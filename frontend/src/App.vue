@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/"><button type="button" id="bttn">Home</button></router-link> |
-      <router-link to="/about"><button type="button" id="bttn">About</button></router-link> |
-      <router-link to="/Log in"><button type="button" id="bttn">Log in</button></router-link>
+      <router-link to="/"><button type="button" class="bttn">Home</button></router-link> |
+      <router-link to="/about"><button type="button" class="bttn">About</button></router-link> |
+  
     </div>
     <router-view/>
   </div>
@@ -28,7 +28,7 @@
     }
   }
 }
-#bttn {
+.bttn {
   height: 50px;
   width: 100px;
   border-radius: 15px;
