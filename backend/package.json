@@ -1,5 +1,7 @@
 {
   "name": "yabs",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "vue-barcode": "^1.1.0"
+  }
 }
