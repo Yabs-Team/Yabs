@@ -4,7 +4,9 @@ import router from './router';
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import VueBarcode from '@chenfengyuan/vue-barcode';
 
+Vue.component(VueBarcode.name, VueBarcode);
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 new Vue({
