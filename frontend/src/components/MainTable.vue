@@ -54,9 +54,9 @@ export default class MainTable extends Vue {
     public totalRows = 0;
 
     get items() {
-
-        return Object.entries(this.loans).filter(([k, v]) => {
+        const items = Object.entries(this.loans).filter(([k, v]) => {
           // @ts-ignore: returned at
+          this.totalRows = items.length;
           return !v.returned_at;
         }).map(([k, v]) => Object.assign(v, {'.key': k}));
       }
