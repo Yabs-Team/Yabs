@@ -19,24 +19,32 @@ const getters = {
 // actions
 const actions = {
   all(context: any, request: any) {
-    BooksAPI.all()
-             .then((response: any) => response.forEach((book: any) => context.commit('setBook', book)))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      BooksAPI.all()
+              .then((response: any) => response.forEach((book: any) => context.commit('setBook', book)))
+              .catch((error: any) => context.commit('failure', error));
+    });
   },
   create(context: any, request: any) {
-    BooksAPI.create(request)
-             .then((response: any) => context.commit('setBook', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      BooksAPI.create(request)
+              .then((response: any) => context.commit('setBook', response))
+              .catch((error: any) => context.commit('failure', error));
+    });
   },
   update(context: any, request: any) {
-    BooksAPI.update(request)
-             .then((response: any) => context.commit('setBook', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      BooksAPI.update(request)
+              .then((response: any) => context.commit('setBook', response))
+              .catch((error: any) => context.commit('failure', error));
+    });
   },
   delete(context: any, request: any) {
-    BooksAPI.delete(request)
-             .then((response: any) => context.commit('removeBook', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      BooksAPI.delete(request)
+              .then((response: any) => context.commit('removeBook', response))
+              .catch((error: any) => context.commit('failure', error));
+    });
   },
 };
 

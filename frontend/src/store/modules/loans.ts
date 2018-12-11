@@ -19,24 +19,56 @@ const getters = {
 // actions
 const actions = {
   all(context: any, request: any) {
-    LoansAPI.all()
-             .then((response: any) => response.forEach((loan: any) => context.commit('setLoan', loan)))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      LoansAPI.all()
+        .then((response: any) => {
+          response.forEach((loan: any) => context.commit('setLoan', loan));
+          resolve();
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
   create(context: any, request: any) {
-    LoansAPI.create(request)
-             .then((response: any) => context.commit('setLoan', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      LoansAPI.create(request)
+        .then((response: any) => {
+          context.commit('setLoan', response);
+          resolve(response);
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
   update(context: any, request: any) {
-    LoansAPI.update(request)
-             .then((response: any) => context.commit('setLoan', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      LoansAPI.update(request)
+        .then((response: any) => {
+          context.commit('setLoan', response);
+          resolve(response);
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
   delete(context: any, request: any) {
-    LoansAPI.delete(request)
-             .then((response: any) => context.commit('removeLoan', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      LoansAPI.delete(request)
+        .then((response: any) => {
+          context.commit('removeLoan', response);
+          resolve(response);
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
 };
 
