@@ -11,7 +11,7 @@ export interface Loan {
   lent_by_id: number;
   loaned_by: object;
   loaned_by_id: number;
-  returned_at: null;
+  returned_at: string|null;
   updated_at: string;
 }
 export interface LoanObject {[id: number]: Loan; }
