@@ -1,13 +1,28 @@
 import Vue from 'vue';
 import LoansAPI from '../../api/loans';
 
-interface LoanState {
-  loans: {};
+export interface Loan {
+  book: object;
+  book_id: number;
+  created_at: string;
+  expiration_date: string;
+  id: number;
+  lent_by: object;
+  lent_by_id: number;
+  loaned_by: object;
+  loaned_by_id: number;
+  returned_at: string|null;
+  updated_at: string;
+}
+export interface LoanObject {[id: number]: Loan; }
+
+export interface LoanState {
+  loans: LoanObject;
   failure: any;
 }
 
 // initial state
-const loanState: LoanState = {loans: {}, failure: null};
+export const loanState: LoanState = {loans: {}, failure: null};
 
 // getters
 const getters = {
