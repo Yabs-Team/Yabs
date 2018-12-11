@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   include ReverseProxy::Controller
+  include Pundit
+
+  def current_user
+    User.where(email: request.env['omniauth.auth']['email']).first
+  end
 
   if Rails.env.test?
     def show
