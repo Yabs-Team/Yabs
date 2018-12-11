@@ -6,11 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-title = Title.create(name: "A book", isbn: "123-123", cost: 200)
+title = Title.create(name: "Programming for dummies", isbn: "420-420", cost: 200)
 title.title_type = "Skönlitteratur"
 title.save
 
-book = Book.create(barcode: "0000", status: "Broken")
+book = Book.create(barcode: "5000", status: "Broken")
 book.title = title
 book.save
 

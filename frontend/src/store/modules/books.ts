@@ -19,9 +19,15 @@ const getters = {
 // actions
 const actions = {
   all(context: any, request: any) {
-    BooksAPI.all()
-             .then((response: any) => response.forEach((book: any) => context.commit('setBook', book)))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise( (resolve, reject) => {
+      BooksAPI.all()
+               .then((response: any) => {
+                 response.forEach((book: any) => context.commit('setBook', book));
+                 resolve();
+                })
+               .catch((error: any) => context.commit('failure', error));
+
+    });
   },
   create(context: any, request: any) {
     BooksAPI.create(request)

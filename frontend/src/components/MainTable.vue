@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-        b-table(show-empty='', stacked='md', :items='items', :fields='fields', :current-page='currentPage', :per-page='perPage', :filter='filter', :sort-by.sync='sortBy', :sort-desc.sync='sortDesc', :sort-direction='sortDirection', @filtered='onFiltered')
+        b-table(v-if="!loansLoading" show-empty='', stacked='md', :items='items', :fields='fields', :current-page='currentPage', :per-page='perPage', :filter='filter', :sort-by.sync='sortBy', :sort-desc.sync='sortDesc', :sort-direction='sortDirection', @filtered='onFiltered')
             template(slot='name', slot-scope='row') {{row.value.first}} {{row.value.last}}
             template(slot='isActive', slot-scope='row') {{row.value?'Yes :)':'No :('}}
             template(slot='actions', slot-scope='row')
@@ -13,6 +13,8 @@
                 b-card
                     ul
                         li(v-for='(value, key) in row.item', :key='key') {{ key }}: {{ value}}
+        .preloader(v-else)
+            p LOADING!
         b-row
             b-col.my-1(md='6')
                 b-pagination.my-0(:total-rows='totalRows', :per-page='perPage', v-model='currentPage')
@@ -24,9 +26,38 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Getter } from '../decorators';
 
 @Component
 export default class MainTable extends Vue {
+
+    get items() {
+        
+        return Object.entries(this.loans).filter(([k, v]) => {
+          // @ts-ignore: returned at
+          return !v.returned_at;
+        }).map(([k, v]) => Object.assign(v, {'.key': k}));
+      }
+
+
+    get sortOptions() {
+      // Create an options list from our fields
+      return this.fields
+        .filter((f: any) => f.sortable)
+        .map((f: any) => Object({ text: f.label,
+                    value: f.key }) );
+    }
+    @Getter('loans/all') public loans: any;
+    public fields = [
+        { key: 'loaned_by.name', sortable: false, label: 'Lånad av'},
+        { key: 'lent_by.name', sortable: false, label: 'Utlånad av'},
+        { key: 'book.title.name', sortable: false, label: 'Boktitel'},
+        { key: 'expiration_date', sortable: false, label: 'Utgångsdatum'},
+      ];
+
+    public loansLoading: boolean = true;
+
+
     @Prop({default: 5}) public perPage!: number;
     @Prop({default: 0}) public pageOptions!: number;
     @Prop({default: null}) public sortBy!: any;
@@ -37,39 +68,20 @@ export default class MainTable extends Vue {
 
 
 public currentPage = 1;
- public items = [ // Mockup
-            {elevnamn: 'Josephi krakowski', lån: 'Flex Tape Manual',
-            lärarnamn: 'Phil Swift', utgångsdatum: '01-01-2019'},
-            {elevnamn: 'Eric Persson', lån: 'Lord of the flies',
-            lärarnamn: 'David Lundholm', utgångsdatum: '01-01-2019'},
-            {elevnamn: 'Filip Gustavsson', lån: 'The hitchhiker\'s guide to the galaxy',
-            lärarnamn: 'Fredrik Kronhamn', utgångsdatum: '01-01-2019'},
-            {elevnamn: 'Alex henryz', lån: 'Moby Dick',
-            lärarnamn: 'Daniel Berg', utgångsdatum: '01-01-2019'},
-            {elevnamn: 'Linus Styrén' , lån: 'Harry Potter 3',
-            lärarnamn: 'David Lundholm', utgångsdatum: '01-01-2019'}];
-
-    public fields = [
-        { key: 'elevnamn', label: 'Utlånad till', sortable: true, class: 'text-left' },
-        { key: 'lärarnamn', label: 'Utlånad av', class: 'text-left'},
-        { key: 'lån', label: 'Material', sortable: true, class: 'text-left'},
-        { key: 'utgångsdatum', label: 'Utgångsdatum', sortable: true, class: 'text-left'},
-    ];
 
 
 
 
 
-    public totalRows = this.items.length;
 
+    public totalRows = 0;
 
-    get sortOptions() {
-      // Create an options list from our fields
-      return this.fields
-        .filter((f: any) => f.sortable)
-        .map((f: any) => Object({ text: f.label,
-                    value: f.key }) );
-    }
+    public created() {
+        this.$store.dispatch('loans/all')
+        .then( () => {
+            this.loansLoading = false;
+        });
+      }
 
     public info(item: any, index: number, button: any) {
       this.modalInfo.title = `Row index: ${index}`;

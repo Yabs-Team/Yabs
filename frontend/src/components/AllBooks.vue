@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-        b-table(show-empty='', stacked='md', :items='books', :fields='fields1', :current-page='currentPage', :per-page='perPage', :filter='filter', :sort-by.sync='sortBy', :sort-desc.sync='sortDesc', :sort-direction='sortDirection', @filtered='onFiltered')
+        b-table(show-empty='', stacked='md', :items='items', :fields='fields', :current-page='currentPage', :per-page='perPage', :filter='filter', :sort-by.sync='sortBy', :sort-desc.sync='sortDesc', :sort-direction='sortDirection', @filtered='onFiltered')
             template(slot='name', slot-scope='row') {{row.value.first}} {{row.value.last}}
             template(slot='isActive', slot-scope='row') {{row.value?'Yes :)':'No :('}}
             template(slot='actions', slot-scope='row')
@@ -23,10 +23,13 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { DESTRUCTION } from 'dns';
+
+import { Getter } from '../decorators';
 
 @Component
 export default class AllBooks extends Vue {
+    @Getter('books/all') public books: any;
+
     @Prop({default: 5}) public perPage!: number;
     @Prop({default: 0}) public pageOptions!: number;
     @Prop({default: null}) public sortBy!: any;
@@ -35,32 +38,36 @@ export default class AllBooks extends Vue {
     @Prop({default: null}) public filter!: any;
     @Prop({default: null}) public modalInfo!: any;
 
-
-
-
-
     public currentPage = 1;
-    public books = [ // Mockup
-            {Title: 'Den lilla gula grävmaskinen', Barcode: '1337', Lent: 'Nej', Status: 'broken af'},
-            {Title: 'The Hobbit', Barcode: '0001', Lent: 'Ja', Status: 'Missing last 10 pages'},
-            {Title: 'Lord of the flies', Barcode: '0002', Lent: 'Ja', Status: 'spilled coffee on page 69'},
-            {Title: 'The hitchhiker\'s guide to the galaxy', Barcode: '0003', Lent: 'Ja', Status: 'Really good'},
-            {Title: 'Moby Dick', Barcode: '0004', Lent: 'Ja', Status: 'Water damage'},
-            {Title: 'Harry potter 3', Barcode: '0005', Lent: 'Ja', Status: 'Fantastic'}];
+    public totalRows: number = 0;
+    // public books = []; // Mockup
+            // {Title: 'Den lilla gula grävmaskinen', Barcode: '1337', Lent: 'Nej', Status: 'broken af'},
+            // {Title: 'The Hobbit', Barcode: '0001', Lent: 'Ja', Status: 'Missing last 10 pages'},
+            // {Title: 'Lord of the flies', Barcode: '0002', Lent: 'Ja', Status: 'spilled coffee on page 69'},
+            // {Title: 'The hitchhiker\'s guide to the galaxy', Barcode: '0003', Lent: 'Ja', Status: 'Really good'},
+            // {Title: 'Moby Dick', Barcode: '0004', Lent: 'Ja', Status: 'Water damage'},
+            // {Title: 'Harry potter 3', Barcode: '0005', Lent: 'Ja', Status: 'Fantastic'}];
+    get items() {
+        const items = Object.entries(this.books).map(([k, v]) => Object.assign(v, {'.key': k}));
+        this.totalRows = items.length;
+        
+        return items;
+    }
 
-
-    public fields1 = [
-        { key: 'Title', label: 'Titel', sortable: true, class: 'text-left' },
-        { key: 'Barcode', label: 'Sträckkod', sortable: true, class: 'text-left'},
-        { key: 'Lent', label: 'Utlånad', class: 'text-left'},
-        { key: 'Status', label: 'Status', sortable: true, class: 'text-left'},
+    public fields = [
+        { key: 'title.name', label: 'Titel', sortable: true, class: 'text-left' },
+        { key: 'barcode', label: 'Streckkod', sortable: true, class: 'text-left'},
+        // { key: 'Lent', label: 'Utlånad', class: 'text-left'},
+        { key: 'status', label: 'Status', sortable: true, class: 'text-left'},
     ];
 
-    public totalRows = this.books.length;
+    public mounted() {
+        this.$store.dispatch('books/all');
+    }
 
     get sortOptions() {
       // Create an options list from our fields
-      return this.fields1
+      return this.fields
         .filter((f: any) => f.sortable)
         .map((f: any) => Object({ text: f.label,
                     value: f.key }) );
@@ -82,19 +89,5 @@ export default class AllBooks extends Vue {
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 </script>
