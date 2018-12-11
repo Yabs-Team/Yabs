@@ -1,5 +1,5 @@
 <template lang="pug">
-    div(@click='changeType')
+    div
         b-dropdown#ddown1.m-md-2(text='Ändra Typ')
             b-dropdown-item(@click='changeToLoan') Lån
             b-dropdown-item(@click='changeToCig') ID Kort
@@ -10,7 +10,7 @@
 
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 
 @Component
 export default class DropDownType extends Vue {
@@ -19,6 +19,7 @@ export default class DropDownType extends Vue {
 
     public type = this.selectedType;
 
+    @Watch('type')
     public changeType() {
         this.$emit('changeType', this.type);
     }

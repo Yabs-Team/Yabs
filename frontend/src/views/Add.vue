@@ -5,7 +5,7 @@
             b-alert(variant="success" :show="showDismissibleSuccessAlert" dismissible) Loan added
             .container
                 h1 Lägg till {{this.type}}
-                DropDownType(@change-type='onChangeType($event)', v-bind:selectedType='this.type')
+                DropDownType(@changeType='onChangeType($event)', v-bind:selectedType='this.type')
                 LoaningForm(v-bind:style='{ display: displayLoan }' v-on:loan-added="onLoanAdded")
                 CigForm(@sendUserData='onSendUserData($event)' @sendImages='onSendImages($event)' v-bind:style='{ display: displayCig }')
                 AddingForm(v-bind:style='{ display: displayAdd }')
