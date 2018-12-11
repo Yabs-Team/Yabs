@@ -8,35 +8,52 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class GoogleLogin extends Vue {
+
+  public options = {
+    response_type: 'code',
+    cookie_policy: 'single_host_origin',
+    client_id: '959028814295-ojio0nureo15e2l4uj2lng0goeef0k27.apps.googleusercontent.com',
+    scope: 'profile email',
+  };
+
   public mounted() {
-    // @ts-ignore: gpAsyncInit
-    window.gpAsyncInit = () => {
-      // @ts-ignore: gapi
-      gapi.auth.authorize({
-        immediate: true,
-        response_type: 'code',
-        cookie_policy: 'single_host_origin',
-        client_id: '959028814295-m3lldg1saq9l6tliujprr7rir6jmohqb.apps.googleusercontent.com',
-        scope: 'profile email https://www.googleapis.com/auth/plus.login',
-      }, (response: any) => {
-        return;
-      });
-    };
+    // // @ts-ignore: gpAsyncInit
+    // window.gpAsyncInit = () => {
+    //   // @ts-ignore: gapi
+    //   gapi.auth.authorize(Object.assign(this.options, {immediate: true}), (response: any) => {
+    //     return;
+    //   });
+    // };
+    gapi.load('auth2', function() { console.log("ready auth2");});
   }
 
   public signIn() {
+    let that = this;
+/*
     // @ts-ignore: gapi
-    gapi.auth.authorize({
-      immediate: false,
-      response_type: 'code',
-      cookie_policy: 'single_host_origin',
-      client_id: '959028814295-m3lldg1saq9l6tliujprr7rir6jmohqb.apps.googleusercontent.com',
-      scope: 'profile email https://www.googleapis.com/auth/plus.login',
-    }, (response: any) => {
+    let options = new gapi.auth2.SigninOptionsBuilder();
+    options.setAppPackageName('johanneberg.loan.app');
+    //options.setFetchBasicProfile(true);
+    options.set
+    options.setPrompt('select_account');
+    options.setScope('profile').setScope('email');
+
+    console.log(gapi.auth2);*/
+
+    // @ts-ignore: gapi
+    gapi.auth2.authorize(this.options).then((response: any) => {
+      console.log("got here");
       if (response && !response.error) {
         // google authentication succeed, now post data to server.
-        this.axios.post('/auth/google_oauth2/callback', response).then((data: any) => {
+        delete response['g-oauth-window'];
+        that.axios.post('auth/google_oauth2/callback', JSON.stringify(response), {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then((data: any) => {
           console.log(data);
+        }).catch((error: any) => {
+          console.log(error);
         });
       } else {
         console.log(response);
