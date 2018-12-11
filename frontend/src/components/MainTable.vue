@@ -31,7 +31,7 @@ import { Getter } from '../decorators';
 @Component
 export default class MainTable extends Vue {
     @Getter('loans/all') public loans: any;
-    
+
     @Prop({default: 5}) public perPage!: number;
     @Prop({default: 0}) public pageOptions!: number;
     @Prop({default: null}) public sortBy!: any;
@@ -41,7 +41,7 @@ export default class MainTable extends Vue {
     @Prop({default: null}) public modalInfo!: any;
 
     public loansLoading: boolean = true;
-    
+
     public fields = [
         { key: 'loaned_by.name', sortable: false, label: 'Lånad av'},
         { key: 'lent_by.name', sortable: false, label: 'Utlånad av'},
@@ -52,7 +52,7 @@ export default class MainTable extends Vue {
     public currentPage = 1;
 
     public totalRows = 0;
-    
+
     get items() {
 
         return Object.entries(this.loans).filter(([k, v]) => {
