@@ -2,7 +2,8 @@
     .view
         #left
         b-container
-            h1 Välkommen till YABS! 
+            h1 Välkommen till YABS!
+            GoogleLogin
             br
             p.info Denna applikation kommer att användas för att underlätta hantering/utlåningen av olika sorters litteratur och utskrivning av passerkort.
             br
@@ -23,7 +24,7 @@
                     router-link.link.row-btn(to='/find')
                         b-button.row-btn(:size="size" :variant="primary") Hitta
             p.info På hitta delen så kan du söka på allting som denna sida hanterar, Tex Elever, specifika lån eller böcker.
-                    
+
         #right
             h5 Böcker som ska inlämnas snart:
             br
@@ -35,10 +36,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import RecentLoan from '@/components/RecentLoan.vue';
+import GoogleLogin from '@/components/GoogleLogin.vue';
 
 @Component({
     components: {
         RecentLoan,
+        GoogleLogin,
     },
 })
 export default class Start extends Vue {

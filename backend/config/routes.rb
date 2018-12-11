@@ -8,5 +8,5 @@ Rails.application.routes.draw do
     end
   end
   root 'application#show'
-  match '/*path', to:'application#show', via: :all, :constraints => lambda{|req| req.path !~ /\/rails\/active_storage\/.*/ }
+  match '/*path', to:'application#show', via: :all, :constraints => lambda{|req| req.path !~ /(\/rails\/active_storage\/|\/auth\/google_oauth2\/).*/ }
 end
