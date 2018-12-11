@@ -27,10 +27,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Getter } from '../decorators';
+import { LoanObject } from '../store/modules/loans';
 
 @Component
 export default class MainTable extends Vue {
-    @Getter('loans/all') public loans: any;
+    @Getter('loans/all') public loans!: LoanObject;
 
     @Prop({default: 5}) public perPage!: number;
     @Prop({default: 0}) public pageOptions!: number;
@@ -55,8 +56,7 @@ export default class MainTable extends Vue {
 
     get items() {
         const items = Object.entries(this.loans).filter(([k, v]) => {
-            // @ts-ignore: returned at
-            this.totalRows = items.length;
+            return !v.returned_at;
         }).map(([k, v]) => Object.assign(v, {'.key': k}));
         this.totalRows = items.length;
 
