@@ -30,7 +30,29 @@ import { Getter } from '../decorators';
 
 @Component
 export default class MainTable extends Vue {
+    @Getter('loans/all') public loans: any;
+    
+    @Prop({default: 5}) public perPage!: number;
+    @Prop({default: 0}) public pageOptions!: number;
+    @Prop({default: null}) public sortBy!: any;
+    @Prop({default: true}) public sortDesc!: boolean;
+    @Prop({default: 'desc'}) public sortDirection!: string;
+    @Prop({default: null}) public filter!: any;
+    @Prop({default: null}) public modalInfo!: any;
 
+    public loansLoading: boolean = true;
+    
+    public fields = [
+        { key: 'loaned_by.name', sortable: false, label: 'Lånad av'},
+        { key: 'lent_by.name', sortable: false, label: 'Utlånad av'},
+        { key: 'book.title.name', sortable: false, label: 'Boktitel'},
+        { key: 'expiration_date', sortable: false, label: 'Utgångsdatum'},
+      ];
+
+    public currentPage = 1;
+
+    public totalRows = 0;
+    
     get items() {
 
         return Object.entries(this.loans).filter(([k, v]) => {
@@ -47,34 +69,6 @@ export default class MainTable extends Vue {
         .map((f: any) => Object({ text: f.label,
                     value: f.key }) );
     }
-    @Getter('loans/all') public loans: any;
-    public fields = [
-        { key: 'loaned_by.name', sortable: false, label: 'Lånad av'},
-        { key: 'lent_by.name', sortable: false, label: 'Utlånad av'},
-        { key: 'book.title.name', sortable: false, label: 'Boktitel'},
-        { key: 'expiration_date', sortable: false, label: 'Utgångsdatum'},
-      ];
-
-    public loansLoading: boolean = true;
-
-
-    @Prop({default: 5}) public perPage!: number;
-    @Prop({default: 0}) public pageOptions!: number;
-    @Prop({default: null}) public sortBy!: any;
-    @Prop({default: true}) public sortDesc!: boolean;
-    @Prop({default: 'desc'}) public sortDirection!: string;
-    @Prop({default: null}) public filter!: any;
-    @Prop({default: null}) public modalInfo!: any;
-
-
-public currentPage = 1;
-
-
-
-
-
-
-    public totalRows = 0;
 
     public created() {
         this.$store.dispatch('loans/all')
@@ -99,19 +93,5 @@ public currentPage = 1;
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 </script>
