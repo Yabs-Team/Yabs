@@ -32,7 +32,7 @@ import { Getter } from '../decorators';
 export default class MainTable extends Vue {
 
     get items() {
-        
+
         return Object.entries(this.loans).filter(([k, v]) => {
           // @ts-ignore: returned at
           return !v.returned_at;

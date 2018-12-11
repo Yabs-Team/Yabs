@@ -50,7 +50,7 @@ export default class AllBooks extends Vue {
     get items() {
         const items = Object.entries(this.books).map(([k, v]) => Object.assign(v, {'.key': k}));
         this.totalRows = items.length;
-        
+
         return items;
     }
 
