@@ -19,24 +19,56 @@ const getters = {
 // actions
 const actions = {
   all(context: any, request: any) {
-    TitlesAPI.all()
-             .then((response: any) => response.forEach((title: any) => context.commit('setTitle', title)))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      TitlesAPI.all()
+        .then((response: any) => {
+          response.forEach((title: any) => context.commit('setTitle', title));
+          resolve();
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
   create(context: any, request: any) {
-    TitlesAPI.create(request)
-             .then((response: any) => context.commit('setTitle', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      TitlesAPI.create(request)
+        .then((response: any) => {
+          context.commit('setTitle', response);
+          resolve(response);
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
   update(context: any, request: any) {
-    TitlesAPI.update(request)
-             .then((response: any) => context.commit('setTitle', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      TitlesAPI.update(request)
+        .then((response: any) => {
+          context.commit('setTitle', response);
+          resolve(response);
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
   delete(context: any, request: any) {
-    TitlesAPI.delete(request)
-             .then((response: any) => context.commit('removeTitle', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise(function(resolve, reject) {
+      TitlesAPI.delete(request)
+        .then((response: any) => {
+          context.commit('removeTitle', response);
+          resolve(response);
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
 };
 
