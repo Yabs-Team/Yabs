@@ -6,24 +6,30 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Getter } from '../decorators';
 
 @Component
 export default class RecentTitel extends Vue {
-      public sortBy = 'Titel';
+      @Getter('titles/all') public titles: any;
+      public sortBy = 'Title';
       public sortDesc = false;
       public fields = [
-        { key: 'Titel', sortable: false },
-        { key: 'Kostnad', sortable: false },
-        { key: 'Typ', sortable: false },
-        { key: 'ISBN', sortable: false },
+        { key: 'name', sortable: false, label: 'Titel' },
+        { key: 'cost', sortable: false, label: 'Kostnad'},
+        { key: 'title_type', sortable: false, label: 'Typ' },
+        { key: 'isbn', sortable: false, label: 'ISBN' },
       ];
 
-      public items = [
-        {Titel: 'Matte 4c', Kostnad: '300', Typ: 'Kurslitteratur', ISBN: '01-01-2019'},
-        {Titel: 'Fysik 2', Kostnad: '299', Typ: 'Kurslitteratur', ISBN: '01-01-2019'},
-        {Titel: 'Harry Potter', Kostnad: '129', Typ: 'Bibloteksbok', ISBN: '01-01-2019'},
-        {Titel: 'Animal Farm', Kostnad: '99', Typ: 'Skönhetslitteratur', ISBN: '01-01-2019'},
-      ];
+    get items() {
+        return Object.entries(this.titles).filter(([k, v]) => {
+          // @ts-ignore: returned at
+          return !v.returned_at;
+        }).map(([k, v]) => Object.assign(v, {'.key': k}));
+    }
+
+      public created() {
+        this.$store.dispatch('titles/all');
+      }
     }
 </script>
 
