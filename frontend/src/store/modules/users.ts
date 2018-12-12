@@ -33,14 +33,30 @@ const getters = {
 // actions
 const actions = {
   all(context: any, request: any) {
-    UsersAPI.all()
-             .then((response: any) => response.forEach((user: any) => context.commit('setUser', user)))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise((resolve, reject) => {
+      UsersAPI.all()
+        .then((response: any) => {
+          response.forEach((user: any) => context.commit('setUser', user));
+          resolve();
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
   update(context: any, request: any) {
-    UsersAPI.update(request)
-             .then((response: any) => context.commit('setUser', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise((resolve, reject) => {
+      UsersAPI.update(request)
+        .then((response: any) => {
+          context.commit('setUser', response);
+          resolve(response);
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
 };
 

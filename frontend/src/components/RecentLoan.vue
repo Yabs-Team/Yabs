@@ -28,7 +28,9 @@ export default class RecentLoan extends Vue {
       }
 
       public created() {
-        this.$store.dispatch('loans/all');
+        this.$store.dispatch('loans/all').then((response: any) => {
+          console.log(this.loans);
+        });
       }
     }
 </script>
