@@ -20,7 +20,7 @@ import { TitleObject } from '../store/modules/titles';
 
 @Component
 export default class AddingForm extends Vue {
-    
+
     @Getter('titles/all') public titles!: TitleObject;
 
     public form = {
@@ -30,7 +30,7 @@ export default class AddingForm extends Vue {
     };
     public name: string = '';
     public show = true;
-    
+
     get titleNames() {
         return Object.entries(this.titles).map(([k, title]) => title.name);
     }

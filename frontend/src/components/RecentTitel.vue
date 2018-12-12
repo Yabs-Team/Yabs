@@ -27,10 +27,10 @@ export default class RecentTitel extends Vue {
         }).map(([k, v]) => Object.assign(v, {'.key': k}));
     }
 
-      public created() {
-        this.$store.dispatch('titles/all');
-      }
+    public created() {
+      this.$store.dispatch('titles/all');
     }
+}
 </script>
 
 <style lang="sass" scoped>
