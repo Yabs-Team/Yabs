@@ -5,7 +5,7 @@
             b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
                 b-form-input#nestedBid(placeholder='Bokens Streckkod' v-model="form.barcode")
             b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                b-form-input#nestedBid(placeholder='Titel' v-model="form.titel")
+                vue-bootstrap-typeahead(v-model="form.title_id" :data="titleNames" @hit="toId()" placeholder='Titel namn')
             b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
                 b-form-input#nestedBid(placeholder='Status: tex "ok", "framsida saknas"' v-model="form.status")
             b-button(type='submit', variant='primary') Lägg till
@@ -15,15 +15,35 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Getter } from '../decorators';
+import { TitleObject } from '../store/modules/titles';
 
 @Component
-export default class LoaningForm extends Vue {
-    public form = {
+export default class AddingForm extends Vue {
+
+    get titleNames() {
+        // @ts-ignore: returned at
+        return Object.entries(this.titles).map(([k, title]) => title.name);
+    }
+
+    @Prop({default: {}}) public titleData!: TitleObject;
+
+    @Getter('titles/all') public titles: any;
+        public form = {
         barcode: '',
-        titel: '',
+        title_id: '',
         status: '',
     };
+
+    public name: string = '';
     public show = true;
+    public toId() {
+       for (const title in this.titles) {
+           if (this.form.title_id === this.titles[title].name) {
+               this.form.title_id = this.titles[title].id;
+           }
+       }
+    }
 
     public onSubmit(evt: Event) {
         evt.preventDefault();
@@ -34,7 +54,7 @@ export default class LoaningForm extends Vue {
     public onReset(evt: Event) {
         evt.preventDefault();
         this.form.barcode = '';
-        this.form.titel = '';
+        this.form.title_id = '';
         this.form.status = '';
         this.show = false;
         this.$nextTick(() => { this.show = true; });

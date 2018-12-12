@@ -1,8 +1,20 @@
 import Vue from 'vue';
 import TitlesAPI from '../../api/titles';
 
-interface TitleState {
-  titles: {};
+export interface Title {
+  cost: number;
+  created_at: string;
+  id: number;
+  isbn: string;
+  name: string;
+  title_type: string;
+  updated_at: string;
+}
+
+export interface TitleObject { [id: number]: Title; }
+
+export interface TitleState {
+  titles: TitleObject;
   failure: any;
 }
 
