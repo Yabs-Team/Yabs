@@ -180,6 +180,7 @@ GEM
     pundit (2.0.0)
       activesupport (>= 3.0.0)
     rack (2.0.6)
+    rack-cors (1.0.2)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -302,6 +303,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   puma (~> 3.11)
   pundit
+  rack-cors
   rails (~> 5.2.1)
   rails-reverse-proxy
   sass-rails (~> 5.0)
