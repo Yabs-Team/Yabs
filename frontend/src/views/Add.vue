@@ -27,6 +27,7 @@ import RecentLoan from '@/components/RecentLoan.vue';
 import RecentTitel from '@/components/RecentTitel.vue';
 import CanvasContainer from '@/components/CanvasContainer.vue';
 import TitelForm from '@/components/TitelForm.vue';
+import LoadingIcon from '@/components/LoadingIcon.vue';
 
 @Component({
   components: {
@@ -38,6 +39,7 @@ import TitelForm from '@/components/TitelForm.vue';
     RecentLoan,
     RecentTitel,
     CanvasContainer,
+    LoadingIcon,
   },
 })
 
