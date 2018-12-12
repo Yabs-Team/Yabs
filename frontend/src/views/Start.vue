@@ -2,7 +2,7 @@
     .view
         #left
         b-container
-            h1 Välkommen till YABS! 
+            h1.text-center Välkommen till YABS! 
             br
             p.info Denna applikation kommer att användas för att underlätta hantering/utlåningen av olika sorters litteratur och utskrivning av passerkort.
             br
