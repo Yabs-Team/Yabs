@@ -17,14 +17,13 @@ export default class GoogleLogin extends Vue {
   };
 
   public mounted() {
-    // // @ts-ignore: gpAsyncInit
-    // window.gpAsyncInit = () => {
-    //   // @ts-ignore: gapi
-    //   gapi.auth.authorize(Object.assign(this.options, {immediate: true}), (response: any) => {
-    //     return;
-    //   });
-    // };
-    gapi.load('auth2', function() { console.log("ready auth2");});
+    // @ts-ignore: gpAsyncInit
+    window.gpAsyncInit = () => {
+      // @ts-ignore: gapi
+      gapi.auth.authorize(Object.assign(this.options, {immediate: true}), (response: any) => {
+        return;
+      });
+    };
   }
 
   public signIn() {
@@ -41,12 +40,12 @@ export default class GoogleLogin extends Vue {
     console.log(gapi.auth2);*/
 
     // @ts-ignore: gapi
-    gapi.auth2.authorize(this.options).then((response: any) => {
+    gapi.auth.authorize(Object.assign(this.options, {immediate: false})).then((response: any) => {
       console.log("got here");
       if (response && !response.error) {
         // google authentication succeed, now post data to server.
         delete response['g-oauth-window'];
-        that.axios.post('auth/google_oauth2/callback', JSON.stringify(response), {
+        that.axios.post('auth/google_oauth2', JSON.stringify(response), {
           headers: {
             'Content-Type': 'application/json',
           },
