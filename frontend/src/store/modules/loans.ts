@@ -19,7 +19,7 @@ const getters = {
 // actions
 const actions = {
   all(context: any, request: any) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       LoansAPI.all()
         .then((response: any) => {
           response.forEach((loan: any) => context.commit('setLoan', loan));
@@ -32,7 +32,7 @@ const actions = {
     });
   },
   create(context: any, request: any) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       LoansAPI.create(request)
         .then((response: any) => {
           context.commit('setLoan', response);
@@ -45,7 +45,7 @@ const actions = {
     });
   },
   update(context: any, request: any) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       LoansAPI.update(request)
         .then((response: any) => {
           context.commit('setLoan', response);
@@ -58,7 +58,7 @@ const actions = {
     });
   },
   delete(context: any, request: any) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       LoansAPI.delete(request)
         .then((response: any) => {
           context.commit('removeLoan', response);

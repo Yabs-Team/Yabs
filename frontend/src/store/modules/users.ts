@@ -32,8 +32,8 @@ const getters = {
 
 // actions
 const actions = {
-  all(context: any, _request: any) {
-    return new Promise(function(resolve, reject) {
+  all(context: any, request: any) {
+    return new Promise((resolve, reject) => {
       UsersAPI.all()
         .then((response: any) => {
           response.forEach((user: any) => context.commit('setUser', user));
@@ -46,7 +46,7 @@ const actions = {
     });
   },
   update(context: any, request: any) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       UsersAPI.update(request)
         .then((response: any) => {
           context.commit('setUser', response);

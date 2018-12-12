@@ -19,7 +19,7 @@ const getters = {
 // actions
 const actions = {
   all(context: any, request: any) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       TitlesAPI.all()
         .then((response: any) => {
           response.forEach((title: any) => context.commit('setTitle', title));
@@ -32,7 +32,7 @@ const actions = {
     });
   },
   create(context: any, request: any) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       TitlesAPI.create(request)
         .then((response: any) => {
           context.commit('setTitle', response);
@@ -45,7 +45,7 @@ const actions = {
     });
   },
   update(context: any, request: any) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       TitlesAPI.update(request)
         .then((response: any) => {
           context.commit('setTitle', response);
@@ -58,7 +58,7 @@ const actions = {
     });
   },
   delete(context: any, request: any) {
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       TitlesAPI.delete(request)
         .then((response: any) => {
           context.commit('removeTitle', response);
