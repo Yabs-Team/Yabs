@@ -1,5 +1,3 @@
-require 'byebug'
-
 Given("I am on the start page") do
     visit("/")
 end
