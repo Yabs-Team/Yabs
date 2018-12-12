@@ -13,7 +13,7 @@
         .right
             RecentLoan(v-bind:style='{ display: displayLoan }')
             CanvasContainer(v-bind:style='{ display: displayCig }' v-bind:userData='userData' v-bind:images='images')
-            RecentLoan(v-bind:style='{ display: displayAdd }')
+            RecentBook(v-bind:style='{ display: displayAdd }')
             RecentTitel(v-bind:style='{ display: displayTitel }')
 </template>
 
@@ -23,6 +23,7 @@ import LoaningForm from '@/components/LoaningForm.vue';
 import CigForm from '@/components/CigForm.vue';
 import AddingForm from '@/components/AddingForm.vue';
 import DropDownType from '@/components/DropDownType.vue';
+import RecentBook from '@/components/RecentBook.vue';
 import RecentLoan from '@/components/RecentLoan.vue';
 import RecentTitel from '@/components/RecentTitel.vue';
 import CanvasContainer from '@/components/CanvasContainer.vue';
@@ -37,6 +38,7 @@ import TitelForm from '@/components/TitelForm.vue';
     DropDownType,
     RecentLoan,
     RecentTitel,
+    RecentBook,
     CanvasContainer,
   },
 })
