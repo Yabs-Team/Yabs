@@ -18,10 +18,14 @@ import { Component, Watch, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class AddLoan extends Vue {
-
   public input = '';
   public inputState: boolean | null = null;
-  public options = [{text: '- Choose 1 -', value: ''}, 'Red', 'Green', 'Blue'];
+  public options = [
+    { text: '- Choose 1 -', value: '' },
+    'Red',
+    'Green',
+    'Blue',
+  ];
   public inputReturn = '';
   public popoverShow = false;
 
@@ -30,51 +34,53 @@ export default class AddLoan extends Vue {
   }
 
   public onOk() {
-      if (!this.input) { this.inputState = false; }
-      if (this.input) {
-        this.onClose();
-        /* "Return" our popover "form" results */
-        this.inputReturn = this.input;
-      }
+    if (!this.input) {
+      this.inputState = false;
+    }
+    if (this.input) {
+      this.onClose();
+      /* "Return" our popover "form" results */
+      this.inputReturn = this.input;
+    }
   }
 
   public onShow() {
-      /* This is called just before the popover is shown */
-      /* Reset our popover "form" variables */
-      this.input = '';
-      this.inputState = null;
-      this.inputReturn = '';
+    /* This is called just before the popover is shown */
+    /* Reset our popover "form" variables */
+    this.input = '';
+    this.inputState = null;
+    this.inputReturn = '';
   }
 
   public onShown() {
-      /* Called just after the popover has been shown */
-      /* Transfer focus to the first input */
-      this.focusRef(this.$refs.input);
+    /* Called just after the popover has been shown */
+    /* Transfer focus to the first input */
+    this.focusRef(this.$refs.input);
   }
 
   public onHidden() {
-      /* Called just after the popover has finished hiding */
-      /* Bring focus back to the button */
-      this.focusRef(this.$refs.button);
+    /* Called just after the popover has finished hiding */
+    /* Bring focus back to the button */
+    this.focusRef(this.$refs.button);
   }
 
   public focusRef(ref: any) {
-      /* Some references may be a component, functional component, or plain element */
-      /* This handles that check before focusing, assuming a focus() method exists */
-      /* We do this in a double nextTick to ensure components have updated & popover positioned first */
+    /* Some references may be a component, functional component, or plain element */
+    /* This handles that check before focusing, assuming a focus() method exists */
+    /* We do this in a double nextTick to ensure components have updated & popover positioned first */
+    this.$nextTick(() => {
       this.$nextTick(() => {
-        this.$nextTick(() => { (ref.$el || ref).focus(); });
+        (ref.$el || ref).focus();
       });
-    }
+    });
+  }
 
-
-    @Watch('input')
+  @Watch('input')
   public onInputChange(val: any, oldVal: any) {
     if (val) {
       this.inputState = true;
     }
   }
-
 }
 </script>
 
