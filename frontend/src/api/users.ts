@@ -47,4 +47,16 @@ export default {
     }
 
   },
+  async signOut() {
+
+    try {
+      const response = await axios.delete(`api/v1/auth/0`, {
+        withCredentials: true,
+      });
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+
+  },
 };
