@@ -1,9 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Start from './views/Start.vue';
-import Profile from './views/Profile.vue';
-import Add from './views/Add.vue';
-import Find from './views/Find.vue';
+import * as views from '@/views';
 
 Vue.use(Router);
 
@@ -13,22 +10,22 @@ export default new Router({
     {
       path: '/',
       name: 'start',
-      component: Start,
+      component: views.Start,
     },
     {
       path: '/users',
       name: 'profile',
-      component: Profile,
+      component: views.Profile,
     },
     {
       path: '/add',
       name: 'add',
-      component: Add,
+      component: views.Add,
     },
     {
       path: '/find',
       name: 'find',
-      component: Find,
+      component: views.Find,
     },
   ],
 });

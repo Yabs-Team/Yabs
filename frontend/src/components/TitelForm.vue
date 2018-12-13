@@ -3,12 +3,12 @@
     b-form(@submit='onSubmit', @reset='onReset', v-if='show')
         b-card(bg-variant='light')
             b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                b-form-input#nestedBid(placeholder='Namn' v-model="form.book_name")
+                b-form-input#nestedBid(placeholder='Namn' v-model="form.name")
             b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                b-form-input#nestedBid(placeholder='Kostnad' v-model="form.titel_cost")
+                b-form-input#nestedBid(placeholder='Kostnad' v-model="form.cost")
             b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                b-form-input#nestedBid(placeholder='ISBN' v-model="form.isbn")
-            b-form-select(v-model="selected" :options="options" class="mb-3")
+                b-form-input#nestedBid(placeholder='isbn' v-model="form.isbn")
+            b-form-select(v-model="form.title_type" :options="options" class="mb-3")
             b-button(type='submit', variant='primary') Lägg till
             b-button(type='reset', variant='danger') Rensa Fältet
 
@@ -18,12 +18,13 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class LoaningForm extends Vue {
+export default class TitleForm extends Vue {
 
     public form = {
-        lent_by_id: '1804583927',
-        loaned_by_id: '',
-        book_id: '',
+        name: '',
+        cost: '',
+        isbn: '',
+        title_type: '',
     };
     public show = true;
 
@@ -34,16 +35,19 @@ export default class LoaningForm extends Vue {
         { value: 'Skönlitteratur', text: 'Skönlitteratur' },
       ];
 
-    public onSubmit(evt: Event) {
+   public onSubmit(evt: Event) {
         evt.preventDefault();
-        console.log(this.$store.dispatch('loans/create', this.form));
+        this.$store.dispatch('titles/create', this.form)
+            .then((title: any) => this.$emit('title-added', title))
+            .catch((failure: any) => console.log(failure));
         // alert(JSON.stringify(this.form));
     }
 
     public onReset(evt: Event) {
         evt.preventDefault();
-        this.form.loaned_by_id = '';
-        this.form.book_id = '';
+        this.form.name = '';
+        this.form.cost = '';
+        this.form.isbn = '';
         this.show = false;
         this.$nextTick(() => { this.show = true; });
     }

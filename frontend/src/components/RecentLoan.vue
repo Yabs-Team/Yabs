@@ -29,10 +29,12 @@ export default class RecentLoan extends Vue {
       .map(([k, v]) => Object.assign(v, { ".key": k }));
   }
 
-  public created() {
-    this.$store.dispatch("loans/all");
-  }
-}
+      public created() {
+        this.$store.dispatch('loans/all').then((response: any) => {
+          console.log(this.loans);
+        });
+      }
+    }
 </script>
 
 <style lang="sass" scoped>

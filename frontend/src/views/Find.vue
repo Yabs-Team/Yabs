@@ -13,7 +13,8 @@
             b-col.my-1(md='6')
                 b-form-group.mb-0(horizontal='', label='Sort')
                     b-input-group
-                        b-form-select(v-model='sortBy', :options='sortOptions')
+                        //- b-form-select(v-model='sortBy', :options='sortOptions')
+                        b-form-select(v-model='sortBy')
                             option(slot='first', :value='null') -- none --
                         b-form-select(:disabled='!sortBy', v-model='sortDesc', slot='append')
                             option(:value='false') Asc
@@ -31,13 +32,13 @@
         // Main table element
         #loan(v-bind:style="{display: displayTable}")
             MainTable(:perPage="perPage", :pageOptions="pageOptions",
-            :sortBy="sortBy", sortDesc="sortDesc",
+            :sortBy="sortBy", :sortDesc="sortDesc",
             :sortDirection="sortDirection",:filter="filter",
             :modalInfo="modalInfo")
 
         #all(v-bind:style="{display: displayCig}")
             AllBooks(:perPage="perPage", :pageOptions="pageOptions",
-            :sortBy="sortBy", sortDesc="sortDesc",
+            :sortBy="sortBy", :sortDesc="sortDesc",
             :sortDirection="sortDirection",:filter="filter",
             :modalInfo="modalInfo")
 
@@ -82,6 +83,7 @@ export default class Find extends Vue {
             this.displayCig = 'block';
         }
     }
+
 }
 </script>
 
