@@ -3,7 +3,12 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   def current_user
-    User.where(email: request.env['omniauth.auth']['email']).first
+    @_current_user ||= session[:current_user_id] &&
+     User.find_by(uid: session[:current_user_id])
+  end
+
+  def store_user_session(user)
+    session[:current_user_id] = user.id
   end
 
   if Rails.env.test?
