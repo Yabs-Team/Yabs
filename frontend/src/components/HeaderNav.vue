@@ -13,8 +13,9 @@
                     b-nav-item
                         router-link.link(to='/find') Hitta
             b-navbar-brand Yabs
-            b-navbar-brand.material-icons account_circle
-              GoogleLogin
+            GoogleLogin
+            //- b-navbar-brand.material-icons account_circle
+
 </template>
 
 <script lang="ts">
