@@ -1,14 +1,27 @@
 import Vue from 'vue';
 import UsersAPI from '../../api/users';
 
-interface UserState {
-  users: {};
-  current_user: {} | null;
+export interface User {
+  created_at: string;
+  email: string;
+  google_token: string;
+  klass: string;
+  name: string;
+  photo_path: string;
+  role: string;
+  uid: number;
+  updated_at: string;
+}
+
+export interface UserObject { [uid: number]: User; }
+
+export interface UserState {
+  users: UserObject;
+  current_user: User | null;
   failure: any;
 }
 
-// initial state
-const userState: UserState = {users: {}, current_user: null, failure: null};
+export const userState: UserState = {users: {}, current_user: null, failure: null};
 
 // getters
 const getters = {
@@ -23,14 +36,30 @@ const getters = {
 // actions
 const actions = {
   all(context: any, request: any) {
-    UsersAPI.all()
-             .then((response: any) => response.forEach((user: any) => context.commit('setUser', user)))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise((resolve, reject) => {
+      UsersAPI.all()
+        .then((response: any) => {
+          response.forEach((user: any) => context.commit('setUser', user));
+          resolve();
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
   update(context: any, request: any) {
-    UsersAPI.update(request)
-             .then((response: any) => context.commit('setUser', response))
-             .catch((error: any) => context.commit('failure', error));
+    return new Promise((resolve, reject) => {
+      UsersAPI.update(request)
+        .then((response: any) => {
+          context.commit('setUser', response);
+          resolve(response);
+        })
+        .catch((error: any) => {
+          context.commit('failure', error);
+          reject(error);
+        });
+    });
   },
   signIn(context: any, request: any) {
     return new Promise((resolve, reject) => {

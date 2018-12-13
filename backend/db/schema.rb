@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_140850) do
     t.integer "uid"
     t.string "name"
     t.string "email"
+    t.string "klass"
     t.string "role"
     t.string "google_token"
     t.string "photo_path"
