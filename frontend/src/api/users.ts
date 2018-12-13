@@ -9,6 +9,7 @@ export default {
         headers: {
           'Content-Type': 'application/json',
         },
+        withCredentials: true,
       });
       return Promise.resolve(response.data);
     } catch (error) {
@@ -23,6 +24,22 @@ export default {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        withCredentials: true,
+      });
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+
+  },
+  async signIn(id_token: string) {
+
+    try {
+      const response = await axios.post(`api/v1/auth`, {id_token: id_token}, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
       });
       return Promise.resolve(response.data);
     } catch (error) {

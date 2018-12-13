@@ -3,7 +3,6 @@
         #left
         b-container
             h1 Välkommen till YABS!
-            GoogleLogin
             br
             p.info Denna applikation kommer att användas för att underlätta hantering/utlåningen av olika sorters litteratur och utskrivning av passerkort.
             br
@@ -34,19 +33,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import RecentLoan from '@/components/RecentLoan.vue';
-import GoogleLogin from '@/components/GoogleLogin.vue';
+import { Component, Vue } from "vue-property-decorator";
+import RecentLoan from "@/components/RecentLoan.vue";
 
 @Component({
-    components: {
-        RecentLoan,
-        GoogleLogin,
-    },
+  components: {
+    RecentLoan
+  }
 })
 export default class Start extends Vue {
-    public size = 'lg';
-    public primary = 'primary';
+  public size = "lg";
+  public primary = "primary";
 }
 </script>
 

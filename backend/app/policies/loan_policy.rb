@@ -1,4 +1,4 @@
-class LoansPolicy < ApplicationPolicy
+class LoanPolicy
   attr_reader :user, :loan
 
   def initialize(user, loan)
@@ -7,6 +7,6 @@ class LoansPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin? && user.uid == loan.lent_by
+    user && user.admin? && user.uid == loan.lent_by
   end
 end
