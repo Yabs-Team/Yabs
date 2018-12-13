@@ -32,11 +32,14 @@ export default class GoogleLogin extends Vue {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    this.$store.dispatch('users/signIn', id_token).then((response: any) => {
-      console.log(response);
-    }).catch((error: any) => {
-      this.signOut();
-    });
+    this.$store
+      .dispatch('users/signIn', id_token)
+      .then((response: any) => {
+        console.log(response);
+      })
+      .catch((error: any) => {
+        this.signOut();
+      });
   }
 
   public onFailure(error: any) {
