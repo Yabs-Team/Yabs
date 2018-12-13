@@ -30,7 +30,7 @@ const getters = {
   },
   currentUser: (state: UserState) => {
     return state.current_user;
-  }
+  },
 };
 
 // actions

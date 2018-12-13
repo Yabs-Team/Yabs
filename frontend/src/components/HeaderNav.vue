@@ -20,12 +20,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import GoogleLogin from "@/components/GoogleLogin.vue";
+import GoogleLogin from '@/components/GoogleLogin.vue';
 
 @Component({
   components: {
     GoogleLogin,
-  }
+  },
 })
 export default class HeaderNav extends Vue {}
 </script>

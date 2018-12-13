@@ -32,10 +32,10 @@ export default {
     }
 
   },
-  async signIn(id_token: string) {
+  async signIn(idToken: string) {
 
     try {
-      const response = await axios.post(`api/v1/auth`, {id_token: id_token}, {
+      const response = await axios.post(`api/v1/auth`, {id_token: idToken}, {
         headers: {
           'Content-Type': 'application/json',
         },
