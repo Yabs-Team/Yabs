@@ -12,34 +12,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { Getter } from "../decorators";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Getter } from '../decorators';
 
 @Component
 export default class LoaningForm extends Vue {
-  @Getter("users/currentUser") public current_user: any;
+  @Getter('users/currentUser') public currentUser!: any;
 
   public form = {
-    lent_by_id: "",
-    loaned_by_id: "",
-    book_id: ""
+    lent_by_id: '',
+    loaned_by_id: '',
+    book_id: '',
   };
   public show = true;
 
   public onSubmit(evt: Event) {
     evt.preventDefault();
-    this.form.lent_by_id = this.current_user ? this.current_user.uid : "";
+    this.form.lent_by_id = this.currentUser ? this.currentUser.uid : '';
     this.$store
-      .dispatch("loans/create", this.form)
-      .then((loan: any) => this.$emit("loan-added", loan))
+      .dispatch('loans/create', this.form)
+      .then((loan: any) => this.$emit('loan-added', loan))
       .catch((failure: any) => console.log(failure));
     // alert(JSON.stringify(this.form));
   }
 
   public onReset(evt: Event) {
     evt.preventDefault();
-    this.form.loaned_by_id = "";
-    this.form.book_id = "";
+    this.form.loaned_by_id = '';
+    this.form.book_id = '';
     this.show = false;
     this.$nextTick(() => {
       this.show = true;

@@ -33,17 +33,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import RecentLoan from "@/components/RecentLoan.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import RecentLoan from '@/components/RecentLoan.vue';
 
 @Component({
   components: {
-    RecentLoan
-  }
+    RecentLoan,
+  },
 })
 export default class Start extends Vue {
-  public size = "lg";
-  public primary = "primary";
+  public size = 'lg';
+  public primary = 'primary';
 }
 </script>
 

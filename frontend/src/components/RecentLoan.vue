@@ -5,19 +5,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { Getter } from "../decorators";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Getter } from '../decorators';
 
 @Component
 export default class RecentLoan extends Vue {
-  @Getter("loans/all") public loans: any;
-  public sortBy = "Utgångsdatum";
+  @Getter('loans/all') public loans: any;
+  public sortBy = 'Utgångsdatum';
   public sortDesc = false;
   public fields = [
-    { key: "loaned_by.name", sortable: false, label: "Lånad av" },
-    { key: "lent_by.name", sortable: false, label: "Utlånad av" },
-    { key: "book.title.name", sortable: false, label: "Boktitel" },
-    { key: "expiration_date", sortable: false, label: "Utgångsdatum" }
+    { key: 'loaned_by.name', sortable: false, label: 'Lånad av' },
+    { key: 'lent_by.name', sortable: false, label: 'Utlånad av' },
+    { key: 'book.title.name', sortable: false, label: 'Boktitel' },
+    { key: 'expiration_date', sortable: false, label: 'Utgångsdatum' },
   ];
 
   get items() {
@@ -26,7 +26,7 @@ export default class RecentLoan extends Vue {
         // @ts-ignore: returned at
         return !v.returned_at;
       })
-      .map(([k, v]) => Object.assign(v, { ".key": k }));
+      .map(([k, v]) => Object.assign(v, { '.key': k }));
   }
 
       public created() {
