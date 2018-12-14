@@ -191,7 +191,7 @@ export default class CigCanvas extends Vue {
   public savePicture() {
     const formData = new FormData();
     formData.append('uid', this.barcode);
-    formData.append('image', this.image);
+    formData.append('image', this.image as Blob);
     this.$store.dispatch('users/update', formData).then((response: any) => {
       console.log('user updated profile!');
     }).catch((error: any) => {

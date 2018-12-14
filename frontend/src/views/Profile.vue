@@ -33,10 +33,11 @@ import { Getter } from '../decorators';
 export default class Profile extends Vue {
   @Getter('users/all') public users!: UserObject;
 
-  public currentUser: User = null;
+  public currentUser: User | null = null;
 
   public created() {
-    this.currentUser = Object.entries(this.users).find(([k, user]) => user.uid === this.$route.params.id)[1];
+    const users: any[] = Object.entries(this.users);
+    if (users) { this.currentUser = users.find(([k, user]) => user.uid === this.$route.params.id)[1]; }
   }
 }
 </script>
