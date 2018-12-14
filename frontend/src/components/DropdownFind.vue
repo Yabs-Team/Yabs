@@ -12,22 +12,20 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class DropdownFind extends Vue {
+  @Prop({ default: '' }) public selectedType!: string;
 
-    @Prop({default: ''}) public selectedType!: string;
+  public type = this.selectedType;
 
-    public type = this.selectedType;
+  public changeType() {
+    this.$emit('change-type', this.type);
+  }
 
-    public changeType() {
-        this.$emit('change-type', this.type);
-    }
+  public changeToLoan() {
+    this.type = 'Utlånade';
+  }
 
-    public changeToLoan() {
-        this.type = 'Utlånade';
-    }
-
-    public changeToCig() {
-        this.type = 'Alla Böcker';
-    }
-
+  public changeToCig() {
+    this.type = 'Alla Böcker';
+  }
 }
 </script>
