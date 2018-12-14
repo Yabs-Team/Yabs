@@ -16,64 +16,67 @@ import JSZip from 'jszip';
 
 @Component
 export default class CigForm extends Vue {
-    public files: string[] = [];
-    public fileList: File[] = [];
+  public files: string[] = [];
+  public fileList: File[] = [];
 
-    @Getter('users/all') public users: any;
+  @Getter('users/all') public users: any;
 
-    public created() {
-      this.$store.dispatch('users/all');
-      this.$emit('sendUserData', this.users);
-    }
+  public created() {
+    this.$store.dispatch('users/all');
+    this.$emit('sendUserData', this.users);
+  }
 
-    public submit() {
-      this.$emit('sendImages', this.files);
-      const formData = new FormData();
-      formData.append('uid', '1804583927');
-      formData.append('image', this.fileList[0]);
-      console.log(this.$store.dispatch('users/update', formData));
-    }
+  public submit() {
+    this.$emit('sendImages', this.files);
+    const formData = new FormData();
+    formData.append('uid', '1804583927');
+    formData.append('image', this.fileList[0]);
+    console.log(this.$store.dispatch('users/update', formData));
+  }
 
-    public onFileSelect(event: any) {
-      this.fileList = event.srcElement.files;
+  public onFileSelect(event: any) {
+    this.fileList = event.srcElement.files;
 
-      for (const fileObject of this.fileList) {
-        if (fileObject.type === 'application/zip') {
-          this.extractFiles(fileObject);
-        } else {
-          this.files.push(URL.createObjectURL(fileObject));
-        }
+    for (const fileObject of this.fileList) {
+      if (fileObject.type === 'application/zip') {
+        this.extractFiles(fileObject);
+      } else {
+        this.files.push(URL.createObjectURL(fileObject));
       }
     }
+  }
 
-    public loadFileData(files: any[], fileIndex: number, fileData: any) {
-      const file = new File([fileData], files[fileIndex].name, { type: 'image/jpeg' });
-      this.files.push(URL.createObjectURL(file));
-    }
+  public loadFileData(files: any[], fileIndex: number, fileData: any) {
+    const file = new File([fileData], files[fileIndex].name, {
+      type: 'image/jpeg',
+    });
+    this.files.push(URL.createObjectURL(file));
+  }
 
-    public loadFiles(extZip: any) {
-      const files: any = Object.values(extZip.files);
-      for (let i = 0; i < files.length; i++) {
-        if (files[i].name.includes('__MACOSX/') === false) {
-          extZip.files[files[i].name].async('blob')
-            .then((fileData: any) => this.loadFileData(files, i, fileData))
-            .catch((error: any) => {
-                console.log('Error2: ' + error);
-            });
-        }
+  public loadFiles(extZip: any) {
+    const files: any = Object.values(extZip.files);
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].name.includes('__MACOSX/') === false) {
+        extZip.files[files[i].name]
+          .async('blob')
+          .then((fileData: any) => this.loadFileData(files, i, fileData))
+          .catch((error: any) => {
+            console.log('Error2: ' + error);
+          });
       }
     }
+  }
 
-    public extractFiles(zip: any) {
-      const newZip = new JSZip();
+  public extractFiles(zip: any) {
+    const newZip = new JSZip();
 
-      newZip.loadAsync(zip)
-        .then(this.loadFiles)
-        .catch( (error: any) => {
-            console.log('Error1: ' + error);
-        });
-    }
-
+    newZip
+      .loadAsync(zip)
+      .then(this.loadFiles)
+      .catch((error: any) => {
+        console.log('Error1: ' + error);
+      });
+  }
 }
 </script>
 

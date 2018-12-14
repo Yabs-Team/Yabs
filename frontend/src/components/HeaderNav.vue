@@ -13,13 +13,20 @@
                     b-nav-item
                         router-link.link(to='/find') Hitta
             b-navbar-brand Yabs
-            b-navbar-brand.material-icons account_circle
+            GoogleLogin
+            //- b-navbar-brand.material-icons account_circle
+
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import GoogleLogin from '@/components/GoogleLogin.vue';
 
-@Component
+@Component({
+  components: {
+    GoogleLogin,
+  },
+})
 export default class HeaderNav extends Vue {}
 </script>
 

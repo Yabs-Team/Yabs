@@ -10,26 +10,28 @@ import { Getter } from '../decorators';
 
 @Component
 export default class RecentTitel extends Vue {
-      @Getter('books/all') public books: any;
-      public sortBy = 'Title';
-      public sortDesc = false;
-      public fields = [
-        { key: 'title.name', sortable: false, label: 'Titel' },
-        { key: 'status', sortable: false, label: 'Status'},
-        { key: 'barcode', sortable: false, label: 'Sträckkod' },
-      ];
+  @Getter('books/all') public books: any;
+  public sortBy = 'Title';
+  public sortDesc = false;
+  public fields = [
+    { key: 'title.name', sortable: false, label: 'Titel' },
+    { key: 'status', sortable: false, label: 'Status' },
+    { key: 'barcode', sortable: false, label: 'Sträckkod' },
+  ];
 
-    get items() {
-        return Object.entries(this.books).filter(([k, v]) => {
-          // @ts-ignore: returned at
-          return !v.returned_at;
-        }).map(([k, v]) => Object.assign(v, {'.key': k}));
-    }
+  get items() {
+    return Object.entries(this.books)
+      .filter(([k, v]) => {
+        // @ts-ignore: returned at
+        return !v.returned_at;
+      })
+      .map(([k, v]) => Object.assign(v, { '.key': k }));
+  }
 
-      public created() {
-        this.$store.dispatch('books/all');
-      }
-    }
+  public created() {
+    this.$store.dispatch('books/all');
+  }
+}
 </script>
 
 <style lang="sass" scoped>

@@ -14,12 +14,22 @@ module Yabs
     #config.active_storage.routes_prefix = '/api/v1'
     config.action_controller.allow_forgery_protection = false
     config.debug_exception_response_format = :default
-    config.api_only = true
+    #config.api_only = true
     config.eager_load_paths << Rails.root.join('app','lib')
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'localhost:3000'
+        resource '*',
+          headers: :any,
+          methods: :any,
+          credentials: true
+      end
+    end
 
     # Don't generate system test files.
     config.generators.system_tests = nil

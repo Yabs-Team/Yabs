@@ -2,7 +2,7 @@
     .view
         #left
         b-container
-            h1.text-center Välkommen till YABS! 
+            h1.text-center Välkommen till YABS!
             br
             p.info Denna applikation kommer att användas för att underlätta hantering/utlåningen av olika sorters litteratur och utskrivning av passerkort.
             br
@@ -23,7 +23,7 @@
                     router-link.link.row-btn(to='/find')
                         b-button.row-btn(:size="size" :variant="primary") Hitta
             p.info På hitta delen så kan du söka på allting som denna sida hanterar, Tex Elever, specifika lån eller böcker.
-                    
+
         #right
             h5 Böcker som ska inlämnas snart:
             br
@@ -37,13 +37,13 @@ import { Component, Vue } from 'vue-property-decorator';
 import RecentLoan from '@/components/RecentLoan.vue';
 
 @Component({
-    components: {
-        RecentLoan,
-    },
+  components: {
+    RecentLoan,
+  },
 })
 export default class Start extends Vue {
-    public size = 'lg';
-    public primary = 'primary';
+  public size = 'lg';
+  public primary = 'primary';
 }
 </script>
 

@@ -13,30 +13,37 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Getter } from '../decorators';
 
 @Component
 export default class LoaningForm extends Vue {
-    public form = {
-        lent_by_id: '1804583927',
-        loaned_by_id: '',
-        book_id: '',
-    };
-    public show = true;
+  @Getter('users/currentUser') public currentUser!: any;
 
-    public onSubmit(evt: Event) {
-        evt.preventDefault();
-        this.$store.dispatch('loans/create', this.form)
-            .then((loan: any) => this.$emit('loan-added', loan))
-            .catch((failure: any) => console.log(failure));
-        // alert(JSON.stringify(this.form));
-    }
+  public form = {
+    lent_by_id: '',
+    loaned_by_id: '',
+    book_id: '',
+  };
+  public show = true;
 
-    public onReset(evt: Event) {
-        evt.preventDefault();
-        this.form.loaned_by_id = '';
-        this.form.book_id = '';
-        this.show = false;
-        this.$nextTick(() => { this.show = true; });
-    }
+  public onSubmit(evt: Event) {
+    evt.preventDefault();
+    this.form.lent_by_id = this.currentUser ? this.currentUser.uid : '';
+    this.$store
+      .dispatch('loans/create', this.form)
+      .then((loan: any) => this.$emit('loan-added', loan))
+      .catch((failure: any) => console.log(failure));
+    // alert(JSON.stringify(this.form));
+  }
+
+  public onReset(evt: Event) {
+    evt.preventDefault();
+    this.form.loaned_by_id = '';
+    this.form.book_id = '';
+    this.show = false;
+    this.$nextTick(() => {
+      this.show = true;
+    });
+  }
 }
 </script>

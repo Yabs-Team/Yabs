@@ -11,7 +11,7 @@ class Api::V1::LoansController < ApplicationController
 
   def create
     @loan = Loan.new(loan_params)
-
+    authorize @loan
     if @loan.save
       render json: @loan
     else
