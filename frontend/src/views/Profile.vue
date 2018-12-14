@@ -1,18 +1,18 @@
 <template lang="pug">
-    .view
-        .left
-            h1 Simon
-            h1 Joahnnesson
-            h1 Elev - TE4
-            CigCanvas
-                // antingen bild eller kortet i canvas
-        .right
-            .header
-                AddLoan
-                .loanText
-                    h1 Lån
-            .myCard
-                RecentLoan
+    div
+      p(v-if="!currentUser") Du är inte inloggad
+      .view(v-else)
+          .left
+              h1 {{currentUser.name}}
+              h1 {{currentUser.role}} - {{currentUser.klass}}
+              img(:src="currentUser.photo_path")
+          .right
+              .header
+                  AddLoan
+                  .loanText
+                      h1 Lån
+              .myCard
+                  RecentLoan
 </template>
 
 <script lang="ts">
@@ -20,6 +20,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import CigCanvas from '@/components/CigCanvas.vue';
 import AddLoan from '@/components/AddLoan.vue';
 import RecentLoan from '@/components/RecentLoan.vue';
+import { User, UserObject } from '../store/modules/users';
+import { Getter } from '../decorators';
 
 @Component({
     components: {
@@ -28,7 +30,15 @@ import RecentLoan from '@/components/RecentLoan.vue';
         RecentLoan,
     },
 })
-export default class App extends Vue {}
+export default class Profile extends Vue {
+  @Getter('users/all') public users!: UserObject;
+
+  public currentUser : User = null;
+
+  created() {
+    this.currentUser = Object.entries(this.users).find(([k, user]) => user.uid == this.$route.params.id)[1];
+  }
+}
 </script>
 
 <style lang="sass" scoped>

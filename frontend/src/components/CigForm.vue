@@ -16,32 +16,24 @@ import JSZip from 'jszip';
 
 @Component
 export default class CigForm extends Vue {
-  public files: string[] = [];
-  public fileList: File[] = [];
-
-  @Getter('users/all') public users: any;
+  public files: File[] = [];
 
   public created() {
     this.$store.dispatch('users/all');
-    this.$emit('sendUserData', this.users);
   }
 
   public submit() {
     this.$emit('sendImages', this.files);
-    const formData = new FormData();
-    formData.append('uid', '1804583927');
-    formData.append('image', this.fileList[0]);
-    console.log(this.$store.dispatch('users/update', formData));
   }
 
   public onFileSelect(event: any) {
-    this.fileList = event.srcElement.files;
+    const fileList: File[] = event.srcElement.files;
 
-    for (const fileObject of this.fileList) {
+    for (const fileObject of fileList) {
       if (fileObject.type === 'application/zip') {
         this.extractFiles(fileObject);
       } else {
-        this.files.push(URL.createObjectURL(fileObject));
+        this.files.push(fileObject);
       }
     }
   }
@@ -50,7 +42,7 @@ export default class CigForm extends Vue {
     const file = new File([fileData], files[fileIndex].name, {
       type: 'image/jpeg',
     });
-    this.files.push(URL.createObjectURL(file));
+    this.files.push(file);
   }
 
   public loadFiles(extZip: any) {

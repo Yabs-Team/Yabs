@@ -7,7 +7,7 @@
                     b-nav-item
                         router-link.link(to='/') Start
                     b-nav-item
-                        router-link.link(to='/users') Profil
+                        router-link.link(:to="`/users/${currentUser.uid}`") Profil
                     b-nav-item
                         router-link.link(to='/add') Lägg till
                     b-nav-item
@@ -19,15 +19,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import GoogleLogin from '@/components/GoogleLogin.vue';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import GoogleLogin from "@/components/GoogleLogin.vue";
+import { Getter } from '../decorators';
 
 @Component({
   components: {
-    GoogleLogin,
-  },
+    GoogleLogin
+  }
 })
-export default class HeaderNav extends Vue {}
+export default class HeaderNav extends Vue {
+  @Getter("users/currentUser") public currentUser!: any;
+}
 </script>
 
 <style lang="sass" scoped>

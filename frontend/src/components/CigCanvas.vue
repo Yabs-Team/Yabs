@@ -20,6 +20,7 @@ import FileSaver from 'file-saver';
 import resize from 'vue-resize-directive';
 import { setTimeout } from 'timers';
 import { UserObject } from '../store/modules/users';
+import { Getter } from '../decorators';
 
 @Component({
   directives: {
@@ -27,8 +28,9 @@ import { UserObject } from '../store/modules/users';
   },
 })
 export default class CigCanvas extends Vue {
-  @Prop({ default: {} }) public userData!: UserObject;
-  @Prop({ default: '' }) public image!: string;
+  @Getter('users/all') public users!: UserObject;
+
+  @Prop({ default: null }) public image!: File | null;
   @Prop({ default: false }) public sendCanvas!: boolean;
 
   public name: string = '';
@@ -41,17 +43,17 @@ export default class CigCanvas extends Vue {
   public context: any = null;
 
   public get userNames() {
-    return Object.entries(this.userData)
+    return Object.entries(this.users)
       .filter(([k, user]) => !user.name.includes('Deleted User'))
       .map(([k, user]) => user.name);
   }
 
-  public checkUserData() {
-    for (const user in this.userData) {
-      if (this.name === this.userData[user].name) {
+  public checkUserData() { // TODO: don't compare name to find the user. Instead compare the uid.
+    for (const user in this.users) {
+      if (this.name === this.users[user].name) {
         this.barcode = user;
-        this.email = this.userData[user].email;
-        this.role = this.userData[user].role;
+        this.email = this.users[user].email;
+        this.role = this.users[user].role;
       }
     }
   }
@@ -91,7 +93,10 @@ export default class CigCanvas extends Vue {
   public drawImages() {
     const barcode = new Image();
     const profileImage = new Image();
-    profileImage.src = this.image;
+
+    if (this.image != null) {
+      profileImage.src = URL.createObjectURL(this.image);
+    }
 
     if (this.barcode !== '') {
       JsBarcode(barcode, this.barcode);
@@ -184,7 +189,15 @@ export default class CigCanvas extends Vue {
   }
 
   public savePicture() {
-    // save to database
+    const formData = new FormData();
+    formData.append('uid', this.barcode);
+    formData.append('image', this.image);
+    this.$store.dispatch('users/update', formData).then((response: any) => {
+      console.log('user updated profile!');
+    }).catch((error: any) => {
+      // TODO: show in notification to user
+      console.error(error);
+    });
   }
 
   public onNameInput() {
