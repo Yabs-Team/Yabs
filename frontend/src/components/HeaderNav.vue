@@ -19,17 +19,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import GoogleLogin from "@/components/GoogleLogin.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import GoogleLogin from '@/components/GoogleLogin.vue';
 import { Getter } from '../decorators';
 
 @Component({
   components: {
-    GoogleLogin
-  }
+    GoogleLogin,
+  },
 })
 export default class HeaderNav extends Vue {
-  @Getter("users/currentUser") public currentUser!: any;
+  @Getter('users/currentUser') public currentUser!: any;
 }
 </script>
 
