@@ -91,7 +91,7 @@ export default class Find extends Vue {
         }
     }
 
-    public onLoaded(){
+    public onLoaded() {
         this.loading = false;
     }
 

@@ -22,19 +22,19 @@
                 \n{{ modalInfo.content }}        
 </template>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
-import { Getter } from "../decorators";
+import { Getter } from '../decorators';
 
 @Component
 export default class AllBooks extends Vue {
-  @Getter("books/all") public books: any;
+  @Getter('books/all') public books: any;
 
   @Prop({ default: 5 }) public perPage!: number;
   @Prop({ default: 0 }) public pageOptions!: number;
   @Prop({ default: null }) public sortBy!: any;
   @Prop({ default: true }) public sortDesc!: boolean;
-  @Prop({ default: "desc" }) public sortDirection!: string;
+  @Prop({ default: 'desc' }) public sortDirection!: string;
   @Prop({ default: null }) public filter!: any;
   @Prop({ default: null }) public modalInfo!: any;
 
@@ -42,14 +42,14 @@ export default class AllBooks extends Vue {
   public totalRows: number = 0;
 
   public fields = [
-    { key: "title.name", label: "Titel", sortable: true, class: "text-left" },
-    { key: "barcode", label: "Streckkod", sortable: true, class: "text-left" },
-    { key: "status", label: "Status", sortable: true, class: "text-left" }
+    { key: 'title.name', label: 'Titel', sortable: true, class: 'text-left' },
+    { key: 'barcode', label: 'Streckkod', sortable: true, class: 'text-left' },
+    { key: 'status', label: 'Status', sortable: true, class: 'text-left' },
   ];
 
   get items() {
     const items = Object.entries(this.books).map(([k, v]) =>
-      Object.assign(v, { ".key": k })
+      Object.assign(v, { '.key': k }),
     );
     this.totalRows = items.length;
 
@@ -66,19 +66,19 @@ export default class AllBooks extends Vue {
   public info(item: any, index: number, button: any) {
     this.modalInfo.title = `Row index: ${index}`;
     this.modalInfo.content = JSON.stringify(item, null, 2);
-    this.$root.$emit("bv::show::modal", "modalInfo", button);
+    this.$root.$emit('bv::show::modal', 'modalInfo', button);
   }
 
   public created() {
     this.$store
-      .dispatch("books/all")
-      .then((books: any) => this.$emit("books-loaded", books))
+      .dispatch('books/all')
+      .then((books: any) => this.$emit('books-loaded', books))
       .catch((failure: any) => console.log(failure));
   }
 
   public resetModal() {
-    this.modalInfo.title = "";
-    this.modalInfo.content = "";
+    this.modalInfo.title = '';
+    this.modalInfo.content = '';
   }
 
   public onFiltered(filteredItems: any) {
@@ -88,7 +88,7 @@ export default class AllBooks extends Vue {
   }
 
   public mounted() {
-    this.$store.dispatch("books/all");
+    this.$store.dispatch('books/all');
   }
 }
 </script>

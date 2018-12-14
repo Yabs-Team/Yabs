@@ -85,7 +85,7 @@ export default class Add extends Vue {
         this.hasAddedLoan = true;
     }
 
-    public onLoaded(){
+    public onLoaded() {
         this.loading = false;
     }
 
