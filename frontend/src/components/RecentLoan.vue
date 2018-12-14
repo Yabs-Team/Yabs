@@ -10,27 +10,32 @@ import { Getter } from '../decorators';
 
 @Component
 export default class RecentLoan extends Vue {
-      @Getter('loans/all') public loans: any;
-      public sortBy = 'Utgångsdatum';
-      public sortDesc = false;
-      public fields = [
-        { key: 'loaned_by.name', sortable: false, label: 'Lånad av'},
-        { key: 'lent_by.name', sortable: false, label: 'Utlånad av'},
-        { key: 'book.title.name', sortable: false, label: 'Boktitel'},
-        { key: 'expiration_date', sortable: false, label: 'Utgångsdatum'},
-      ];
+  @Getter('loans/all') public loans: any;
+  public sortBy = 'Utgångsdatum';
+  public sortDesc = false;
+  public fields = [
+    { key: 'loaned_by.name', sortable: false, label: 'Lånad av' },
+    { key: 'lent_by.name', sortable: false, label: 'Utlånad av' },
+    { key: 'book.title.name', sortable: false, label: 'Boktitel' },
+    { key: 'expiration_date', sortable: false, label: 'Utgångsdatum' },
+  ];
 
-      get items() {
-        return Object.entries(this.loans).filter(([k, v]) => {
-          // @ts-ignore: returned at
-          return !v.returned_at;
-        }).map(([k, v]) => Object.assign(v, {'.key': k}));
-      }
+  get items() {
+    return Object.entries(this.loans)
+      .filter(([k, v]) => {
+        // @ts-ignore: returned at
+        return !v.returned_at;
+      })
+      .map(([k, v]) => Object.assign(v, { '.key': k }));
+  }
 
-      public created() {
-        this.$store.dispatch('loans/all');
-      }
-    }
+  public created() {
+    this.$store
+      .dispatch('loans/all')
+      .then((loans: any) => this.$emit('loans-loaded', loans))
+      .catch((failure: any) => console.log(failure));
+  }
+}
 </script>
 
 <style lang="sass" scoped>
