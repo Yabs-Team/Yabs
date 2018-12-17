@@ -5,8 +5,10 @@ Rails.application.routes.draw do
       resources :loans
       resources :books
       resources :titles
+
+      resources :auth, only: [:index, :create, :destroy]
     end
   end
   root 'application#show'
-  match '/*path', to:'application#show', via: :all, :constraints => lambda{|req| req.path !~ /\/rails\/active_storage\/.*/ }
+  match '/*path', to:'application#show', via: :all, :constraints => ->(req) { req.path !~ /(\/rails\/active_storage\/).*/ }
 end

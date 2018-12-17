@@ -20,42 +20,43 @@ import { TitleObject } from '../store/modules/titles';
 
 @Component
 export default class AddingForm extends Vue {
+  @Getter('titles/all') public titles!: TitleObject;
 
-    @Getter('titles/all') public titles!: TitleObject;
+  public form = {
+    barcode: '',
+    title_id: 0,
+    status: '',
+  };
+  public name: string = '';
+  public show = true;
 
-    public form = {
-        barcode: '',
-        title_id: 0,
-        status: '',
-    };
-    public name: string = '';
-    public show = true;
+  get titleNames() {
+    return Object.entries(this.titles).map(([k, title]) => title.name);
+  }
 
-    get titleNames() {
-        return Object.entries(this.titles).map(([k, title]) => title.name);
+  public toId() {
+    for (const title in this.titles) {
+      if (this.name === this.titles[title].name) {
+        this.form.title_id = this.titles[title].id;
+      }
     }
+  }
 
-    public toId() {
-       for (const title in this.titles) {
-           if (this.name === this.titles[title].name) {
-               this.form.title_id = this.titles[title].id;
-           }
-       }
-    }
+  public onSubmit(evt: Event) {
+    evt.preventDefault();
+    console.log(this.$store.dispatch('books/create', this.form));
+    // alert(JSON.stringify(this.form));
+  }
 
-    public onSubmit(evt: Event) {
-        evt.preventDefault();
-        console.log(this.$store.dispatch('books/create', this.form));
-        // alert(JSON.stringify(this.form));
-    }
-
-    public onReset(evt: Event) {
-        evt.preventDefault();
-        this.form.barcode = '';
-        this.form.title_id = 0;
-        this.form.status = '';
-        this.show = false;
-        this.$nextTick(() => { this.show = true; });
-    }
+  public onReset(evt: Event) {
+    evt.preventDefault();
+    this.form.barcode = '';
+    this.form.title_id = 0;
+    this.form.status = '';
+    this.show = false;
+    this.$nextTick(() => {
+      this.show = true;
+    });
+  }
 }
 </script>

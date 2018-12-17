@@ -21,7 +21,7 @@
         // Info modal
         b-modal#modalInfo(@hide='resetModal', :title='modalInfo.title', ok-only='')
             pre.
-                \n{{ modalInfo.content }}        
+                \n{{ modalInfo.content }}
 </template>
 
 <script lang="ts">
@@ -31,69 +31,68 @@ import { LoanObject } from '../store/modules/loans';
 
 @Component
 export default class MainTable extends Vue {
-    @Getter('loans/all') public loans!: LoanObject;
+  @Getter('loans/all') public loans!: LoanObject;
 
-    @Prop({default: 5}) public perPage!: number;
-    @Prop({default: 0}) public pageOptions!: number;
-    @Prop({default: null}) public sortBy!: any;
-    @Prop({default: true}) public sortDesc!: boolean;
-    @Prop({default: 'desc'}) public sortDirection!: string;
-    @Prop({default: null}) public filter!: any;
-    @Prop({default: null}) public modalInfo!: any;
+  @Prop({ default: 5 }) public perPage!: number;
+  @Prop({ default: 0 }) public pageOptions!: number;
+  @Prop({ default: null }) public sortBy!: any;
+  @Prop({ default: true }) public sortDesc!: boolean;
+  @Prop({ default: 'desc' }) public sortDirection!: string;
+  @Prop({ default: null }) public filter!: any;
+  @Prop({ default: null }) public modalInfo!: any;
 
-    public loansLoading: boolean = true;
+  public loansLoading: boolean = true;
 
-    public fields = [
-        { key: 'loaned_by.name', sortable: false, label: 'Lånad av'},
-        { key: 'lent_by.name', sortable: false, label: 'Utlånad av'},
-        { key: 'book.title.name', sortable: false, label: 'Boktitel'},
-        { key: 'expiration_date', sortable: false, label: 'Utgångsdatum'},
-      ];
+  public fields = [
+    { key: 'loaned_by.name', sortable: false, label: 'Lånad av' },
+    { key: 'lent_by.name', sortable: false, label: 'Utlånad av' },
+    { key: 'book.title.name', sortable: false, label: 'Boktitel' },
+    { key: 'expiration_date', sortable: false, label: 'Utgångsdatum' },
+  ];
 
-    public currentPage = 1;
+  public currentPage = 1;
 
-    public totalRows = 0;
+  public totalRows = 0;
 
-    get items() {
-        const items = Object.entries(this.loans).filter(([k, v]) => {
-            return !v.returned_at;
-        }).map(([k, v]) => Object.assign(v, {'.key': k}));
-        this.totalRows = items.length;
+  get items() {
+    const items = Object.entries(this.loans)
+      .filter(([k, v]) => {
+        return !v.returned_at;
+      })
+      .map(([k, v]) => Object.assign(v, { '.key': k }));
+    this.totalRows = items.length;
 
-        return items;
-    }
+    return items;
+  }
 
+  get sortOptions() {
+    // Create an options list from our fields
+    return this.fields
+      .filter((f: any) => f.sortable)
+      .map((f: any) => Object({ text: f.label, value: f.key }));
+  }
 
-    get sortOptions() {
-      // Create an options list from our fields
-      return this.fields
-        .filter((f: any) => f.sortable)
-        .map((f: any) => Object({ text: f.label,
-                    value: f.key }) );
-    }
+  public created() {
+    this.$store.dispatch('loans/all').then(() => {
+      this.loansLoading = false;
+    });
+  }
 
-    public created() {
-        this.$store.dispatch('loans/all')
-        .then( () => {
-            this.loansLoading = false;
-        });
-      }
+  public info(item: any, index: number, button: any) {
+    this.modalInfo.title = `Row index: ${index}`;
+    this.modalInfo.content = JSON.stringify(item, null, 2);
+    this.$root.$emit('bv::show::modal', 'modalInfo', button);
+  }
 
-    public info(item: any, index: number, button: any) {
-      this.modalInfo.title = `Row index: ${index}`;
-      this.modalInfo.content = JSON.stringify(item, null, 2);
-      this.$root.$emit('bv::show::modal', 'modalInfo', button);
-    }
+  public resetModal() {
+    this.modalInfo.title = '';
+    this.modalInfo.content = '';
+  }
 
-    public resetModal() {
-      this.modalInfo.title = '';
-      this.modalInfo.content = '';
-    }
-
-    public onFiltered(filteredItems: any) {
-      // Trigger pagination to update the number of buttons/pages due to filtering
-      this.totalRows = filteredItems.length;
-      this.currentPage = 1;
-    }
+  public onFiltered(filteredItems: any) {
+    // Trigger pagination to update the number of buttons/pages due to filtering
+    this.totalRows = filteredItems.length;
+    this.currentPage = 1;
+  }
 }
 </script>

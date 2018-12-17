@@ -4,6 +4,7 @@ import books from './modules/books';
 import loans from './modules/loans';
 import users from './modules/users';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -16,5 +17,6 @@ export default new Vuex.Store({
     loans,
     users,
   },
+  plugins: [createPersistedState()],
   strict: debug,
 });
