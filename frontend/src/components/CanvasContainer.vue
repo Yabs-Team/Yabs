@@ -14,47 +14,43 @@ import JSZip from 'jszip';
 import { UserObject } from '../store/modules/users';
 
 @Component({
-    components: {
-        CigCanvas,
-    },
+  components: {
+    CigCanvas,
+  },
 })
 export default class CanvasContainer extends Vue {
+  @Prop({ default: null }) public userData!: UserObject;
+  @Prop({ default: [] }) public images!: string[];
 
-    @Prop({default: null}) public userData!: UserObject;
-    @Prop({default: []}) public images!: string[];
+  public sendCanvas: boolean = false;
+  public imageBlobs: any[] = [];
 
-    public sendCanvas: boolean = false;
-    public imageBlobs: any[] = [];
+  public getAllCanvases() {
+    this.sendCanvas = !this.sendCanvas;
+  }
 
-    public getAllCanvases() {
-        this.sendCanvas = !this.sendCanvas;
+  public onImageReceived(image: any) {
+    this.imageBlobs.push(image);
+    if (this.images.length === this.imageBlobs.length) {
+      this.downloadAll();
     }
+  }
 
-    public onImageReceived(image: any) {
-        this.imageBlobs.push(image);
-        if (this.images.length === this.imageBlobs.length) {
-            this.downloadAll();
-        }
-    }
+  public downloadAll() {
+    const zip = new JSZip();
+    let count: number = 0;
 
-    public downloadAll() {
-        const zip = new JSZip();
-        let count: number = 0;
+    this.imageBlobs.forEach((image) => {
+      count++;
+      zip.file(count + '.png', image);
 
-        this.imageBlobs.forEach( (image) => {
-            count++;
-            zip.file(count + '.png', image);
-
-            if (count === this.imageBlobs.length) {
-                zip.generateAsync({type: 'blob'}).then((zipFile: any) => {
-                    FileSaver.saveAs(zipFile, 'cards.zip');
-                });
-            }
+      if (count === this.imageBlobs.length) {
+        zip.generateAsync({ type: 'blob' }).then((zipFile: any) => {
+          FileSaver.saveAs(zipFile, 'cards.zip');
         });
-
-    }
-
-
+      }
+    });
+  }
 }
 </script>
 
@@ -78,7 +74,7 @@ export default class CanvasContainer extends Vue {
         display: flex
         flex-direction: row
         justify-content: center
-        
+
     .grid-container
         margin-top: 10px
         margin-bottom: 10px
@@ -92,6 +88,6 @@ export default class CanvasContainer extends Vue {
 
     .canvas
         place-self: center
-        
+
 </style>
 

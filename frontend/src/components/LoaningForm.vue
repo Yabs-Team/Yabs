@@ -13,11 +13,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Getter } from '../decorators';
 
 @Component
 export default class LoaningForm extends Vue {
+  @Getter('users/currentUser') public currentUser!: any;
+
   public form = {
-    lent_by_id: '1804583927',
+    lent_by_id: '',
     loaned_by_id: '',
     book_id: '',
   };
@@ -25,6 +28,7 @@ export default class LoaningForm extends Vue {
 
   public onSubmit(evt: Event) {
     evt.preventDefault();
+    this.form.lent_by_id = this.currentUser ? this.currentUser.uid : '';
     this.$store
       .dispatch('loans/create', this.form)
       .then((loan: any) => this.$emit('loan-added', loan))

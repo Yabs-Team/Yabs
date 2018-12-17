@@ -19,7 +19,7 @@
         // Info modal
         b-modal#modalInfo(@hide='resetModal', :title='modalInfo.title', ok-only='')
             pre.
-                \n{{ modalInfo.content }}        
+                \n{{ modalInfo.content }}
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
@@ -85,10 +85,6 @@ export default class AllBooks extends Vue {
     // Trigger pagination to update the number of buttons/pages due to filtering
     this.totalRows = filteredItems.length;
     this.currentPage = 1;
-  }
-
-  public mounted() {
-    this.$store.dispatch('books/all');
   }
 }
 </script>
