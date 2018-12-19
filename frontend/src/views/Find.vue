@@ -1,46 +1,49 @@
 <template lang="pug">
-.view.find
-    dropdownFind(@change-type='onChangeType($event)', v-bind:selectedType='this.type')
-    b-container(fluid='')
-        // User Interface controls
-        b-row
-            b-col.my-1(md='6')
-                b-form-group.mb-0(horizontal='', label='Filter')
-                    b-input-group
-                        b-form-input(v-model='filter', placeholder='Type to Search')
-                            b-input-group-append
-                                b-btn(:disabled='!filter', @click="filter = ''") Clear
-            b-col.my-1(md='6')
-                b-form-group.mb-0(horizontal='', label='Sort')
-                    b-input-group
-                        //- b-form-select(v-model='sortBy', :options='sortOptions')
-                        b-form-select(v-model='sortBy')
-                            option(slot='first', :value='null') -- none --
-                        b-form-select(:disabled='!sortBy', v-model='sortDesc', slot='append')
-                            option(:value='false') Asc
-                            option(:value='true') Desc
-            b-col.my-1(md='6')
-                b-form-group.mb-0(horizontal='', label='Sort direction')
-                    b-input-group
-                        b-form-select(v-model='sortDirection', slot='append')
-                            option(value='asc') Asc
-                            option(value='desc') Desc
-                            option(value='last') Last
-            b-col.my-1(md='6')
-                b-form-group.mb-0(horizontal='', label='Per page')
-                    b-form-select(:options='pageOptions', v-model='perPage')
-        // Main table element
-        #loan(v-bind:style="{display: displayTable}")
-            MainTable(:perPage="perPage", :pageOptions="pageOptions",
-            :sortBy="sortBy", :sortDesc="sortDesc",
-            :sortDirection="sortDirection",:filter="filter",
-            :modalInfo="modalInfo")
+div
+    .view.find()
+        dropdownFind(@change-type='onChangeType($event)', v-bind:selectedType='this.type')
+        b-container(fluid='')
+            // User Interface controls
+            b-row
+                b-col.my-1(md='6')
+                    b-form-group.mb-0(horizontal='', label='Filter')
+                        b-input-group
+                            b-form-input(v-model='filter', placeholder='Type to Search')
+                                b-input-group-append
+                                    b-btn(:disabled='!filter', @click="filter = ''") Clear
+                b-col.my-1(md='6')
+                    b-form-group.mb-0(horizontal='', label='Sort')
+                        b-input-group
+                            //- b-form-select(v-model='sortBy', :options='sortOptions')
+                            b-form-select(v-model='sortBy')
+                                option(slot='first', :value='null') -- none --
+                            b-form-select(:disabled='!sortBy', v-model='sortDesc', slot='append')
+                                option(:value='false') Asc
+                                option(:value='true') Desc
+                b-col.my-1(md='6')
+                    b-form-group.mb-0(horizontal='', label='Sort direction')
+                        b-input-group
+                            b-form-select(v-model='sortDirection', slot='append')
+                                option(value='asc') Asc
+                                option(value='desc') Desc
+                                option(value='last') Last
+                b-col.my-1(md='6')
+                    b-form-group.mb-0(horizontal='', label='Per page')
+                        b-form-select(:options='pageOptions', v-model='perPage')
+            // Main table element
+            LoadingIcon(v-show='loading')
+            #info(v-show='!loading')
+                #loan(v-bind:style="{display: displayTable}")
+                    MainTable(:perPage="perPage", :pageOptions="pageOptions",
+                    :sortBy="sortBy", :sortDesc="sortDesc",
+                    :sortDirection="sortDirection",:filter="filter",
+                    :modalInfo="modalInfo")
 
-        #all(v-bind:style="{display: displayCig}")
-            AllBooks(:perPage="perPage", :pageOptions="pageOptions",
-            :sortBy="sortBy", :sortDesc="sortDesc",
-            :sortDirection="sortDirection",:filter="filter",
-            :modalInfo="modalInfo")
+                #all(v-bind:style="{display: displayCig}")
+                    AllBooks(:perPage="perPage", :pageOptions="pageOptions",
+                    :sortBy="sortBy", :sortDesc="sortDesc",
+                    :sortDirection="sortDirection",:filter="filter",
+                    :modalInfo="modalInfo", @books-loaded="onLoaded")
 
 </template>
 
@@ -52,11 +55,14 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import DropdownFind from '@/components/DropdownFind.vue';
 import MainTable from '@/components/MainTable.vue';
 import AllBooks from '@/components/AllBooks.vue';
+import LoadingIcon from '@/components/LoadingIcon.vue';
+
 @Component({
     components: {
         DropdownFind,
         MainTable,
         AllBooks,
+        LoadingIcon,
     },
 })
 
@@ -72,6 +78,7 @@ export default class Find extends Vue {
     public sortDirection = 'asc';
     public filter = null;
     public modalInfo = { title: '', content: '' };
+    public loading = true;
 
     public onChangeType(type: string) {
         this.type = type;
@@ -82,6 +89,10 @@ export default class Find extends Vue {
             this.displayTable = 'none';
             this.displayCig = 'block';
         }
+    }
+
+    public onLoaded() {
+        this.loading = false;
     }
 
 }
@@ -95,7 +106,5 @@ export default class Find extends Vue {
         margin-left: 0% 
         width: 50vw
         margin-top: 70px    
-    
-    
 
 </style>

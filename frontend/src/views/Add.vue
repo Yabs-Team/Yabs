@@ -10,8 +10,9 @@
                 CigForm(@sendImages='onSendImages($event)' v-bind:style='{ display: displayCig }')
                 AddingForm(v-bind:style='{ display: displayAdd }')
                 TitelForm(v-bind:style='{ display: displayTitel }')
-        .right
-            RecentLoan(v-bind:style='{ display: displayLoan }')
+        LoadingIcon(v-show='loading')
+        .right(v-show='!loading')
+            RecentLoan(v-bind:style='{ display: displayLoan }' @loans-loaded="onLoaded")
             CanvasContainer(v-bind:style='{ display: displayCig }' :images='images')
             RecentBook(v-bind:style='{ display: displayAdd }')
             RecentTitel(v-bind:style='{ display: displayTitel }')
@@ -28,6 +29,7 @@ import RecentLoan from '@/components/RecentLoan.vue';
 import RecentTitel from '@/components/RecentTitel.vue';
 import CanvasContainer from '@/components/CanvasContainer.vue';
 import TitelForm from '@/components/TitelForm.vue';
+import LoadingIcon from '@/components/LoadingIcon.vue';
 
 @Component({
   components: {
@@ -40,6 +42,7 @@ import TitelForm from '@/components/TitelForm.vue';
     RecentTitel,
     RecentBook,
     CanvasContainer,
+    LoadingIcon,
   },
 })
 
@@ -53,6 +56,7 @@ export default class Add extends Vue {
     public showDismissibleSuccessAlert = false;
     public failure: any = '';
     public hasAddedLoan: boolean = false;
+    public loading = true;
 
     public displayAdd = 'none';
     public displayTitel = 'none';
@@ -78,6 +82,10 @@ export default class Add extends Vue {
 
     public onLoanAdded(payload: any) {
         this.hasAddedLoan = true;
+    }
+
+    public onLoaded() {
+        this.loading = false;
     }
 
     public onChangeType(type: string) {

@@ -69,6 +69,13 @@ export default class AllBooks extends Vue {
     this.$root.$emit('bv::show::modal', 'modalInfo', button);
   }
 
+  public created() {
+    this.$store
+      .dispatch('books/all')
+      .then((books: any) => this.$emit('books-loaded', books))
+      .catch((failure: any) => console.log(failure));
+  }
+
   public resetModal() {
     this.modalInfo.title = '';
     this.modalInfo.content = '';
@@ -78,10 +85,6 @@ export default class AllBooks extends Vue {
     // Trigger pagination to update the number of buttons/pages due to filtering
     this.totalRows = filteredItems.length;
     this.currentPage = 1;
-  }
-
-  public mounted() {
-    this.$store.dispatch('books/all');
   }
 }
 </script>
