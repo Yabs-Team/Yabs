@@ -7,13 +7,13 @@
                 h1 Lägg till {{this.type}}
                 DropDownType(@changeType='onChangeType($event)', v-bind:selectedType='this.type')
                 LoaningForm(v-bind:style='{ display: displayLoan }' v-on:loan-added="onLoanAdded")
-                CigForm(@sendUserData='onSendUserData($event)' @sendImages='onSendImages($event)' v-bind:style='{ display: displayCig }')
+                CigForm(@sendImages='onSendImages($event)' v-bind:style='{ display: displayCig }')
                 AddingForm(v-bind:style='{ display: displayAdd }')
                 TitelForm(v-bind:style='{ display: displayTitel }')
         LoadingIcon(v-show='loading')
         .right(v-show='!loading')
             RecentLoan(v-bind:style='{ display: displayLoan }' @loans-loaded="onLoaded")
-            CanvasContainer(v-bind:style='{ display: displayCig }' v-bind:userData='userData' v-bind:images='images')
+            CanvasContainer(v-bind:style='{ display: displayCig }' :images='images')
             RecentBook(v-bind:style='{ display: displayAdd }')
             RecentTitel(v-bind:style='{ display: displayTitel }')
 </template>
@@ -51,8 +51,7 @@ export default class Add extends Vue {
     public displayLoan = 'block';
     public displayCig = 'none';
     public updated = false;
-    public userData = {};
-    public images: any[] = [];
+    public images: File[] = [];
     public showDismissibleDangerAlert = false;
     public showDismissibleSuccessAlert = false;
     public failure: any = '';
@@ -115,10 +114,6 @@ export default class Add extends Vue {
         }
     }
 
-    public onSendUserData(userData: any) {
-        this.userData = userData;
-    }
-
     public onSendImages(images: any[]) {
         this.images = images;
     }
@@ -149,7 +144,7 @@ export default class Add extends Vue {
 
         .left
             height: 43%
-    
+
         .right
             height: 57%
 
