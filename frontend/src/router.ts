@@ -13,7 +13,7 @@ export default new Router({
       component: views.Start,
     },
     {
-      path: '/users',
+      path: '/users/:id',
       name: 'profile',
       component: views.Profile,
     },

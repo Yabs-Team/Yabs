@@ -3,7 +3,7 @@
         b-button(@click="getAllCanvases") Ladda ned alla kort
         .card
             .grid-container
-                CigCanvas.canvas(@imageSent='onImageReceived($event)' v-for="(image, index) in images" :key="index" v-bind:userData="userData" v-bind:image="image" v-bind:sendCanvas="sendCanvas")
+                CigCanvas.canvas(@imageSent='onImageReceived($event)' v-for="(image, index) in images" :key="index" :image="image" :sendCanvas="sendCanvas")
 </template>
 
 <script lang="ts">
@@ -11,7 +11,6 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import CigCanvas from '@/components/CigCanvas.vue';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
-import { UserObject } from '../store/modules/users';
 
 @Component({
   components: {
@@ -19,8 +18,7 @@ import { UserObject } from '../store/modules/users';
   },
 })
 export default class CanvasContainer extends Vue {
-  @Prop({ default: null }) public userData!: UserObject;
-  @Prop({ default: [] }) public images!: string[];
+  @Prop({ default: [] }) public images!: File[];
 
   public sendCanvas: boolean = false;
   public imageBlobs: any[] = [];
