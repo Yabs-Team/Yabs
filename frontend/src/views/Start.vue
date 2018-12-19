@@ -27,23 +27,32 @@
         #right
             h5 Böcker som ska inlämnas snart:
             br
-            .myCard
-                RecentLoan
+            LoadingIcon(v-show='loading')
+            .myCard(v-show='!loading')
+                RecentLoan(@loans-loaded='onLoaded')
 
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import RecentLoan from '@/components/RecentLoan.vue';
+import LoadingIcon from '@/components/LoadingIcon.vue';
 
 @Component({
-  components: {
-    RecentLoan,
-  },
+    components: {
+        RecentLoan,
+        LoadingIcon,
+    },
 })
 export default class Start extends Vue {
-  public size = 'lg';
-  public primary = 'primary';
+    public size = 'lg';
+    public primary = 'primary';
+    public loading = true;
+
+
+    public onLoaded() {
+        this.loading = false;
+    }
 }
 </script>
 

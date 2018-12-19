@@ -30,9 +30,10 @@ export default class RecentLoan extends Vue {
   }
 
   public created() {
-    this.$store.dispatch('loans/all').then((response: any) => {
-      console.log(this.loans);
-    });
+    this.$store
+      .dispatch('loans/all')
+      .then((loans: any) => this.$emit('loans-loaded', loans))
+      .catch((failure: any) => console.log(failure));
   }
 }
 </script>
