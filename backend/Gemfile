@@ -44,7 +44,6 @@ gem "rack-cors"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rails-reverse-proxy'
 end
 
 group :development do
@@ -62,8 +61,6 @@ group :test do
   gem 'minitest'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
-  gem 'simplecov'
-  gem 'codacy-coverage'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

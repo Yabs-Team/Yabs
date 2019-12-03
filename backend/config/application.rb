@@ -23,7 +23,7 @@ module Yabs
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'localhost:3000'
+        origins "localhost:#{Rails.env.test? ? 3000 : 8080}"
         resource '*',
           headers: :any,
           methods: :any,

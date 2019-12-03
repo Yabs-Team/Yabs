@@ -37,6 +37,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       LoansAPI.all()
         .then((response: any) => {
+          console.log(response);
           response.forEach((loan: any) => context.commit('setLoan', loan));
           resolve();
         })

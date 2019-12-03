@@ -186,11 +186,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
-    rails-reverse-proxy (0.9.1)
-      addressable
-      rack
-      rack-proxy
-      rails
     railties (5.2.1)
       actionpack (= 5.2.1)
       activesupport (= 5.2.1)
@@ -287,7 +282,6 @@ DEPENDENCIES
   pundit
   rack-cors
   rails (~> 5.2.1)
-  rails-reverse-proxy
   sass-rails (~> 5.0)
   selenium-webdriver
   simplecov

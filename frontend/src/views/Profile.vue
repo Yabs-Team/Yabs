@@ -5,7 +5,7 @@
           .left
               h1 {{currentUser.name}}
               h1 {{currentUser.role}} - {{currentUser.klass}}
-              img(:src="currentUser.photo_path")
+              img(:src="`http://localhost:3000/${currentUser.photo_path}`")
           .right
               .header
                   AddLoan
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import CigCanvas from '@/components/CigCanvas.vue';
 import AddLoan from '@/components/AddLoan.vue';
 import RecentLoan from '@/components/RecentLoan.vue';
@@ -36,8 +36,11 @@ export default class Profile extends Vue {
   public currentUser: User | null = null;
 
   public created() {
-    const users: any[] = Object.entries(this.users);
-    if (users) { this.currentUser = users.find(([k, user]) => user.uid === this.$route.params.id)[1]; }
+    this.$store.dispatch('users/all').then(() => {
+      const users: any[] = Object.entries(this.users);
+      console.log(users);
+      if (users) { this.currentUser = users.find(([k, user]) => user.uid == this.$route.params.id)[1]; }
+    });
   }
 }
 </script>

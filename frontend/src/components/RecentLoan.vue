@@ -30,6 +30,8 @@ export default class RecentLoan extends Vue {
   }
 
   public created() {
+    console.log("IM PRETTY!1");
+    console.log(this.$store);
     this.$store
       .dispatch('loans/all')
       .then((loans: any) => this.$emit('loans-loaded', loans))

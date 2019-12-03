@@ -6,7 +6,7 @@
                 b-navbar-nav
                     b-nav-item
                         router-link.link(to='/') Start
-                    b-nav-item
+                    b-nav-item(v-if="currentUser")
                         router-link.link(:to="`/users/${currentUser.uid}`") Profil
                     b-nav-item
                         router-link.link(to='/add') Lägg till
