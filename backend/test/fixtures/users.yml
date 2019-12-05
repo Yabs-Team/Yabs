@@ -1,13 +1,36 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  uid: 1
-  name: MyString
-  google_token: MyString
-  photo_path: MyString
+user_1904583927:
+  uid: 1904583927
+  name: Daniel Berg
+  email: daniel.berg@ga.ntig.se
+  klass: Lärare
+  role: Lärare
+  google_token: '101296211137404583927'
+  photo_path: 
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2019-12-03 22:22:51.788387000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &3 2019-12-03 22:22:51.788387000 Z
+    zone: *2
+    time: *3
 
-two:
-  uid: 1
-  name: MyString
-  google_token: MyString
-  photo_path: MyString
+user_1968097915:
+  uid: 1968097915
+  name: Alex Henryz
+  email: alex.henryz@elev.ga.ntig.se
+  klass: TE4
+  role: Elev
+  google_token: '101834530373768097915'
+  photo_path: 
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2019-12-03 22:22:54.965793000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &3 2019-12-03 22:22:54.965793000 Z
+    zone: *2
+    time: *3

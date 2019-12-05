@@ -1,0 +1,4 @@
+extraction:
+  javascript:
+    index:
+      include: "frontend/src/"

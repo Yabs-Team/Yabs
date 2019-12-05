@@ -38,8 +38,7 @@ export default class Profile extends Vue {
   public created() {
     this.$store.dispatch('users/all').then(() => {
       const users: any[] = Object.entries(this.users);
-      console.log(users);
-      if (users) { this.currentUser = users.find(([k, user]) => user.uid == this.$route.params.id)[1]; }
+      if (users) { this.currentUser = users.find(([k, user]) => user.uid === +this.$route.params.id)[1]; }
     });
   }
 }

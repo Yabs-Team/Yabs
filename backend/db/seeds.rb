@@ -20,5 +20,11 @@ loan.loaned_by = User.find_by_name('Alex Henryz')
 loan.book = book
 loan.save
 
-Book.create(barcode: "0001", status: "OK", title: title)
-Book.create(barcode: "0002", status: "OK", title: title)
+title.dump_fixture(append=false)
+book.dump_fixture(append=false)
+loan.dump_fixture(append=false)
+loan.lent_by.dump_fixture(append=false)
+loan.loaned_by.dump_fixture(append=true)
+
+Book.create(barcode: "0001", status: "OK", title: title).dump_fixture
+Book.create(barcode: "0002", status: "OK", title: title).dump_fixture
