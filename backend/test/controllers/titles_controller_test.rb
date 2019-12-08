@@ -2,47 +2,37 @@ require 'test_helper'
 
 class TitlesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @title = titles(:one)
+    @title = titles(:title_1)
   end
 
   test "should get index" do
-    get titles_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_title_url
+    get api_v1_titles_url, as: :json
     assert_response :success
   end
 
   test "should create title" do
     assert_difference('Title.count') do
-      post titles_url, params: { title: { cost: @title.cost, isbn: @title.isbn, name: @title.name, type: @title.type } }
+      post api_v1_titles_url, params: { title: { cost: @title.cost, isbn: @title.isbn, name: @title.name, title_type: @title.title_type } }, as: :json
     end
 
-    assert_redirected_to title_url(Title.last)
+    assert_response 200
   end
 
   test "should show title" do
-    get title_url(@title)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_title_url(@title)
+    get api_v1_title_url(@title), as: :json
     assert_response :success
   end
 
   test "should update title" do
-    patch title_url(@title), params: { title: { cost: @title.cost, isbn: @title.isbn, name: @title.name, type: @title.type } }
-    assert_redirected_to title_url(@title)
+    patch api_v1_title_url(@title), params: { title: { cost: @title.cost, isbn: @title.isbn, name: @title.name, title_type: @title.title_type } }, as: :json
+    assert_response 200
   end
 
   test "should destroy title" do
     assert_difference('Title.count', -1) do
-      delete title_url(@title)
+      delete api_v1_title_url(@title), as: :json
     end
 
-    assert_redirected_to titles_url
+    assert_response 200
   end
 end

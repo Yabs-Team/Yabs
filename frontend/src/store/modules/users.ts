@@ -40,6 +40,7 @@ const actions = {
       UsersAPI.all()
         .then((response: any) => {
           response.forEach((user: any) => context.commit('setUser', user));
+          // console.log(response);
           resolve();
         })
         .catch((error: any) => {
