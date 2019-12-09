@@ -27,7 +27,6 @@ jobs:
           ${{ runner.os }}-gem-
     - name: Bundle install
       run: |
-        brew install sqlite3
         cd backend
         gem install bundler:2.0.2
         bundle install --jobs=4 --retry=3 --path vendor/bundle
