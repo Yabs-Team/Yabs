@@ -29,7 +29,7 @@ jobs:
       run: |
         brew install sqlite3
         cd backend
-        gem install bundler:1.17.2
+        gem install bundler:2.0.2
         bundle install --jobs=4 --retry=3 --path vendor/bundle
     - name: Load database from schema
       run: |

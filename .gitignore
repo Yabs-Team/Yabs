@@ -14,8 +14,8 @@ backend/config/secrets.yml
 rerun.txt
 pickle-email-*.html
 coverage/
-
-.DS_Store
+.vscode/
+**/*.DS_Store
 
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
 #config/initializers/secret_token.rb
