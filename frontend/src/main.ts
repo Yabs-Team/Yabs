@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios';
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
@@ -18,6 +19,7 @@ const app = new Vue({
   el: '#app',
   router,
   store,
+  vuetify,
   render: (h) => h(App),
 });
 

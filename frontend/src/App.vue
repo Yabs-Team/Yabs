@@ -1,60 +1,56 @@
-<template lang="pug">
-  .app
-    HeaderNav
-    router-view
+<template>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
 
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-content>
+      <router-view/>
+    </v-content>
+  </v-app>
 </template>
 
-<style lang="sass">
-  
-  .app
-    width: 100vw
-    height: 100vh
-
-  .app .view
-    position: absolute
-    z-index: 100
-    top: 56px
-    bottom: 0
-    width: 100vw
-    display: flex
-    flex-direction: row
-    margin: 5000
-
-
-  .view .left
-    width: 50%
-    height: 100%
-    padding: 10%
-    padding-top: 5%
-
-  .view .right
-    width: 50%
-    height: 100%
-    padding: 5%
-    padding-left: 0px
-
-  @media only screen and (max-width: 808px)
-    .app .view
-      flex-direction: column
-
-    .view .right, .left
-      width: 100%
-      display: flex
-      flex-direction: row
-      justify-content: center
-      padding: 0px
-    
-</style>
-
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HeaderNav from '@/components/HeaderNav.vue';
+import Vue from 'vue';
 
-@Component({
-  components: {
-    HeaderNav,
-  },
-})
-export default class App extends Vue {}
+export default Vue.extend({
+  name: 'App',
+
+  data: () => ({
+    //
+  }),
+});
 </script>
