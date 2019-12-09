@@ -13,11 +13,11 @@ jobs:
       id: cache
       with:
         path: ~/local/rubies
-        key: ${{ runner.os }}-ruby-2.6.3
+        key: ${{ runner.os }}-ruby-2.5.1
     - uses: clupprich/ruby-build-action@master
       id: ruby
       with:
-        ruby-version: 2.6.3
+        ruby-version: 2.5.1
         cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
     - uses: actions/cache@v1
       with:
@@ -28,7 +28,7 @@ jobs:
     - name: Bundle install
       run: |
         cd backend
-        gem install bundler:2.0.2
+        gem install bundler:1.16.6
         bundle install --jobs=4 --retry=3 --path vendor/bundle
     - name: Load database from schema
       run: |
@@ -67,11 +67,11 @@ jobs:
       id: cache
       with:
         path: ~/local/rubies
-        key: ${{ runner.os }}-ruby-2.6.3
+        key: ${{ runner.os }}-ruby-2.5.1
     - uses: clupprich/ruby-build-action@master
       id: ruby
       with:
-        ruby-version: 2.6.3
+        ruby-version: 2.5.1
         cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
     - uses: actions/cache@v1
       with:
@@ -82,7 +82,7 @@ jobs:
     - name: Bundle install
       run: |
         cd backend
-        gem install bundler:2.0.2
+        gem install bundler:1.16.6
         bundle install --jobs=4 --retry=3 --path vendor/bundle
     - name: Load database from schema
       run: |
