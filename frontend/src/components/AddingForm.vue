@@ -2,13 +2,13 @@
    div
     b-form(@submit='onSubmit', @reset='onReset', v-if='show')
         b-card(bg-variant='light')
-            b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                b-form-input#nestedBid(placeholder='Bokens Streckkod' v-model="form.barcode")
-            b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
+            b-form-group(vertical='' id="streckkod" label-class='text-sm-right' label-for='nestedBid')
+                b-form-input#nestedBid(placeholder='Bokens Streckkod'  v-model="form.barcode")
+            b-form-group(vertical='' id="titlenamn" label-class='text-sm-right' label-for='nestedBid')
                 vue-bootstrap-typeahead(v-model="name" :data="titleNames" @hit="toId()" placeholder='Titel namn')
-            b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
+            b-form-group(vertical='' id="status" label-class='text-sm-right' label-for='nestedBid')
                 b-form-input#nestedBid(placeholder='Status: tex "ok", "framsida saknas"' v-model="form.status")
-            b-button(type='submit', variant='primary') Lägg till
+            b-button(type='submit', id="addBook" variant='primary') Lägg till
             b-button(type='reset', variant='danger') Rensa Fältet
 
 </template>
