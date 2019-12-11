@@ -8,7 +8,7 @@
                 DropDownType(@changeType='onChangeType($event)', v-bind:selectedType='this.type')
                 LoaningForm(v-bind:style='{ display: displayLoan }' v-on:loan-added="onLoanAdded")
                 CigForm(@sendImages='onSendImages($event)' v-bind:style='{ display: displayCig }')
-                AddingForm(v-bind:style='{ display: displayAdd }')
+                CreateBookFormComponent(v-bind:style='{ display: displayAdd }')
                 TitelForm(v-bind:style='{ display: displayTitel }')
         LoadingIcon(v-show='loading')
         .right(v-show='!loading')
@@ -22,7 +22,7 @@
 import { Component, Watch, Vue } from 'vue-property-decorator';
 import LoaningForm from '@/components/LoaningForm.vue';
 import CigForm from '@/components/CigForm.vue';
-import AddingForm from '@/components/AddingForm.vue';
+import CreateBookFormComponent from '@/components/CreateBookFormComponent.vue';
 import DropDownType from '@/components/DropDownType.vue';
 import RecentBook from '@/components/RecentBook.vue';
 import RecentLoan from '@/components/RecentLoan.vue';
@@ -35,7 +35,7 @@ import LoadingIcon from '@/components/LoadingIcon.vue';
   components: {
     LoaningForm,
     CigForm,
-    AddingForm,
+    CreateBookFormComponent,
     TitelForm,
     DropDownType,
     RecentLoan,

@@ -56,11 +56,11 @@ jobs:
       id: cache
       with:
         path: ~/local/rubies
-        key: ${{ runner.os }}-ruby-2.5.1
+        key: ${{ runner.os }}-ruby-2.6.3
     - uses: clupprich/ruby-build-action@master
       id: ruby
       with:
-        ruby-version: 2.5.1
+        ruby-version: 2.6.3
         cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
     - uses: actions/cache@v1
       with:
@@ -71,7 +71,7 @@ jobs:
     - name: Bundle install
       run: |
         cd backend
-        gem install bundler:1.16.6
+        gem install bundler:2.0.2
         sudo apt-get -yqq install libsqlite3-dev
         bundle install --jobs=4 --retry=3 --path vendor/bundle
     - name: Load database from schema
