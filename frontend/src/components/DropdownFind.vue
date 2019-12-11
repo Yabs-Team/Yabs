@@ -1,9 +1,10 @@
-<template lang="pug">
-    div(@click='changeType')
-        b-dropdown#ddown1.m-md-2(:text="type")
-            b-dropdown-item(@click='changeToLoan') Utlånade
-            b-dropdown-item(@click='changeToCig') Alla Böcker
-
+<template>
+  <div @click="changeType">
+    <b-dropdown class="m-md-2" id="ddown1" :text="type">
+      <b-dropdown-item @click="changeToLoan">Utlånade</b-dropdown-item>
+      <b-dropdown-item @click="changeToCig">Alla Böcker</b-dropdown-item>
+    </b-dropdown>
+  </div>
 </template>
 
 

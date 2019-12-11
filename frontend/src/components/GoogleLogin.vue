@@ -1,7 +1,8 @@
-<template lang="pug">
-  div
-    a.text-warning(v-if="usersModule.currentUser" href="#" @click="signOut();") SIGN OUT
-    div#signin2
+<template>
+  <div>
+    <a class="text-warning" v-if="usersModule.currentUser" href="#" @click="signOut">SIGN OUT</a>
+    <div id="signin2" />
+  </div>
 </template>
 
 <script lang="ts">

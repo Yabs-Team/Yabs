@@ -94,7 +94,6 @@ class BooksModule extends VuexModule {
   @Mutation
   private convertBookList(payload: any) {
     const list = convertList(payload, 'barcode');
-    console.log(list);
     this.bookState.books = list;
   }
 }

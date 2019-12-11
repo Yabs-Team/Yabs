@@ -1,15 +1,18 @@
-<template lang="pug">
-    div#loading.mx-auto
-        div(v-for="x in 8")
+<template>
+    <div class="mx-auto" id="loading">
+        <div v-for="x in 8" :key="x" />
+    </div>
 </template>
 
 <style lang="sass">
     #loading
         width: 64px
         height: 64px
+        
     #loading div
         animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite
         transform-origin: 32px 32px
+        
     #loading div:after
         content: " "
         display: block
@@ -22,16 +25,21 @@
     
     #loading div:nth-child(1)
         animation-delay: -0.036s
+        
     #loading div:nth-child(1):after
         top: 50px
         left: 50px
+        
     #loading div:nth-child(2)
         animation-delay: -0.072s
+        
     #loading div:nth-child(2):after
         top: 54px
         left: 45px
+        
     #loading div:nth-child(3)
         animation-delay: -0.108s
+        
     #loading div:nth-child(3):after
         top: 57px
         left: 39px

@@ -1,21 +1,27 @@
-<template lang="pug">
-    .base
-        b-navbar(type='dark', variant='primary', toggleable='')
-            b-navbar-toggle(target='nav_dropdown_collapse')
-            b-collapse#nav_dropdown_collapse(is-nav='')
-                b-navbar-nav
-                    b-nav-item
-                        router-link.link(to='/') Start
-                    b-nav-item(v-if="usersModule.currentUser")
-                        router-link.link(:to="`/users/${usersModule.currentUser.uid}`") Profil
-                    b-nav-item
-                        router-link.link(to='/add') Lägg till
-                    b-nav-item
-                        router-link.link(to='/find') Hitta
-            b-navbar-brand Yabs
-            GoogleLogin
-            //- b-navbar-brand.material-icons account_circle
-
+<template>
+  <div class="base">
+    <b-navbar type="dark" variant="primary" toggleable>
+      <b-navbar-toggle target="nav_dropdown_collapse" />
+      <b-collapse id="nav_dropdown_collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item>
+            <router-link class="link" to="/">Start</router-link>
+          </b-nav-item>
+          <b-nav-item v-if="usersModule.currentUser">
+            <router-link class="link" :to="`/users/${usersModule.currentUser.uid}`">Profil</router-link>
+          </b-nav-item>
+          <b-nav-item>
+            <router-link class="link" to="/add">Lägg till</router-link>
+          </b-nav-item>
+          <b-nav-item>
+            <router-link class="link" to="/find">Hitta</router-link>
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+      <b-navbar-brand>Yabs</b-navbar-brand>
+      <GoogleLogin />
+    </b-navbar>
+  </div>
 </template>
 
 <script lang="ts">

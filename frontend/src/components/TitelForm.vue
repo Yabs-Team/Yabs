@@ -1,15 +1,20 @@
-<template lang="pug">
-    v-form(@submit='onSubmit', @reset='onReset', v-if='show')
-        v-card(bg-variant='light')
-            v-item-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                v-text-field#nestedBid(placeholder='Namn' v-model="form.name")
-            v-item-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                v-text-field#nestedBid(placeholder='Kostnad' v-model="form.cost")
-            v-item-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                v-text-field#nestedBid(placeholder='isbn' v-model="form.isbn")
-            v-select(v-model="form.title_type" :items="options" label="Välj typ av titel")
-            v-btn(type='submit', color='primary') Lägg till
-            v-btn(type='reset', color='error') Rensa Fältet
+<template>
+  <v-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <v-card bg-variant="light">
+      <v-item-group vertical="" label-class="text-sm-right" label-for="nestedBid">
+        <v-text-field id="nestedBid" placeholder="Namn" v-model="form.name" />
+      </v-item-group>
+      <v-item-group vertical="" label-class="text-sm-right" label-for="nestedBid">
+        <v-text-field id="nestedBid" placeholder="Kostnad" v-model="form.cost" />
+      </v-item-group>
+      <v-item-group vertical="" label-class="text-sm-right" label-for="nestedBid">
+        <v-text-field id="nestedBid" placeholder="isbn" v-model="form.isbn" />
+      </v-item-group>
+      <v-select v-model="form.title_type" :items="options" label="Välj typ av titel" />
+      <v-btn type="submit" color="primary">Lägg till</v-btn>
+      <v-btn type="reset" color="error">Rensa Fältet</v-btn>
+    </v-card>
+  </v-form>
 
 </template>
 

@@ -1,14 +1,18 @@
-<template lang="pug">
-   div
-    v-form(@submit='onSubmit', @reset='onReset', v-if='show')
-        v-card(bg-variant='light')
-            v-item-group(vertical='' label-class='text-sm-right' label-for='nestedUid')
-                v-text-field#nestedUid(placeholder='Elevens Streckkod' v-model="form.loaned_by_id")
-            v-item-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                v-text-field#nestedBid(placeholder='Bokens Streckkod' v-model="form.book_id")
-            v-btn(type='submit', variant='primary') Låna Ut
-            v-btn(type='reset', variant='danger') Rensa Fälten
-
+<template>
+  <div>
+    <v-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <v-card bg-variant="light">
+        <v-item-group vertical="" label-class="text-sm-right" label-for="nestedUid">
+          <v-text-field id="nestedUid" placeholder="Elevens Streckkod" v-model="form.loaned_by_id" />
+        </v-item-group>
+        <v-item-group vertical="" label-class="text-sm-right" label-for="nestedBid">
+          <v-text-field id="nestedBid" placeholder="Bokens Streckkod" v-model="form.book_id" />
+        </v-item-group>
+        <v-btn type="submit" variant="primary">Låna Ut</v-btn>
+        <v-btn type="reset" variant="danger">Rensa Fälten</v-btn>
+      </v-card>
+    </v-form>
+  </div>
 </template>
 
 <script lang="ts">
