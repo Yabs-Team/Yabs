@@ -14,15 +14,6 @@ describe('HeaderNav.vue', () => {
     expect(wrapper.html()).toMatch('Yabs');
   });
 
-  it('renders profile if logged in when passed', () => {
-    const wrapper: Wrapper<HeaderNav> = shallowFactory(HeaderNav, injectRouterStubs);
-
-    expect(wrapper.html()).not.toMatch('Profile');
-
-    UsersModule.setCurrentUser({uid: 1});
-
-    expect(wrapper.html()).toMatch('Profil');
-  });
 
   it('renders correctly', () => {
     const wrapper: Wrapper<HeaderNav> = shallowFactory(HeaderNav, injectRouterStubs);

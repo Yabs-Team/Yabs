@@ -9,7 +9,7 @@ export default {
   async all() {
 
     try {
-      const response = await axios.get(`http://localhost:3000/api/v1/books`,
+      const response = await axios.get('http://localhost:3000/api/v1/books',
         { headers, withCredentials: true });
       return Promise.resolve(response.data);
     } catch (error) {
@@ -20,7 +20,7 @@ export default {
   async create(request: any) {
 
     try {
-      const response = await axios.post(`http://localhost:3000/api/v1/books`, request, {
+      const response = await axios.post('http://localhost:3000/api/v1/books', request, {
         headers: {
           'Content-Type': 'application/json',
         },

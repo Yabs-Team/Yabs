@@ -10,6 +10,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+// this will be routes instead
+
 @Component
 export default class DropdownFind extends Vue {
   @Prop({ default: '' }) public selectedType!: string;

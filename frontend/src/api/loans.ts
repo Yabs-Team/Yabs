@@ -9,7 +9,7 @@ export default {
   async all() {
 
     try {
-      const response = await axios.get(`http://localhost:3000/api/v1/loans`,
+      const response = await axios.get('http://localhost:3000/api/v1/loans',
         {headers, withCredentials: true});
       return Promise.resolve(response.data);
     } catch (error) {
@@ -20,7 +20,7 @@ export default {
   async create(request: any) {
 
     try {
-      const response = await axios.post(`http://localhost:3000/api/v1/loans`, request,
+      const response = await axios.post('http://localhost:3000/api/v1/loans', request,
         {headers, withCredentials: true});
       return Promise.resolve(response.data);
     } catch (error) {

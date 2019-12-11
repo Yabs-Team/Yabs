@@ -1,6 +1,6 @@
 <template lang="pug">
     .root
-        b-button(@click="getAllCanvases") Ladda ned alla kort
+        v-btn(@click="getAllCanvases") Ladda ned alla kort
         .card
             .grid-container
                 CigCanvas.canvas(@imageSent='onImageReceived($event)' v-for="(image, index) in images" :key="index" :image="image" :sendCanvas="sendCanvas")

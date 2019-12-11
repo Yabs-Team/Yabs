@@ -1,11 +1,11 @@
 <template lang="pug">
     div
-      p(v-if="!currentUser") Du är inte inloggad
+      p(v-if="!usersModule.currentUser") Du är inte inloggad
       .view(v-else)
           .left
-              h1 {{currentUser.name}}
-              h1 {{currentUser.role}} - {{currentUser.klass}}
-              img(:src="`http://localhost:3000/${currentUser.photo_path}`")
+              h1 {{usersModule.currentUser.name}}
+              h1 {{usersModule.currentUser.role}} - {{usersModule.currentUser.klass}}
+              img(:src="`http://localhost:3000/${usersModule.currentUser.photo_path}`")
           .right
               .header
                   AddLoan
@@ -23,21 +23,14 @@ import RecentLoan from '@/components/RecentLoan.vue';
 import UsersModule, { User } from '../store/modules/UsersModule';
 
 @Component({
-    components: {
-        CigCanvas,
-        AddLoan,
-        RecentLoan,
-    },
+  components: {
+    CigCanvas,
+    AddLoan,
+    RecentLoan,
+  },
 })
 export default class Profile extends Vue {
-  public currentUser: User | null = null;
-
-  public created() {
-    UsersModule.fetchAll().then(() => {
-      const users: any[] = Object.entries(UsersModule.all);
-      if (users) { this.currentUser = users.find(([key, user]) => user.uid === +this.$route.params.id)[1]; }
-    });
-  }
+  private usersModule = UsersModule;
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-        b-table(v-if="!loansLoading" show-empty='', stacked='md', :items='items', :fields='fields', :current-page='currentPage', :per-page='perPage', :filter='filter', :sort-by.sync='sortBy', :sort-desc.sync='sortDesc', :sort-direction='sortDirection', @filtered='onFiltered')
+        b-table(v-if="!loansLoading" show-empty='', stacked='md', :items='items', :fields='fields', :current-page='currentPage', :per-page='perPage', :filter='filter', :sort-by.sync='sortBy', :sort-desc.sync='sortDesc', @filtered='onFiltered')
             template(slot='name', slot-scope='row') {{row.value.first}} {{row.value.last}}
             template(slot='isActive', slot-scope='row') {{row.value?'Yes :)':'No :('}}
             template(slot='actions', slot-scope='row')
@@ -35,7 +35,6 @@ export default class MainTable extends Vue {
   @Prop({ default: 0 }) public pageOptions!: number;
   @Prop({ default: null }) public sortBy!: any;
   @Prop({ default: true }) public sortDesc!: boolean;
-  @Prop({ default: 'desc' }) public sortDirection!: string;
   @Prop({ default: null }) public filter!: any;
   @Prop({ default: null }) public modalInfo!: any;
 

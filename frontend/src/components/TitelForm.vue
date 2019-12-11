@@ -1,16 +1,15 @@
 <template lang="pug">
-   div
-    b-form(@submit='onSubmit', @reset='onReset', v-if='show')
-        b-card(bg-variant='light')
-            b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                b-form-input#nestedBid(placeholder='Namn' v-model="form.name")
-            b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                b-form-input#nestedBid(placeholder='Kostnad' v-model="form.cost")
-            b-form-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
-                b-form-input#nestedBid(placeholder='isbn' v-model="form.isbn")
-            b-form-select(v-model="form.title_type" :options="options" class="mb-3")
-            b-button(type='submit', variant='primary') Lägg till
-            b-button(type='reset', variant='danger') Rensa Fältet
+    v-form(@submit='onSubmit', @reset='onReset', v-if='show')
+        v-card(bg-variant='light')
+            v-item-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
+                v-text-field#nestedBid(placeholder='Namn' v-model="form.name")
+            v-item-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
+                v-text-field#nestedBid(placeholder='Kostnad' v-model="form.cost")
+            v-item-group(vertical='' label-class='text-sm-right' label-for='nestedBid')
+                v-text-field#nestedBid(placeholder='isbn' v-model="form.isbn")
+            v-select(v-model="form.title_type" :items="options" label="Välj typ av titel")
+            v-btn(type='submit', color='primary') Lägg till
+            v-btn(type='reset', color='error') Rensa Fältet
 
 </template>
 
@@ -29,7 +28,6 @@ export default class TitleForm extends Vue {
   public show = true;
 
   public options = [
-    { value: null, text: 'Välj typ av Titel' },
     { value: 'Kurslitteratur', text: 'Kurslitteratur' },
     { value: 'Bibloteksbok', text: 'Bibloteksbok' },
     { value: 'Skönlitteratur', text: 'Skönlitteratur' },
@@ -38,8 +36,8 @@ export default class TitleForm extends Vue {
   public onSubmit(evt: Event) {
     evt.preventDefault();
     TitlesModule.create(this.form)
-    .then((title: any) => this.$emit('title-added', title))
-    .catch((failure: any) => console.log(failure));
+      .then((title: any) => this.$emit('title-added', title))
+      .catch((failure: any) => console.log(failure));
   }
 
   public onReset(evt: Event) {

@@ -12,6 +12,9 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 
+// this will be routes instead
+
+
 @Component
 export default class DropDownType extends Vue {
   @Prop({ default: '' }) public selectedType!: string;

@@ -1,15 +1,15 @@
 <template lang="pug">
     #myContainer
         .my-3
-            b-btn#exPopoverReactive1(:disabled='popoverShow', variant='primary', ref='button') <h1 class="material-icons icon">add</h1>
-        b-popover(target='exPopoverReactive1' triggers='click' :show.sync='popoverShow' placement='bottom' container='myContainer' ref='popover' @show='onShow' @shown='onShown' @hidden='onHidden')
+            v-btn#exPopoverReactive1(:disabled='popoverShow', variant='primary', ref='button') <h1 class="material-icons icon">add</h1>
+        v-tooltip(target='exPopoverReactive1' triggers='click' :show.sync='popoverShow' placement='bottom' container='myContainer' ref='popover' @show='onShow' @shown='onShown' @hidden='onHidden')
             template(slot='title')
                 | Skanna boken du vill låna
             div
-                b-form-group.mb-1(label='Bok ID', label-for='pop1', :state='inputState', horizontal='', invalid-feedback='This field is required')
-                    b-form-input#pop1(ref='input', :state='inputState', size='sm', v-model='input')
-                b-btn(@click='onClose', size='sm', variant='danger') Cancel
-                b-btn(@click='onOk', size='sm', variant='primary') Ok
+                v-item-group.mb-1(label='Bok ID', label-for='pop1', :state='inputState', horizontal='', invalid-feedback='This field is required')
+                    v-text-field#pop1(ref='input', :state='inputState', size='sm', v-model='input')
+                v-btn(@click='onClose', size='sm', variant='danger') Cancel
+                v-btn(@click='onOk', size='sm', variant='primary') Ok
 
 </template>
 

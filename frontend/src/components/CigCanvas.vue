@@ -2,11 +2,11 @@
     div
         #canvasContainer(ref="canvasContainer")
             canvas#canvas(ref='canvas')
-        b-form
-            b-form-group
-                vue-bootstrap-typeahead(v-model="name" :data="userNames" @hit="onNameInput")
-                b-button(@click="savePicture") Spara Bild
-                b-button(@click="downloadCanvas") Ladda ned kort
+        v-form
+            v-item-group
+                v-autocomplete(v-model="name" :data="userNames")
+                v-btn(@click="savePicture") Spara Bild
+                v-btn(@click="downloadCanvas") Ladda ned kort
         img(src="../assets/background.png" hidden ref="bg")
         img(src="../assets/logo.png" hidden ref="logo")
 </template>

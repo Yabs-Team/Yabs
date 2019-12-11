@@ -2,11 +2,12 @@ class Api::V1::LoansController < ApplicationController
   before_action :set_loan, only: [:show, :update, :destroy]
 
   def index
-    render json: Loan.all
+    render json: policy_scope(Loan.all)
   end
 
   def show
-    render json: @loan
+    authorize @loan
+    render json: policy_scope(@loan)
   end
 
   def create
@@ -20,6 +21,7 @@ class Api::V1::LoansController < ApplicationController
   end
 
   def update
+    authorize @loan
     if @loan.update(loan_params)
       render json: @loan
     else
@@ -28,6 +30,7 @@ class Api::V1::LoansController < ApplicationController
   end
 
   def destroy
+    authorize @loan
     @loan.destroy
     render json: @loan
   end

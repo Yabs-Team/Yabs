@@ -10,7 +10,7 @@ exports[`HeaderNav.vue renders correctly 1`] = `
           <router-link-stub to="/" class="link">Start</router-link-stub>
         </b-nav-item-stub>
         <b-nav-item-stub target="_self" event="click" routertag="a">
-          <router-link-stub to="/users/1" class="link">Profil</router-link-stub>
+          <router-link-stub to="/users/undefined" class="link">Profil</router-link-stub>
         </b-nav-item-stub>
         <b-nav-item-stub target="_self" event="click" routertag="a">
           <router-link-stub to="/add" class="link">Lägg till</router-link-stub>

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import {VuexModule, Module, getModule, Action, Mutation} from 'vuex-module-decorators';
 import store from '..';
 import LoansAPI from '../../api/loans';
+import convertList from '../../helpers/convertArrayToNested';
 
 export interface Loan {
   book: object;
@@ -36,7 +37,7 @@ class LoansModule extends VuexModule {
     return new Promise((resolve, reject) => {
       LoansAPI.all()
         .then((response: any) => {
-          response.forEach((loan: any) => this.setLoan(loan));
+          this.convertLoanList(response);
           resolve();
         })
         .catch((error: any) => {
@@ -104,6 +105,11 @@ class LoansModule extends VuexModule {
   @Mutation
   private removeLoan(loanId: string) {
     Vue.delete(this.loanState.loans, loanId);
+  }
+  @Mutation
+  private convertLoanList(payload: Loan[]) {
+    const list = convertList(payload, 'id');
+    this.loanState.loans = list;
   }
 }
 

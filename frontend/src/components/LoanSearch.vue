@@ -49,7 +49,6 @@ b-container(fluid='')
             \n{{ modalInfo.content }}
 
 
-
 </template>
 
 <script lang="ts">

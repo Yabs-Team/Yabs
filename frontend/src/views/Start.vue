@@ -1,27 +1,27 @@
 <template lang="pug">
     .view
         #left
-        b-container
+        v-container
             h1.text-center Välkommen till YABS!
             br
             p.info Denna applikation kommer att användas för att underlätta hantering/utlåningen av olika sorters litteratur och utskrivning av passerkort.
             br
-            b-row
-                b-col
+            v-row
+                v-col
                     router-link.link.row-btn(to='/users')
-                        b-button.row-btn(:size="size" :variant="primary") Profil
+                        v-btn.row-btn(:size="size" :color="primary") Profil
             p.info På profil sidan så ser du all relevant information angående din profil tex antal aktiva lån från dig.
             br
-            b-row
-                b-col
+            v-row
+                v-col
                     router-link.link.row-btn(to='/add')
-                        b-button.row-btn(:size="size" :variant="primary") Lägg till
+                        v-btn.row-btn(:size="size" :color="primary") Lägg till
             p.info Lägg till delen används för att skapa nya passerkort, registera nya lån och lägga till nya böcker.
             br
-            b-row
-                b-col
+            v-row
+                v-col
                     router-link.link.row-btn(to='/find')
-                        b-button.row-btn(:size="size" :variant="primary") Hitta
+                        v-btn.row-btn(:size="size" :color="primary") Hitta
             p.info På hitta delen så kan du söka på allting som denna sida hanterar, Tex Elever, specifika lån eller böcker.
 
         #right
@@ -37,22 +37,28 @@
 import { Component, Vue } from 'vue-property-decorator';
 import RecentLoan from '@/components/RecentLoan.vue';
 import LoadingIcon from '@/components/LoadingIcon.vue';
+import UsersModule from '../store/modules/UsersModule';
+import TitlesModule from '../store/modules/TitlesModule';
+import LoansModule from '../store/modules/LoansModule';
+import BooksModule from '../store/modules/BooksModule';
 
 @Component({
-    components: {
-        RecentLoan,
-        LoadingIcon,
-    },
+  components: {
+    RecentLoan,
+    LoadingIcon,
+  },
 })
 export default class Start extends Vue {
-    public size = 'lg';
-    public primary = 'primary';
-    public loading = true;
+  public size = 'lg';
+  public primary = 'primary';
+  public loading = true;
 
-
-    public onLoaded() {
-        this.loading = false;
-    }
+  public onLoaded() {
+    this.loading = false;
+  }
+  public created() {
+    UsersModule.fetchAll();
+  }
 }
 </script>
 
@@ -76,7 +82,6 @@ export default class Start extends Vue {
     display: flex
     flex-direction: row
     justify-content: center
-
 
 
 #wrapper

@@ -5,9 +5,9 @@ import VuexPersistence from 'vuex-persist';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
- state: {},
- mutations: {},
- actions: {},
- modules: {},
- plugins: [new VuexPersistence().plugin],
+  state: {},
+  mutations: {},
+  actions: {},
+  modules: {},
+  plugins: [new VuexPersistence().plugin],
 });

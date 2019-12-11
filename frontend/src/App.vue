@@ -2,9 +2,7 @@
   <v-app>
     <HeaderNav />
     <router-view />
-
   </v-app>
-
 </template>
 
 <style lang="sass">

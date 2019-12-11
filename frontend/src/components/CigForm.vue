@@ -1,12 +1,11 @@
 <template lang="pug">
     div
-        b-card(bg-variant='light')
+        v-card(bg-variant='light')
             //- lable(for="file", name="file") Välj en eller flera billder/zipfiler
             input.input-file(multiple type="file" id="file" name="file" accept="image/*, .zip" @change="onFileSelect")
             br
             br
-            b-button(@click='submit' variant='primary') Lägg till
-
+            v-btn(@click='submit' variant='primary') Lägg till
 </template>
 
 <script lang="ts">
