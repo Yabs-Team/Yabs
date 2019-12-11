@@ -9,7 +9,7 @@
             b-form-group(vertical='' id="status" label-class='text-sm-right' label-for='nestedBid')
                 b-form-input#nestedBid(placeholder='Status: tex "ok", "framsida saknas"' v-model="form.status")
             b-button(type='submit', id="addBook" variant='primary') Lägg till
-            b-button(type='reset', variant='danger') Rensa Fältet
+            b-button(type='reset', id="resetbookfield" variant='danger') Rensa Fältet
 
 </template>
 

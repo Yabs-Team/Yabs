@@ -21,16 +21,17 @@ describe('This test will create a title and a book', () => {
     cy.get('[placeholder=isbn]').type('420-420 {enter}')
   })
     
-    it('Open up the book', () => {
-      cy.get('[id=ddown1__BV_toggle_]').click()
-      cy.get('[id=book]').click()
-    })
+  it('Open up the book', () => {
+    cy.get('[id=ddown1__BV_toggle_]').click()
+    cy.get('[id=book]').click()
+  })
 
-    it('Creates a book', () => {
-      cy.get('[id=titlenamn]').type('Book made from Test')
-      cy.get('[id=streckkod]').type('232133131')
-      cy.get('[id=status]').type('ok')
-      cy.get('[id=addBook]').click()
-    })
+  it('Creates a book', () => {
+    cy.get('[id=titlenamn]').type('Book made from Test')
+    cy.get('[id=streckkod]').type('232133131')
+    cy.get('[id=status]').type('ok')
+    cy.get('[id=addBook]').click()
+    cy.get('[id=resetbookfield]').click()
+  })
 
 })
