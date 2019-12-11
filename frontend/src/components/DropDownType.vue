@@ -3,8 +3,8 @@
         b-dropdown#ddown1.m-md-2(text='Ändra Typ')
             b-dropdown-item(@click='changeToLoan') Lån
             b-dropdown-item(@click='changeToCig') ID Kort
-            b-dropdown-item(@click='changeToBook' id='book') Bok
-            b-dropdown-item(@click='changeToTitel' id='title') Titel
+            b-dropdown-item(@click='changeToBook' data-cy='book') Bok
+            b-dropdown-item(@click='changeToTitel' data-cy='title') Titel
 
 </template>
 

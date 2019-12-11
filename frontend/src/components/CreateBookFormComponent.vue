@@ -5,7 +5,7 @@
         v-model="form.barcode"
         label="Barcode"
         autocomplete="off"
-        id="streckkod"
+        data-cy="barcode"
         required
       ></v-text-field>
       <v-autocomplete    
@@ -15,17 +15,17 @@
         item-value="id"
         label="Select a favorite activity or create a new one"
         autocomplete="off"
-        id="titlenamn"
+        data-cy="titlename"
       ></v-autocomplete>
       <v-text-field
         v-model="form.status"
         label="Status: tex 'ok', 'framsida saknas'"
         autocomplete="off"
-        id="status"
+        data-cy="status"
         required
       ></v-text-field>
-      <v-btn class="mr-4" type="submit" id="addBook" color="primary">Lägg till</v-btn>
-      <v-btn @click.prevent="onReset" id="resetbookfield" color="error">Rensa fält</v-btn>
+      <v-btn class="mr-4" type="submit" data-cy="addBook" color="primary">Lägg till</v-btn>
+      <v-btn @click.prevent="onReset" data-cy="resetbookfield" color="error">Rensa fält</v-btn>
     </v-card>
   </v-form>
 </template>
