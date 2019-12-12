@@ -1,7 +1,13 @@
 <template>
-    <div class="mx-auto" id="loading">
-        <div v-for="x in 8" :key="x" />
-    </div>
+  <div
+    id="loading"
+    class="mx-auto"
+  >
+    <div
+      v-for="x in 8"
+      :key="x"
+    />
+  </div>
 </template>
 
 <style lang="sass">

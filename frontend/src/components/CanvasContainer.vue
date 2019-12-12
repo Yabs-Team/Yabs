@@ -1,15 +1,17 @@
 <template>
   <div class="root">
-    <v-btn @click="getAllCanvases">Ladda ned alla kort</v-btn>
+    <v-btn @click="getAllCanvases">
+      Ladda ned alla kort
+    </v-btn>
     <div class="card">
       <div class="grid-container">
         <CigCanvas
-          class="canvas"
-          @imageSent="onImageReceived($event)"
           v-for="(image, index) in images"
           :key="index"
+          class="canvas"
           :image="image"
-          :sendCanvas="sendCanvas"
+          :send-canvas="sendCanvas"
+          @imageSent="onImageReceived($event)"
         />
       </div>
     </div>

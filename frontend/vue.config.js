@@ -1,7 +1,7 @@
 module.exports = {
-  "outputDir": "../backend/public",
-  "indexPath": "app.html",
-  "transpileDependencies": [
-    "vuetify"
+  'outputDir': '../backend/public',
+  'indexPath': 'app.html',
+  'transpileDependencies': [
+    'vuetify'
   ]
-}
+};

@@ -16,7 +16,7 @@
         label="Select a favorite activity or create a new one"
         autocomplete="off"
         data-cy="titlename"
-      ></v-autocomplete>
+      />
       <v-text-field
         v-model="form.status"
         label="Status: tex 'ok', 'framsida saknas'"
@@ -24,8 +24,21 @@
         data-cy="status"
         required
       />
-      <v-btn class="mr-4" data-cy="addBook" type="submit" color="primary">Lägg till</v-btn>
-      <v-btn @click.prevent="onReset" data-cy="resetbookfield" color="error">Rensa fält</v-btn>
+      <v-btn
+        class="mr-4"
+        data-cy="addBook"
+        type="submit"
+        color="primary"
+      >
+        Lägg till
+      </v-btn>
+      <v-btn
+        data-cy="resetbookfield"
+        color="error"
+        @click.prevent="onReset"
+      >
+        Rensa fält
+      </v-btn>
     </v-card>
   </v-form>
 </template>

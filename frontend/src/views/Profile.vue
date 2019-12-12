@@ -1,11 +1,16 @@
 <template>
   <div>
-    <p v-if="!usersModule.currentUser">Du är inte inloggad</p>
-    <div class="view" v-else>
+    <p v-if="!usersModule.currentUser">
+      Du är inte inloggad
+    </p>
+    <div
+      v-else
+      class="view"
+    >
       <div class="left">
-        <h1>{{usersModule.currentUser.name}}</h1>
-        <h1>{{usersModule.currentUser.role}} - {{usersModule.currentUser.klass}}</h1>
-        <img :src="`http://localhost:3000/${usersModule.currentUser.photo_path}`" />
+        <h1>{{ usersModule.currentUser.name }}</h1>
+        <h1>{{ usersModule.currentUser.role }} - {{ usersModule.currentUser.klass }}</h1>
+        <img :src="`http://localhost:3000/${usersModule.currentUser.photo_path}`">
       </div>
       <div class="right">
         <div class="header">

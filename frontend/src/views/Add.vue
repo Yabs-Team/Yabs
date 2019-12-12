@@ -1,27 +1,53 @@
 <template>
   <div class="view">
     <div class="left">
-      <v-alert type="error" :show="showDismissibleDangerAlert" dismissible="dismissible">{{failure}}</v-alert>
+      <v-alert
+        type="error"
+        :show="showDismissibleDangerAlert"
+        dismissible="dismissible"
+      >
+        {{ failure }}
+      </v-alert>
       <v-alert
         type="success"
         :show="showDismissibleSuccessAlert"
         dismissible="dismissible"
-      >Loan added</v-alert>
+      >
+        Loan added
+      </v-alert>
       <div class="container">
-        <h1>Lägg till {{this.type}}</h1>
-        <DropDownType @changeType="onChangeType($event)" v-bind:selectedType="this.type" />
-        <LoaningForm v-bind:style="{ display: displayLoan }" v-on:loan-added="onLoanAdded" />
-        <CigForm @sendImages="onSendImages($event)" v-bind:style="{ display: displayCig }" />
-        <CreateBookFormComponent v-bind:style="{ display: displayAdd }" />
-        <TitelForm v-bind:style="{ display: displayTitel }" />
+        <h1>Lägg till {{ this.type }}</h1>
+        <DropDownType
+          :selected-type="this.type"
+          @changeType="onChangeType($event)"
+        />
+        <LoaningForm
+          :style="{ display: displayLoan }"
+          @loan-added="onLoanAdded"
+        />
+        <CigForm
+          :style="{ display: displayCig }"
+          @sendImages="onSendImages($event)"
+        />
+        <CreateBookFormComponent :style="{ display: displayAdd }" />
+        <TitelForm :style="{ display: displayTitel }" />
       </div>
     </div>
     <LoadingIcon v-show="loading" />
-    <div class="right" v-show="!loading">
-      <RecentLoan v-bind:style="{ display: displayLoan }" @loans-loaded="onLoaded" />
-      <CanvasContainer v-bind:style="{ display: displayCig }" :images="images" />
-      <RecentBook v-bind:style="{ display: displayAdd }" />
-      <RecentTitel v-bind:style="{ display: displayTitel }" />
+    <div
+      v-show="!loading"
+      class="right"
+    >
+      <RecentLoan
+        :style="{ display: displayLoan }"
+        @loans-loaded="onLoaded"
+      />
+      <CanvasContainer
+        :style="{ display: displayCig }"
+        :images="images"
+      />
+      <RecentBook :style="{ display: displayAdd }" />
+      <RecentTitel :style="{ display: displayTitel }" />
     </div>
   </div>
 </template>

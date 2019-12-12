@@ -1,6 +1,14 @@
 <template>
-  <b-card class="card" bg-variant="light">
-    <b-table :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :items="items" :fields="fields" />
+  <b-card
+    class="card"
+    bg-variant="light"
+  >
+    <b-table
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
+      :items="items"
+      :fields="fields"
+    />
   </b-card>
 </template>
 

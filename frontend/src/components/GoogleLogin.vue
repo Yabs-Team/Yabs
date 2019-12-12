@@ -1,6 +1,11 @@
 <template>
   <div>
-    <a class="text-warning" v-if="usersModule.currentUser" href="#" @click="signOut">SIGN OUT</a>
+    <a
+      v-if="usersModule.currentUser"
+      class="text-warning"
+      href="#"
+      @click="signOut"
+    >SIGN OUT</a>
     <div id="signin2" />
   </div>
 </template>

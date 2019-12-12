@@ -2,17 +2,22 @@
   <div>
     <v-card bg-variant="light">
       <input
+        id="file"
         class="input-file"
         multiple="multiple"
         type="file"
-        id="file"
         name="file"
         accept="image/*, .zip"
         @change="onFileSelect"
-      />
-      <br/>
-      <br/>
-      <v-btn @click="submit" variant="primary">Lägg till</v-btn>
+      >
+      <br>
+      <br>
+      <v-btn
+        variant="primary"
+        @click="submit"
+      >
+        Lägg till
+      </v-btn>
     </v-card>
   </div>
 </template>
