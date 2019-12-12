@@ -1,18 +1,19 @@
 describe('This test will create a title and a book', () => {
   it('Opens the website', () => {
     cy.visit('http://localhost:8080/add')
-    cy.request('http://localhost:3000/test/mock/admin') 
+    //cy.request('http://localhost:3000/test/mock/admin') 
   })
 
   // it('Login with Google'), () => {
   //   cy.get('[id=not_signed_inow8rarn26wvu]')
   // }
 
-  it('Open up the title', () => {
+  it('Selects "Title" tab in dropdown', () => {
     cy.get('[id=ddown1__BV_toggle_]').click()
     cy.get('[data-cy=title]').click()
   })
 
+  //The activity "Programming for dummies" may vary depending on the seed, which means the test might fail
   it('Creates a title', () => {
     cy.get('[placeholder=Namn]').type('Programming for dummies')
     cy.get('[placeholder=Kostnad]').type('200')
@@ -22,11 +23,12 @@ describe('This test will create a title and a book', () => {
     cy.get('[data-cy=resetbookfield]').click({force:true})
   })
     
-  it('Open up the book', () => {
+  it('Selects "Book" tab in dropdown', () => {
     cy.get('[id=ddown1__BV_toggle_]').click()
     cy.get('[data-cy=book]').click()
   })
 
+  //The activity "Programming for dummies may vary depending on the seed" which means the test might fail
   it('Creates a book', () => {
     cy.get('[data-cy=titlename]').type('Programming for dummies')
     cy.get('div').contains('Programming for dummies').click()
@@ -37,6 +39,7 @@ describe('This test will create a title and a book', () => {
     cy.pause()
   })
 
+  //The activity "Programming for dummies may vary depending on the seed" which means the test might fail
   it('Creates a book and reset the fields', () => {
     cy.get('[data-cy=titlename]').type('Programming for dummies')
     cy.get('div').contains('Programming for dummies').click({force:true})
