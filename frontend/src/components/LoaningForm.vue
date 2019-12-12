@@ -1,15 +1,45 @@
 <template>
   <div>
-    <v-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <v-form
+      v-if="show"
+      @submit="onSubmit"
+      @reset="onReset"
+    >
       <v-card bg-variant="light">
-        <v-item-group vertical="" label-class="text-sm-right" label-for="nestedUid">
-          <v-text-field id="nestedUid" placeholder="Elevens Streckkod" v-model="form.loaned_by_id" />
+        <v-item-group
+          vertical=""
+          label-class="text-sm-right"
+          label-for="nestedUid"
+        >
+          <v-text-field
+            id="nestedUid"
+            v-model="form.loaned_by_id"
+            placeholder="Elevens Streckkod"
+          />
         </v-item-group>
-        <v-item-group vertical="" label-class="text-sm-right" label-for="nestedBid">
-          <v-text-field id="nestedBid" placeholder="Bokens Streckkod" v-model="form.book_id" />
+        <v-item-group
+          vertical=""
+          label-class="text-sm-right"
+          label-for="nestedBid"
+        >
+          <v-text-field
+            id="nestedBid"
+            v-model="form.book_id"
+            placeholder="Bokens Streckkod"
+          />
         </v-item-group>
-        <v-btn type="submit" variant="primary">Låna Ut</v-btn>
-        <v-btn type="reset" variant="danger">Rensa Fälten</v-btn>
+        <v-btn
+          type="submit"
+          variant="primary"
+        >
+          Låna Ut
+        </v-btn>
+        <v-btn
+          type="reset"
+          variant="danger"
+        >
+          Rensa Fälten
+        </v-btn>
       </v-card>
     </v-form>
   </div>
@@ -33,14 +63,16 @@ export default class LoaningForm extends Vue {
     loaned_by_id: '',
     book_id: '',
   };
-  public show = true;
+  public show: boolean = true;
 
   public onSubmit(evt: Event) {
     evt.preventDefault();
     this.form.lent_by_id = UsersModule.currentUser ? UsersModule.currentUser.uid : '';
-    LoansModule.create(this.form)
-      .then((loan: any) => this.$emit('loan-added', loan))
-      .catch((failure: any) => console.log(failure));
+    if (!!this.form.lent_by_id && !!this.form.loaned_by_id && !!this.form.book_id) {
+      LoansModule.create(this.form)
+        .then((loan: any) => this.$emit('loan-added', loan))
+        .catch((failure: any) => console.log(failure));
+    }
   }
 
   public onReset(evt: Event) {

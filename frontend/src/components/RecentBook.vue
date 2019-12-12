@@ -1,6 +1,14 @@
 <template>
-  <b-card class="card" bg-variant="light">
-    <b-table :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :items="items" :fields="fields" />
+  <b-card
+    class="card"
+    bg-variant="light"
+  >
+    <b-table
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
+      :items="items"
+      :fields="fields"
+    />
   </b-card>
 </template>
 
@@ -10,9 +18,9 @@ import BooksModule from '../store/modules/BooksModule';
 
 @Component
 export default class RecentTitel extends Vue {
-  public sortBy = 'Title';
-  public sortDesc = false;
-  public fields = [
+  public sortBy: string = 'Title';
+  public sortDesc: boolean = false;
+  public fields: object[] = [
     { key: 'title.name', sortable: false, label: 'Titel' },
     { key: 'status', sortable: false, label: 'Status' },
     { key: 'barcode', sortable: false, label: 'Sträckkod' },

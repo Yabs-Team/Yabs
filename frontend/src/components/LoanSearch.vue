@@ -2,44 +2,108 @@
   <b-container fluid>
     <!-- User Interface controls-->
     <b-row>
-      <b-col class="my-1" md="6">
-        <b-form-group class="mb-0" horizontal label="Filter">
+      <b-col
+        class="my-1"
+        md="6"
+      >
+        <b-form-group
+          class="mb-0"
+          horizontal
+          label="Filter"
+        >
           <b-input-group>
-            <b-form-input v-model="filter" placeholder="Type to Search">
+            <b-form-input
+              v-model="filter"
+              placeholder="Type to Search"
+            >
               <b-input-group-append>
-                <b-btn :disabled="!filter" @click="filter = ''">Clear</b-btn>
+                <b-btn
+                  :disabled="!filter"
+                  @click="filter = ''"
+                >
+                  Clear
+                </b-btn>
               </b-input-group-append>
             </b-form-input>
           </b-input-group>
         </b-form-group>
       </b-col>
-      <b-col class="my-1" md="6">
-        <b-form-group class="mb-0" horizontal label="Sort">
+      <b-col
+        class="my-1"
+        md="6"
+      >
+        <b-form-group
+          class="mb-0"
+          horizontal
+          label="Sort"
+        >
           <b-input-group>
-            <b-form-select v-model="sortBy" :options="sortOptions">
-              <option slot="first" :value="null">-- none --</option>
+            <b-form-select
+              v-model="sortBy"
+              :options="sortOptions"
+            >
+              <option
+                slot="first"
+                :value="null"
+              >
+                -- none --
+              </option>
             </b-form-select>
-            <b-form-select :disabled="!sortBy" v-model="sortDesc" slot="append">
-              <option :value="false">Asc</option>
-              <option :value="true">Desc</option>
+            <b-form-select
+              slot="append"
+              v-model="sortDesc"
+              :disabled="!sortBy"
+            >
+              <option :value="false">
+                Asc
+              </option>
+              <option :value="true">
+                Desc
+              </option>
             </b-form-select>
           </b-input-group>
         </b-form-group>
       </b-col>
-      <b-col class="my-1" md="6">
-        <b-form-group class="mb-0" horizontal label="Sort direction">
+      <b-col
+        class="my-1"
+        md="6"
+      >
+        <b-form-group
+          class="mb-0"
+          horizontal
+          label="Sort direction"
+        >
           <b-input-group>
-            <b-form-select v-model="sortDirection" slot="append">
-              <option value="asc">Asc</option>
-              <option value="desc">Desc</option>
-              <option value="last">Last</option>
+            <b-form-select
+              slot="append"
+              v-model="sortDirection"
+            >
+              <option value="asc">
+                Asc
+              </option>
+              <option value="desc">
+                Desc
+              </option>
+              <option value="last">
+                Last
+              </option>
             </b-form-select>
           </b-input-group>
         </b-form-group>
       </b-col>
-      <b-col class="my-1" md="6">
-        <b-form-group class="mb-0" horizontal label="Per page">
-          <b-form-select :options="pageOptions" v-model="perPage" />
+      <b-col
+        class="my-1"
+        md="6"
+      >
+        <b-form-group
+          class="mb-0"
+          horizontal
+          label="Per page"
+        >
+          <b-form-select
+            v-model="perPage"
+            :options="pageOptions"
+          />
         </b-form-group>
       </b-col>
     </b-row>
@@ -57,40 +121,73 @@
       :sort-direction="sortDirection"
       @filtered="onFiltered"
     >
-      <template slot="name" slot-scope="row">{{row.value.first}} {{row.value.last}}</template>
-      <template slot="isActive" slot-scope="row">{{row.value?'Yes :)':'No :('}}</template>
-      <template slot="actions" slot-scope="row">
+      <template
+        slot="name"
+        slot-scope="row"
+      >
+        {{ row.value.first }} {{ row.value.last }}
+      </template>
+      <template
+        slot="isActive"
+        slot-scope="row"
+      >
+        {{ row.value?'Yes :)':'No :(' }}
+      </template>
+      <template
+        slot="actions"
+        slot-scope="row"
+      >
         <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening-->
         <b-button
           class="mr-1"
           size="sm"
           @click.stop="info(row.item, row.index, $event.target)"
-        >Info modal</b-button>
+        >
+          Info modal
+        </b-button>
         <b-button
           size="sm"
           @click.stop="row.toggleDetails"
-        >{{ row.detailsShowing ? 'Hide' : 'Show' }} Details</b-button>
+        >
+          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+        </b-button>
       </template>
-      <template slot="row-details" slot-scope="row">
+      <template
+        slot="row-details"
+        slot-scope="row"
+      >
         <b-card>
           <ul>
-            <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value}}</li>
+            <li
+              v-for="(value, key) in row.item"
+              :key="key"
+            >
+              {{ key }}: {{ value }}
+            </li>
           </ul>
         </b-card>
       </template>
     </b-table>
     <b-row>
-      <b-col class="my-1" md="6">
+      <b-col
+        class="my-1"
+        md="6"
+      >
         <b-pagination
+          v-model="currentPage"
           class="my-0"
           :total-rows="totalRows"
           :per-page="perPage"
-          v-model="currentPage"
-        ></b-pagination>
+        />
       </b-col>
     </b-row>
     <!-- Info modal-->
-    <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" ok-only>
+    <b-modal
+      id="modalInfo"
+      :title="modalInfo.title"
+      ok-only
+      @hide="resetModal"
+    >
       <pre>\n{{ modalInfo.content }}</pre>
     </b-modal>
   </b-container>

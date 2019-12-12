@@ -1,12 +1,18 @@
 <template>
   <div>
     <div class="view find">
-      <dropdownFind @change-type="onChangeType($event)" v-bind:selectedType="this.type" />
+      <dropdownFind
+        :selected-type="this.type"
+        @change-type="onChangeType($event)"
+      />
       <v-container fluid>
         <!-- User Interface controls-->
         <v-row>
           <v-col md="6">
-            <v-text-field v-model="filter" label="Type to Search" />
+            <v-text-field
+              v-model="filter"
+              label="Type to Search"
+            />
           </v-col>
           <v-col md="6">
             <v-select
@@ -18,30 +24,43 @@
             />
           </v-col>
           <v-col md="6">
-            <v-select :items="pageOptions" v-model="perPage" label="Per page" />
+            <v-select
+              v-model="perPage"
+              :items="pageOptions"
+              label="Per page"
+            />
           </v-col>
         </v-row>
         <!-- Main table element-->
         <LoadingIcon v-show="loading" />
-        <div id="info" v-show="!loading">
-          <div id="loan" v-bind:style="{display: displayTable}">
+        <div
+          v-show="!loading"
+          id="info"
+        >
+          <div
+            id="loan"
+            :style="{display: displayTable}"
+          >
             <MainTable
-              :perPage="perPage"
-              :pageOptions="pageOptions"
-              :sortBy="sortBy"
-              :sortDesc="sortDesc"
+              :per-page="perPage"
+              :page-options="pageOptions"
+              :sort-by="sortBy"
+              :sort-desc="sortDesc"
               :filter="filter"
-              :modalInfo="modalInfo"
+              :modal-info="modalInfo"
             />
           </div>
-          <div id="all" v-bind:style="{display: displayCig}">
+          <div
+            id="all"
+            :style="{display: displayCig}"
+          >
             <AllBooks
-              :perPage="perPage"
-              :pageOptions="pageOptions"
-              :sortBy="sortBy"
-              :sortDesc="sortDesc"
+              :per-page="perPage"
+              :page-options="pageOptions"
+              :sort-by="sortBy"
+              :sort-desc="sortDesc"
               :filter="filter"
-              :modalInfo="modalInfo"
+              :modal-info="modalInfo"
               @books-loaded="onLoaded"
             />
           </div>
@@ -68,20 +87,20 @@ import LoadingIcon from '@/components/LoadingIcon.vue';
   },
 })
 export default class Find extends Vue {
-  public type = 'Utlånade';
-  public displayTable = 'block';
-  public displayCig = 'none';
+  public type: string = 'Utlånade';
+  public displayTable: string = 'block';
+  public displayCig: string = 'none';
 
   public perPage: number = 5;
   public pageOptions: number[] = [5, 10, 15];
 
-  public sortBy = null;
-  public sortDesc = true;
-  public filter = null;
-  public modalInfo = { title: '', content: '' };
-  public loading = true;
+  public sortBy: any = null;
+  public sortDesc: boolean = true;
+  public filter: any = null;
+  public modalInfo: object = { title: '', content: '' };
+  public loading: boolean = true;
 
-  private sortTypes = [
+  private sortTypes: object[] = [
     { text: 'Asc', value: false },
     { text: 'Desc', value: true },
   ];

@@ -1,44 +1,65 @@
 <template>
-    <div id="myContainer">
+  <div id="myContainer">
     <div class="my-3">
-        <v-btn
-          id="exPopoverReactive1" 
-          :disabled="popoverShow"
-          variant="primary"
-          ref="button"
-        >
-          <h1 class="material-icons icon">add</h1>
-        </v-btn>
+      <v-btn
+        id="exPopoverReactive1" 
+        ref="button"
+        :disabled="popoverShow"
+        variant="primary"
+      >
+        <h1 class="material-icons icon">
+          add
+        </h1>
+      </v-btn>
     </div>
     <v-tooltip
+      ref="popover"
       target="exPopoverReactive1"
       triggers="click"
       :show.sync="popoverShow"
       placement="bottom"
       container="myContainer"
-      ref="popover"
       @show="onShow"
       @shown="onShown"
       @hidden="onHidden"
     >
-      <template slot="title">Skanna boken du vill låna</template>
-        <div>
-            <v-item-group
-              class="mb-1"
-              label="Bok ID"
-              label-for="pop1"
-              :state="inputState"
-              horizontal=""
-              invalid-feedback="This field is required"
-            >
-              <v-text-field id="pop1" ref="input" :state="inputState" size="sm" v-model="input"></v-text-field>
-            </v-item-group>
-            <v-btn @click="onClose" size="sm" variant="danger">Cancel</v-btn>
-            <v-btn @click="onOk" size="sm" variant="primary">Ok</v-btn>
-        </div>
+      <template slot="title">
+        Skanna boken du vill låna
+      </template>
+      <div>
+        <v-item-group
+          class="mb-1"
+          label="Bok ID"
+          label-for="pop1"
+          :state="inputState"
+          horizontal=""
+          invalid-feedback="This field is required"
+        >
+          <v-text-field
+            id="pop1"
+            ref="input"
+            v-model="input"
+            :state="inputState"
+            size="sm"
+          />
+        </v-item-group>
+        <v-btn
+          size="sm"
+          variant="danger"
+          @click="onClose"
+        >
+          Cancel
+        </v-btn>
+        <v-btn
+          size="sm"
+          variant="primary"
+          @click="onOk"
+        >
+          Ok
+        </v-btn>
+      </div>
     </v-tooltip>
-</div>
-
+  </div>
 </template>
 
 <script lang="ts">
@@ -46,16 +67,16 @@ import { Component, Watch, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class AddLoan extends Vue {
-  public input = '';
+  public input: string = '';
   public inputState: boolean | null = null;
-  public options = [
+  public options: any = [
     { text: '- Choose 1 -', value: '' },
     'Red',
     'Green',
     'Blue',
   ];
-  public inputReturn = '';
-  public popoverShow = false;
+  public inputReturn: string = '';
+  public popoverShow: boolean = false;
 
   public onClose() {
     this.popoverShow = false;

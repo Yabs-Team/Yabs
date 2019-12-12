@@ -20,7 +20,7 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 export default class DropDownType extends Vue {
   @Prop({ default: '' }) public selectedType!: string;
 
-  public type = this.selectedType;
+  public type: string = this.selectedType;
 
   @Watch('type')
   public changeType() {

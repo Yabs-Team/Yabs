@@ -1,6 +1,14 @@
 <template>
-  <b-card class="card" bg-variant="light">
-    <b-table :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :items="items" :fields="fields" />
+  <b-card
+    class="card"
+    bg-variant="light"
+  >
+    <b-table
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
+      :items="items"
+      :fields="fields"
+    />
   </b-card>
 </template>
 
@@ -10,9 +18,9 @@ import LoansModule from '../store/modules/LoansModule';
 
 @Component
 export default class RecentLoan extends Vue {
-  public sortBy = 'Utgångsdatum';
-  public sortDesc = false;
-  public fields = [
+  public sortBy: string = 'Utgångsdatum';
+  public sortDesc: boolean = false;
+  public fields: object[] = [
     { key: 'loaned_by.name', sortable: false, label: 'Lånad av' },
     { key: 'lent_by.name', sortable: false, label: 'Utlånad av' },
     { key: 'book.title.name', sortable: false, label: 'Boktitel' },
