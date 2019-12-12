@@ -7,16 +7,24 @@ exports[`HeaderNav.vue renders correctly 1`] = `
     <b-collapse-stub id="nav_dropdown_collapse" isnav="true" tag="div">
       <b-navbar-nav-stub tag="ul">
         <b-nav-item-stub target="_self" event="click" routertag="a">
-          <router-link-stub to="/" class="link">Start</router-link-stub>
+          <router-link-stub to="/" class="link">
+            Start
+          </router-link-stub>
         </b-nav-item-stub>
         <b-nav-item-stub target="_self" event="click" routertag="a">
-          <router-link-stub to="/users/undefined" class="link">Profil</router-link-stub>
+          <router-link-stub to="/users/undefined" class="link">
+            Profil
+          </router-link-stub>
         </b-nav-item-stub>
         <b-nav-item-stub target="_self" event="click" routertag="a">
-          <router-link-stub to="/add" class="link">Lägg till</router-link-stub>
+          <router-link-stub to="/add" class="link">
+            Lägg till
+          </router-link-stub>
         </b-nav-item-stub>
         <b-nav-item-stub target="_self" event="click" routertag="a">
-          <router-link-stub to="/find" class="link">Hitta</router-link-stub>
+          <router-link-stub to="/find" class="link">
+            Hitta
+          </router-link-stub>
         </b-nav-item-stub>
       </b-navbar-nav-stub>
     </b-collapse-stub>

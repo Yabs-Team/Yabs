@@ -30,7 +30,7 @@
           @sendImages="onSendImages($event)"
         />
         <CreateBookFormComponent :style="{ display: displayAdd }" />
-        <TitelForm :style="{ display: displayTitel }" />
+        <TitelFormComponent :style="{ display: displayTitel }" />
       </div>
     </div>
     <LoadingIcon v-show="loading" />
@@ -62,7 +62,7 @@ import RecentBook from '@/components/RecentBook.vue';
 import RecentLoan from '@/components/RecentLoan.vue';
 import RecentTitel from '@/components/RecentTitel.vue';
 import CanvasContainer from '@/components/CanvasContainer.vue';
-import TitelForm from '@/components/TitelForm.vue';
+import TitelFormComponent from '@/components/TitelFormComponent.vue';
 import LoadingIcon from '@/components/LoadingIcon.vue';
 
 @Component({
@@ -70,7 +70,7 @@ import LoadingIcon from '@/components/LoadingIcon.vue';
     LoaningForm,
     CigForm,
     CreateBookFormComponent,
-    TitelForm,
+    TitelFormComponent,
     DropDownType,
     RecentLoan,
     RecentTitel,

@@ -39,7 +39,6 @@
         />
       </v-item-group>
       <v-select
-        data-cy='selectTitle'
         v-model="form.title_type"
         :items="options"
         label="Välj typ av titel"
@@ -62,11 +61,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import TitlesModule from '../store/modules/TitlesModule';
+import TitlesModule, { TitleForm } from '../store/modules/TitlesModule';
 
 @Component
-export default class TitleForm extends Vue {
-  public form: object = {
+export default class TitleFormComponent extends Vue {
+  public form: TitleForm = {
     name: '',
     cost: '',
     isbn: '',

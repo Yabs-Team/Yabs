@@ -20,6 +20,13 @@ export interface Title {
   updated_at: string;
 }
 
+export interface TitleForm {
+  name: string;
+  cost: string;
+  isbn: string;
+  title_type: string;
+}
+
 export interface TitleCollection { [id: number]: Title; }
 
 export interface TitleState {
@@ -55,7 +62,7 @@ class TitlesModule extends VuexModule {
   }
 
   @Action({rawError: true})
-  public create(request: any) {
+  public create(request: TitleForm) {
     return new Promise((resolve, reject) => {
       TitlesAPI.create(request)
         .then((response: any) => {

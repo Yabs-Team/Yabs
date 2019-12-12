@@ -68,9 +68,11 @@ export default class LoaningForm extends Vue {
   public onSubmit(evt: Event) {
     evt.preventDefault();
     this.form.lent_by_id = UsersModule.currentUser ? UsersModule.currentUser.uid : '';
-    LoansModule.create(this.form)
-      .then((loan: any) => this.$emit('loan-added', loan))
-      .catch((failure: any) => console.log(failure));
+    if (!!this.form.lent_by_id && !!this.form.loaned_by_id && !!this.form.book_id) {
+      LoansModule.create(this.form)
+        .then((loan: any) => this.$emit('loan-added', loan))
+        .catch((failure: any) => console.log(failure));
+    }
   }
 
   public onReset(evt: Event) {
