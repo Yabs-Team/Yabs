@@ -67,16 +67,16 @@ import { Component, Watch, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class AddLoan extends Vue {
-  public input = '';
+  public input: string = '';
   public inputState: boolean | null = null;
-  public options = [
+  public options: any = [
     { text: '- Choose 1 -', value: '' },
     'Red',
     'Green',
     'Blue',
   ];
-  public inputReturn = '';
-  public popoverShow = false;
+  public inputReturn: string = '';
+  public popoverShow: boolean = false;
 
   public onClose() {
     this.popoverShow = false;

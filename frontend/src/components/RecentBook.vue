@@ -18,9 +18,9 @@ import BooksModule from '../store/modules/BooksModule';
 
 @Component
 export default class RecentTitel extends Vue {
-  public sortBy = 'Title';
-  public sortDesc = false;
-  public fields = [
+  public sortBy: string = 'Title';
+  public sortDesc: boolean = false;
+  public fields: object[] = [
     { key: 'title.name', sortable: false, label: 'Titel' },
     { key: 'status', sortable: false, label: 'Status' },
     { key: 'barcode', sortable: false, label: 'Sträckkod' },

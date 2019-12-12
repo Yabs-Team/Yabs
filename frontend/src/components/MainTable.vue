@@ -106,16 +106,16 @@ export default class MainTable extends Vue {
 
   public loansLoading: boolean = true;
 
-  public fields = [
+  public fields: object[] = [
     { key: 'loaned_by.name', sortable: false, label: 'Lånad av' },
     { key: 'lent_by.name', sortable: false, label: 'Utlånad av' },
     { key: 'book.title.name', sortable: false, label: 'Boktitel' },
     { key: 'expiration_date', sortable: false, label: 'Utgångsdatum' },
   ];
 
-  public currentPage = 1;
+  public currentPage: number = 1;
 
-  public totalRows = 0;
+  public totalRows: number = 0;
 
   get items() {
     const items = Object.entries(LoansModule.all)

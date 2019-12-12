@@ -13,10 +13,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import UsersModule from '../store/modules/UsersModule';
+import { VuexModule } from 'vuex-module-decorators';
 
 @Component
 export default class GoogleLogin extends Vue {
-  public usersModule = UsersModule;
+  public usersModule: VuexModule = UsersModule;
 
   public mounted() {
     // @ts-ignore: gapi

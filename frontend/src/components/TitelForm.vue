@@ -65,15 +65,15 @@ import TitlesModule from '../store/modules/TitlesModule';
 
 @Component
 export default class TitleForm extends Vue {
-  public form = {
+  public form: object = {
     name: '',
     cost: '',
     isbn: '',
     title_type: '',
   };
-  public show = true;
+  public show: boolean = true;
 
-  public options = [
+  public options: object[] = [
     { value: 'Kurslitteratur', text: 'Kurslitteratur' },
     { value: 'Bibloteksbok', text: 'Bibloteksbok' },
     { value: 'Skönlitteratur', text: 'Skönlitteratur' },
@@ -81,9 +81,11 @@ export default class TitleForm extends Vue {
 
   public onSubmit(evt: Event) {
     evt.preventDefault();
-    TitlesModule.create(this.form)
-      .then((title: any) => this.$emit('title-added', title))
-      .catch((failure: any) => console.log(failure));
+    if (!!this.form.name && !!this.form.cost && !! this.form.isbn && !!this.form.title_type) {
+      TitlesModule.create(this.form)
+        .then((title: any) => this.$emit('title-added', title))
+        .catch((failure: any) => console.log(failure));
+    }
   }
 
   public onReset(evt: Event) {

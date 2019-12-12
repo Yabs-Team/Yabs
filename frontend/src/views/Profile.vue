@@ -33,6 +33,7 @@ import CigCanvas from '@/components/CigCanvas.vue';
 import AddLoan from '@/components/AddLoan.vue';
 import RecentLoan from '@/components/RecentLoan.vue';
 import UsersModule, { User } from '../store/modules/UsersModule';
+import { VuexModule } from 'vuex-module-decorators';
 
 @Component({
   components: {
@@ -42,7 +43,7 @@ import UsersModule, { User } from '../store/modules/UsersModule';
   },
 })
 export default class Profile extends Vue {
-  private usersModule = UsersModule;
+  private usersModule: VuexModule = UsersModule;
 }
 </script>
 

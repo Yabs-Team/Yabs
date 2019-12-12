@@ -80,19 +80,19 @@ import LoadingIcon from '@/components/LoadingIcon.vue';
   },
 })
 export default class Add extends Vue {
-  public type = 'Lån';
-  public displayLoan = 'block';
-  public displayCig = 'none';
-  public updated = false;
+  public type: string = 'Lån';
+  public displayLoan: string = 'block';
+  public displayCig: string = 'none';
+  public updated: boolean = false;
   public images: File[] = [];
-  public showDismissibleDangerAlert = false;
-  public showDismissibleSuccessAlert = false;
+  public showDismissibleDangerAlert: boolean = false;
+  public showDismissibleSuccessAlert: boolean = false;
   public failure: any = '';
   public hasAddedLoan: boolean = false;
-  public loading = true;
+  public loading: boolean = true;
 
-  public displayAdd = 'none';
-  public displayTitel = 'none';
+  public displayAdd: string = 'none';
+  public displayTitel: string = 'none';
 
   @Watch('$store.state.loans.failure')
   public onFailureChanged(val: any) {
@@ -146,10 +146,6 @@ export default class Add extends Vue {
       this.displayAdd = 'none';
       this.displayTitel = 'block';
     }
-  }
-
-  public onSendImages(images: any[]) {
-    this.images = images;
   }
 
   public onSendImages(images: any[]) {

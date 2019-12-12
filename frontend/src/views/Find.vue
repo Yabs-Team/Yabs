@@ -87,20 +87,20 @@ import LoadingIcon from '@/components/LoadingIcon.vue';
   },
 })
 export default class Find extends Vue {
-  public type = 'Utlånade';
-  public displayTable = 'block';
-  public displayCig = 'none';
+  public type: string = 'Utlånade';
+  public displayTable: string = 'block';
+  public displayCig: string = 'none';
 
   public perPage: number = 5;
   public pageOptions: number[] = [5, 10, 15];
 
-  public sortBy = null;
-  public sortDesc = true;
-  public filter = null;
-  public modalInfo = { title: '', content: '' };
-  public loading = true;
+  public sortBy: any = null;
+  public sortDesc: boolean = true;
+  public filter: any = null;
+  public modalInfo: object = { title: '', content: '' };
+  public loading: boolean = true;
 
-  private sortTypes = [
+  private sortTypes: object[] = [
     { text: 'Asc', value: false },
     { text: 'Desc', value: true },
   ];

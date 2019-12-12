@@ -25,7 +25,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class DropdownFind extends Vue {
   @Prop({ default: '' }) public selectedType!: string;
 
-  public type = this.selectedType;
+  public type: string = this.selectedType;
 
   public changeType() {
     this.$emit('change-type', this.type);

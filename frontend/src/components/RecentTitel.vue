@@ -18,9 +18,9 @@ import TitlesModule from '../store/modules/TitlesModule';
 
 @Component
 export default class RecentTitel extends Vue {
-  public sortBy = 'Title';
-  public sortDesc = false;
-  public fields = [
+  public sortBy: string = 'Title';
+  public sortDesc: boolean = false;
+  public fields: object[] = [
     { key: 'name', sortable: false, label: 'Titel' },
     { key: 'cost', sortable: false, label: 'Kostnad' },
     { key: 'title_type', sortable: false, label: 'Typ' },

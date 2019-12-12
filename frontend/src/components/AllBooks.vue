@@ -99,10 +99,10 @@ export default class AllBooks extends Vue {
   @Prop({ default: null }) public filter!: any;
   @Prop({ default: null }) public modalInfo!: any;
 
-  public currentPage = 1;
+  public currentPage: number = 1;
   public totalRows: number = 0;
 
-  public fields = [
+  public fields: object[] = [
     { key: 'title.name', label: 'Titel', sortable: true, class: 'text-left' },
     { key: 'barcode', label: 'Streckkod', sortable: true, class: 'text-left' },
     { key: 'status', label: 'Status', sortable: true, class: 'text-left' },

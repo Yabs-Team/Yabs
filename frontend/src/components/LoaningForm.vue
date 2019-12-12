@@ -63,7 +63,7 @@ export default class LoaningForm extends Vue {
     loaned_by_id: '',
     book_id: '',
   };
-  public show = true;
+  public show: boolean = true;
 
   public onSubmit(evt: Event) {
     evt.preventDefault();

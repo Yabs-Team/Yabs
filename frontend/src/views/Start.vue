@@ -100,9 +100,9 @@ import BooksModule from '../store/modules/BooksModule';
   },
 })
 export default class Start extends Vue {
-  public size = 'lg';
-  public primary = 'primary';
-  public loading = true;
+  public size: string = 'lg';
+  public primary: string = 'primary';
+  public loading: boolean = true;
 
   public onLoaded() {
     this.loading = false;
