@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     end
   end
   root 'application#show'
+  get '/test/mock/admin', to: 'application#mockAdmin'
+  get '/test/mock/student', to: 'application#mockStudent'
   match '/*path', to:'application#show', via: :all, :constraints => ->(req) { req.path !~ /(\/rails\/active_storage\/).*/ }
 end

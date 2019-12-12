@@ -40,6 +40,7 @@
       </v-item-group>
       <v-select
         v-model="form.title_type"
+        data-cy="selectTitle"
         :items="options"
         label="Välj typ av titel"
       />

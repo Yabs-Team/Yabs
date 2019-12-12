@@ -2,10 +2,10 @@ class LoanPolicy < ApplicationPolicy
   attr_reader :user, :loan
   class Scope < Scope
     def resolve
-      if user.admin?
+      if user&.admin?
         scope.all
       else
-        scope.where("loaned_by_id": user.id)
+        scope.where("loaned_by_id": user&.id)
       end
     end
   end
