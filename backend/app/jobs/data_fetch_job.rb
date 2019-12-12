@@ -25,10 +25,10 @@ class DataFetchJob < ApplicationJob
       token << person.id
       uid = Time.new.year.to_s[2..-1] + person.id.to_str[13..-1]
       if person.org_unit_path == "/Johanneberg/Personal"
-        role = "Lärare"
-        klass = "Lärare"
+        role = 4
+        klass = "Personal"
       else 
-        role = "Elev"
+        role = 1
         klass = person.org_unit_path[20..-1]
       end
       if @user = User.find_by(google_token: person.id)
