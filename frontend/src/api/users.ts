@@ -17,6 +17,20 @@ export default {
     }
 
   },
+  async get(id: string) {
+    try {
+      const response = await axios.get(`http://localhost:3000/api/v1/users/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+
+  },
   async update(request: any) {
 
     try {

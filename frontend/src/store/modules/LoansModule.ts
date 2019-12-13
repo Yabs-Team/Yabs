@@ -45,7 +45,6 @@ class LoansModule extends VuexModule {
           resolve();
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -60,7 +59,6 @@ class LoansModule extends VuexModule {
           resolve(response);
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -75,7 +73,6 @@ class LoansModule extends VuexModule {
           resolve(response);
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -90,7 +87,6 @@ class LoansModule extends VuexModule {
           resolve(response);
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -106,6 +102,7 @@ class LoansModule extends VuexModule {
     Vue.delete(this.loanState.loans, loanId);
   }
   @Mutation
+
   private convertLoanList(payload: Loan[]) {
     const list = convertList(payload, 'id');
     this.loanState.loans = list;

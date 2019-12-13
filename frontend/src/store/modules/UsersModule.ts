@@ -54,7 +54,6 @@ class UsersModule extends VuexModule {
           resolve();
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -70,7 +69,6 @@ class UsersModule extends VuexModule {
           resolve(response);
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -85,7 +83,6 @@ class UsersModule extends VuexModule {
           resolve(response);
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -100,7 +97,6 @@ class UsersModule extends VuexModule {
           resolve(response);
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
