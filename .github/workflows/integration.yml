@@ -92,7 +92,6 @@ jobs:
         bundle exec cucumber
   newman:
     runs-on: ubuntu-lastest
-
     - uses: actions/checkout@v1
     - name: Checkout develop
       run: git checkout develop
