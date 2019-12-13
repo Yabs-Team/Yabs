@@ -1,46 +1,11 @@
-name: Integration
+name: postman
 
-on:
-  schedule:
-  - cron: "0 0 * * *"
+on: push
 
-jobs:
-  cc:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v1
-    - name: Checkout develop
-      run: git checkout develop
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-    - name: Install packages
-      run: |
-        cd frontend
-        yarn install
-    - name: Run unit tests
-      run: |
-        cd frontend
-        yarn test:unit
-    - name: Generate formatted coverage for codeclimate
-      run: |
-        echo Fetch testreporter tool
-        cd frontend
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x cc-test-reporter
-        ./cc-test-reporter format-coverage -t lcov
-    - name: Upload coverage report to codeclimate
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      run: |
-        echo Upload report to codeclimate
-        cd frontend
-        ./cc-test-reporter upload-coverage
-  e2e:
-    runs-on: ubuntu-latest
-
-    steps:
+jobs: 
+  newman:
+  
+    runs-on: ubuntu-lastest
     - uses: actions/checkout@v1
     - name: Checkout develop
       run: git checkout develop
@@ -84,9 +49,9 @@ jobs:
       run: |
         cd backend
         bundle exec bin/rails s &
-    - name: Run e2e tests
+    - name: Run newman tests
       run: |
-        sudo apt-get -yqq install chromium-chromedriver
-        cd tests
-        bundle install
-        bundle exec cucumber
+        cd frontend
+        yarn add newman
+        node_modules/newman/bin/newman.js run Yabs.postman_collection.json
+
