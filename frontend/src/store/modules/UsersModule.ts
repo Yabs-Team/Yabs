@@ -25,28 +25,28 @@ export interface UserCollection { [uid: number]: User; }
 
 export interface UserState {
   users: UserCollection;
-  current_user: any;
+  currentUser: any;
   failure: any;
 }
 
 @Module({dynamic: true, namespaced: true, name: 'UsersModule', store, preserveState: true})
 class UsersModule extends VuexModule {
-  private userState: UserState = {users: {}, current_user: null, failure: null};
+  private userState: UserState = {users: {}, currentUser: null, failure: null};
 
-  get all() {
+  get currentUserID(): number {
+    return this.userState.currentUser;
+  }
+
+  get all(): UserCollection {
     return this.userState.users;
   }
 
-  get currentUser() {
-    if (this.userState && this.userState.current_user) {
-      return this.all[this.userState.current_user];
-    } else {
-      return {};
-    }
+  get currentUser(): User {
+    return this.all[this.userState.currentUser];
   }
 
   @Action({rawError: true})
-  public fetchAll() {
+  public fetchAll(): Promise<object> {
     return new Promise((resolve, reject) => {
       UsersAPI.all()
         .then((response: User[]) => {
@@ -92,7 +92,7 @@ class UsersModule extends VuexModule {
   }
 
   @Action({rawError: true})
-  public signOut() {
+  public signOut(): Promise<object> {
     return new Promise((resolve, reject) => {
       UsersAPI.signOut()
         .then((response: any) => {
@@ -107,24 +107,19 @@ class UsersModule extends VuexModule {
   }
 
   @Mutation
-  public setUser(payload: any) {
+  public setUser(payload: any): void {
     Vue.set(this.userState.users, payload.uid, payload);
   }
 
   @Mutation
-  public setCurrentUser(payload: any) {
-    this.userState.current_user = payload.uid;
+  public setCurrentUser(payload: any): void {
+    Vue.set(this.userState, 'currentUser', payload.uid);
   }
 
   @Mutation
-  public setFailure(payload: any) {
-    this.userState.failure = payload;
-  }
-
-  @Mutation
-  public convertUserList(payload: User[]) {
+  public convertUserList(payload: User[]): void {
     const list = convertList(payload, 'uid');
-    this.userState.users = list;
+    Vue.set(this.userState, 'users', list);
   }
 }
 

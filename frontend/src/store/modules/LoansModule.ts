@@ -102,11 +102,6 @@ class LoansModule extends VuexModule {
   }
 
   @Mutation
-  private setFailure(payload: any) {
-    this.loanState.failure = payload;
-  }
-
-  @Mutation
   private removeLoan(loanId: string) {
     Vue.delete(this.loanState.loans, loanId);
   }

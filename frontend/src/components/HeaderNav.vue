@@ -71,12 +71,5 @@ export default class HeaderNav extends Vue {
     .link
         color: white
         font-decoration: none
-
-    .base
-        position: absolute
-        z-index: 1000
-        left: 0px
-        right: 0px
-
 </style>
 
