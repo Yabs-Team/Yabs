@@ -55,5 +55,6 @@ jobs:
       run: |
         cd frontend
         yarn add newman
-        node_modules/newman/bin/newman.js run frontend/Yabs.postman_collection.json
+        ls *.json
+        node_modules/newman/bin/newman.js run Yabs.postman_collection.json
 
