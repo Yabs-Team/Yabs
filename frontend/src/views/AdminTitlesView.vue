@@ -1,24 +1,37 @@
 <template>
   <div>
     <h1 class="display-2">Titles</h1>
-    <TitelFormComponent />
-    <RecentTitel />
+    <div class="flex">
+      <div style="margin-right: 50px">
+        <TitleFormComponent />
+      </div>
+      <div>
+        <TitleListComponent />
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import TitelFormComponent from '@/components/TitelFormComponent.vue';
-import RecentTitel from '@/components/RecentTitel.vue';
+import TitleFormComponent from '@/components/TitleFormComponent.vue';
+import TitleListComponent from '@/components/TitleListComponent.vue';
 
 @Component({
   components: {
-    TitelFormComponent,
-    RecentTitel
+    TitleFormComponent,
+    TitleListComponent
   }
 })
 export default class AdminTitlesView extends Vue {}
 </script>
 
 <style scoped>
+.flex {
+  display: flex;
+}
+
+.flex > div {
+  flex: 1;
+}
 </style>

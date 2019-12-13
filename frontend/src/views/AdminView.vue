@@ -2,7 +2,7 @@
   <div class="main-container">
     <div class="left">
       <v-card
-        elevation="12"
+        elevation="6"
         width="256"
       >
         <v-navigation-drawer
@@ -33,9 +33,11 @@
       </v-card>
     </div>
     <div class="right">
-      <v-content>
-        <router-view />
-      </v-content>
+      <v-card elevation="6" class="pa-10">
+        <v-content>
+          <router-view />
+        </v-content>
+      </v-card>
     </div>
   </div>
 </template>
