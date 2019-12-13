@@ -13,7 +13,7 @@ import TitlesModule from '../store/modules/TitlesModule';
 import { VuexModule } from 'vuex-module-decorators';
 
 @Component
-export default class RecentTitel extends Vue {
+export default class TitleListComponent extends Vue {
   private titlesModule: VuexModule = TitlesModule;
   private headers: object[] = [
     { text: 'Titel', value: 'name', sortable: false },

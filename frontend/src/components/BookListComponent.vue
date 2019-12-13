@@ -13,7 +13,7 @@ import BooksModule from '../store/modules/BooksModule';
 import { VuexModule } from 'vuex-module-decorators';
 
 @Component
-export default class RecentTitel extends Vue {
+export default class BookListComponent extends Vue {
   private booksModule: VuexModule = BooksModule;
   public headers: object[] = [
     { text: 'Titel', value: 'title.name', sortable: false },

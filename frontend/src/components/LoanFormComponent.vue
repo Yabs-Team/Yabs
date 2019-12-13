@@ -5,7 +5,6 @@
       @submit="onSubmit"
       @reset="onReset"
     >
-      <v-card bg-variant="light">
         <v-item-group
           vertical=""
           label-class="text-sm-right"
@@ -14,7 +13,8 @@
           <v-text-field
             id="nestedUid"
             v-model="form.loaned_by_id"
-            placeholder="Elevens Streckkod"
+            label="Elevens Streckkod"
+            outlined
           />
         </v-item-group>
         <v-item-group
@@ -25,22 +25,24 @@
           <v-text-field
             id="nestedBid"
             v-model="form.book_id"
-            placeholder="Bokens Streckkod"
+            label="Bokens Streckkod"
+            outlined
           />
         </v-item-group>
         <v-btn
           type="submit"
-          variant="primary"
+          color="primary"
+          class="mr-4"
+          large
         >
           Låna Ut
         </v-btn>
         <v-btn
           type="reset"
-          variant="danger"
+          large
         >
           Rensa Fälten
         </v-btn>
-      </v-card>
     </v-form>
   </div>
 </template>
@@ -57,7 +59,7 @@ interface Form {
 }
 
 @Component
-export default class LoaningForm extends Vue {
+export default class LoanFormComponent extends Vue {
   public form: Form = {
     lent_by_id: '',
     loaned_by_id: '',
@@ -67,7 +69,7 @@ export default class LoaningForm extends Vue {
 
   public onSubmit(evt: Event) {
     evt.preventDefault();
-    this.form.lent_by_id = UsersModule.currentUser ? UsersModule.currentUser.uid : '';
+    this.form.lent_by_id = UsersModule.currentUser || '';
     if (!!this.form.lent_by_id && !!this.form.loaned_by_id && !!this.form.book_id) {
       LoansModule.create(this.form)
         .then((loan: any) => this.$emit('loan-added', loan))

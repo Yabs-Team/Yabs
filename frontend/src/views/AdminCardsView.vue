@@ -1,19 +1,25 @@
 <template>
   <div>
     <h1 class="display-2">Cards</h1>
-    <CigForm @sendImages="onSendImages($event)" />  
-    <CanvasContainer :images="images" />
+    <div class="flex">
+      <div style="margin-right: 50px">
+        <CardFormComponent @sendImages="onSendImages($event)" />  
+      </div>
+      <div>
+        <CanvasContainer :images="images" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import CigForm from '@/components/CigForm.vue';
+import CardFormComponent from '@/components/CardFormComponent.vue';
 import CanvasContainer from '@/components/CanvasContainer.vue';
 
 @Component({
   components: {
-    CigForm,
+    CardFormComponent,
     CanvasContainer
   }
 })
@@ -30,4 +36,11 @@ export default class AdminCardsViews extends Vue {
 
 
 <style scoped>
+.flex {
+  display: flex;
+}
+
+.flex > div {
+  flex: 1;
+}
 </style>

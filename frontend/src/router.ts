@@ -22,7 +22,7 @@ export default new Router({
       name: 'admin',
       component: views.AdminView,
       children: [
-        {path: '', component: views.AdminIndexView},
+        {path: '', component: views.AdminDashboardView},
         {path: 'loans', component: views.AdminLoansView},
         {path: 'titles', component: views.AdminTitlesView},
         {path: 'books', component: views.AdminBooksView},

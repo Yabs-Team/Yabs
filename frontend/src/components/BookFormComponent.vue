@@ -47,7 +47,7 @@ import BooksModule from '../store/modules/BooksModule';
 import { VuexModule } from 'vuex-module-decorators';
 
 @Component
-export default class CreateBookFormComponent extends Vue {
+export default class BookFormComponent extends Vue {
   private form: {} = {
     barcode: '',
     title_id: 0,

@@ -32,6 +32,10 @@ class LoansModule extends VuexModule {
     return this.loanState.loans;
   }
 
+  get allAsArray() {
+    return Object.keys(this.loanState.loans).map( (id) => this.loanState.loans[parseInt(id)]);
+  }
+
   @Action({rawError: true})
   public fetchAll() {
     return new Promise((resolve, reject) => {

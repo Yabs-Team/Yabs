@@ -3,7 +3,7 @@
     <v-btn @click="getAllCanvases">
       Ladda ned alla kort
     </v-btn>
-    <div class="card">
+    <div class="cig-card">
       <div class="grid-container">
         <CigCanvas
           v-for="(image, index) in images"
@@ -71,7 +71,8 @@ export default class CanvasContainer extends Vue {
         height: 100%
         width: 100%
 
-    .card
+    .cig-card
+        margin-top: 20px
         width: 100%
         height: 100%
         overflow-y: auto

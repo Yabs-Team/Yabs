@@ -70,20 +70,14 @@
     <div id="right">
       <h5>Böcker som ska inlämnas snart:</h5>
       <br>
-      <LoadingIcon v-show="loading" />
-      <div
-        v-show="!loading"
-        class="myCard"
-      >
-        <RecentLoan @loans-loaded="onLoaded" />
-      </div>
+      <LoanListComponent />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import RecentLoan from '@/components/RecentLoan.vue';
+import LoanListComponent from '@/components/LoanListComponent.vue';
 import LoadingIcon from '@/components/LoadingIcon.vue';
 import UsersModule from '../store/modules/UsersModule';
 import TitlesModule from '../store/modules/TitlesModule';
@@ -92,7 +86,7 @@ import BooksModule from '../store/modules/BooksModule';
 
 @Component({
   components: {
-    RecentLoan,
+    LoanListComponent,
     LoadingIcon,
   },
 })
@@ -101,11 +95,9 @@ export default class Start extends Vue {
   public primary: string = 'primary';
   public loading: boolean = true;
 
-  public onLoaded() {
-    this.loading = false;
-  }
   public created() {
     UsersModule.fetchAll();
+    LoansModule.fetchAll();
   }
 }
 </script>
