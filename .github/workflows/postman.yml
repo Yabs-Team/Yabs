@@ -6,6 +6,8 @@ jobs:
   newman:
   
     runs-on: ubuntu-lastest
+
+    steps:
     - uses: actions/checkout@v1
     - name: Checkout develop
       run: git checkout develop
