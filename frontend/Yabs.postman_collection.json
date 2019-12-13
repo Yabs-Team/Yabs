@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "45b7949a-c6af-4049-b903-e1e7149459d2",
+		"name": "Yabs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/api/v1/users/1942307407",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uid\": 1,\n    \"name\": \"David Svartingsson\",\n    \"email\": \"David.svartingsson@gmail.com\",\n    \"klass\": \"TE4\",\n    \"role\": \"Elev\",\n    \"google_token\": \"105943592676842307407\",\n    \"photo_path\": \"/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBFZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4bd592d9f5598bdcb3994366256aceff650410f6/Screenshot%202019-12-03%20at%2019.03.27.png?disposition=inline\",\n    \"created_at\": \"2019-12-10T12:52:46.761Z\",\n    \"updated_at\": \"2019-12-10T14:42:11.753Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/1942307407",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"1942307407"
+					]
+				},
+				"description": "This is the request for getting me as a user ( single user )"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/v1/loans/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uid\": 1,\n    \"name\": \"David Svartingsson\",\n    \"email\": \"David.svartingsson@gmail.com\",\n    \"klass\": \"TE4\",\n    \"role\": \"Elev\",\n    \"google_token\": \"105943592676842307407\",\n    \"photo_path\": \"/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBFZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4bd592d9f5598bdcb3994366256aceff650410f6/Screenshot%202019-12-03%20at%2019.03.27.png?disposition=inline\",\n    \"created_at\": \"2019-12-10T12:52:46.761Z\",\n    \"updated_at\": \"2019-12-10T14:42:11.753Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/loans/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"loans",
+						"1"
+					]
+				},
+				"description": "This is the request for getting one single loan"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

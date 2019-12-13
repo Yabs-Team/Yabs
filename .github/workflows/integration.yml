@@ -1,8 +1,8 @@
 name: Integration
 
-on:
-  schedule:
-  - cron: "0 0 * * *"
+on: push
+#  schedule:
+#  - cron: "0 0 * * *"
 
 jobs:
   cc:
@@ -90,3 +90,55 @@ jobs:
         cd tests
         bundle install
         bundle exec cucumber
+  newman:
+    runs-on: ubuntu-lastest
+
+    - uses: actions/checkout@v1
+    - name: Checkout develop
+      run: git checkout develop
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Build frontend
+      run: |
+        cd frontend
+        yarn install
+        yarn build
+    - uses: actions/cache@v1
+      id: cache
+      with:
+        path: ~/local/rubies
+        key: ${{ runner.os }}-ruby-2.6.3
+    - uses: clupprich/ruby-build-action@master
+      id: ruby
+      with:
+        ruby-version: 2.6.3
+        cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
+    - uses: actions/cache@v1
+      with:
+        path: backend/vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+    - name: Bundle install
+      run: |
+        cd backend
+        gem install bundler:2.0.2
+        sudo apt-get -yqq install libsqlite3-dev
+        bundle install --jobs=4 --retry=3 --path vendor/bundle
+    - name: Load database from schema
+      run: |
+        cd backend
+        bundle exec bin/rails db:schema:load
+    - name: Run rails backend
+      env:
+        RAILS_ENV: test
+      run: |
+        cd backend
+        bundle exec bin/rails s &
+    - name: Run newman tests
+      run: |
+        cd frontend
+        yarn add newman
+        node_modules/newman/bin/newman.js run Yabs.postman_collection.json
+
