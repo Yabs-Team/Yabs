@@ -1,5 +1,7 @@
 ## What issue did you implement or fix?
-Fixed #1
+Fixes #1
+Closes #1
+Resolves #1
 
 ## Summary
 - Fixed foobar in zoobar.
