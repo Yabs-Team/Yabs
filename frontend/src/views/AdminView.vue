@@ -24,7 +24,7 @@
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                  <v-list-item-title :data-cy="item.title" >{{ item.title }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </router-link>
@@ -33,7 +33,10 @@
       </v-card>
     </div>
     <div class="right">
-      <v-card elevation="6" class="pa-10">
+      <v-card
+        elevation="6"
+        class="pa-10"
+      >
         <v-content>
           <router-view />
         </v-content>

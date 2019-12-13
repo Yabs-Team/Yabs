@@ -18,7 +18,6 @@ export default {
 
   },
   async create(request: any) {
-
     try {
       const response = await axios.post('http://localhost:3000/api/v1/loans', request,
         {headers, withCredentials: true});

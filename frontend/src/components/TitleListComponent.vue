@@ -1,10 +1,10 @@
 <template>
-    <v-data-table
-      :headers="headers"
-      :items="titlesModule.allAsArray"
-      :items-per-page="5"
-      class="elevation-1"
-    />
+  <v-data-table
+    :headers="headers"
+    :items="titlesModule.allAsArray"
+    :items-per-page="5"
+    class="elevation-1"
+  />
 </template>
 
 <script lang="ts">
@@ -20,7 +20,7 @@ export default class TitleListComponent extends Vue {
     { text: 'Kostnad', value: 'cost', sortable: false },
     { text: 'Typ', values: 'title_type', sortable: false },
     { text: 'ISBN', values: 'isbn', sortable: false },
-  ]
+  ];
 }
 </script>
 

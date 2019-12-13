@@ -1,20 +1,20 @@
 <template>
   <div>
-      <v-file-input
-        id="file"
-        class="input-file"
-        multiple
-        outlined
-        accept="image/*, .zip"
-        @change="onFileSelect"
-      />
-      <v-btn
-        color="primary"
-        @click="submit"
-        large
-      >
-        Lägg till
-      </v-btn>
+    <v-file-input
+      id="file"
+      class="input-file"
+      multiple
+      outlined
+      accept="image/*, .zip"
+      @change="onFileSelect"
+    />
+    <v-btn
+      color="primary"
+      large
+      @click="submit"
+    >
+      Lägg till
+    </v-btn>
   </div>
 </template>
 

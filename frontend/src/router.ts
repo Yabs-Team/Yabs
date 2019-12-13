@@ -34,6 +34,6 @@ export default new Router({
       path: '/find',
       name: 'find',
       component: views.Find,
-    },
+    }
   ],
 });

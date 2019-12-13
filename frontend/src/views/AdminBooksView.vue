@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="display-2">Books</h1>
+    <h1 class="display-2">
+      Books
+    </h1>
     <div class="flex">
       <div style="margin-right: 50px">
         <BookFormComponent />
@@ -14,7 +16,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import BooksModule from "../store/modules/BooksModule";
+import BooksModule from '../store/modules/BooksModule';
 import BookFormComponent from '@/components/BookFormComponent.vue';
 import BookListComponent from '@/components/BookListComponent.vue';
 import TitlesModule from '../store/modules/TitlesModule';

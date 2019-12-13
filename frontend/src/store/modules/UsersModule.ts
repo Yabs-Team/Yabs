@@ -50,11 +50,11 @@ class UsersModule extends VuexModule {
     return new Promise((resolve, reject) => {
       UsersAPI.all()
         .then((response: User[]) => {
+          console.log(response);
           this.convertUserList(response);
           resolve();
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -70,7 +70,6 @@ class UsersModule extends VuexModule {
           resolve(response);
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -85,7 +84,6 @@ class UsersModule extends VuexModule {
           resolve(response);
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -100,7 +98,6 @@ class UsersModule extends VuexModule {
           resolve(response);
         })
         .catch((error: any) => {
-          this.setFailure(error);
           reject(error);
         });
     });
@@ -114,6 +111,11 @@ class UsersModule extends VuexModule {
   @Mutation
   public setCurrentUser(payload: any): void {
     Vue.set(this.userState, 'currentUser', payload.uid);
+  }
+
+  @Mutation
+  public setFailure(payload: any): void {
+    // This should fix end to end tests(yarn build)
   }
 
   @Mutation

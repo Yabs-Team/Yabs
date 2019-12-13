@@ -38,6 +38,7 @@
               class="row-btn"
               :size="size"
               :color="primary"
+              data-cy="addPage"
             >
               Admin
             </v-btn>

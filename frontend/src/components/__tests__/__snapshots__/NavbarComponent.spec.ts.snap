@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HeaderNav.vue renders correctly 1`] = `
+exports[`NavbarComponent.vue renders correctly 1`] = `
 <div class="base">
   <b-navbar-stub tag="nav" type="dark" variant="primary" toggleable="true">
     <b-navbar-toggle-stub label="Toggle navigation" target="nav_dropdown_collapse"></b-navbar-toggle-stub>

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="display-2">Titles</h1>
+    <h1 class="display-2">
+      Titles
+    </h1>
     <div class="flex">
       <div style="margin-right: 50px">
         <TitleFormComponent />
@@ -14,7 +16,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import TitlesModule from "../store/modules/TitlesModule";
+import TitlesModule from '../store/modules/TitlesModule';
 import TitleFormComponent from '@/components/TitleFormComponent.vue';
 import TitleListComponent from '@/components/TitleListComponent.vue';
 

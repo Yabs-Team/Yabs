@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="display-2">Cards</h1>
+    <h1 class="display-2">
+      Cards
+    </h1>
     <div class="flex">
       <div style="margin-right: 50px">
         <CardFormComponent @sendImages="onSendImages($event)" />  

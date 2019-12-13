@@ -1,6 +1,8 @@
 <template>
   <div class="view">
-    <h1 class="display-2">Dashboard</h1>
+    <h1 class="display-2">
+      Dashboard
+    </h1>
   </div>
 </template>
 

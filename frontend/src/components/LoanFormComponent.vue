@@ -16,6 +16,31 @@
             label="Elevens Streckkod"
             outlined
           />
+          <v-item-group
+            vertical=""
+            label-class="text-sm-right"
+            label-for="nestedBid"
+          >
+            <v-text-field
+              id="nestedBid"
+              v-model="form.book_id"
+              data-cy="book_barcode"
+              placeholder="Bokens Streckkod"
+            />
+          </v-item-group>
+          <v-btn
+            data-cy="loanOutBook"
+            type="submit"
+            variant="primary"
+          >
+            Låna Ut
+          </v-btn>
+          <v-btn
+            type="reset"
+            variant="danger"
+          >
+            Rensa Fälten
+          </v-btn>
         </v-item-group>
         <v-item-group
           vertical=""
@@ -53,9 +78,9 @@ import LoansModule from '../store/modules/LoansModule';
 import UsersModule from '../store/modules/UsersModule';
 
 interface Form {
-  lent_by_id: any;
-  loaned_by_id: '';
-  book_id: '';
+  lent_by_id: number | string;
+  loaned_by_id: number | string;
+  book_id: number | string;
 }
 
 @Component
@@ -63,7 +88,7 @@ export default class LoanFormComponent extends Vue {
   public form: Form = {
     lent_by_id: '',
     loaned_by_id: '',
-    book_id: '',
+    book_id: ''
   };
   public show: boolean = true;
 

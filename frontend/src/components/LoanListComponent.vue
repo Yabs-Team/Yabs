@@ -1,10 +1,10 @@
 <template>
-    <v-data-table
-      :headers="headers"
-      :items="loansModule.allAsArray"
-      :items-per-page="5"
-      class="elevation-1"
-    />
+  <v-data-table
+    :headers="headers"
+    :items="loansModule.allAsArray"
+    :items-per-page="5"
+    class="elevation-1"
+  />
 </template>
 
 <script lang="ts">
