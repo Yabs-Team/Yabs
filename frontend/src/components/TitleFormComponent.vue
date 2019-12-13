@@ -56,7 +56,6 @@
       </v-btn>
       <v-btn
         type="reset"
-        color="error"
         large
       >
         Rensa Fältet

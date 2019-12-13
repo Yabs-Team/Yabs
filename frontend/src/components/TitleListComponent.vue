@@ -1,6 +1,6 @@
 <template>
     <v-data-table
-      :headers="fields"
+      :headers="headers"
       :items="titlesModule.allAsArray"
       :items-per-page="5"
       class="elevation-1"
@@ -15,16 +15,12 @@ import { VuexModule } from 'vuex-module-decorators';
 @Component
 export default class RecentTitel extends Vue {
   private titlesModule: VuexModule = TitlesModule;
-  private fields: object[] = [
+  private headers: object[] = [
     { text: 'Titel', value: 'name', sortable: false },
     { text: 'Kostnad', value: 'cost', sortable: false },
     { text: 'Typ', values: 'title_type', sortable: false },
     { text: 'ISBN', values: 'isbn', sortable: false },
   ]
-
-  private created() {
-    TitlesModule.fetchAll();
-  }
 }
 </script>
 

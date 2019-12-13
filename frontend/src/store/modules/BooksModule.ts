@@ -11,7 +11,7 @@ interface BookState {
 }
 
 interface BookCollection {
-  [id: number]: Book;
+  [id: string]: Book;
 }
 interface Book {
   barcode: number;
@@ -28,6 +28,10 @@ class BooksModule extends VuexModule {
 
   get all() {
     return this.bookState.books;
+  }
+
+  get allAsArray() {
+    return Object.keys(this.bookState.books).map((id) => this.bookState.books[id]);
   }
 
   @Action({rawError: true})

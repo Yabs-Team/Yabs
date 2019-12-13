@@ -1,24 +1,44 @@
 <template>
   <div>
     <h1 class="display-2">Books</h1>
-    <CreateBookFormComponent />
-    <RecentBook />
+    <div class="flex">
+      <div style="margin-right: 50px">
+        <BookFormComponent />
+      </div>
+      <div>
+        <BookListComponent />
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import CreateBookFormComponent from '@/components/CreateBookFormComponent.vue';
-import RecentBook from '@/components/RecentBook.vue';
+import BooksModule from "../store/modules/BooksModule";
+import BookFormComponent from '@/components/BookFormComponent.vue';
+import BookListComponent from '@/components/BookListComponent.vue';
+import TitlesModule from '../store/modules/TitlesModule';
 
 @Component({
   components: {
-    CreateBookFormComponent,
-    RecentBook
+    BookFormComponent,
+    BookListComponent
   }
 })
-export default class AdminBooksView extends Vue {}
+export default class AdminBooksView extends Vue {
+  private created() {
+    BooksModule.fetchAll();
+    TitlesModule.fetchAll();
+  }
+}
 </script>
 
 <style scoped>
+.flex {
+  display: flex;
+}
+
+.flex > div {
+  flex: 1;
+}
 </style>
