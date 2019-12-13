@@ -2,7 +2,9 @@
   <v-app>
     <HeaderNav />
     <main>
-      <router-view />
+      <v-content>
+        <router-view />
+      </v-content>
     </main>
   </v-app>
 </template>

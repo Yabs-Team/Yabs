@@ -33,7 +33,9 @@
       </v-card>
     </div>
     <div class="right">
-      <router-view />
+      <v-content>
+        <router-view />
+      </v-content>
     </div>
   </div>
 </template>
