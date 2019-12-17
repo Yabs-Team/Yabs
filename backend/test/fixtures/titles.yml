@@ -6,7 +6,7 @@ title_1:
   cost: 70
   title_type: Skönlitteratur
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.542650000 Z
+    utc: &1 2019-12-17 13:17:53.058027000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -22,7 +22,7 @@ title_3:
   cost: 300
   title_type: Kurslitteratur
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.550442000 Z
+    utc: &1 2019-12-17 13:17:53.065793000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -38,7 +38,7 @@ title_2:
   cost: 100
   title_type: Skönlitteratur
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.546593000 Z
+    utc: &1 2019-12-17 13:17:53.062085000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -54,7 +54,7 @@ title_4:
   cost: 60
   title_type: Kurslitteratur
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.554716000 Z
+    utc: &1 2019-12-17 13:17:53.069868000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1

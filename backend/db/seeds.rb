@@ -52,6 +52,19 @@ Book.create(barcode: "5006", status: "OK", title: title_cc).dump_fixture
 Book.create(barcode: "5007", status: "OK", title: title_tomtens_jul).dump_fixture
 Book.create(barcode: "5008", status: "OK", title: title_tomtens_jul).dump_fixture
 
+# Create subjects
+p_sub = Subject.create(name: "Programming")
+s_sub = Subject.create(name: "Swedish")
+e_sub = Subject.create(name: "English")
+
+p_user = User.find_by_name("Daniel Berg")
+s_user = User.find_by_name("Jimmy Löfgren")
+e_user = s_user
+
+SubjectsUser.create(user_id: p_user.uid, subject_id: p_sub.id)
+SubjectsUser.create(user_id: s_user.uid, subject_id: s_sub.id)
+SubjectsUser.create(user_id: e_user.uid, subject_id: e_sub.id)
+
 # Create fixtures
 loan_alice.dump_fixture(append=false)
 loan_alice.lent_by.dump_fixture(append=false)

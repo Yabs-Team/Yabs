@@ -4,7 +4,7 @@ book_5000:
   barcode: '5000'
   status: OK
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.569538000 Z
+    utc: &1 2019-12-17 13:17:53.083174000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -18,7 +18,7 @@ book_5002:
   barcode: '5002'
   status: Broken
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.608449000 Z
+    utc: &1 2019-12-17 13:17:53.122759000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -32,7 +32,7 @@ book_5003:
   barcode: '5003'
   status: OK
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.613301000 Z
+    utc: &1 2019-12-17 13:17:53.126923000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -46,7 +46,7 @@ book_5004:
   barcode: '5004'
   status: OK
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.625422000 Z
+    utc: &1 2019-12-17 13:17:53.131365000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -60,7 +60,7 @@ book_5005:
   barcode: '5005'
   status: Broken
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.629224000 Z
+    utc: &1 2019-12-17 13:17:53.135317000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -74,7 +74,7 @@ book_5006:
   barcode: '5006'
   status: OK
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.632600000 Z
+    utc: &1 2019-12-17 13:17:53.139791000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -88,7 +88,7 @@ book_5007:
   barcode: '5007'
   status: OK
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.636449000 Z
+    utc: &1 2019-12-17 13:17:53.143458000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
@@ -102,7 +102,7 @@ book_5008:
   barcode: '5008'
   status: OK
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-16 13:06:17.641177000 Z
+    utc: &1 2019-12-17 13:17:53.155077000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
