@@ -47,7 +47,7 @@ class LoansModule extends VuexModule {
   }
 
   @Action({rawError: true})
-  public create(request: any) {
+  public create(request: any): Promise<Loan> {
     return new Promise((resolve, reject) => {
       LoansAPI.create(request)
         .then((response: any) => {

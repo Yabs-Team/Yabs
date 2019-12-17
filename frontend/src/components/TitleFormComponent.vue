@@ -14,6 +14,7 @@
         v-model="form.name"
         label="Namn"
         outlined
+        data-cy="name"
       />
     </v-item-group>
     <v-item-group
@@ -26,6 +27,7 @@
         v-model="form.cost"
         label="Kostnad"
         outlined
+        data-cy="cost"
       />
     </v-item-group>
     <v-item-group
@@ -38,6 +40,7 @@
         v-model="form.isbn"
         label="isbn"
         outlined
+        data-cy="isbn"
       />
     </v-item-group>
     <v-select
@@ -45,18 +48,21 @@
       :items="options"
       label="Välj typ av titel"
       outlined
+      data-cy="titleType"
     />
     <v-btn
       type="submit"
       color="primary"
       class="mr-4"
       large
+      data-cy="submit"
     >
       Lägg till
     </v-btn>
     <v-btn
       type="reset"
       large
+      data-cy="reset"
     >
       Rensa Fältet
     </v-btn>

@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2019_12_17_130204) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -78,6 +79,11 @@ ActiveRecord::Schema.define(version: 2019_12_17_130204) do
     t.string "title_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
+    t.string "authors"
+    t.string "cover"
+    t.decimal "page_count"
+    t.string "published_date"
   end
 
   create_table "users", id: false, force: :cascade do |t|

@@ -1,5 +1,5 @@
 <template>
-  <v-data-table
+  <ListComponent
     :headers="headers"
     :items="titlesModule.allAsArray"
     :items-per-page="5"
@@ -11,8 +11,13 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import TitlesModule from '../store/modules/TitlesModule';
 import { VuexModule } from 'vuex-module-decorators';
+import ListComponent from '@/components/ListComponent.vue';
 
-@Component
+@Component({
+  components: {
+    ListComponent
+  }
+})
 export default class TitleListComponent extends Vue {
   private titlesModule: VuexModule = TitlesModule;
   private headers: object[] = [

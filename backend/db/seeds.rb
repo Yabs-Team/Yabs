@@ -7,13 +7,23 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Import Users
+require 'google_books'
 ActiveSupport.on_load(:active_job) do
     ActiveJob::Base.queue_adapter = Rails.application.config.active_job.queue_adapter
 end
 DataFetchJob.perform_now
 
+alice_google = GoogleBooks::API.search('isbn:0763645680').first
 # Create titles of both book types
-title_alice = Title.create(name: "Alice in Wonderland", isbn: "97161949222", cost: 70, title_type: "Skönlitteratur")
+title_alice = Title.create(name: "Alice in Wonderland", isbn: "0763645680", 
+    cost: 70, 
+    title_type: "Skönlitteratur",
+    description: alice_google.description,
+    authors: alice_google.authors.to_s,
+    cover: alice_google.covers[:large],
+    page_count: alice_google.page_count,
+    published_date: alice_google.published_date
+)
 title_lotr = Title.create(name: "The Fellowship of the Ring", isbn: "9780547928210", cost: 100, title_type: "Skönlitteratur")
 
 title_cc = Title.create(name: "Clean Code", isbn: "9780132350884", cost: 300, title_type: "Kurslitteratur")

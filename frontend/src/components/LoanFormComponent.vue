@@ -12,6 +12,7 @@
       >
         <v-text-field
           id="nestedUid"
+          data-cy="student_barcode"
           v-model="form.loaned_by_id"
           label="Elevens Streckkod"
           outlined
@@ -25,11 +26,13 @@
         <v-text-field
           id="nestedBid"
           v-model="form.book_id"
+          data-cy="book_barcode"
           label="Bokens Streckkod"
           outlined
         />
       </v-item-group>
       <v-btn
+        data-cy="loanOutBook"
         type="submit"
         color="primary"
         class="mr-4"
@@ -49,7 +52,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import LoansModule from '../store/modules/LoansModule';
+import LoansModule, { Loan } from '../store/modules/LoansModule';
 import UsersModule from '../store/modules/UsersModule';
 
 interface Form {
@@ -67,17 +70,17 @@ export default class LoanFormComponent extends Vue {
   };
   public show: boolean = true;
 
-  public onSubmit(evt: Event) {
+  public onSubmit(evt: Event): void {
     evt.preventDefault();
     this.form.lent_by_id = UsersModule.currentUserID;
     if (!!this.form.lent_by_id && !!this.form.loaned_by_id && !!this.form.book_id) {
       LoansModule.create(this.form)
-        .then((loan: any) => this.$emit('loan-added', loan))
-        .catch((failure: any) => console.log(failure));
+        .then((payload: Loan) => this.$emit('loan-added', payload))
+        .catch((failure: boolean) => console.log(failure));
     }
   }
 
-  public onReset(evt: Event) {
+  public onReset(evt: Event): void {
     evt.preventDefault();
     this.form.loaned_by_id = '';
     this.form.book_id = '';

@@ -4,10 +4,9 @@ import {
   VueClass,
   Wrapper,
   ThisTypedMountOptions,
-  createLocalVue,
 } from '@vue/test-utils';
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue';
+import Vuetify from 'vuetify';
 import Vuex from 'vuex';
 import {cloneDeep} from 'lodash';
 import users from '@/store/modules/UsersModule';
@@ -17,10 +16,9 @@ export function factory<V extends Vue>(
   options?: ThisTypedMountOptions<V>,
   mountFunc: any = mount,
 ): Wrapper<V> {
-  const localVue = createLocalVue();
 
-  localVue.use(BootstrapVue);
-  localVue.use(Vuex);
+  Vue.use(Vuetify);
+  Vue.use(Vuex);
 
   const storeConfig = {
     modules: {
@@ -31,7 +29,6 @@ export function factory<V extends Vue>(
   const store = new Vuex.Store(cloneDeep(storeConfig));
 
   return mountFunc(component, {
-    localVue,
     store,
     ...options,
   });

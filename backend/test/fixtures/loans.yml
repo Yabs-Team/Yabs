@@ -6,6 +6,7 @@ loan_1:
   book_id: '5000'
   returned_at: 
   created_at: !ruby/object:ActiveSupport::TimeWithZone
+
     utc: &1 2019-12-17 13:17:53.108537000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC

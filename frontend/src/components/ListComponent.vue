@@ -13,6 +13,7 @@
       :headers="headers"
       :items="items"
       :search="search"
+      :items-per-page="itemsPerPage"
     >
       <template
         v-if="useActions"
@@ -40,15 +41,16 @@ interface IHeader {
 }
 
 @Component({})
-export default class SearchListComponent extends Vue {
+export default class ListComponent extends Vue {
   public search: string = '';
   @Prop() public headers!: IHeader[];
   @Prop() public items!: any[]; // Please fix generic types.
-  @Prop() public useActions: boolean = false;
+  @Prop({ default: false }) public useActions!: boolean;
   @Prop() public routePath!: string;
+  @Prop({ default: 10 }) public itemsPerPage!: number;
 
   // Adds the header "Actions" if useActions is true.
-  created() {
+  created(): void {
     if(this.useActions && !this.contains(this.headers, 'Actions') ) {
       this.headers.push({ text: 'Actions', value: 'action', sortable: false });
     }

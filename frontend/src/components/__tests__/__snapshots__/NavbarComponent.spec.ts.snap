@@ -1,35 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavbarComponent.vue renders correctly 1`] = `
-<div class="base">
-  <b-navbar-stub tag="nav" type="dark" variant="primary" toggleable="true">
-    <b-navbar-toggle-stub label="Toggle navigation" target="nav_dropdown_collapse"></b-navbar-toggle-stub>
-    <b-collapse-stub id="nav_dropdown_collapse" isnav="true" tag="div">
-      <b-navbar-nav-stub tag="ul">
-        <b-nav-item-stub target="_self" event="click" routertag="a">
-          <router-link-stub to="/" class="link">
-            Start
-          </router-link-stub>
-        </b-nav-item-stub>
-        <b-nav-item-stub target="_self" event="click" routertag="a">
-          <router-link-stub to="/users/undefined" class="link">
-            Profil
-          </router-link-stub>
-        </b-nav-item-stub>
-        <b-nav-item-stub target="_self" event="click" routertag="a">
-          <router-link-stub to="/add" class="link">
-            Lägg till
-          </router-link-stub>
-        </b-nav-item-stub>
-        <b-nav-item-stub target="_self" event="click" routertag="a">
-          <router-link-stub to="/find" class="link">
-            Hitta
-          </router-link-stub>
-        </b-nav-item-stub>
-      </b-navbar-nav-stub>
-    </b-collapse-stub>
-    <b-navbar-brand-stub target="_self" event="click" routertag="a" tag="div">Yabs</b-navbar-brand-stub>
-    <googlelogin-stub></googlelogin-stub>
-  </b-navbar-stub>
+<div class="pb-10">
+  <v-app-bar-stub tag="header" tile="true" extensionheight="48" src="" value="true" fixed="true" class="nav">
+    <v-toolbar-items-stub>
+      <v-btn-stub tag="button" activeclass="" to="/" text="true" type="button">
+        <v-icon-stub class="px-3">
+          mdi-home
+        </v-icon-stub>Yabs
+      </v-btn-stub>
+    </v-toolbar-items-stub>
+    <v-spacer-stub></v-spacer-stub>
+    <v-toolbar-items-stub>
+      <googlelogin-stub></googlelogin-stub>
+    </v-toolbar-items-stub>
+  </v-app-bar-stub>
 </div>
 `;

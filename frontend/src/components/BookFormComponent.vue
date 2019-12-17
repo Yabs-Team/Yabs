@@ -6,6 +6,7 @@
       autocomplete="off"
       required
       outlined
+      data-cy="barcode"
     />
     <v-autocomplete    
       v-model="form.title_id"
@@ -15,6 +16,7 @@
       label="Välj titel"
       autocomplete="off"
       outlined
+      data-cy="chooseTitle"
     />
     <v-text-field
       v-model="form.status"
@@ -22,18 +24,21 @@
       autocomplete="off"
       required
       outlined
+      data-cy="status"
     />
     <v-btn
       class="mr-4"
       type="submit"
       color="primary"
       large
+      data-cy="addBook"
     >
       Lägg till
     </v-btn>
     <v-btn
       large
       @click.prevent="onReset"
+      data-cy="reset"
     >
       Rensa fält
     </v-btn>

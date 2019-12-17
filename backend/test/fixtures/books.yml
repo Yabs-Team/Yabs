@@ -4,6 +4,7 @@ book_5000:
   barcode: '5000'
   status: OK
   created_at: !ruby/object:ActiveSupport::TimeWithZone
+
     utc: &1 2019-12-17 13:17:53.083174000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
@@ -46,6 +47,7 @@ book_5004:
   barcode: '5004'
   status: OK
   created_at: !ruby/object:ActiveSupport::TimeWithZone
+
     utc: &1 2019-12-17 13:17:53.131365000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
