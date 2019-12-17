@@ -21,10 +21,10 @@ import ListComponent from '@/components/ListComponent.vue';
 export default class LoanListComponent extends Vue {
   private loansModule: VuexModule = LoansModule;
   private headers: object[] = [
-    { text: 'Lånad av', key: 'loaned_by.name', sortable: false },
-    { text: 'Utlånad av', key: 'lent_by.name', sortable: false },
-    { text: 'Boktitel', key: 'book.title.name', sortable: false },
-    { text: 'Utgångsdatum', key: 'expiration_date', sortable: false },
+    { text: 'Lånad av', value: 'loaned_by.name', sortable: false },
+    { text: 'Utlånad av', value: 'lent_by.name', sortable: false },
+    { text: 'Boktitel', value: 'book.title.name', sortable: false },
+    { text: 'Utgångsdatum', value: 'expiration_date', sortable: false },
   ];
 }
 </script>

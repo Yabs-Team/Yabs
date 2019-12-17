@@ -23,8 +23,8 @@ export default class TitleListComponent extends Vue {
   private headers: object[] = [
     { text: 'Titel', value: 'name', sortable: false },
     { text: 'Kostnad', value: 'cost', sortable: false },
-    { text: 'Typ', values: 'title_type', sortable: false },
-    { text: 'ISBN', values: 'isbn', sortable: false },
+    { text: 'Typ', value: 'title_type', sortable: false },
+    { text: 'ISBN', value: 'isbn', sortable: false },
   ];
 }
 </script>
