@@ -56,7 +56,7 @@ This Vue app is used with vue-bootstrap but we're working on switching that to V
 
 ### Backend
 
-The backend is run by using `rails s` in the console. As the command implies, it's run by using rails as a scalable and adaptable base for our booking system. This backend has four test systems that controls if the backend functions as needed. A example of these is the book_test.rb's `create new book` test which sees if they can add a new book. 
+The backend is run by using `rails s` in the console. As the command implies, it's run by using rails as a scalable and adaptable base for our booking system. This backend has four test systems that controls if the backend functions as needed. An example of these is the book_test.rb's `create new book` test which sees if they can add a new book. 
 
 To generate a database to use as the backend input `rake db:migrate` in the console, if you managed to do something wrong you can either type it again or type `rake db:rollback` to correct your mistake.
 
