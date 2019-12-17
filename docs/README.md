@@ -44,21 +44,21 @@ Code review is the process that happens after a new pull request is created and 
 Yabs or yet another booking system is a collection of tools for creating card id generation and loans of literature.
 
 ## Testing
-Our tests are written in the component and views folders. Each tests that we have made is coded to test a specific function of a component, or test what displays on the site. There are a few tests inside but most of them are not so specific as we had hoped.
+Our tests are written in the component and views folders. Each tests that we have made is coded to test a specific function of a component, or test what displays on the site. Some tests have been written, however most of them are not so specific as we had hoped.
 
 ## High Level
 
 ### Frontend
 
-The front end is built up with the Vue framework. To run it, type `yarn serve` into the console and wait for the files to load. As is common form Vue, the app is currently built by using components and putting them into views that the user renders when it reaches a certain route. The view may be rendered differently depending on the status of the user.
+The front end is built up with the Vue framework. To run it, type `yarn serve` into the console and wait for the files to load. As is common form Vue, the app is built by using components and putting them into views that the user renders when it reaches a certain route. The view may be rendered differently depending on the status of the user.
 
-This Vue app is currently used with vue-bootstrap but we're working on switching that to Vuetify. If the site goes down, that's the reason.
+This Vue app is used with vue-bootstrap but we're working on switching that to Vuetify. If the site goes down, that's the reason.
 
 ### Backend
 
-The backend is run by using `rails s` in the console. As the command implies, it's currently run by using rails as a scaleable and adapable base for our booking system. This backend has four test systems that controls if the backend functions as needed. A example of these is the book_test.rb's `create new book` test which sees if they can add a new book. 
+The backend is run by using `rails s` in the console. As the command implies, it's run by using rails as a scalable and adaptable base for our booking system. This backend has four test systems that controls if the backend functions as needed. A example of these is the book_test.rb's `create new book` test which sees if they can add a new book. 
 
-To generate a database to use as the backend input `rake db:migrate` in the console, if you managed to do something wrong you can either type it again or type `rake db:roolback` to correct your mistake.
+To generate a database to use as the backend input `rake db:migrate` in the console, if you managed to do something wrong you can either type it again or type `rake db:rollback` to correct your mistake.
 
 Detailed information can be seen in the low level documentation.
 
