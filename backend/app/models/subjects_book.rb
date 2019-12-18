@@ -1,0 +1,2 @@
+class SubjectsBook < ApplicationRecord
+end

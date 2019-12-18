@@ -54,26 +54,34 @@ title_lotr.dump_fixture
 title_tomtens_jul.dump_fixture
 
 # Create the rest of the books
-Book.create(barcode: "5002", status: "Broken", title: title_alice).dump_fixture
-Book.create(barcode: "5003", status: "OK", title: title_alice).dump_fixture
-Book.create(barcode: "5004", status: "OK", title: title_lotr).dump_fixture
-Book.create(barcode: "5005", status: "Broken", title: title_lotr).dump_fixture
-Book.create(barcode: "5006", status: "OK", title: title_cc).dump_fixture
-Book.create(barcode: "5007", status: "OK", title: title_tomtens_jul).dump_fixture
-Book.create(barcode: "5008", status: "OK", title: title_tomtens_jul).dump_fixture
 
 # Create subjects
-p_sub = Subject.create(name: "Programming")
-s_sub = Subject.create(name: "Swedish")
-e_sub = Subject.create(name: "English")
+p_sub = Subject.create(name: "Programming").dump_fixture
+s_sub = Subject.create(name: "Swedish").dump_fixture
+e_sub = Subject.create(name: "English").dump_fixture
+lib_sub = Subject.create(name: "Skönlitteratur").dump_fixture
 
 p_user = User.find_by_name("Daniel Berg")
 s_user = User.find_by_name("Jimmy Löfgren")
 e_user = s_user
+lib_user = s_user
 
-SubjectsUser.create(user_id: p_user.uid, subject_id: p_sub.id)
-SubjectsUser.create(user_id: s_user.uid, subject_id: s_sub.id)
-SubjectsUser.create(user_id: e_user.uid, subject_id: e_sub.id)
+SubjectsUser.create(user_id: p_user.uid, subject_id: p_sub.id).dump_fixture
+SubjectsUser.create(user_id: s_user.uid, subject_id: s_sub.id).dump_fixture
+SubjectsUser.create(user_id: e_user.uid, subject_id: e_sub.id).dump_fixture
+SubjectsUser.create(user_id: lib_user.uid, subject_id: lib_sub.id).dump_fixture
+
+lib_sub.books.create(barcode: "5002", status: "Broken", title: title_alice).dump_fixture
+lib_sub.books.create(barcode: "5003", status: "OK", title: title_alice).dump_fixture
+lib_sub.books.create(barcode: "5004", status: "OK", title: title_lotr).dump_fixture
+lib_sub.books.create(barcode: "5005", status: "Broken", title: title_lotr).dump_fixture
+p_sub.books.create(barcode: "5006", status: "OK", title: title_cc).dump_fixture
+e_sub.books.create(barcode: "5007", status: "OK", title: title_tomtens_jul).dump_fixture
+s_sub.books.create(barcode: "5008", status: "OK", title: title_tomtens_jul).dump_fixture
+
+p1_book = Book.find_by_barcode(5002)
+s1_book = Book.find_by_barcode(5004)
+e1_book = Book.find_by_barcode(5006)
 
 # Create fixtures
 loan_alice.dump_fixture(append=false)
