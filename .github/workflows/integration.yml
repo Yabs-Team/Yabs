@@ -3,9 +3,13 @@ name: Integration
 on:
   schedule:
   - cron: "0 0 * * *"
+  push: 
+    branches:
+      - test-for-283
 
 jobs:
   cc:
+    if: github.event_name == "schedule"
     runs-on: ubuntu-latest
 
     steps:
