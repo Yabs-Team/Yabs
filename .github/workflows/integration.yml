@@ -3,6 +3,9 @@ name: Integration
 on:
   schedule:
   - cron: "0 0 * * *"
+  push:
+    branches: 
+      - test-for-283
 
 jobs:
   cc:
