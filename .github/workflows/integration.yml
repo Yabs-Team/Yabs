@@ -6,7 +6,6 @@ on:
 
 jobs:
   cc:
-    if: github.event_name == schedule
     runs-on: ubuntu-latest
 
     steps:
