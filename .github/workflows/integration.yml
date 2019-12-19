@@ -5,10 +5,11 @@ on:
   - cron: "0 0 * * *"
   push: 
     branches:
-      - develop
+      - test-for-283
 
 jobs:
   cc:
+    if: github.event_name == "schedule"
     runs-on: ubuntu-latest
 
     steps:
