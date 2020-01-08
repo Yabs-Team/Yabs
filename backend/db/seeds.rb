@@ -42,7 +42,7 @@ loan_alice.save
 
 loan_cc = Loan.new(expiration_date: Date.current)
 loan_cc.lent_by = User.find_by_name("Låneservice Johanneberg")
-loan_cc.loaned_by = User.find(1975529089)
+loan_cc.loaned_by = User.find(2075529089)
 loan_cc.book = book_cc
 loan_cc.returned_at = Date.current
 loan_cc.save

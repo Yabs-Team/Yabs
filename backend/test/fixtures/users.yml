@@ -1,6 +1,6 @@
 
-user_1954282603:
-  uid: 1954282603
+user_2054282603:
+  uid: 2054282603
   name: Låneservice Johanneberg
   email: johanneberg.laneservice@ga.ntig.se
   klass: ej
@@ -8,17 +8,17 @@ user_1954282603:
   google_token: '101173758873354282603'
   photo_path: 
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-18 14:23:19.877422000 Z
+    utc: &1 2020-01-08 09:34:27.859230000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
   updated_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &3 2019-12-18 14:23:19.877422000 Z
+    utc: &3 2020-01-08 09:34:27.859230000 Z
     zone: *2
     time: *3
 
-user_1968097915:
-  uid: 1968097915
+user_2068097915:
+  uid: 2068097915
   name: Alex Henryz
   email: alex.henryz@elev.ga.ntig.se
   klass: TE4
@@ -26,17 +26,17 @@ user_1968097915:
   google_token: '101834530373768097915'
   photo_path: 
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-18 14:23:22.610978000 Z
+    utc: &1 2020-01-08 09:34:30.103766000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
   updated_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &3 2019-12-18 14:23:22.610978000 Z
+    utc: &3 2020-01-08 09:34:30.103766000 Z
     zone: *2
     time: *3
 
-user_1975529089:
-  uid: 1975529089
+user_2075529089:
+  uid: 2075529089
   name: Max Gustafsson
   email: max.gustafsson@elev.ga.ntig.se
   klass: 3B
@@ -44,11 +44,11 @@ user_1975529089:
   google_token: '110102009585975529089'
   photo_path: 
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-18 14:23:24.607821000 Z
+    utc: &1 2020-01-08 09:34:32.147887000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
   updated_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &3 2019-12-18 14:23:24.607821000 Z
+    utc: &3 2020-01-08 09:34:32.147887000 Z
     zone: *2
     time: *3

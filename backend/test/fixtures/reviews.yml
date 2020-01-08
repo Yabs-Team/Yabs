@@ -4,13 +4,13 @@ review_1:
   score: 3
   review: I didn't particulary like this book.
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-18 14:23:28.107291000 Z
+    utc: &1 2020-01-08 09:34:35.200003000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
   updated_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &3 2019-12-18 14:23:28.107291000 Z
+    utc: &3 2020-01-08 09:34:35.200003000 Z
     zone: *2
     time: *3
-  user_id: '1968097915'
+  user_id: '2068097915'
   title_id: 1

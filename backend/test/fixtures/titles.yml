@@ -6,12 +6,12 @@ title_1:
   cost: 70
   title_type: Skönlitteratur
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-18 14:23:28.016944000 Z
+    utc: &1 2020-01-08 09:34:35.134203000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
   updated_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &3 2019-12-18 14:23:28.016944000 Z
+    utc: &3 2020-01-08 09:34:35.134203000 Z
     zone: *2
     time: *3
   description: A little girl falls down a rabbit hole and discovers a world of nonsensical
@@ -28,12 +28,12 @@ title_2:
   cost: 100
   title_type: Skönlitteratur
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-18 14:23:28.021793000 Z
+    utc: &1 2020-01-08 09:34:35.140421000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
   updated_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &3 2019-12-18 14:23:28.021793000 Z
+    utc: &3 2020-01-08 09:34:35.140421000 Z
     zone: *2
     time: *3
   description: 
@@ -49,12 +49,12 @@ title_3:
   cost: 300
   title_type: Kurslitteratur
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-18 14:23:28.028753000 Z
+    utc: &1 2020-01-08 09:34:35.145128000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
   updated_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &3 2019-12-18 14:23:28.028753000 Z
+    utc: &3 2020-01-08 09:34:35.145128000 Z
     zone: *2
     time: *3
   description: 
@@ -70,12 +70,12 @@ title_4:
   cost: 60
   title_type: Kurslitteratur
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2019-12-18 14:23:28.034730000 Z
+    utc: &1 2020-01-08 09:34:35.150847000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
   updated_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &3 2019-12-18 14:23:28.034730000 Z
+    utc: &3 2020-01-08 09:34:35.150847000 Z
     zone: *2
     time: *3
   description: 
