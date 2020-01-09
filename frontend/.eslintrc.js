@@ -10,18 +10,18 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'no-debugger': 'off',
-    'quotes': ['warn', 'single'],
-    'camelcase': 'warn',
-    'no-multiple-empty-lines': 'warn',
+    'quotes': ['error', 'single'],
+    'camelcase': 'error',
+    'no-multiple-empty-lines': 'error',
     'indent': 'off',
-    '@typescript-eslint/indent': ['warn', 2],
-    '@typescript-eslint/semi': ['warn', 'always'],
-    '@typescript-eslint/no-empty-function': 'warn',
-    '@typescript-eslint/no-empty-interface': 'warn',
-    '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/indent': ['error', 2],
+    '@typescript-eslint/semi': ['error', 'always'],
+    '@typescript-eslint/no-empty-function': 'error',
+    '@typescript-eslint/no-empty-interface': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'error',
     '@typescript-eslint/typedef': [
-      'warn',
+      'error',
       {
         'arrowParameter': false,
         'explicit-function-return-type': true
