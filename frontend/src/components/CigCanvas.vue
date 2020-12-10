@@ -19,8 +19,8 @@
         <v-autocomplete
           v-model="name"
           :items="userNames"
-          @change="onNameInput"
           data-cy="user-selector"
+          @change="onNameInput"
         />
         <v-btn
           class="btn"
