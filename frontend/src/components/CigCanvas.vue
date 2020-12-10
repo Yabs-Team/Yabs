@@ -20,6 +20,7 @@
           v-model="name"
           :items="userNames"
           @change="onNameInput"
+          data-cy="user-selector"
         />
         <v-btn
           class="btn"
@@ -29,6 +30,7 @@
         </v-btn>
         <v-btn
           class="btn"
+          data-cy="download-btn"
           @click="downloadCanvas"
         >
           Ladda ned kort

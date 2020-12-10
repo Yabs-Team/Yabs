@@ -63,6 +63,7 @@ export default class GoogleLogin extends Vue {
         console.log(response);
       })
       .catch((error: object) => {
+        console.log(error);
         this.signOut();
       });
   }
