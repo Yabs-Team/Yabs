@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-file-input
-      data-cy="file-input"
       id="file"
+      data-cy="file-input"
       class="input-file"
       multiple
       outlined
