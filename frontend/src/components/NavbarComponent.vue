@@ -54,30 +54,22 @@ import GoogleLogin from '@/components/GoogleLogin.vue';
 import UsersModule from '../store/modules/UsersModule';
 import { VuexModule } from 'vuex-module-decorators';
 
-@Component({
-  components: {
-    GoogleLogin,
-  },
-})
-
-// This is the NavbarComponent and has one single method that tries to sign out the user
-// if the user is logged in
-
-export default class NavbarComponent extends Vue {
-  public usersModule: VuexModule = UsersModule;
-  
-  public signOut(): void {
-    try {
-      // @ts-ignore: gapi
-      const auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(() => {
+export default{
+  name: 'Navbar',
+  components: { GoogleLogin },
+  setup() : void{
+    async function SignOut() : Promise<void> {
+      try {
+        // @ts-ignore: gapi
+        const auth2 = await gapi.auth2.getAuthInstance();
+        await auth2.signOut();
+        await UsersModule.signOut();
+      } catch (e) {
         UsersModule.signOut();
-      });
-    } catch (e) {
-      UsersModule.signOut();
+      }
     }
   }
-}
+};
 </script>
 
 <style>
