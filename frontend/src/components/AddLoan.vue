@@ -38,7 +38,7 @@
           <v-text-field
             id="pop1"
             ref="input"
-            v-model="input"
+            v-model="inputText"
             :state="inputState"
             size="sm"
           />
@@ -64,43 +64,43 @@
 
 <script lang="ts">
 import { Component, Watch, Prop, Vue } from 'vue-property-decorator';
-import { ref } from '@vue/composition-api';
+import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 
-export default {
+export default defineComponent({
   name: 'AddLoan',
-  setup(_ : object , ctx : object) : object{
+  setup(_ : object, { root } : SetupContext) {
     
-    let input = ref(''),
+    let inputText = ref(''),
       inputState = ref(false),
       inputReturn = ref(''),
-      popoverShow = ref(false); 
-
+      popoverShow = ref(false),
+      button = ref(null),
+      input = ref(null);
+      
     function onClose() : void{
       popoverShow.value = false;
     }
 
     function onOk() : void{
-      if(!input.value){
+      if(!inputText.value){
         inputState.value = false;
       }
-      if(!input.value){
+      if(!inputText.value){
         onClose();
-        inputReturn.value = input.value;
+        inputReturn.value = inputText.value;
       }
     }
 
     function onShow() : void {
-      input.value = '';
+      inputText.value = '';
       inputState.value = false;
       inputReturn.value = '';
     }
 
     // function onShown(){
-      
+    //   focusRef(input);
     // }
 
-    console.log(input);
-    alert('tjofan');
 
     return{
       input,
@@ -108,6 +108,8 @@ export default {
       inputReturn,
       popoverShow,
       onClose,
+      button,
+      inputText,
       onOk,
       onShow,
       // onShown,
@@ -115,7 +117,7 @@ export default {
       // focusRef,
     };
   }
-};
+});
 
 //   public onShown(): void {
 //     /* Called just after the popover has been shown */
