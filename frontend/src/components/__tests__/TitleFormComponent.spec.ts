@@ -22,6 +22,7 @@ describe('TitleFormComponent.vue', () => {
     wrapper.find('[data-jest=\'cost\']').setValue('20');
     wrapper.find('[data-jest=\'isbn\']').setValue('1234567891');
     wrapper.find('[data-jest=\'titleType\']').setValue('Kurslitteratur');
+    wrapper.find('[data-jest=\'subjectId\']').setValue('Programmering');
 
     wrapper.find('[data-jest=\'form\']').trigger('submit');
 
@@ -30,6 +31,7 @@ describe('TitleFormComponent.vue', () => {
       title_type: 'Kurslitteratur', //eslint-disable-line camelcase
       cost: '20',
       isbn: '1234567891',
+      'subject_id': 'Programmering'
     });
   });
 });
