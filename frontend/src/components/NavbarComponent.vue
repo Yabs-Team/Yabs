@@ -15,9 +15,9 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
-      <v-toolbar-items v-if="usersModule.currentUser">
+      <v-toolbar-items v-if="UsersModule.currentUser">
         <v-btn
-          :to="'/users/'+ usersModule.currentUserID"
+          :to="'/users/'+ UsersModule.currentUserID"
           text
         >
           <v-icon class="px-3">
@@ -49,16 +49,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
 import GoogleLogin from '@/components/GoogleLogin.vue';
 import UsersModule from '../store/modules/UsersModule';
 import { VuexModule } from 'vuex-module-decorators';
+import { defineComponent } from '@vue/composition-api';
 
-export default{
+export default defineComponent({
   name: 'Navbar',
   components: { GoogleLogin },
-  setup() : void{
-    async function SignOut() : Promise<void> {
+  setup(){
+    async function signOut() : Promise<void> {
       try {
         // @ts-ignore: gapi
         const auth2 = await gapi.auth2.getAuthInstance();
@@ -68,8 +68,11 @@ export default{
         UsersModule.signOut();
       }
     }
+    return{
+      signOut, UsersModule
+    };
   }
-};
+});
 </script>
 
 <style>
