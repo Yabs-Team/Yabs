@@ -64,68 +64,89 @@
 
 <script lang="ts">
 import { Component, Watch, Prop, Vue } from 'vue-property-decorator';
+import { ref } from '@vue/composition-api';
 
-@Component
-export default class AddLoan extends Vue {
-  public input: string = '';
-  public inputState: boolean | null = null;
- 
-  public inputReturn: string = '';
-  public popoverShow: boolean = false;
+export default {
+  name: 'AddLoan',
+  setup(_ : object , ctx : object) : object{
+    
+    let input = ref(''),
+      inputState = ref(false),
+      inputReturn = ref(''),
+      popoverShow = ref(false); 
 
-  public onClose(): void {
-    this.popoverShow = false;
-  }
-
-  public onOk(): void {
-    if (!this.input) {
-      this.inputState = false;
+    function onClose() : void{
+      popoverShow.value = false;
     }
-    if (this.input) {
-      this.onClose();
-      /* "Return" our popover "form" results */
-      this.inputReturn = this.input;
+
+    function onOk() : void{
+      if(!input.value){
+        inputState.value = false;
+      }
+      if(!input.value){
+        onClose();
+        inputReturn.value = input.value;
+      }
     }
-  }
 
-  public onShow(): void {
-    /* This is called just before the popover is shown */
-    /* Reset our popover "form" variables */
-    this.input = '';
-    this.inputState = null;
-    this.inputReturn = '';
-  }
-
-  public onShown(): void {
-    /* Called just after the popover has been shown */
-    /* Transfer focus to the first input */
-    this.focusRef(this.$refs.input);
-  }
-
-  public onHidden(): void {
-    /* Called just after the popover has finished hiding */
-    /* Bring focus back to the button */
-    this.focusRef(this.$refs.button);
-  }
-
-  public focusRef(ref: any): void { //eslint-disable-line @typescript-eslint/no-explicit-any
-    /* Some references may be a component, functional component, or plain element */
-    /* This handles that check before focusing, assuming a focus() method exists */
-    /* We do this in a double nextTick to ensure components have updated & popover positioned first */
-    this.$nextTick(() => {
-      this.$nextTick(() => {
-        (ref.$el || ref).focus();
-      });
-    });
-  }
-
-  @Watch('input')
-  public onInputChange(val: string, oldVal: string): void {
-    if (val) {
-      this.inputState = true;
+    function onShow() : void {
+      input.value = '';
+      inputState.value = false;
+      inputReturn.value = '';
     }
+
+    // function onShown(){
+      
+    // }
+
+    console.log(input);
+    alert('tjofan');
+
+    return{
+      input,
+      inputState,
+      inputReturn,
+      popoverShow,
+      onClose,
+      onOk,
+      onShow,
+      // onShown,
+      // onHidden,
+      // focusRef,
+    };
   }
-}
+};
+
+//   public onShown(): void {
+//     /* Called just after the popover has been shown */
+//     /* Transfer focus to the first input */
+//     this.focusRef(this.$refs.input);
+//   }
+
+//   public onHidden(): void {
+//     /* Called just after the popover has finished hiding */
+//     /* Bring focus back to the button */
+//     this.focusRef(this.$refs.button);
+//   }
+
+//   public focusRef(ref: any): void { //eslint-disable-line @typescript-eslint/no-explicit-any
+//     /* Some references may be a component, functional component, or plain element */
+//     /* This handles that check before focusing, assuming a focus() method exists */
+//     /* We do this in a double nextTick to ensure components have updated & popover positioned first */
+//     this.$nextTick(() => {
+//       this.$nextTick(() => {
+//         (ref.$el || ref).focus();
+//       });
+//     });
+//   }
+
+//   @Watch('input')
+//   public onInputChange(val: string, oldVal: string): void {
+//     if (val) {
+//       this.inputState = true;
+//     }
+//   }
+// }
 </script>
 
 
