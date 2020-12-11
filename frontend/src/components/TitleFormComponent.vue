@@ -55,6 +55,14 @@
       outlined
       data-cy="titleType"
     />
+    <v-select
+      v-model="form.subject_id"
+      data-jest="subjectId"
+      data-cy="subjectId"
+      :items="subjects"
+      label="Välj ämne av titel"
+      outlined
+    />
     <v-btn
       type="submit"
       color="primary"
@@ -78,6 +86,7 @@
 import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import TitlesModule from '../store/modules/TitlesModule';
 import { Title, TitleForm } from '../types';
+import Subjects from '../services/api/subjects';
 
 
 // This is the child component of the earlier named parent element and catches the information
@@ -91,6 +100,7 @@ export default defineComponent({
       cost: '',
       isbn: '',
       title_type: '', //eslint-disable-line camelcase
+      subject_id: '',  //eslint-disable-line camelcase
     } as TitleForm);
 
     const show = ref(true);
@@ -100,6 +110,17 @@ export default defineComponent({
       { value: 'Bibloteksbok', text: 'Bibloteksbok' },
       { value: 'Skönlitteratur', text: 'Skönlitteratur' },
     ];
+
+    const subjects = ref([]);
+
+    // Collects all subjects from the backend to provide them in the dropdown
+    // This should be moved to a subject store module in the future
+    async function updateSubject(): Promise<void> {
+      const temp: Subjects[] = await Subjects.all();
+      subjects.value = temp.map((x: Subject) => ({ value: x.id, text: x.name }));
+    };
+    updateSubject();
+
     // The onSubmit eventlistener calls the titlesmodule and recreates the form when the submit has been
     // successfull
 
@@ -110,6 +131,8 @@ export default defineComponent({
             emit('title-added', title);
           })
           .catch((failure: object) => console.log(failure));
+      } else {
+        console.log('Missing data');
       }
     }
 
@@ -126,7 +149,7 @@ export default defineComponent({
       });
     }
 
-    return { form, show, options, onSubmit, onReset };
+    return { form, show, options, onSubmit, onReset, subjects };
   }
 });
 </script>
