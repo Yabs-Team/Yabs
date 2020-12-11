@@ -8,7 +8,7 @@
         <v-form>
           <v-text-field
             v-model="scannedBookId"
-            data-cy="book_barcode"
+            data-cy="book_barcode_return"
             label="Bokens Streckkod"
             outlined
           />
