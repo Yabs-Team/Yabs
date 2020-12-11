@@ -18,6 +18,8 @@ describe('This test will create a title and a book', () => {
     cy.get('[data-cy=isbn]').type(isbn);
     cy.get('[data-cy=titleType]').click({force:true});
     cy.get('div').contains('Kurslitteratur').click();
+    cy.get('[data-cy=subjectId]').click({force:true});
+    cy.get('div').contains('Programmering').click();
     cy.get('[data-cy=submit]').click();
 
     cy.get('[data-jest=search]').type(bookTitle);
