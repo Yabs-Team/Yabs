@@ -85,7 +85,7 @@
 <script lang="ts">
 import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import TitlesModule from '../store/modules/TitlesModule';
-import { Title, TitleForm } from '../types';
+import { Title, TitleForm, Subject } from '../types';
 import Subjects from '../services/api/subjects';
 
 
@@ -116,7 +116,7 @@ export default defineComponent({
     // Collects all subjects from the backend to provide them in the dropdown
     // This should be moved to a subject store module in the future
     async function updateSubject(): Promise<void> {
-      const temp: Subjects[] = await Subjects.all();
+      const temp: Subject[] = await Subjects.all();
       subjects.value = temp.map((x: Subject) => ({ value: x.id, text: x.name }));
     };
     updateSubject();
