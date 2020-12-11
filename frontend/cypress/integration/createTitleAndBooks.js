@@ -19,7 +19,10 @@ describe('This test will create a title and a book', () => {
     cy.get('[data-cy=titleType]').click({force:true});
     cy.get('div').contains('Kurslitteratur').click();
     cy.get('[data-cy=subjectId]').click({force:true});
-    cy.get('div').contains('Programmering').click();
+    cy.get('div').contains('Programm').click();
+    // Due to the browser translating programmering when running in our CI env
+    // this test uses the Programm shorthand as that would make it pass both locally and in the CI
+
     cy.get('[data-cy=submit]').click();
 
     cy.get('[data-jest=search]').type(bookTitle);
