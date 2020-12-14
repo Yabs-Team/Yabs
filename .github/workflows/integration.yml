@@ -21,10 +21,10 @@ jobs:
         yarn install
         yarn build --silent
     - uses: ruby/setup-ruby@v1.59.1
-      working-directory: backend
       with:
         ruby-version: 2.6.3
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        working-directory: backend
     - name: Load database from schema
       run: |
         cd backend
@@ -62,10 +62,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1.59.1
-      working-directory: backend
       with:
         ruby-version: 2.6.3
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        working-directory: backend
     - name: Load fixtures and schema
       env:
         RAILS_ENV: test
