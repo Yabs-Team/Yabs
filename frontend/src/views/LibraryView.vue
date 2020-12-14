@@ -11,33 +11,41 @@
 </template>
 
 <script lang='ts'>
+import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import {Vue, Component, Prop} from 'vue-property-decorator';
 import LoanListComponent from '@/components/LoanListComponent.vue';
 import LibraryLoanComponent from '@/components/LibraryLoanComponent.vue';
 import TitleListComponent from '@/components/TitleListComponent.vue';
 import ReturnLoanComponent from '@/components/ReturnLoanComponent.vue';
-import TitlesModule from '../store/modules/TitlesModule';
 import LoansModule from '../store/modules/LoansModule';
+import TitlesModule from '../store/modules/TitlesModule';
 import BooksModule from '../store/modules/BooksModule';
+import { VuexModule } from 'vuex-module-decorators';
 
-
-@Component({
+export default ({
+  name: 'LibraryView',
   components: {
     LoanListComponent,
     LibraryLoanComponent,
     TitleListComponent,
-    ReturnLoanComponent
-  }
-})
+    ReturnLoanComponent,
+  },
+  setup(_ : object, { root } : SetupContext) : object {
+    const loansModule: VuexModule = LoansModule;
+    const titlesModule: VuexModule = TitlesModule;
+    const booksModule: VuexModule = BooksModule;
 
-export default class LibraryView extends Vue{
+    function created() : void {
+      LoansModule.fetchAll(); 
+      TitlesModule.fetchAll();
+      BooksModule.fetchAll();
+    }
 
-  private created(): void {
-    LoansModule.fetchAll();
-    TitlesModule.fetchAll();
-    BooksModule.fetchAll();
+    created();
+
+    return { loansModule, titlesModule, booksModule, created };
   }
-}
+});
 </script>
 
 <style>
