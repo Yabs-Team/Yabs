@@ -125,8 +125,7 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: |
-          npm install -g @lhci/cli@0.6.x
-          npm install -g serve
+          yarn add --global @lhci/cli@0.6.x
       - name: Build frontend
         run: |
           cd frontend
@@ -150,10 +149,6 @@ jobs:
         run: |
           cd backend
           bundle exec bin/rails s &
-      - name: Run Vue frontend
-        run: |
-          cd frontend
-          serve -s dist -l 8080 &
       - name: Run Lighthouse CI
         run: |
           lhci autorun
