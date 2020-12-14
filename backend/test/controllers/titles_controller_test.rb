@@ -2,7 +2,8 @@ require 'test_helper'
 
 class TitlesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @title = titles(:title_1)
+    @title ||= build(:title, id: 12412)
+    p @title
   end
 
   test "should get index" do
@@ -12,7 +13,7 @@ class TitlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create title" do
     assert_difference('Title.count') do
-      post api_v1_titles_url, params: { title: { cost: @title.cost, isbn: @title.isbn, name: @title.name, title_type: @title.title_type, subject_id: @title.subject_id } }, as: :json
+      post api_v1_titles_url, params: { title: @title }, as: :json
     end
 
     assert_response 200
@@ -24,7 +25,7 @@ class TitlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update title" do
-    patch api_v1_title_url(@title), params: { title: { cost: @title.cost, isbn: @title.isbn, name: @title.name, title_type: @title.title_type, subject_id: @title.subject_id } }, as: :json
+    patch api_v1_title_url(@title), params: { title: @title }, as: :json
     assert_response 200
   end
 

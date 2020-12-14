@@ -76,6 +76,13 @@ GEM
     declarative-option (0.1.0)
     erubi (1.9.0)
     execjs (2.7.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
+    faker (2.15.1)
+      i18n (>= 1.6, < 2)
     faraday (0.17.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.11.3)
@@ -238,6 +245,8 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
   coffee-rails
+  factory_bot_rails
+  faker
   google-api-client
   google_books
   jbuilder

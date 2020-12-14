@@ -11,7 +11,7 @@ require 'google_books'
 ActiveSupport.on_load(:active_job) do
     ActiveJob::Base.queue_adapter = Rails.application.config.active_job.queue_adapter
 end
-DataFetchJob.perform_now
+# DataFetchJob.perform_now
 
 p_sub = Subject.create(name: "Programmering")
 s_sub = Subject.create(name: "Svenska")
