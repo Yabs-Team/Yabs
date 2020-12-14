@@ -1,5 +1,3 @@
-
-
 import { shallowFactory } from '@/helpers/testFactoryHelpers';
 import { Wrapper } from '@vue/test-utils';
 import AdminCardsView from '../AdminCardsView.vue';
