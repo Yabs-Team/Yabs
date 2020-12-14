@@ -12,6 +12,7 @@
       :items="convertListToA(allUsers)"
       :items-per-page="5"
       :search="search"
+      @click:row="userClick"
     >
       <template v-slot:item.role="{ item }">
         <v-select
@@ -82,6 +83,12 @@ export default class AdminUsersVIew extends Vue {
       user.role = user.assignedRoles!.reduce((acc, num) => acc += Number(num), 0);
       UsersModule.update(user);
     }
+  }
+
+  private userClick(user: User): void {
+    console.log(this.$route);
+    this.$router.push(`/users/${user.uid}`);
+    console.log(user.uid);
   }
 }
 </script>
