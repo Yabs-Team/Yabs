@@ -27,7 +27,7 @@ class DataFetchJob < ApplicationJob
       
       # year = "2020"
       token << person.id
-      uid = year.[string.length / 2..-1] + person.id.to_str[13..-1]
+      uid = year[year.length / 2..-1] + person.id.to_str[13..-1]
 
       if person.org_unit_path == "/Johanneberg/Personal"
         role = 4
