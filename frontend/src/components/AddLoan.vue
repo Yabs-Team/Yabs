@@ -63,8 +63,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Watch, Prop, Vue } from 'vue-property-decorator';
-import { ref, defineComponent, SetupContext } from '@vue/composition-api';
+import { ref, defineComponent, SetupContext, watch } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'AddLoan',
@@ -97,10 +96,29 @@ export default defineComponent({
       inputReturn.value = '';
     }
 
-    // function onShown(){
-    //   focusRef(input);
-    // }
+    function onShown(){
+      focusRef(input);
+    }
 
+    function onHidden() : void {
+      focusRef(button);
+    }
+
+    function focusRef(ref : any) : void { //eslint-disable-line @typescript-eslint/no-explicit-any
+      root.$nextTick(() => {
+        root.$nextTick(() => {
+          (ref.$el || ref).focus();
+        });
+      });
+    }
+
+    watch(input,(value, prevValue) => {
+      if (value) {
+        inputState.value = true;
+      }
+    })
+
+      console.log(popoverShow)
 
     return{
       input,
@@ -112,43 +130,11 @@ export default defineComponent({
       inputText,
       onOk,
       onShow,
-      // onShown,
-      // onHidden,
-      // focusRef,
+      onShown,
+      onHidden
     };
   }
 });
-
-//   public onShown(): void {
-//     /* Called just after the popover has been shown */
-//     /* Transfer focus to the first input */
-//     this.focusRef(this.$refs.input);
-//   }
-
-//   public onHidden(): void {
-//     /* Called just after the popover has finished hiding */
-//     /* Bring focus back to the button */
-//     this.focusRef(this.$refs.button);
-//   }
-
-//   public focusRef(ref: any): void { //eslint-disable-line @typescript-eslint/no-explicit-any
-//     /* Some references may be a component, functional component, or plain element */
-//     /* This handles that check before focusing, assuming a focus() method exists */
-//     /* We do this in a double nextTick to ensure components have updated & popover positioned first */
-//     this.$nextTick(() => {
-//       this.$nextTick(() => {
-//         (ref.$el || ref).focus();
-//       });
-//     });
-//   }
-
-//   @Watch('input')
-//   public onInputChange(val: string, oldVal: string): void {
-//     if (val) {
-//       this.inputState = true;
-//     }
-//   }
-// }
 </script>
 
 
