@@ -116,3 +116,41 @@ jobs:
       env:
         COLLECTION_UID_YABS: ${{secrets.COLLECTION_UID_YABS}}
         POSTMAN_KEY: ${{secrets.POSTMAN_KEY}}
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install dependencies
+        run: |
+          npm install -g @lhci/cli@0.6.x
+      - name: Build frontend
+        run: |
+          cd frontend
+          yarn install
+          yarn build --silent
+      - uses: ruby/setup-ruby@v1.59.1
+        with:
+          ruby-version: 2.6.3
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          working-directory: backend
+      - name: Load fixtures and schema
+        env:
+          RAILS_ENV: test
+        run: |
+          cd backend
+          bundle exec bin/rails db:schema:load
+          bundle exec bin/rails db:fixtures:load
+      - name: Run rails backend
+        env:
+          RAILS_ENV: test
+        run: |
+          cd backend
+          bundle exec bin/rails s &
+      - name: Run Lighthouse CI
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: |
+          lhci autorun
