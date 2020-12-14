@@ -125,7 +125,7 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: |
-          yarn global add @lhci/cli@0.6.1
+          npm install -g @lhci/cli@0.6.x
       - name: Build frontend
         run: |
           cd frontend
