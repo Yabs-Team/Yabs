@@ -10,7 +10,8 @@ export {
   BookCollection,
   Loan,
   LoanForm,
-  LoanCollection
+  LoanCollection,
+  Subject
 };
 
 interface User {
@@ -98,3 +99,8 @@ interface LoanForm {
 }
 
 interface LoanCollection {[id: number]: Loan; }
+
+interface Subject {
+  id: number;
+  name: string;
+}

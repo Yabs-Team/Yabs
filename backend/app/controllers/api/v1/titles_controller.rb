@@ -23,17 +23,22 @@ class Api::V1::TitlesController < ApplicationController
   # saves it to the db and then renders all JSON object of the instance title
 
   def create
-    book_data = GoogleBooks::API.search("isbn:#{title_params['isbn']}").first
-    new_data = {
-      name: book_data.title, 
-      description: book_data.description, 
-      authors: book_data.authors.to_s,
-      cover: book_data.covers[:large],
-      page_count: book_data.page_count,
-      published_date: book_data.published_date
-    }
-    updated_params = title_params.merge(new_data)
-    @title = Title.new(updated_params)
+    begin
+      book_data = GoogleBooks::API.search("isbn:#{title_params['isbn']}").first
+      new_data = {
+        name: book_data.title,
+        description: book_data.description,
+        authors: book_data.authors.to_s,
+        cover: book_data.covers[:large],
+        page_count: book_data.page_count,
+        published_date: book_data.published_date
+      }
+      updated_params = title_params.merge(new_data)
+    rescue # In case a API result was not found create the title any way
+      updated_params = title_params
+    ensure
+      @title = Title.new(updated_params)
+    end
 
     if @title.save
       render json: @title
