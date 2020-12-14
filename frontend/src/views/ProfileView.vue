@@ -8,11 +8,11 @@
     <v-row>
       <v-col col="12">
         <v-card>
-          <v-card-title>{{ usersModule.currentUser.name }}</v-card-title>
-          <v-card-subtitle>{{ RoleChecker.roleAsText() }} - {{ usersModule.currentUser.klass }}</v-card-subtitle>
+          <v-card-title>{{ getUser().name }}</v-card-title>
+          <v-card-subtitle>{{ roleToText(getUser().role) }} - {{ getUser().klass }}</v-card-subtitle>
           <img
-            v-if="usersModule.currentUser.photo_path"
-            :src="`http://localhost:3000/${usersModule.currentUser.photo_path}`"
+            v-if="getUser().photo_path"
+            :src="`http://localhost:3000/${getUser().photo_path}`"
           >
         </v-card>
       </v-col>
@@ -41,6 +41,7 @@ import UsersModule from '../store/modules/UsersModule';
 import { VuexModule } from 'vuex-module-decorators';
 import LoansModule from '../store/modules/LoansModule';
 import RoleChecker from '@/helpers/RoleChecker';
+import roleToText from '@/helpers/roleToText';
 
 @Component({
   components: {
@@ -52,9 +53,14 @@ import RoleChecker from '@/helpers/RoleChecker';
 export default class Profile extends Vue {
   private usersModule: VuexModule = UsersModule;
   private RoleChecker: RoleChecker = RoleChecker;
+  private roleToText: Function = roleToText;
 
   private created(): void {
     LoansModule.fetchAll();
+  }
+
+  private getUser():string {
+    return this.usersModule.all[this.$route.params.id];
   }
 }
 </script>
