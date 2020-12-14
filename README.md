@@ -13,6 +13,19 @@ Yabs or yet another booking system is a collection of tools for creating card id
 
 Yabs is released under the [MIT License](https://opensource.org/licenses/MIT).
 
+## Development environment
+Supports development under Mac with docker for mac, Linux with docker and Windows running docker with WSL2 backend. VSCode is used for development. Recommended VSCode extensions:
+- [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
+- [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+- [Quokka.js](https://marketplace.visualstudio.com/items?itemName=WallabyJs.quokka-vscode)
+- [Ruby](https://marketplace.visualstudio.com/items?itemName=rebornix.ruby)
+- [endwise](https://marketplace.visualstudio.com/items?itemName=kaiwood.endwise)
+- [Better Align](https://marketplace.visualstudio.com/items?itemName=wwm.better-align)
+
+Also install nodejs and yarn locally so linter and Vetur works properly in editor. Run `yarn install` in /frontend to install node modules on host machine.
+
 ## Installation
 Install dependencies:
 ```
