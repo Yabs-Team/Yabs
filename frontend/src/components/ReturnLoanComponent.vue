@@ -34,8 +34,6 @@
 
 <script lang='ts'>
 import { ref, defineComponent, SetupContext } from '@vue/composition-api';
-import {Vue, Component, Prop} from 'vue-property-decorator';
-import { component } from 'vue/types/umd';
 import LoansModule from '../store/modules/LoansModule';
 import { Loan } from '../types';
 

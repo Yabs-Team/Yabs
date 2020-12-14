@@ -11,8 +11,7 @@
 </template>
 
 <script lang='ts'>
-import { ref, defineComponent, SetupContext } from '@vue/composition-api';
-import {Vue, Component, Prop} from 'vue-property-decorator';
+import { SetupContext } from '@vue/composition-api';
 import LoanListComponent from '@/components/LoanListComponent.vue';
 import LibraryLoanComponent from '@/components/LibraryLoanComponent.vue';
 import TitleListComponent from '@/components/TitleListComponent.vue';

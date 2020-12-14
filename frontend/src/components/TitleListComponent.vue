@@ -7,8 +7,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, SetupContext } from '@vue/composition-api';
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 import TitlesModule from '../store/modules/TitlesModule';
 import { VuexModule } from 'vuex-module-decorators';
 import ListComponent from '@/components/ListComponent.vue';
