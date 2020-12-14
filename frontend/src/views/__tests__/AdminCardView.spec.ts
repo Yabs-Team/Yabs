@@ -7,7 +7,6 @@ describe('AdminCardsView.vue', () => {
   it('CardFormComponent exists in view', () => {
     const wrapper: Wrapper<AdminCardsView> = shallowFactory(AdminCardsView);
     expect(wrapper.find({name: 'CardFormComponent'}).exists()).toBe(true);
-
   });
 
 });
