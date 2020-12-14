@@ -148,6 +148,5 @@ jobs:
           cd backend
           bundle exec bin/rails s &
       - name: Run Lighthouse CI
-        working-directory: frontend
         run: |
           lhci autorun
