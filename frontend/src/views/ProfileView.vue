@@ -10,10 +10,10 @@
         <v-card>
           <v-card-title>{{ usersModule.currentUser.name }}</v-card-title>
           <v-card-subtitle>{{ RoleChecker.roleAsText() }} - {{ usersModule.currentUser.klass }}</v-card-subtitle>
-          <img
+          <v-img
             v-if="usersModule.currentUser.photo_path"
-            :src="`http://localhost:3000/${usersModule.currentUser.photo_path}`"
-          >
+            :src="usersModule.currentUser.photo_path"
+          />
         </v-card>
       </v-col>
     </v-row>
@@ -54,7 +54,12 @@ export default class Profile extends Vue {
   private RoleChecker: RoleChecker = RoleChecker;
 
   private created(): void {
+    console.log(this.usersModule);
     LoansModule.fetchAll();
   }
 }
 </script>
+
+<style lang="scss">
+
+</style>
