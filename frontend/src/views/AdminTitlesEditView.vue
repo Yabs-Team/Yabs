@@ -34,11 +34,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.flex {
-  display: flex;
-}
-
-.flex > div {
-  flex: 1;
-}
 </style>

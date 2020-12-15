@@ -27,7 +27,6 @@ describe('This test will update a title', () => {
     cy.get('[data-jest=search]').type(bookTitle);
     cy.get('[data-cy=formAction]').first().click();
 
-    // cy.get('[data-cy=reset]').click();
     cy.get('[data-cy=name]').should('have.value', bookTitle);
     cy.get('[data-cy=isbn]').should('have.value', isbn);
     cy.get('[data-cy=cost]').should('have.value', cost);
