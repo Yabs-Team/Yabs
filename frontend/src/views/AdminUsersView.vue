@@ -60,7 +60,7 @@ export default class AdminUsersVIew extends Vue {
   /**
 
   /**
-   * This function loads all the users
+   * This function returns all users
    */
   get allUsers(): UserCollection {
     let users = convertListToN(UsersModule.allAsArray
