@@ -10,27 +10,35 @@
         <v-card>
           <v-card-title>{{ usersModule.currentUser.name }}</v-card-title>
           <v-card-subtitle>{{ RoleChecker.roleAsText() }} - {{ usersModule.currentUser.klass }}</v-card-subtitle>
-          <img
+          <v-img
+            class="ma-a image pb-10"
+            contain
             v-if="usersModule.currentUser.photo_path"
             :src="`http://localhost:3000/${usersModule.currentUser.photo_path}`"
-          >
+          ></v-img>
         </v-card>
       </v-col>
     </v-row>
 
-    <v-card>
+    <v-card class="d-flex align-start justify-center pa-4 pt-7 pb-1">
       <v-file-input
-        v-model="file"
+        class="pa-0"
+        v-model="image"
         color="deep-purple accent-4"
-        counter
         label="File input"
         multiple
         placeholder="Update image"
         prepend-icon="mdi-paperclip"
         outlined
-        :show-size="1000"
+      />
+      <v-btn
+        class="mt-1 ml-10"
+        color="primary"
+        large
+        @click="savePicture"
       >
-      </v-file-input>
+        Lägg till
+      </v-btn>
     </v-card>
 
     <v-row>
@@ -57,13 +65,9 @@ import UsersModule from '../store/modules/UsersModule';
 import { VuexModule } from 'vuex-module-decorators';
 import LoansModule from '../store/modules/LoansModule';
 import RoleChecker from '@/helpers/RoleChecker';
+import { User } from '@/types';
 
 @Component({
-  data(){
-    return{
-      file: undefined
-    };
-  },
   components: {
     CigCanvas,
     AddLoan,
@@ -73,9 +77,40 @@ import RoleChecker from '@/helpers/RoleChecker';
 export default class Profile extends Vue {
   private usersModule: VuexModule = UsersModule;
   private RoleChecker: RoleChecker = RoleChecker;
+  public image: File[] = [];
 
   private created(): void {
     LoansModule.fetchAll();
   }
+
+  public savePicture(): void {
+    if(this.image.length == 0){
+      alert('You have not selected a file!');
+      return;
+
+    }else if(this.image.length > 1){
+      alert('You have selected to many files! Select one!');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('uid', this.$route.params.id);
+    formData.append('image', this.image[0] as Blob);
+    UsersModule.update(formData).then((response: User) => {
+      console.log('user updated profile!');
+    }).catch((error: object) => {
+      // TODO: show in notification to user
+      console.error(error);
+    });
+  }
 }
 </script>
+
+<style lang="scss">
+
+  .image{
+    width: 50%;
+    margin: auto;
+    // padding-bottom: 2.5vh;
+  }
+</style>
