@@ -68,7 +68,6 @@ class UsersModule extends VuexModule {
     return new Promise((resolve, reject) => {
       UsersAPI.signIn(request)
         .then((response: User) => {
-          console.log(response);
           this.setCurrentUser(response);
           this.fetchAll();
           resolve(response);
