@@ -2,6 +2,9 @@
   <ListComponent
     :headers="headers"
     :items="titlesModule.allAsArray"
+    route-path="admin/titles"
+    route-specifier="isbn"
+    :use-actions="true"
     class="elevation-1"
   />
 </template>

@@ -52,6 +52,19 @@ class TitlesModule extends VuexModule {
         });
     });
   }
+  @Action({rawError: true})
+  public fetchSingleByISBN(isbn: string): Promise<Title> {
+    return new Promise((resolve, reject) => {
+      TitlesAPI.singleByISBN(isbn)
+        .then((response: Title) => {
+          resolve(response);
+        })
+        .catch((error: object) => {
+          this.setFailure(Error);
+          reject(error);
+        });
+    });
+  }
 
   @Action({rawError: true})
   public create(request: TitleForm): Promise<Title> {

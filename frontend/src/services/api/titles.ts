@@ -19,6 +19,14 @@ export default class TitlesAPI extends APIRequest {
     });
   }
 
+  static singleByISBN(isbn: string): Promise<Title> {
+    return new Promise((res, rej) => {
+      this.Get<Title>(`v1/titles/${isbn}?ISBN=true`)
+        .then((resp) => {res(resp); })
+        .catch((err) => {rej(err); });
+    });
+  }
+
   static create(request: TitleForm): Promise<Title> {
     return new Promise((res, rej) => {
       this.Post<Title>('v1/titles', request)
