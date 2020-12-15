@@ -11,9 +11,9 @@
           <v-card-title>{{ usersModule.currentUser.name }}</v-card-title>
           <v-card-subtitle>{{ RoleChecker.roleAsText() }} - {{ usersModule.currentUser.klass }}</v-card-subtitle>
           <v-img
+            v-if="usersModule.currentUser.photo_path"
             class="ma-a image pb-10"
             contain
-            v-if="usersModule.currentUser.photo_path"
             :src="`http://localhost:3000/${usersModule.currentUser.photo_path}`"
           >
             <template v-slot:placeholder>
@@ -25,7 +25,7 @@
                 <v-progress-circular
                   indeterminate
                   color="black lighten-5"
-                ></v-progress-circular>
+                />
               </v-row>
             </template>
           </v-img>
@@ -35,8 +35,8 @@
 
     <v-card class="d-flex align-start justify-center pa-4 pt-7 pb-1">
       <v-file-input
-        class="pa-0"
         v-model="image"
+        class="pa-0"
         color="deep-purple accent-4"
         label="File input"
         multiple
