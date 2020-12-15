@@ -4,17 +4,25 @@
  -->
 
 <template>
-  <div>
-    <h1 class="display-2">
-      Loans
-    </h1>
-    <div class="flex">
-      <div style="margin-right: 50px">
-        <LoanFormComponent />
+  <div>  
+    <div>
+      <h1 class="display-2">
+        Loans
+      </h1>
+      <div class="flex">
+        <div style="margin-right: 50px">
+          <LoanFormComponent />
+        </div>
+        <div>
+          <LoanListComponent />
+        </div>
       </div>
-      <div>
-        <LoanListComponent />
-      </div>
+    </div>
+    <div style="margin-top: 50px">
+      <h1 class="display-2">
+        Return
+      </h1>
+      <ReturnLoanComponent />
     </div>
   </div>
 </template>
@@ -23,12 +31,14 @@
 import { Vue, Component } from 'vue-property-decorator';
 import LoanFormComponent from '@/components/LoanFormComponent.vue';
 import LoanListComponent from '@/components/LoanListComponent.vue';
+import ReturnLoanComponent from '@/components/ReturnLoanComponent.vue';
 import LoansModule from '../store/modules/LoansModule';
 
 @Component({
   components: {
     LoanFormComponent,
-    LoanListComponent
+    LoanListComponent,
+    ReturnLoanComponent
   }
 })
 
