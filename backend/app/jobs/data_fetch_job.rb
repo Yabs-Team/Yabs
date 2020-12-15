@@ -22,7 +22,7 @@ class DataFetchJob < ApplicationJob
 
   def insert_data(users, token)
     users.each do |person|
-      # personcreation_time = Tue, 04 Feb 2020 01:38:22
+      # person.creation_time = Tue, 04 Feb 2020 01:38:22
       # year = "2020"
       
       year = person.creation_time.split()[3]
