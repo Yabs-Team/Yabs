@@ -51,7 +51,6 @@
 <script lang="ts">
 import GoogleLogin from '@/components/GoogleLogin.vue';
 import UsersModule from '../store/modules/UsersModule';
-import { VuexModule } from 'vuex-module-decorators';
 import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
