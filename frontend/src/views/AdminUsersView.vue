@@ -58,9 +58,6 @@ export default class AdminUsersVIew extends Vue {
     { text: '', value: 'actions' },
   ];
   /**
-   * This function filters out all students from the Usersmodule users
-   * and gives the remaining an array with their specified roles.
-   */
 
   /**
    * This function loads all the users
