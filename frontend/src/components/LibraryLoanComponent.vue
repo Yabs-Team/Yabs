@@ -66,7 +66,7 @@ export default defineComponent ({
   components: {
     LoanFormComponent
   },
-  setup(_: object, { root }: SetupContext) {
+  setup(_: object, { root, emit }: SetupContext) {
     const form = ref({
       lent_by_id: 0, //eslint-disable-line camelcase
       loaned_by_id: 0, //eslint-disable-line camelcase
@@ -81,7 +81,7 @@ export default defineComponent ({
       form.value.loaned_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
       if (!!form.value.lent_by_id && !!form.value.loaned_by_id && !!form.value.book_id) {
         LoansModule.create(form.value)
-          .then((payload: Loan) => this.$emit('loan-added', payload))
+          .then((payload: Loan) => emit('loan-added', payload))
           .catch((failure: boolean) => console.log(failure));
       }
     }
