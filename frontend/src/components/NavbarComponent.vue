@@ -15,9 +15,9 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer />
-      <v-toolbar-items v-if="usersModule.currentUser">
+      <v-toolbar-items v-if="UsersModule.currentUser">
         <v-btn
-          :to="'/users/'+ usersModule.currentUserID"
+          :to="'/users/'+ UsersModule.currentUserID"
           text
         >
           <v-icon class="px-3">
@@ -49,35 +49,29 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
 import GoogleLogin from '@/components/GoogleLogin.vue';
 import UsersModule from '../store/modules/UsersModule';
-import { VuexModule } from 'vuex-module-decorators';
+import { defineComponent } from '@vue/composition-api';
 
-@Component({
-  components: {
-    GoogleLogin,
-  },
-})
-
-// This is the NavbarComponent and has one single method that tries to sign out the user
-// if the user is logged in
-
-export default class NavbarComponent extends Vue {
-  public usersModule: VuexModule = UsersModule;
-  
-  public signOut(): void {
-    try {
-      // @ts-ignore: gapi
-      const auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(() => {
+export default defineComponent({
+  name: 'Navbar',
+  components: { GoogleLogin },
+  setup(){
+    async function signOut() : Promise<void> {
+      try {
+        // @ts-ignore: gapi
+        const auth2 = await gapi.auth2.getAuthInstance();
+        await auth2.signOut();
+        await UsersModule.signOut();
+      } catch (e) {
         UsersModule.signOut();
-      });
-    } catch (e) {
-      UsersModule.signOut();
+      }
     }
+    return{
+      signOut, UsersModule
+    };
   }
-}
+});
 </script>
 
 <style>

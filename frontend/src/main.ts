@@ -2,14 +2,11 @@ import Vue, { VNode } from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
 import vuetify from './plugins/vuetify';
-import VueCompositionAPI from '@vue/composition-api';
+import compositionApi from '@vue/composition-api';
 
 Vue.config.productionTip = false;
-Vue.use(VueAxios, axios);
-Vue.use(VueCompositionAPI);
+Vue.use(compositionApi);
 
 new Vue({
   el: '#app',
@@ -18,4 +15,3 @@ new Vue({
   vuetify,
   render: (h): VNode => h(App),
 });
-
