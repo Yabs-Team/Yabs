@@ -39,7 +39,6 @@ class Api::V1::TitlesController < ApplicationController
       render json: @title
     else
       render json: @title.errors, status: :unprocessable_entity
-      p @title.errors
     end
   end
 
