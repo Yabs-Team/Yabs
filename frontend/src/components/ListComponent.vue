@@ -19,7 +19,7 @@
     >
       <template
         v-if="useActions"
-        v-slot:item.action="{ item }"
+        v-slot:[`item.actions`]="{ item }"
       >
         <v-icon
           small

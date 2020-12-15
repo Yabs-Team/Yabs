@@ -33,23 +33,43 @@
 </template>
 
 <script lang='ts'>
-import {Vue, Component, Prop} from 'vue-property-decorator';
+import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import LoansModule from '../store/modules/LoansModule';
 import { Loan } from '../types';
 
+export default defineComponent({
+  name: 'ReturnLoanComponent',
+  setup(_: object, { root }: SetupContext) {
+    const scannedBookId = ref('');
 
-@Component
-export default class ReturnLoanComponent extends Vue{
-  private scannedBookId: string = '';
+    function onSubmit(evt: Event): void {
+      evt.preventDefault();
 
-  private onSubmit(evt: Event): void {
-    evt.preventDefault();
-    const targetLoan = LoansModule.allAsArray.find((loan: Loan) => {return loan.book_id == Number(this.scannedBookId);});
+      const targetLoan = LoansModule.allAsArray.find((loan: Loan) => {
+        return loan.book_id == Number(scannedBookId.value);
+      });
 
-    if (targetLoan) {LoansModule.delete(targetLoan);}; 
+      if(targetLoan) {
+        LoansModule.delete(targetLoan);
+      };
+    }
+
+    return { scannedBookId, onSubmit };
   }
+});
 
-}
+// @Component
+// export default class ReturnLoanComponent extends Vue{
+//   private scannedBookId: string = '';
+
+//   private onSubmit(evt: Event): void {
+//     evt.preventDefault();
+//     const targetLoan = LoansModule.allAsArray.find((loan: Loan) => {return loan.book_id == Number(this.scannedBookId);});
+
+//     if (targetLoan) {LoansModule.delete(targetLoan);}; 
+//   }
+
+// }
 </script>
 
 <style>
