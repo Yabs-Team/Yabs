@@ -4,7 +4,7 @@ export default function roleToText(role: number): string {
     1: 'Elev',
     2: 'Elevhälsoteam',
     4: 'Lärare',
-    8: 'vaktmästare',
+    8: 'Vaktmästare',
     16: 'Admin',
     32: 'Rektor'
   };
