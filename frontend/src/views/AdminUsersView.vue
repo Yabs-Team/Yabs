@@ -61,14 +61,6 @@ export default class AdminUsersVIew extends Vue {
    * This function filters out all students from the Usersmodule users
    * and gives the remaining an array with their specified roles.
    */
-  // get staffUsers(): UserCollection {
-  //   return convertListToN(UsersModule.allAsArray
-  //     .filter(user => RoleChecker.isStudentHealth(user))
-  //     .map((user) => {
-  //       user.assignedRoles = RoleChecker.assignedRoles(user).map((number) => { return number.toString(); });
-  //       return user;
-  //     }), 'uid');
-  // }
 
   /**
    * This function loads all the users
