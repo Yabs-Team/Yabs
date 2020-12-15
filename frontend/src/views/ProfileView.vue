@@ -133,6 +133,8 @@ export default class Profile extends Vue {
       console.log('user updated profile!');
     }).catch((error: object) => {
       // TODO: show in notification to user
+      this.snackbarText = error.toString();
+      this.snackbar = true;
       console.error(error);
     });
   }
