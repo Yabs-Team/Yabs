@@ -90,9 +90,7 @@ export default class AdminUsersVIew extends Vue {
   }
 
   private userClick(user: User): void {
-    console.log(this.$route);
     this.$router.push(`/users/${user.uid}`);
-    console.log(user.uid);
   }
 }
 </script>
