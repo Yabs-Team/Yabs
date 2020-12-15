@@ -59,29 +59,23 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-
-@Component({
-  components: {}
-})
-
 // This is the admin view and has no child nor parent components and is therefore only
 // used for the sole purpose of giving the admin opportunities to go to the requested route
-
-export default class AdminView extends Vue {
-
-  // The items object is used to fill the tables with the right column and row information
-  // so that the user can choose from the different links
-  
-  private items: object[] = [
-    { title: 'Dashboard', icon: 'dashboard', path: '/admin'},
-    { title: 'Loans', icon: 'library_books', path: '/admin/loans' },
-    { title: 'Titles', icon: 'title', path: '/admin/titles' },
-    { title: 'Books', icon: 'book', path: '/admin/books' },
-    { title: 'Cards', icon: 'account_box', path: '/admin/cards' },
-    { title: 'Users', icon: 'group', path: '/admin/users' }
-  ];
-}
+export default ({
+  name: 'AdminView',
+  setup(): object {
+    const items: object[] = [
+      { title: 'Dashboard', icon: 'dashboard', path: '/admin'},
+      { title: 'Loans', icon: 'library_books', path: '/admin/loans' },
+      { title: 'Titles', icon: 'title', path: '/admin/titles' },
+      { title: 'Books', icon: 'book', path: '/admin/books' },
+      { title: 'Cards', icon: 'account_box', path: '/admin/cards' },
+      { title: 'Users', icon: 'group', path: '/admin/users' }
+    ];
+    
+    return { items };
+  }
+})
 </script>
 
 <style>
