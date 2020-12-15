@@ -33,7 +33,7 @@
       </v-col>
     </v-row>
 
-    <v-card class="d-flex align-start justify-center pa-4 pt-7 pb-1">
+    <v-card class="d-flex align-start justify-center pa-4 pt-7 pb-1" v-if="RoleChecker.isAdmin()">
       <v-file-input
         v-model="image"
         class="pa-0"
@@ -53,6 +53,21 @@
         Uppdatera
       </v-btn>
     </v-card>
+
+    <v-snackbar v-model="snackbar">
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
 
     <v-row>
       <v-col col="12">
@@ -91,6 +106,7 @@ export default class Profile extends Vue {
   private usersModule: VuexModule = UsersModule;
   private RoleChecker: RoleChecker = RoleChecker;
   public image: File[] = [];
+  public snackbar: Boolean = false;
 
   private created(): void {
     LoansModule.fetchAll();
