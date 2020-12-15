@@ -9,13 +9,13 @@
     />
     <v-data-table
       :headers="headers"
-      :items="convertListToA(staffUsers)"
+      :items="convertListToA(allUsers)"
       :items-per-page="5"
       :search="search"
     >
       <template v-slot:item.role="{ item }">
         <v-select
-          v-model="staffUsers[item.uid].assignedRoles"
+          v-model="allUsers[item.uid].assignedRoles"
           :items="selectRoles"
           multiple
         />
@@ -23,7 +23,7 @@
       <template v-slot:item.actions="{ item }">
         <v-btn 
           color="primary"
-          @click="updateUserRoles(staffUsers[item.uid])"
+          @click="updateUserRoles(allUsers[item.uid])"
         >
           Save
         </v-btn>
@@ -57,17 +57,13 @@ export default class AdminUsersVIew extends Vue {
     { text: 'Roller', value: 'role' },
     { text: '', value: 'actions' },
   ];
-  /**
-   * This function filters out all students from the Usersmodule users
-   * and gives the remaining an array with their specified roles.
-   */
-  get staffUsers(): UserCollection {
-    return convertListToN(UsersModule.allAsArray
-      .filter(user => RoleChecker.isStudentHealth(user))
+  get allUsers(): UserCollection {
+    let users = convertListToN(UsersModule.allAsArray
       .map((user) => {
         user.assignedRoles = RoleChecker.assignedRoles(user).map((number) => { return number.toString(); });
         return user;
       }), 'uid');
+    return users;
   }
 
   private selectRoles: object[] = Object.keys(RoleChecker.roles()).map((key) => {
@@ -75,7 +71,7 @@ export default class AdminUsersVIew extends Vue {
       value: key, 
       text: RoleChecker.roles()[Number(key)] 
     }; 
-  }).filter(selectRole => Number(selectRole.value) != 1);
+  }).filter(selectRole => Number(selectRole.value));
   
   private created(): void {
     UsersModule.fetchAll();
