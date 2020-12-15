@@ -112,12 +112,16 @@ export default class Profile extends Vue {
   }
 
   public savePicture(): void {
+    let errorText = '';
+
     if(this.image.length == 0){
-      this.snackbarText = 'You have not selected a file!';
-      this.snackbar = true;
-      return;
+      errorText = 'No files selected. Please select an image!';
     }else if(this.image.length > 1){
-      this.snackbarText = 'You have selected to many files! Select one!';
+      errorText = 'Too many files selected! Please select only one!';
+    }
+
+    if(errorText != ''){
+      this.snackbarText = errorText;
       this.snackbar = true;
       return;
     }
