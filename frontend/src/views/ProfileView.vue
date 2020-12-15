@@ -17,6 +17,22 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-card>
+      <v-file-input
+        v-model="file"
+        color="deep-purple accent-4"
+        counter
+        label="File input"
+        multiple
+        placeholder="Update image"
+        prepend-icon="mdi-paperclip"
+        outlined
+        :show-size="1000"
+      >
+      </v-file-input>
+    </v-card>
+
     <v-row>
       <v-col col="12">
         <v-card>
@@ -43,6 +59,11 @@ import LoansModule from '../store/modules/LoansModule';
 import RoleChecker from '@/helpers/RoleChecker';
 
 @Component({
+  data(){
+    return{
+      file: undefined
+    };
+  },
   components: {
     CigCanvas,
     AddLoan,
