@@ -55,18 +55,16 @@
     </v-card>
 
     <v-snackbar v-model="snackbar">
-      {{ text }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          color="pink"
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
-          Close
-        </v-btn>
-      </template>
+      {{ snackbarText }}
+        <template>
+          <v-btn
+            color="primary"
+            text
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
     </v-snackbar>
 
     <v-row>
@@ -107,6 +105,7 @@ export default class Profile extends Vue {
   private RoleChecker: RoleChecker = RoleChecker;
   public image: File[] = [];
   public snackbar: Boolean = false;
+  public snackbarText: String = '';
 
   private created(): void {
     LoansModule.fetchAll();
@@ -114,11 +113,12 @@ export default class Profile extends Vue {
 
   public savePicture(): void {
     if(this.image.length == 0){
-      alert('You have not selected a file!');
+      this.snackbarText = 'You have not selected a file!';
+      this.snackbar = true;
       return;
-
     }else if(this.image.length > 1){
-      alert('You have selected to many files! Select one!');
+      this.snackbarText = 'You have selected to many files! Select one!';
+      this.snackbar = true;
       return;
     }
 
