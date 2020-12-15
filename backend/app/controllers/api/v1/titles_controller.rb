@@ -72,7 +72,11 @@ class Api::V1::TitlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_title
-      @title = Title.find(params[:id])
+      @title = if params[:ISBN] && params[:ISBN] != 'false'
+                 Title.where(isbn: params[:id]).first
+               else
+                 Title.find(params[:id])
+               end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
