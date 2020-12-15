@@ -19,11 +19,12 @@
     >
       <template
         v-if="useActions"
-        v-slot:[`item.actions`]="{ item }"
+        v-slot:item.action="{ item }"
       >
         <v-icon
           small
           class="mr-2"
+          data-cy="formAction"
           @click="route($event, item)"
         >
           edit
