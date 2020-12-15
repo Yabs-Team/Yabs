@@ -35,10 +35,8 @@
 <script lang="ts">
 import { SetupContext } from '@vue/composition-api';
 import UsersModule from '@/store/modules/UsersModule';
-import { VuexModule } from 'vuex-module-decorators';
 import RoleChecker from '@/helpers/RoleChecker';
 import { User, UserCollection } from '@/types';
-import convertListToA from '@/helpers/convertNestedToArray';
 import convertListToN from '@/helpers/convertArrayToNested';
 
 export default ({
@@ -62,7 +60,7 @@ export default ({
     }
 
     function selectRoles(): object[] {
-       return Object.keys(RoleChecker.roles()).map((key) => {
+      return Object.keys(RoleChecker.roles()).map((key) => {
         return {
           value: key, 
           text: RoleChecker.roles()[Number(key)] 
@@ -83,13 +81,14 @@ export default ({
 
     return {
       search,
+      headers,
       allUsers,
       selectRoles,
       created,
       updateUserRoles
-    }
+    };
   }
-})
+});
 </script>
 
 <style scoped>

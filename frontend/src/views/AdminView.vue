@@ -75,7 +75,7 @@ export default ({
     
     return { items };
   }
-})
+});
 </script>
 
 <style>
