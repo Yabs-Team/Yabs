@@ -69,3 +69,10 @@ docker-compose up
 ```
 docker-compose exec backend bash
 ```
+
+## Reseeding database
+To reseed the database run these commands in running docker backend:
+```
+rails db:setup
+rails db:fixtures:load
+```
