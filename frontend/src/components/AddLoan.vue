@@ -96,7 +96,7 @@ export default defineComponent({
       inputReturn.value = '';
     }
 
-    function onShown(){
+    function onShown(): void {
       focusRef(input);
     }
 
@@ -142,4 +142,3 @@ export default defineComponent({
     .icon
         font-size: 30px
 </style>
-
