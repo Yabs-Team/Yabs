@@ -11,7 +11,7 @@ require 'google_books'
 ActiveSupport.on_load(:active_job) do
     ActiveJob::Base.queue_adapter = Rails.application.config.active_job.queue_adapter
 end
-# DataFetchJob.perform_now
+DataFetchJob.perform_now
 
 p_sub = Subject.create(name: "Programmering")
 s_sub = Subject.create(name: "Svenska")
@@ -53,7 +53,7 @@ loan_alice.save
 
 loan_cc = Loan.new(expiration_date: Date.current)
 loan_cc.lent_by = User.find_by_name("Låneservice Johanneberg")
-loan_cc.loaned_by = User.find(2075529089)
+loan_cc.loaned_by = User.find_by_name("Alex Henryz")
 loan_cc.book = book_cc
 loan_cc.returned_at = Date.current
 loan_cc.save
