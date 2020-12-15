@@ -57,7 +57,6 @@ export default class AdminUsersVIew extends Vue {
     { text: 'Roller', value: 'role' },
     { text: '', value: 'actions' },
   ];
-  /**
   get allUsers(): UserCollection {
     let users = convertListToN(UsersModule.allAsArray
       .map((user) => {
