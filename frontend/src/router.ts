@@ -5,26 +5,30 @@ import * as views from '@/views';
 
 Vue.use(VueRouter);
 
+function loadView(view: string): object {
+  return (): object => import(`@/views/${view}.vue`);
+};
+
 const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'start',
-    component: views.Start,
+    component: loadView('Start'),
   },
   {
     path: '/users/:id',
     name: 'profile',
-    component: views.Profile,
+    component: loadView('ProfileView'),
   },
   {
     path: '/books/:id',
     name: 'edit book',
-    component: views.EditBook,
+    component: loadView('EditBook'),
   },
   {
     path: '/admin',
     name: 'admin',
-    component: views.AdminView,
+    component: loadView('AdminView'),
     children: [
       {path: '', component: views.AdminDashboardView},
       {path: 'loans', component: views.AdminLoansView},
@@ -37,12 +41,12 @@ const routes: RouteConfig[] = [
   {
     path: '/find',
     name: 'find',
-    component: views.Find,
+    component: loadView('FindView'),
   },
   {
     path: '/library',
     name: 'library',
-    component: views.Library,
+    component: loadView('LibraryView')
   }
 ];
 const options: RouterOptions = {
