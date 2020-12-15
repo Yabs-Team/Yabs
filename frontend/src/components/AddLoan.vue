@@ -116,7 +116,7 @@ export default defineComponent({
       if (value) {
         inputState.value = true;
       }
-    })
+    });
 
       console.log(popoverShow)
 
