@@ -15,7 +15,20 @@
             contain
             v-if="usersModule.currentUser.photo_path"
             :src="`http://localhost:3000/${usersModule.currentUser.photo_path}`"
-          ></v-img>
+          >
+            <template v-slot:placeholder>
+              <v-row
+                class="fill-height ma-0"
+                align="center"
+                justify="center"
+              >
+                <v-progress-circular
+                  indeterminate
+                  color="black lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
         </v-card>
       </v-col>
     </v-row>
@@ -37,7 +50,7 @@
         large
         @click="savePicture"
       >
-        Lägg till
+        Uppdatera
       </v-btn>
     </v-card>
 
