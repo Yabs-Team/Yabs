@@ -33,7 +33,10 @@
       </v-col>
     </v-row>
 
-    <v-card class="d-flex align-start justify-center pa-4 pt-7 pb-1" v-if="RoleChecker.isAdmin()">
+    <v-card
+      v-if="RoleChecker.isAdmin()"
+      class="d-flex align-start justify-center pa-4 pt-7 pb-1"
+    >
       <v-file-input
         v-model="image"
         class="pa-0"
@@ -56,15 +59,16 @@
 
     <v-snackbar v-model="snackbar">
       {{ snackbarText }}
-        <template>
-          <v-btn
-            color="primary"
-            text
-            @click="snackbar = false"
-          >
-            Close
-          </v-btn>
-        </template>
+      <template>
+        <v-btn
+          color="primary"
+          s
+          text
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
     </v-snackbar>
 
     <v-row>
