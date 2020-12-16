@@ -80,12 +80,13 @@ export default defineComponent({
       }
     }
 
+    created();
+
     return {
       search,
       headers,
       allUsers,
       selectRoles,
-      created,
       updateUserRoles,
       convertListToA
     };
