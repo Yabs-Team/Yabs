@@ -146,6 +146,5 @@ export default class Profile extends Vue {
   .image{
     width: 50%;
     margin: auto;
-    // padding-bottom: 2.5vh;
   }
 </style>
