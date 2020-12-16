@@ -33,6 +33,7 @@ const routes: RouteConfig[] = [
       {path: '', component: views.AdminDashboardView},
       {path: 'loans', component: views.AdminLoansView},
       {path: 'titles', component: views.AdminTitlesView},
+      {path: 'titles/:id', component: views.AdminTitlesEditView},
       {path: 'books', component: views.AdminBooksView},
       {path: 'cards', component: views.AdminCardsView},
       {path: 'users', component: views.AdminUsersView},
