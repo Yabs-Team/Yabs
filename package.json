@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "docsify": "^4.9.4"
+    "@types/jest": "^26.0.19",
+    "@vue/test-utils": "^1.1.1",
+    "docsify": "^4.9.4",
+    "vue-property-decorator": "^9.1.2"
   }
 }
