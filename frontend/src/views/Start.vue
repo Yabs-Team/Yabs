@@ -128,34 +128,7 @@ export default ({
     };
   }
 });
-
-// @Component({
-//   components: {
-//     LoanListComponent,
-//     LoadingIcon,
-//   },
-// })
-// export default class Start extends Vue {
-//   public size: string = 'lg';
-//   public primary: string = 'primary';
-//   public loading: boolean = true;
-//   private usersModule: VuexModule = UsersModule;
-
-//   // The users module is imported and used in order to get information about the current user
-//   // but also so that the possibility for a user to monitor its soon expiring loans.
-//   // The Loans Module is imported so that we can fetch all info about the loans and since
-//   // there is a relation between loans and users the constructor instantiates the class
-//   // by fetching all the information from the two modules
-
-//   public created(): void {
-//     if(UsersModule.currentUserID){
-//       UsersModule.fetchAll();
-//       LoansModule.fetchAll();
-//     }
-//   }
-// }
 </script>
-
 
 <style lang="sass">
 
