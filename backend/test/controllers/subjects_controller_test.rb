@@ -33,6 +33,6 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
       delete api_v1_subject_url(@subject), as: :json
     end
 
-    assert_response 200
+    assert_response 204
   end
 end

@@ -63,7 +63,7 @@ class Api::V1::TitlesController < ApplicationController
 
   def destroy
     @title.destroy
-    render json: @title
+    render json: @title, status: :no_content
   end
 
   # Set title method, find the current title and sets the title to that instance in order

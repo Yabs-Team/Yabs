@@ -33,6 +33,6 @@ class TitlesControllerTest < ActionDispatch::IntegrationTest
       delete api_v1_title_url(@title), as: :json
     end
 
-    assert_response 200
+    assert_response 204
   end
 end
