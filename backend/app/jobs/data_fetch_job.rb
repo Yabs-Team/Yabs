@@ -22,7 +22,7 @@ class DataFetchJob < ApplicationJob
 
   def insert_data(users, token)
     users.each do |person|
-      year = person.creation_time.split()[3]
+      year = person.creation_time.year.to_s
       token << person.id
       uid = year[year.length / 2..-1] + person.id.to_str[13..-1]
 
