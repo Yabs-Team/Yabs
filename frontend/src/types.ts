@@ -1,5 +1,3 @@
-import { Action } from 'vuex';
-
 export {
   User,
   UserForm,

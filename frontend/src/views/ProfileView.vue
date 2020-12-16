@@ -38,7 +38,6 @@ import CigCanvas from '@/components/CigCanvas.vue';
 import AddLoan from '@/components/AddLoan.vue';
 import LoanListComponent from '@/components/LoanListComponent.vue';
 import UsersModule from '../store/modules/UsersModule';
-import { VuexModule } from 'vuex-module-decorators';
 import LoansModule from '../store/modules/LoansModule';
 import RoleChecker from '@/helpers/RoleChecker';
 import roleToText from '@/helpers/roleToText';
