@@ -33,6 +33,6 @@ class LoansControllerTest < ActionDispatch::IntegrationTest
       delete api_v1_loan_url(@loan), as: :json
     end
 
-    assert_response 200
+    assert_response 204
   end
 end
