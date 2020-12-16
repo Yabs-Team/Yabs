@@ -33,57 +33,65 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator';
+import { SetupContext, defineComponent, computed, ref } from '@vue/composition-api';
 import UsersModule from '@/store/modules/UsersModule';
-import { VuexModule } from 'vuex-module-decorators';
 import RoleChecker from '@/helpers/RoleChecker';
 import { User, UserCollection } from '@/types';
-import convertListToA from '@/helpers/convertNestedToArray';
 import convertListToN from '@/helpers/convertArrayToNested';
+import convertListToA from '@/helpers/convertNestedToArray';
 
-@Component({
-  components: {
-  },
-})
-export default class AdminUsersVIew extends Vue {
-  private UsersModule: VuexModule = UsersModule;
-  private RoleChecker: RoleChecker = RoleChecker;
-  private convertListToA: Function = convertListToA;
+export default defineComponent({
+  name: 'AdminUsersView',
+  setup(_: object, { root }: SetupContext): object {
+    const search = ref('');
+    const headers: object[] = [
+      { text: 'Namn', value: 'name' },
+      { text: 'Email', value: 'email' },
+      { text: 'Roller', value: 'role' },
+      { text: '', value: 'actions' },
+    ];
 
-  private search: string = '';
-  private headers: object[] = [
-    { text: 'Namn', value: 'name' },
-    { text: 'Email', value: 'email' },
-    { text: 'Roller', value: 'role' },
-    { text: '', value: 'actions' },
-  ];
-  get allUsers(): UserCollection {
-    let users = convertListToN(UsersModule.allAsArray
-      .map((user) => {
-        user.assignedRoles = RoleChecker.assignedRoles(user).map((number) => { return number.toString(); });
-        return user;
-      }), 'uid');
-    return users;
-  }
+    const allUsers = computed ((): UserCollection => {
+      let users = convertListToN(UsersModule.allAsArray
+        .map((user) => {
+          user.assignedRoles = RoleChecker.assignedRoles(user).map((number) => { return number.toString(); });
+          return user;
+        }), 'uid');
+      return users;
+    });
 
-  private selectRoles: object[] = Object.keys(RoleChecker.roles()).map((key) => {
-    return { 
-      value: key, 
-      text: RoleChecker.roles()[Number(key)] 
-    }; 
-  }).filter(selectRole => Number(selectRole.value));
-  
-  private created(): void {
-    UsersModule.fetchAll();
-  }
+    const selectRoles = computed ((): object[] => {
+      return Object.keys(RoleChecker.roles()).map((key) => {
+        return {
+          value: key, 
+          text: RoleChecker.roles()[Number(key)] 
+        }; 
+      }).filter(selectRole => Number(selectRole.value));
+    });
 
-  private updateUserRoles(user: User): void {
-    if (user.assignedRoles!.length >= 1) {
-      user.role = user.assignedRoles!.reduce((acc, num) => acc += Number(num), 0);
-      UsersModule.update(user);
+    function created(): void {
+      UsersModule.fetchAll();
     }
+
+    function updateUserRoles(user: User): void {
+      if (user.assignedRoles!.length >= 1) {
+        user.role = user.assignedRoles!.reduce((acc, num) => acc += Number(num), 0);
+        UsersModule.update(user);
+      }
+    }
+
+    created();
+
+    return {
+      search,
+      headers,
+      allUsers,
+      selectRoles,
+      updateUserRoles,
+      convertListToA
+    };
   }
-}
+});
 </script>
 
 <style scoped>
