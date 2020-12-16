@@ -59,11 +59,12 @@
 </template>
 
 <script lang="ts">
+import { SetupContext } from '@vue/composition-api';
+import { Vue } from 'vue-property-decorator';
 // This is the admin view and has no child nor parent components and is therefore only
 // used for the sole purpose of giving the admin opportunities to go to the requested route
-export default ({
-  name: 'AdminView',
-  setup(): object {
+export default class AdminView extends Vue {
+  setup(_: object, { root }: SetupContext): object {
     const items: object[] = [
       { title: 'Dashboard', icon: 'dashboard', path: '/admin'},
       { title: 'Loans', icon: 'library_books', path: '/admin/loans' },
@@ -75,7 +76,7 @@ export default ({
     
     return { items };
   }
-});
+};
 </script>
 
 <style>

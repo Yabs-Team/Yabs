@@ -33,14 +33,14 @@
 </template>
 
 <script lang="ts">
+import { Vue } from 'vue-property-decorator';
 import { SetupContext } from '@vue/composition-api';
 import UsersModule from '@/store/modules/UsersModule';
 import RoleChecker from '@/helpers/RoleChecker';
 import { User, UserCollection } from '@/types';
 import convertListToN from '@/helpers/convertArrayToNested';
 
-export default ({
-  name: 'AdminUsersView',
+export default class AdminUsersView extends Vue {
   setup(_: object, { root }: SetupContext): object {
     const search: string = '';
     const headers: object[] = [
@@ -88,7 +88,7 @@ export default ({
       updateUserRoles
     };
   }
-});
+};
 </script>
 
 <style scoped>
