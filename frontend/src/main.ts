@@ -3,10 +3,10 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
-import compositionApi from '@vue/composition-api';
+import VueCompositionAPI from '@vue/composition-api';
 
 Vue.config.productionTip = false;
-Vue.use(compositionApi);
+Vue.use(VueCompositionAPI);
 
 new Vue({
   el: '#app',
