@@ -42,6 +42,7 @@ import { VuexModule } from 'vuex-module-decorators';
 import LoansModule from '../store/modules/LoansModule';
 import RoleChecker from '@/helpers/RoleChecker';
 import roleToText from '@/helpers/roleToText';
+import { User, UserModuleType } from '@/types';
 
 @Component({
   components: {
@@ -51,7 +52,7 @@ import roleToText from '@/helpers/roleToText';
   },
 })
 export default class Profile extends Vue {
-  private usersModule: VuexModule = UsersModule;
+  private usersModule: UserModuleType = UsersModule;
   private RoleChecker: RoleChecker = RoleChecker;
   private roleToText: Function = roleToText;
 
@@ -59,8 +60,9 @@ export default class Profile extends Vue {
     LoansModule.fetchAll();
   }
 
-  private getUser():string {
-    return this.usersModule.all[this.$route.params.id];
+  private getUser(): User {
+    let id: number = parseInt(this.$route.params.id);
+    return this.usersModule.all[id];
   }
 }
 </script>

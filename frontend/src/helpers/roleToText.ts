@@ -1,20 +1,17 @@
 export default function roleToText(role: number): string {
-  const roleList = [];
-  const roleText = {
+  const roleText: {[key: number]: string} = {
     1: 'Elev',
     2: 'Elevhälsoteam',
     4: 'Lärare',
-    8: 'vaktmästare',
+    8: 'Vaktmästare',
     16: 'Admin',
     32: 'Rektor'
   };
 
-  while(role > 0) {
-    let k = Math.floor(Math.log(role) / Math.log(2));
-    let result = Math.pow(2, k);
-    roleList.push(roleText[result]);
-    role -= result;
-  }
+  const rolesKeys: number[] = Object.keys(roleText).map(Number);
+  const roles: string[] = rolesKeys.filter(
+    (bitwise) => role & bitwise).map(
+    (bitwise) => roleText[bitwise]);
   
-  return roleList.join(', '); 
+  return roles.join(', '); 
 }
