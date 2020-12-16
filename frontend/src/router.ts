@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter, { RouterOptions } from 'vue-router';
 import { RouteConfig } from 'vue-router/types/router';
-import * as views from '@/views';
 
 Vue.use(VueRouter);
 
@@ -30,13 +29,13 @@ const routes: RouteConfig[] = [
     name: 'admin',
     component: loadView('AdminView'),
     children: [
-      {path: '', component: views.AdminDashboardView},
-      {path: 'loans', component: views.AdminLoansView},
-      {path: 'titles', component: views.AdminTitlesView},
-      {path: 'titles/:id', component: views.AdminTitlesEditView},
-      {path: 'books', component: views.AdminBooksView},
-      {path: 'cards', component: views.AdminCardsView},
-      {path: 'users', component: views.AdminUsersView},
+      {path: '', component: loadView('AdminDashboardView')},
+      {path: 'loans', component: loadView('AdminLoansView')},
+      {path: 'titles', component: loadView('AdminTitlesView')},
+      {path: 'titles/:id', component: loadView('AdminTitlesEditView')},
+      {path: 'books', component: loadView('AdminBooksView')},
+      {path: 'cards', component: loadView('AdminCardsView')},
+      {path: 'users', component: loadView('AdminUsersView')},
     ]
   },
   {
