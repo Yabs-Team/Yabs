@@ -41,7 +41,6 @@ import UsersModule from '../store/modules/UsersModule';
 import LoansModule from '../store/modules/LoansModule';
 import RoleChecker from '@/helpers/RoleChecker';
 import roleToText from '@/helpers/roleToText';
-import { VuexModule } from 'vuex-module-decorators';
 import { User, UserModuleType } from '@/types';
 
 @Component({
