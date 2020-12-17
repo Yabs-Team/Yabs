@@ -5,7 +5,7 @@
         <v-card>
           <v-chip-group mandatory>
             <v-chip
-              v-if="!RoleChecker.isStudent()"
+              v-if="!rolechecker.isStudent"
               v-model="users"
               class="ma-2"
               color="success"
@@ -61,8 +61,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator';
-
+import { SetupContext, defineComponent, computed, ref } from '@vue/composition-api';
 import BookListComponent from '@/components/BookListComponent.vue';
 import UserListComponent from '@/components/UserListComponent.vue';
 import LoanListComponent from '@/components/LoanListComponent.vue';
@@ -71,24 +70,33 @@ import UsersModule from '@/store/modules/UsersModule';
 import LoansModule from '@/store/modules/LoansModule';
 import RoleChecker from '../helpers/RoleChecker';
 
-@Component({
+export default defineComponent({
+  name: 'FindView',
   components: {
     BookListComponent,
     UserListComponent,
     LoanListComponent
   },
-})
-export default class FindView extends Vue {
-  private RoleChecker: RoleChecker = RoleChecker;
-  users:boolean = false;
-  loans:boolean = false;
-  books:boolean = false;
+  setup(_: object, { root }: SetupContext): object {
+    const rolechecker = RoleChecker;
+    const users = ref(false as boolean);
+    const loans = ref(false as boolean);
+    const books = ref(false as boolean);
 
-  private created(): void {
-    BooksModule.fetchAll();
-    UsersModule.fetchAll();
-    LoansModule.fetchAll();
+    function created(): void {
+      BooksModule.fetchAll();
+      UsersModule.fetchAll();
+      LoansModule.fetchAll();
+    }
+
+    created();
+
+    return {
+      rolechecker,
+      users,
+      loans,
+      books
+    };
   }
-
-}
+});
 </script>
