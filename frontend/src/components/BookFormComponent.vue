@@ -78,7 +78,16 @@ export default class BookFormComponent extends Vue {
 
   private onSubmit(evt: Event): void {
     evt.preventDefault();
-    BooksModule.create(this.form);
+    const multiBookInput = this.form.barcode.split(',');
+    if (multiBookInput.length > 1) {
+      for (let bookBarcode of multiBookInput) {
+        const tempBook = {...this.form};
+        tempBook.barcode = bookBarcode.trim();
+        BooksModule.create(tempBook);
+      };
+    } else {
+      BooksModule.create(this.form);
+    };
     this.onReset();
   }
 
