@@ -39,7 +39,7 @@ class Api::V1::SubjectsController < ApplicationController
   # DELETE /subjects/1.json
   def destroy
     @subject.destroy
-    render json: @subject
+    render json: @subject, status: :no_content
   end
 
   private
