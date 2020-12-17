@@ -15,12 +15,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
 import BooksModule from '../store/modules/BooksModule';
 import BookFormComponent from '@/components/BookFormComponent.vue';
 import BookListComponent from '@/components/BookListComponent.vue';
 import TitlesModule from '../store/modules/TitlesModule';
-import { onMounted } from '@vue/composition-api';
 
 export default({
   name: 'AdminBooksView',
