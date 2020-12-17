@@ -10,7 +10,7 @@
         Loans
       </h1>
       <div class="flex">
-        <div style="margin-right: 50px">
+        <div>
           <LoanFormComponent />
         </div>
         <div>
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div style="margin-top: 50px">
+    <div>
       <h1 class="display-2">
         Return
       </h1>
@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component} from 'vue-property-decorator';
 import LoanFormComponent from '@/components/LoanFormComponent.vue';
 import LoanListComponent from '@/components/LoanListComponent.vue';
 import ReturnLoanComponent from '@/components/ReturnLoanComponent.vue';
@@ -63,5 +63,13 @@ export default class AdminLoansView extends Vue {
 
 .flex > div {
   flex: 1;
+}
+
+.flex {
+  margin-right: 50px;
+}
+
+.display-2 {
+  margin-top: 50px;
 }
 </style>
