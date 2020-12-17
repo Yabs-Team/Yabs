@@ -32,7 +32,6 @@
         </v-card>
       </v-col>
     </v-row>
-
     <v-card
       v-if="RoleChecker.isAdmin()"
       class="d-flex align-start justify-center pa-4 pt-7 pb-1"
@@ -56,21 +55,18 @@
         Uppdatera
       </v-btn>
     </v-card>
-
     <v-snackbar v-model="snackbar">
       {{ snackbarText }}
-      <template>
-        <v-btn
-          color="primary"
-          s
-          text
-          @click="snackbar = false"
-        >
-          Close
-        </v-btn>
-      </template>
+        <template>
+          <v-btn
+            color="primary"
+            text
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
     </v-snackbar>
-
     <v-row>
       <v-col col="12">
         <v-card>
@@ -136,7 +132,6 @@ export default class Profile extends Vue {
     UsersModule.update(formData).then((response: User) => {
       console.log('user updated profile!');
     }).catch((error: object) => {
-      // TODO: show in notification to user
       this.snackbarText = error.toString();
       this.snackbar = true;
       console.error(error);
@@ -150,6 +145,5 @@ export default class Profile extends Vue {
   .image{
     width: 50%;
     margin: auto;
-    // padding-bottom: 2.5vh;
   }
 </style>
