@@ -30,7 +30,7 @@ export default defineComponent({
     const headers = [
       { text: 'Titel', value: 'title.name' },
       { text: 'Skick', value: 'condition' },
-      { text: 'Sträckkod', value: 'barcode' },
+      { text: 'Streckkod', value: 'barcode' },
     ] as object;
 
     return {
