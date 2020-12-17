@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts">
-import { SetupContext, defineComponent, computed, ref } from '@vue/composition-api';
+import { SetupContext, defineComponent, ref } from '@vue/composition-api';
 import BookListComponent from '@/components/BookListComponent.vue';
 import UserListComponent from '@/components/UserListComponent.vue';
 import LoanListComponent from '@/components/LoanListComponent.vue';
