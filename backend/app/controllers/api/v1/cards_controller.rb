@@ -4,8 +4,9 @@ class Api::V1::CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    # @cards = Card.all
-    return 'hhihi'
+    p Card.all
+    render json: Card.all
+    # return 'hhihi'
   end
 
   # GET /cards/1

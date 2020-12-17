@@ -1,3 +1,4 @@
 class Card < ApplicationRecord
-    belongs_to :users
+    self.primary_key = 'uid'
+    belongs_to :user
 end
