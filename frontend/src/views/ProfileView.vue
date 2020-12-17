@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="!usersModule.currentUser">
+  <v-card v-if="!UsersModule.currentUser">
     <v-card-text>
       Du är inte inloggad
     </v-card-text>
@@ -9,7 +9,7 @@
       <v-col col="12">
         <v-card>
           <v-card-title>{{ getUser().name }}</v-card-title>
-          <v-card-subtitle>{{ roleToText(getUser().role) }} - {{ getUser().klass }}</v-card-subtitle>
+          <v-card-subtitle>{{ getUser().role }} - {{ getUser().klass }}</v-card-subtitle>
           <img
             v-if="getUser().photo_path"
             :src="`http://localhost:3000/${getUser().photo_path}`"
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import AddLoan from '@/components/AddLoan.vue';
 import LoanListComponent from '@/components/LoanListComponent.vue';
@@ -43,24 +43,31 @@ import RoleChecker from '@/helpers/RoleChecker';
 import roleToText from '@/helpers/roleToText';
 import { User, UserModuleType } from '@/types';
 
-@Component({
+
+export default defineComponent({
+  name: 'Profile',
   components: {
     CigCanvas,
     AddLoan,
     LoanListComponent,
   },
+  setup(_ : object, { root } : SetupContext) {
+
+    function created() : void {
+      LoansModule.fetchAll();
+    } 
+
+    function getUser():User {
+      return UsersModule.all[+root.$route.params.id];
+    }
+    return{
+      UsersModule,
+      RoleChecker,
+      created,
+      getUser
+    };
+  }
+
+
 })
-export default class Profile extends Vue {
-  private usersModule: UserModuleType = UsersModule;
-  private RoleChecker: RoleChecker = RoleChecker;
-  private roleToText: Function = roleToText;
-
-  private created(): void {
-    LoansModule.fetchAll();
-  }
-
-  private getUser():User {
-    return this.usersModule.all[+this.$route.params.id];
-  }
-}
 </script>

@@ -1,7 +1,7 @@
 <template>
   <ListComponent
     :headers="headers"
-    :items="loansModule.allAsArray"
+    :items="loansModule"
     class="elevation-1"
   />
 </template>
@@ -11,16 +11,22 @@ import { Prop } from 'vue-property-decorator';
 import LoansModule from '../store/modules/LoansModule';
 import { VuexModule } from 'vuex-module-decorators';
 import ListComponent from '@/components/ListComponent.vue';
-import { defineComponent, SetupContext } from '@vue/composition-api';
+import { ref, defineComponent} from '@vue/composition-api';
+
+// This component is used as a Parent element and therefore has the headers object to 
+// send down the component tree using props in Vue and in this specific example, sending 
+// down the headers for the loan table
 
 export default defineComponent({
-  name: 'LoanListComponent',
+  name: 'TitleFormComponent',
   components: {
     ListComponent
   },
-  setup(_ : object, ctx : SetupContext) {
-    const loansModule: VuexModule = LoansModule;
-    const headers: object[] = [
+  setup(_ : object, ctx : object) : object {
+
+    const loansModule : any = LoansModule.allAsArray ;
+  
+    const headers : object[] = [
       { text: 'Lånad av', value: 'loaned_by.name' },
       { text: 'Utlånad av', value: 'lent_by.name' },
       { text: 'Boktitel', value: 'book.title.name' },

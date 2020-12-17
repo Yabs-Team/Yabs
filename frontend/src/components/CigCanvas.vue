@@ -67,6 +67,7 @@ import UsersModule from '../store/modules/UsersModule';
 import { User } from '@/types';
 import roleToText from '@/helpers/roleToText';
 
+
 @Component({
   directives: {
     resize,
@@ -84,7 +85,6 @@ export default class CigCanvas extends Vue {
   public height: number = 0;
   public size: number = 1;
   public context: CanvasRenderingContext2D | null = null;
-  private roleToText: Function = roleToText;
 
   
   // Method userNames is used in order to filter out the users that are not deleted to verify
