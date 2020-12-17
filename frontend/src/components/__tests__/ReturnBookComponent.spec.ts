@@ -1,6 +1,5 @@
 import { Wrapper } from '@vue/test-utils';
 import { shallowFactory } from '@/helpers/testFactoryHelpers';
-import Vue from 'vue';
 import ReturnLoanComponent from '@/components/ReturnLoanComponent.vue';
 import BooksModule from '@/store/modules/BooksModule';
 
