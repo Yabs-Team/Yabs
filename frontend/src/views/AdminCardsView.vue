@@ -21,32 +21,38 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import CardFormComponent from '@/components/CardFormComponent.vue';
 import CanvasContainer from '@/components/CanvasContainer.vue';
 import UsersModule from '../store/modules/UsersModule';
 
-@Component({
+export default defineComponent({
+  name: 'AdminCardsView',
   components: {
     CardFormComponent,
     CanvasContainer
-  }
-})
-export default class AdminCardsViews extends Vue {
-  public images: File[] = [];
+  },
+  setup(_: object, { root }: SetupContext) {
+    const images: File[] = ref([]);
+  
+    // The on send images getter takes the image from the event target and sets it to the instance
+    // of the image
+  
+    function onSendImages(sendImages: File[]): void {
+      this.images = sendImages;
+    }
+  
+    function created(): void {
+      UsersModule.fetchAll();
+    }
 
-  // The on send images getter takes the image from the event target and sets it to the instance
-  // of the image
-
-  private onSendImages(images: File[]): void {
-    this.images = images;
-  }
-
-  private created(): void {
-    UsersModule.fetchAll();
+    created();
+    return {
+      images, onSendImages
+    };
   }
   
-}
+});
 </script>
 
 
