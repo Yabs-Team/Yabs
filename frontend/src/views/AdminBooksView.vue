@@ -19,8 +19,9 @@ import BooksModule from '../store/modules/BooksModule';
 import BookFormComponent from '@/components/BookFormComponent.vue';
 import BookListComponent from '@/components/BookListComponent.vue';
 import TitlesModule from '../store/modules/TitlesModule';
+import { defineComponent } from '@vue/composition-api';
 
-export default({
+export default defineComponent({
   name: 'AdminBooksView',
   components: {
     BookFormComponent,
