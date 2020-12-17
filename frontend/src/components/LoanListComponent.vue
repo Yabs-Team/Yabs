@@ -25,6 +25,7 @@ export default defineComponent({
       { text: 'Utlånad av', value: 'lent_by.name' },
       { text: 'Boktitel', value: 'book.title.name' },
       { text: 'Utgångsdatum', value: 'expiration_date' },
+      { text: 'Streckkod', value: 'book_id' }
     ];
     return { loansModule, headers };
   }
