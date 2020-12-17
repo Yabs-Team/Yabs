@@ -1,64 +1,62 @@
 <template>
-  <div id="myContainer">
-    <div class="my-3">
-      <v-btn
-        id="exPopoverReactive1" 
-        ref="button"
-        :disabled="popoverShow"
-        variant="primary"
-      >
-        <h1 class="material-icons icon">
-          add
-        </h1>
-      </v-btn>
-    </div>
-    <v-tooltip
-      ref="popover"
-      target="exPopoverReactive1"
-      triggers="click"
-      :show.sync="popoverShow"
-      placement="bottom"
-      container="myContainer"
+  <div class="text-center">
+    <v-menu
+      v-model="menu"
+      :close-on-content-click="false"
+      :nudge-width="300"
+      offset-y
       @show="onShow"
       @shown="onShown"
       @hidden="onHidden"
     >
-      <template slot="title">
-        Skanna boken du vill låna
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="none"
+          v-bind="attrs"
+          v-on="on"
+        >
+          Låna bok
+        </v-btn>
       </template>
-      <div>
-        <v-item-group
-          class="mb-1"
-          label="Bok ID"
-          label-for="pop1"
-          :state="inputState"
-          horizontal=""
-          invalid-feedback="This field is required"
-        >
-          <v-text-field
-            id="pop1"
-            ref="input"
-            v-model="input"
+
+      <v-card>
+        <template>
+          Skanna boken du vill låna
+        </template>
+        <div>
+          <v-item-group
+            class="mb-1"
+            label="Bok ID"
+            label-for="pop1"
             :state="inputState"
+            horizontal=""
+            invalid-feedback="This field is required"
+          >
+            <v-text-field
+              id="pop1"
+              ref="input"
+              v-model="input"
+              :state="inputState"
+              size="sm"
+            />
+          </v-item-group>
+          <v-btn
             size="sm"
-          />
-        </v-item-group>
-        <v-btn
-          size="sm"
-          variant="danger"
-          @click="onClose"
-        >
-          Cancel
-        </v-btn>
-        <v-btn
-          size="sm"
-          variant="primary"
-          @click="onOk"
-        >
-          Ok
-        </v-btn>
-      </div>
-    </v-tooltip>
+            variant="danger"
+            @click="onCancel"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            size="sm"
+            variant="primary"
+            @click="onOk"
+          >
+            Ok
+          </v-btn>
+        </div>
+      </v-card>
+    </v-menu>
   </div>
 </template>
 
@@ -69,12 +67,13 @@ import { Component, Watch, Prop, Vue } from 'vue-property-decorator';
 export default class AddLoan extends Vue {
   public input: string = '';
   public inputState: boolean | null = null;
- 
+  public menu: boolean = false;
   public inputReturn: string = '';
-  public popoverShow: boolean = false;
 
-  public onClose(): void {
-    this.popoverShow = false;
+
+  public onCancel(): void {
+    this.menu = false;
+    console.log('close');
   }
 
   public onOk(): void {
@@ -82,10 +81,13 @@ export default class AddLoan extends Vue {
       this.inputState = false;
     }
     if (this.input) {
-      this.onClose();
+      this.onCancel();
       /* "Return" our popover "form" results */
       this.inputReturn = this.input;
+      this.input = '';
     }
+    console.log('hej');
+    
   }
 
   public onShow(): void {
@@ -100,12 +102,14 @@ export default class AddLoan extends Vue {
     /* Called just after the popover has been shown */
     /* Transfer focus to the first input */
     this.focusRef(this.$refs.input);
+    console.log('on show körs');
   }
 
   public onHidden(): void {
     /* Called just after the popover has finished hiding */
     /* Bring focus back to the button */
     this.focusRef(this.$refs.button);
+    console.log('hidden körs');
   }
 
   public focusRef(ref: any): void { //eslint-disable-line @typescript-eslint/no-explicit-any
@@ -117,6 +121,7 @@ export default class AddLoan extends Vue {
         (ref.$el || ref).focus();
       });
     });
+    console.log('on körs focus');
   }
 
   @Watch('input')
@@ -128,9 +133,7 @@ export default class AddLoan extends Vue {
 }
 </script>
 
-
 <style lang="sass" scoped>
-    .icon
-        font-size: 30px
+    .v-menu
+      height: 400px 
 </style>
-
