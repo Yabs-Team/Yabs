@@ -5,6 +5,7 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  # config.reload_controllers = !Rails.env.production?
 
   config.cache_classes = true
 
