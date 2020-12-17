@@ -13,12 +13,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import NavbarComponent from '@/components/NavbarComponent.vue';
 
-@Component({
+export default({
+  name: 'App',
   components: {
     NavbarComponent,
   },
-})
-export default class App extends Vue {}
+});
+
 </script>
 
 <style lang="sass">
