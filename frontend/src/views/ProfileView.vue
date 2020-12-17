@@ -57,15 +57,15 @@
     </v-card>
     <v-snackbar v-model="snackbar">
       {{ snackbarText }}
-        <template>
-          <v-btn
-            color="primary"
-            text
-            @click="snackbar = false"
-          >
-            Close
-          </v-btn>
-        </template>
+      <template>
+        <v-btn
+          color="primary"
+          text
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
     </v-snackbar>
     <v-row>
       <v-col col="12">
