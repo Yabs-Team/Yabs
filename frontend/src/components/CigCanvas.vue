@@ -77,37 +77,6 @@ export default defineComponent({
   directives: {
     resize,
   },
-<<<<<<< HEAD
-})
-export default class CigCanvas extends Vue {
-  @Prop({ default: null }) public image!: File | null;
-  @Prop({ default: false }) public sendCanvas!: boolean;
-
-  public name: string = '';
-  public barcode: string = '';
-  public role: number = 0;
-  public email: string = '';
-  public width: number = 0;
-  public height: number = 0;
-  public size: number = 1;
-  public context: CanvasRenderingContext2D | null = null;
-  private roleToText: Function = roleToText;
-
-  
-  // Method userNames is used in order to filter out the users that are not deleted to verify
-  // that the user that you are trying to render on the card is an actual active user
-  
-  private get userNames(): string[] {
-
-    return Object.entries(UsersModule.all)
-      .filter(([key, user]) => !user.name.includes('Deleted User'))
-      .map(([key, user]) => user.name);
-  }
-
-
-  // checkUserData is used to fill the instances of the class with information from the 
-  // UsersModule so that the card has the right inforamtion
-=======
   props: {
     image: {type: File, default: null},
     sendCanvas: {type: Boolean, default: false},
@@ -135,8 +104,6 @@ export default class CigCanvas extends Vue {
         .filter(([key, user]) => !(user as User).name.includes('Deleted User'))
         .map(([key, user]) => (user as User).name);
     }
->>>>>>> all but CigCanvas done
-
     // checkUserData is used to fill the instances of the class with information from the 
     // UsersModule so that the card has the right inforamtion
 
@@ -279,40 +246,8 @@ export default class CigCanvas extends Vue {
           height / 1.7 + height / 8,
           width,
         );
-<<<<<<< HEAD
-      }
-    }, 200);
-  }
-
-  // draw text method renders the text on the canvas in order to style it and also get
-  // good fonts and such
-
-  public drawText(): void {
-    if (this.context){
-      const firstFontSize = this.width / 10;
-      const secondFontSize = this.width / 20;
-
-      this.context.font = firstFontSize + 'px Arial';
-      this.context.textAlign = 'center';
-      this.context.fillStyle = '#ffffff';
-      this.context.fillText(
-        this.name,
-        this.width / 2,
-        this.height / 2 + this.height / 8,
-        this.width,
-      );
-      this.context.fillText(
-        roleToText(this.role),
-        this.width / 2,
-        this.height / 1.7 + this.height / 8,
-        this.width,
-      );
-    } 200;
-  }
-=======
       } 200;
     }
->>>>>>> all but CigCanvas done
 
     // This is a watch action that monitors the send the instance sendCanvas to see if the 
     // boolean is being mutated in any way and also blobs the image to send it via the 
