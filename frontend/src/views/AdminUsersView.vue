@@ -12,6 +12,7 @@
       :items="convertListToA(allUsers)"
       :items-per-page="5"
       :search="search"
+      @click:row="userClick"
     >
       <template v-slot:item.role="{ item }">
         <v-select
@@ -33,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { SetupContext, defineComponent, computed, ref } from '@vue/composition-api';
+import { SetupContext, defineComponent, computed, ref} from '@vue/composition-api';
 import UsersModule from '@/store/modules/UsersModule';
 import RoleChecker from '@/helpers/RoleChecker';
 import { User, UserCollection } from '@/types';
@@ -43,6 +44,7 @@ import convertListToA from '@/helpers/convertNestedToArray';
 export default defineComponent({
   name: 'AdminUsersView',
   setup(_: object, { root }: SetupContext): object {
+    const router = root.$router;
     const search = ref('');
     const headers: object[] = [
       { text: 'Namn', value: 'name' },
@@ -80,6 +82,10 @@ export default defineComponent({
       }
     }
 
+    function userClick(user: User): void {
+      router.push(`/users/${user.uid}`);
+    }
+
     created();
 
     return {
@@ -88,7 +94,8 @@ export default defineComponent({
       allUsers,
       selectRoles,
       updateUserRoles,
-      convertListToA
+      convertListToA,
+      userClick
     };
   }
 });

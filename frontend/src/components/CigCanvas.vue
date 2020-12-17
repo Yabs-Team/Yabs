@@ -65,6 +65,7 @@ import resize from 'vue-resize-directive';
 import { setTimeout } from 'timers';
 import UsersModule from '../store/modules/UsersModule';
 import { User } from '@/types';
+import roleToText from '@/helpers/roleToText';
 
 @Component({
   directives: {
@@ -83,6 +84,7 @@ export default class CigCanvas extends Vue {
   public height: number = 0;
   public size: number = 1;
   public context: CanvasRenderingContext2D | null = null;
+  private roleToText: Function = roleToText;
 
   
   // Method userNames is used in order to filter out the users that are not deleted to verify
@@ -237,7 +239,7 @@ export default class CigCanvas extends Vue {
         this.width,
       );
       this.context.fillText(
-        this.role.toString(),
+        roleToText(this.role),
         this.width / 2,
         this.height / 1.7 + this.height / 8,
         this.width,
