@@ -67,6 +67,7 @@ export default defineComponent({
       });
 
       if(targetLoan) {
+        // Gets exsisting book from BooksModule
         const existingBook = BooksModule.allAsArray.find(x => (x.barcode == scannedBookId.value));
         if(existingBook){
           updatedBookCondition.title_id = existingBook.title_id; //eslint-disable-line camelcase
@@ -75,8 +76,8 @@ export default defineComponent({
         updatedBookCondition.condition = scannedBookStatus.value;
         LoansModule.delete(targetLoan);
         BooksModule.update(updatedBookCondition);
-        scannedBookId.value = '';
-        scannedBookStatus.value = '';
+        scannedBookId.value = ''; // Resets values on page to default 
+        scannedBookStatus.value = ''; // Resets values on page to default 
       };
     }
 
