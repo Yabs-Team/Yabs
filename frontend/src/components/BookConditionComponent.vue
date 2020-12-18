@@ -13,6 +13,7 @@
       readonly
     />
     <v-overflow-btn
+      v-model="form.condition"
       class="my-2"
       :items="statuses"
       label="Overflow Btn"
@@ -24,7 +25,7 @@
     />
     <v-btn
       color="primary"
-      type="submit"
+      @click="submit"
     >
       Update Book
     </v-btn>
@@ -34,7 +35,7 @@
 <script lang="ts">
 import BooksModule from '../store/modules/BooksModule';
 import { Book, BookForm } from '@/types';
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, ref } from '@vue/composition-api';
 
 interface BookConditionProps {
   title: string,
@@ -53,25 +54,24 @@ export default defineComponent({
     status:{type:String, default:'Unavailable'},
     note:{type:String, default:''}
   },
-  setup(props:BookConditionProps, ctx:Object){
+  setup(props:BookConditionProps){
 
     const statuses: string [] = ['Damaged', 'OK', 'Other'];
 
     const form: BookForm = {
-      condition: props.status,
+      condition: ref(props.status),
       title_id: props.title_id, //eslint-disable-line camelcase
       barcode: props.barcode
     };
 
-    function onSubmit(evt: Event): void {
-      evt.preventDefault();
+    function submit(): void {
       BooksModule.update(form);
       alert('Book Updated');
     }
     return{
       form,
       statuses,
-      onSubmit
+      submit
     };
   }
   

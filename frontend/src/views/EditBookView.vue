@@ -1,7 +1,8 @@
 <template>
   <div>
+      <!-- Todo: add cover to title interface and implement the code below for setting image src -->
+      <!-- :src="book.title.cover" -->
     <v-img
-      :src="book.title.cover"
       lazy-src="https://picsum.photos/id/11/100/60"
       aspect-ratio="1"
       class="grey lighten-2"
@@ -23,32 +24,35 @@
     </v-img>
     <BookConditionComponent 
       :title="book.title.name" 
-      :condition="book.condition" 
+      :title_id="book.title.id"
+      :status="book.condition" 
       :barcode="book.barcode"
+      :note="book.note"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { defineComponent, SetupContext, ref, Ref } from '@vue/composition-api';
 import BooksModule from '../store/modules/BooksModule';
 import BookConditionComponent from '../components/BookConditionComponent.vue';
 import TitlesModule from '../store/modules/TitlesModule';
 import { Title, Book } from '@/types';
 
-@Component({
+export default defineComponent({
+  name: 'EditBookView',
   components: {
     BookConditionComponent
-  }
-})
-export default class EditBook extends Vue {
-  private book: Book | null = null;
+  },
+  setup(_: object, { root }: SetupContext){
+    let book: Ref<Book> = ref({title: {} as Title} as Book);
 
-  private async created(): Promise<void> {
-    BooksModule.fetchSingle(this.$route.params.id).then((response: Book) => {
-      this.book = response;
+    BooksModule.fetchSingle(root.$route.params.id).then((response: Book) => {
+      book.value = response;
     });
+    return {
+      book
+    };
   }
-
-}
+});
 </script>

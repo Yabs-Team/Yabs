@@ -22,7 +22,7 @@ const routes: RouteConfig[] = [
   {
     path: '/books/:id',
     name: 'edit book',
-    component: loadView('EditBook'),
+    component: loadView('EditBookView'),
   },
   {
     path: '/admin',
