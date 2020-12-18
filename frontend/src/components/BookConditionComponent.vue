@@ -56,8 +56,6 @@ export default defineComponent({
   setup(props:BookConditionProps, ctx:Object){
 
     const statuses: string [] = ['Damaged', 'OK', 'Other'];
-    
-    console.log(props);
 
     const form: BookForm = {
       condition: props.status,
