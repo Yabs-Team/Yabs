@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, SetupContext } from '@vue/composition-api';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 import UsersModule from '../store/modules/UsersModule';
 import JSZip, { JSZipObject } from 'jszip';
 
