@@ -4,7 +4,6 @@ class Api::V1::CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    p Card.all
     render json: Card.all
     # return 'hhihi'
   end
@@ -12,6 +11,7 @@ class Api::V1::CardsController < ApplicationController
   # GET /cards/1
   # GET /cards/1.json
   def show
+    render json: @card
   end
 
   # GET /cards/new
@@ -19,37 +19,25 @@ class Api::V1::CardsController < ApplicationController
     @card = Card.new
   end
 
-  # GET /cards/1/edit
-  def edit
-  end
-
   # POST /cards
   # POST /cards.json
   def create
     @card = Card.new(card_params)
 
-    respond_to do |format|
-      if @card.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.' }
-        format.json { render :show, status: :created, location: @card }
-      else
-        format.html { render :new }
-        format.json { render json: @card.errors, status: :unprocessable_entity }
-      end
+    if @card.save
+      render json: @card
+    else
+      render json: @card.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /cards/1
   # PATCH/PUT /cards/1.json
   def update
-    respond_to do |format|
-      if @card.update(card_params)
-        format.html { redirect_to @card, notice: 'Card was successfully updated.' }
-        format.json { render :show, status: :ok, location: @card }
-      else
-        format.html { render :edit }
-        format.json { render json: @card.errors, status: :unprocessable_entity }
-      end
+    if @card.update(card_params)
+      render json: @card
+    else
+      render json: @card.errors, status: :unprocessable_entity
     end
   end
 
@@ -57,10 +45,10 @@ class Api::V1::CardsController < ApplicationController
   # DELETE /cards/1.json
   def destroy
     @card.destroy
-    respond_to do |format|
-      format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to api_v1_cards_url, notice: 'Card was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private
@@ -71,6 +59,6 @@ class Api::V1::CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:uid, :user_uid, :expiration_data, :status)
+      params.require(:card).permit(:uid, :user_id, :expiration_data, :status)
     end
 end
