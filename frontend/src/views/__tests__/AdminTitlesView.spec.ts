@@ -6,7 +6,7 @@ import Vue from 'vue';
 describe('AdminTitlesView.vue', () => {
   
   it('Is not empty', () => {
-    const wrapper: Wrapper<AdminTitlesView> = shallowFactory(AdminTitlesView);
+    const wrapper: Wrapper<Vue> = shallowFactory(AdminTitlesView);
     expect(wrapper.find('div').exists()).toBe(true);
   });
   
