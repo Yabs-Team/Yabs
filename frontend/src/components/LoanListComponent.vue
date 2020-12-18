@@ -1,7 +1,7 @@
 <template>
   <ListComponent
     :headers="headers"
-    :items="loansModule.allAsArray"
+    :items="LoansModule.allAsArray"
     class="elevation-1"
   />
 </template>
@@ -19,7 +19,6 @@ export default defineComponent({
     ListComponent
   },
   setup(_ : object, ctx : SetupContext) {
-    const loansModule: VuexModule = LoansModule;
     const headers: object[] = [
       { text: 'Lånad av', value: 'loaned_by.name' },
       { text: 'Utlånad av', value: 'lent_by.name' },
@@ -27,7 +26,7 @@ export default defineComponent({
       { text: 'Utgångsdatum', value: 'expiration_date' },
       { text: 'Streckkod', value: 'book_id' }
     ];
-    return { loansModule, headers };
+    return { LoansModule, headers };
   }
 });
 </script>

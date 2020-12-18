@@ -1,7 +1,7 @@
 <template>
   <ListComponent
     :headers="headers"
-    :items="titlesModule.allAsArray"
+    :items="TitlesModule.allAsArray"
     route-path="admin/titles"
     route-specifier="isbn"
     :use-actions="true"
@@ -24,7 +24,6 @@ export default defineComponent({
     ListComponent
   },
   setup(_: object, { root }: SetupContext) {
-    const titlesModule: VuexModule = TitlesModule;
 
     const headers: object[] = [
       { text: 'Titel', value: 'name' },
@@ -33,7 +32,7 @@ export default defineComponent({
       { text: 'ISBN', value: 'isbn' }
     ];
     
-    return { titlesModule, headers };
+    return { TitlesModule, headers };
   }
 });
 </script>
