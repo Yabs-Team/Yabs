@@ -2,6 +2,7 @@
   <div>
     <v-file-input
       id="file"
+      data-cy="file-input"
       class="input-file"
       multiple
       outlined
