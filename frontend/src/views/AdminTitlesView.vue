@@ -15,30 +15,32 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { defineComponent } from '@vue/composition-api';
 import TitlesModule from '../store/modules/TitlesModule';
 import TitleFormComponent from '@/components/TitleFormComponent.vue';
 import TitleListComponent from '@/components/TitleListComponent.vue';
 
-@Component({
-  components: {
-    TitleFormComponent,
-    TitleListComponent
-  }
-})
-
 // This component is a parent view for the components TitleFormComponent and the
 // TitleListComponent
 
-export default class AdminTitlesView extends Vue {
+export default defineComponent({
+  name: 'AdminTitlesView',
+  components: {
+    TitleFormComponent,
+    TitleListComponent
+  },
+  setup() {
 
-  // The created() function is the constructor in vue and instantiates the class by fetching
-  // all the titles from the backend
+    // The created() function is the constructor in vue and instantiates the class by fetching
+    // all the titles from the backend
+  
+    function created(): void {
+      TitlesModule.fetchAll();
+    }
 
-  private created(): void {
-    TitlesModule.fetchAll();
+    created();
   }
-}
+});
 </script>
 
 <style scoped>

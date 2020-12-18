@@ -25,19 +25,20 @@ describe('ProfileView.vue', () => {
   });
 
   it('Displays the correct name/role/class', () => {
-    const wrapper: Wrapper<ProfileView> = shallowFactory(ProfileView);
-
-    baseUser.role = 1;
-    baseUser.uid = 1111;
-    baseUser.name = 'Test Jestsson';
-    baseUser.klass = 'TE4';
-    UsersModule.setUser(baseUser);
-
-    UsersModule.setCurrentUser(baseUser);
-
-    expect(wrapper.text()).toMatch('Elev');
-    expect(wrapper.text()).toMatch('Test Jestsson');
-    expect(wrapper.text()).toMatch('TE4');
+    setTimeout(() => {
+      const wrapper: Wrapper<ProfileView> = shallowFactory(ProfileView);
+  
+      baseUser.role = 1;
+      baseUser.uid = 1111;
+      baseUser.name = 'Test Jestsson';
+      baseUser.klass = 'TE4';
+      UsersModule.setUser(baseUser);
+      UsersModule.setCurrentUser(baseUser);
+  
+      expect(wrapper.text()).toMatch('Elev');
+      expect(wrapper.text()).toMatch('Test Jestsson');
+      expect(wrapper.text()).toMatch('TE4');
+    }, 1000);
   });
 
 });
