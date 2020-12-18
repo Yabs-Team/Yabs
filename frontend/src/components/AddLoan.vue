@@ -82,7 +82,6 @@ export default class AddLoan extends Vue {
 
   public onCancel(): void {
     this.menu = false;
-    console.log('close');
   }
 
   public onOk(): void {
@@ -100,9 +99,6 @@ export default class AddLoan extends Vue {
           .then((payload: Loan) => this.$emit('loan-added', payload))
           .catch((failure: boolean) => console.log(failure));
         this.input = '';
-      } else {
-
-        console.log('hej');
       }
 
     
@@ -149,7 +145,3 @@ export default class AddLoan extends Vue {
 }
 </script>
 
-<style lang="sass" scoped>
-    .v-menu
-      height: 400px 
-</style>
