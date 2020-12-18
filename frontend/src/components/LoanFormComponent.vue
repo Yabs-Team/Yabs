@@ -54,7 +54,6 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
 import LoansModule from '../store/modules/LoansModule';
 import { Loan, LoanForm } from '../types';
 import UsersModule from '../store/modules/UsersModule';
