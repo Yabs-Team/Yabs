@@ -2,12 +2,12 @@
 
 one:
   uid: MyString
-  user_uid: MyString
+  user_id: MyString
   expiration_data: 2020-12-17 11:55:10
   status: MyString
 
 two:
-  uid: MyString
-  user_uid: MyString
+  uid: MyStri
+  user_id: MyString
   expiration_data: 2020-12-17 11:55:10
   status: MyString
