@@ -16,7 +16,6 @@
 
 <script lang="ts">
 import BooksModule from '../store/modules/BooksModule';
-import { VuexModule } from 'vuex-module-decorators';
 import ListComponent from '@/components/ListComponent.vue';
 import { defineComponent } from '@vue/composition-api';
 

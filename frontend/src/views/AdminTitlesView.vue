@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 import TitlesModule from '../store/modules/TitlesModule';
 import TitleFormComponent from '@/components/TitleFormComponent.vue';
 import TitleListComponent from '@/components/TitleListComponent.vue';

@@ -9,7 +9,7 @@ jest.mock('@/store/modules/BooksModule');
 describe('BookFormComponent.vue', () => {
   
   it('calls booksmodule with correct values', () => {
-    const wrapper: Wrapper<BookFormComponent> = factory(BookFormComponent);
+    const wrapper: Wrapper<Vue> = factory(BookFormComponent);
 
     wrapper.find('[data-jest=\'barcode\']').setValue('1234');
     wrapper.find('[data-jest=\'condition\']').setValue('ok');

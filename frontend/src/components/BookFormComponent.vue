@@ -54,7 +54,6 @@
 import TitlesModule from '../store/modules/TitlesModule';
 import BooksModule from '../store/modules/BooksModule';
 import { BookForm } from '../types';
-import { VuexModule } from 'vuex-module-decorators';
 import { defineComponent } from '@vue/composition-api';
 
 // This is the component for the book form which includes all the information for the book

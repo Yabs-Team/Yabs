@@ -34,7 +34,7 @@
 <script lang="ts">
 import BooksModule from '../store/modules/BooksModule';
 import { Book, BookForm } from '@/types';
-import { defineComponent, ref } from '@vue/composition-api';
+import { defineComponent } from '@vue/composition-api';
 
 interface BookConditionProps {
   title: string,
