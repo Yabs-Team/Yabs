@@ -17,6 +17,7 @@
     <v-form>
       <v-item-group>
         <v-autocomplete
+          data-cy="user-selector"
           v-model="name"
           :items="userNames()"
           @change="onNameInput"
@@ -30,6 +31,7 @@
         <v-btn
           class="btn"
           @click="downloadCanvas"
+          data-cy="download-btn"
         >
           Ladda ned kort
         </v-btn>

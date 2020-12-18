@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-file-input
+      data-cy="file-input"
       id="file"
       class="input-file"
       multiple
@@ -9,6 +10,7 @@
       @change="onFileSelect"
     />
     <v-btn
+      data-cy="add-file"
       color="primary"
       large
       @click="submit"
