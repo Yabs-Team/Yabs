@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="!usersModule.currentUser">
+  <v-card v-if="!UsersModule.currentUser">
     <v-card-text>
       Du är inte inloggad
     </v-card-text>
@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import AddLoan from '@/components/AddLoan.vue';
 import LoanListComponent from '@/components/LoanListComponent.vue';
@@ -96,56 +96,66 @@ import RoleChecker from '@/helpers/RoleChecker';
 import roleToText from '@/helpers/roleToText';
 import { User, UserModuleType } from '@/types';
 
-@Component({
+
+export default defineComponent({
+  name: 'Profile',
   components: {
     CigCanvas,
     AddLoan,
     LoanListComponent,
   },
+  setup(_ : object, { root } : SetupContext) {
+    const image = ref([] as Array<File>)
+    const snackbar = ref(false);
+    const snackbarText = ref('');
+
+    function created() : void {
+      LoansModule.fetchAll();
+    } 
+
+    function getUser():User {
+      return UsersModule.all[+root.$route.params.id];
+    }
+
+    function savePicture(): void {
+      let errorText = '';
+
+      if(image.value.length == 0){
+        errorText = 'No files selected. Please select an image!';
+      }else if(image.value.length > 1){
+        errorText = 'Too many files selected! Please select only one!';
+      }
+
+      if(errorText != ''){
+        snackbarText.value = errorText;
+        snackbar.value = true;
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('uid', root.$route.params.id);
+      formData.append('image', image.value[0] as Blob);
+      UsersModule.update(formData).then((response: User) => {
+        snackbarText.value = 'Users image has been updated!';
+      }).catch((error: object) => {
+        snackbarText.value = error.toString();
+      });
+      
+      snackbar.value = true;
+    }
+    return{
+      UsersModule,
+      RoleChecker,
+      created,
+      getUser,
+      savePicture,
+      snackbar,
+      snackbarText,
+      roleToText
+    };
+  }
 })
-export default class Profile extends Vue {
-  private usersModule: UserModuleType = UsersModule;
-  private RoleChecker: RoleChecker = RoleChecker;
-  private roleToText: Function = roleToText;
-  public image: File[] = [];
-  public snackbar: Boolean = false;
-  public snackbarText: String = '';
 
-  private created(): void {
-    LoansModule.fetchAll();
-  }
-
-  private getUser():User {
-    return this.usersModule.all[+this.$route.params.id];
-  }
-
-  public savePicture(): void {
-    let errorText = '';
-
-    if(this.image.length == 0){
-      errorText = 'No files selected. Please select an image!';
-    }else if(this.image.length > 1){
-      errorText = 'Too many files selected! Please select only one!';
-    }
-
-    if(errorText != ''){
-      this.snackbarText = errorText;
-      this.snackbar = true;
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('uid', this.$route.params.id);
-    formData.append('image', this.image[0] as Blob);
-    UsersModule.update(formData).then((response: User) => {
-      this.snackbarText = 'Users image has been updated!';
-    }).catch((error: object) => {
-      this.snackbarText = error.toString();
-    });
-    
-    this.snackbar = true;
-  }
-}
 </script>
 
 <style lang="scss">
