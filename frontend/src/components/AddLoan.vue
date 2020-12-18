@@ -62,6 +62,9 @@
 
 <script lang="ts">
 import { Component, Watch, Prop, Vue } from 'vue-property-decorator';
+import LoansModule from '../store/modules/LoansModule';
+import { Loan, AddLoan } from '../types';
+import UsersModule from '../store/modules/UsersModule';
 
 @Component
 export default class AddLoan extends Vue {
@@ -69,6 +72,12 @@ export default class AddLoan extends Vue {
   public inputState: boolean | null = null;
   public menu: boolean = false;
   public inputReturn: string = '';
+
+  public form: AddLoan = {
+    book_id: 0, //eslint-disable-line camelcase
+    lent_by_id: 2054282603, //eslint-disable-line camelcase
+    loaned_by_id: 0 //eslint-disable-line camelcase
+  };
 
 
   public onCancel(): void {
@@ -84,10 +93,20 @@ export default class AddLoan extends Vue {
       this.onCancel();
       /* "Return" our popover "form" results */
       this.inputReturn = this.input;
-      this.input = '';
-    }
-    console.log('hej');
+      this.form.book_id = parseInt(this.input); //eslint-disable-line camelcase
+      this.form.loaned_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
+      if (!!this.form.lent_by_id && !!this.form.loaned_by_id && !!this.form.book_id) {
+        LoansModule.create(this.form)
+          .then((payload: Loan) => this.$emit('loan-added', payload))
+          .catch((failure: boolean) => console.log(failure));
+        this.input = '';
+      } else {
+
+        console.log('hej');
+      }
+
     
+    }
   }
 
   public onShow(): void {
@@ -102,14 +121,12 @@ export default class AddLoan extends Vue {
     /* Called just after the popover has been shown */
     /* Transfer focus to the first input */
     this.focusRef(this.$refs.input);
-    console.log('on show körs');
   }
 
   public onHidden(): void {
     /* Called just after the popover has finished hiding */
     /* Bring focus back to the button */
     this.focusRef(this.$refs.button);
-    console.log('hidden körs');
   }
 
   public focusRef(ref: any): void { //eslint-disable-line @typescript-eslint/no-explicit-any
@@ -121,7 +138,6 @@ export default class AddLoan extends Vue {
         (ref.$el || ref).focus();
       });
     });
-    console.log('on körs focus');
   }
 
   @Watch('input')

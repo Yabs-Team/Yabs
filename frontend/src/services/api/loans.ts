@@ -1,4 +1,4 @@
-import { Loan, LoanForm } from '@/types';
+import { Loan, LoanForm, AddLoan } from '@/types';
 import APIRequest from './APIRequest';
 
 export default class LoansAPI extends APIRequest {
@@ -12,6 +12,14 @@ export default class LoansAPI extends APIRequest {
   }
 
   static create(request: LoanForm): Promise<Loan> {
+    return new Promise((res, rej) => {
+      this.Post<Loan>('v1/loans', request)
+        .then((resp) => {res(resp); })
+        .catch((err) => {rej(err); });
+    });
+  }
+
+  static createLoan(request: AddLoan): Promise<Loan> {
     return new Promise((res, rej) => {
       this.Post<Loan>('v1/loans', request)
         .then((resp) => {res(resp); })
