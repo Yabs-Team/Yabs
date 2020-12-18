@@ -5,8 +5,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { defineComponent } from '@vue/composition-api';
 
-@Component
-export default class AdminDashboardView extends Vue {}
+export default defineComponent({
+  name: 'AdminDashboardView'
+});
 </script>
