@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  uid: MyString
-  user_id: MyString
+  uid: 1
+  user_id: 1849468831
   expiration_data: 2020-12-17 11:55:10
-  status: MyString
+  status: testCard0
 
 two:
-  uid: MyStri
-  user_id: MyString
+  uid: 2
+  user_id: 1849468831
   expiration_data: 2020-12-17 11:55:10
-  status: MyString
+  status: TestCard1
