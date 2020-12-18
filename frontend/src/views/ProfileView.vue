@@ -94,7 +94,7 @@ import UsersModule from '../store/modules/UsersModule';
 import LoansModule from '../store/modules/LoansModule';
 import RoleChecker from '@/helpers/RoleChecker';
 import roleToText from '@/helpers/roleToText';
-import { User, UserModuleType } from '@/types';
+import { User } from '@/types';
 
 
 export default defineComponent({
