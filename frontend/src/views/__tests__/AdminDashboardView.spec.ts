@@ -1,7 +1,7 @@
 import { shallowFactory } from '@/helpers/testFactoryHelpers';
 import { Wrapper } from '@vue/test-utils';
 import AdminDashboardView from '../AdminDashboardView.vue';
-import Vue from 'vue'
+import Vue from 'vue';
 
 describe('AdminDashboardView.vue', () => {
   
