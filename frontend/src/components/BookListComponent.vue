@@ -6,7 +6,7 @@
 <template>
   <ListComponent
     :headers="headers"
-    :items="booksModule.allAsArray"
+    :items="BooksModule.allAsArray"
     :route-path="'books'"
     :route-specifier="'barcode'"
     class="elevation-1"
@@ -15,10 +15,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
 import BooksModule from '../store/modules/BooksModule';
-import { VuexModule } from 'vuex-module-decorators';
 import ListComponent from '@/components/ListComponent.vue';
+import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'BookListComponent',
@@ -39,6 +38,7 @@ export default defineComponent({
     };
   }
 });
+
 </script>
 
 <style lang="sass" scoped>

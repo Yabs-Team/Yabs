@@ -32,34 +32,50 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
 import BooksModule from '../store/modules/BooksModule';
 import { Book, BookForm } from '@/types';
+import { defineComponent } from '@vue/composition-api';
 
-@Component
-export default class BookStatusComponent extends Vue {
-  @Prop({default: 'No Data'}) private title!: string;
-  @Prop({default: 0}) private title_id!: number; //eslint-disable-line camelcase
-  @Prop({default: ''}) private barcode!: string;
-  @Prop({default: 'Unavailable'}) private status!: string;
-  @Prop({default: ''}) private note!: string;
+interface BookConditionProps {
+  title: string,
+  title_id: number, //eslint-disable-line camelcase
+  barcode: string,
+  status: string,
+  note: string
+};
 
-  private statuses: string[] = ['Damaged', 'OK', 'Other'];
+export default defineComponent({
+  name: 'BookStatusComponent',
+  props: {
+    title:{type:String, default:'No Data'},
+    title_id:{type:Number, default:0}, //eslint-disable-line camelcase
+    barcode:{type:String, default:''},
+    status:{type:String, default:'Unavailable'},
+    note:{type:String, default:''}
+  },
+  setup(props:BookConditionProps, ctx:Object){
 
+    const statuses: string [] = ['Damaged', 'OK', 'Other'];
 
-  private form: BookForm = {
-    condition: this.status,
-    title_id: this.title_id, //eslint-disable-line camelcase
-    barcode: this.barcode
-  };
+    const form: BookForm = {
+      condition: props.status,
+      title_id: props.title_id, //eslint-disable-line camelcase
+      barcode: props.barcode
+    };
 
-
-  private onSubmit(evt: Event): void {
-    evt.preventDefault();
-    BooksModule.update(this.form);
-    alert('Book Updated');
+    function onSubmit(evt: Event): void {
+      evt.preventDefault();
+      BooksModule.update(form);
+      alert('Book Updated');
+    }
+    return{
+      form,
+      statuses,
+      onSubmit
+    };
   }
-}
+  
+});
 </script>
 
 <style scoped>
