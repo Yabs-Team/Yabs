@@ -1,5 +1,21 @@
 {
   "dependencies": {
-    "docsify": "^4.9.4"
+    "docsify": "^4.9.4",
+    "husky": "^5.0.6",
+    "lint-staged": "^10.5.3"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "vue-cli-service lint --fix",
+      "git add ."
+    ]
   }
 }
