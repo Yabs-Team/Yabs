@@ -12,7 +12,6 @@
 <script lang="ts">
 import { defineComponent, SetupContext } from '@vue/composition-api';
 import TitlesModule from '../store/modules/TitlesModule';
-import { VuexModule } from 'vuex-module-decorators';
 import ListComponent from '@/components/ListComponent.vue';
 
 // The TitleListComponent inherits the information about the titles from the titles module
