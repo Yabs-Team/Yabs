@@ -75,6 +75,7 @@ export default class AddLoan extends Vue {
 
   public form: AddLoan = {
     book_id: 0, //eslint-disable-line camelcase
+    /* Hardcoded value atm for the school */
     lent_by_id: 2054282603, //eslint-disable-line camelcase
     loaned_by_id: 0 //eslint-disable-line camelcase
   };
@@ -94,6 +95,7 @@ export default class AddLoan extends Vue {
       this.inputReturn = this.input;
       this.form.book_id = parseInt(this.input); //eslint-disable-line camelcase
       this.form.loaned_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
+      /* This Checks if the form contains the necessary data  */
       if (!!this.form.lent_by_id && !!this.form.loaned_by_id && !!this.form.book_id) {
         LoansModule.create(this.form)
           .then((payload: Loan) => this.$emit('loan-added', payload))
