@@ -5,6 +5,8 @@ import { factory } from '@/helpers/testFactoryHelpers';
 import LoansModule from '@/store/modules/LoansModule';
 import UsersModule from '@/store/modules/UsersModule';
 import { User } from '@/types';
+import Vue from 'vue';
+
 
 jest.mock('@/store/modules/LoansModule', () => {
   return {
@@ -17,7 +19,7 @@ jest.mock('@/store/modules/LoansModule', () => {
 describe('LoanFormComponent.vue', () => {
   
   it('calls loansmodule with correct values', () => {
-    const wrapper: Wrapper<LoanFormComponent> = factory(LoanFormComponent);
+    const wrapper: Wrapper<Vue> = factory(LoanFormComponent);
     UsersModule.setCurrentUser({uid: 123} as User);
 
     wrapper.find('[data-jest=\'student_barcode\']').setValue('123');
