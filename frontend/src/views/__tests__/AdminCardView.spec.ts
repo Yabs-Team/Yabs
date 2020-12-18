@@ -5,7 +5,7 @@ import AdminCardsView from '../AdminCardsView.vue';
 describe('AdminCardsView.vue', () => {
   
   it('CardFormComponent exists in view', () => {
-    const wrapper: Wrapper<AdminCardsView> = shallowFactory(AdminCardsView);
+    const wrapper: Wrapper<Vue> = shallowFactory(AdminCardsView);
     expect(wrapper.find({name: 'CardFormComponent'}).exists()).toBe(true);
   });
 

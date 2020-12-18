@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, SetupContext } from '@vue/composition-api';
+import { ref, defineComponent, SetupContext, Ref } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
@@ -40,13 +40,13 @@ export default defineComponent({
     images: {type: Array, default: []}
   },
   setup(props : CanvasContainerProps){
-    let sendCanvas: boolean = ref(false);
+    let sendCanvas: Ref<boolean> = ref(false);
     let imageBlobs: Blob[] = [];
     
     // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
 
     function getAllCanvases(): void {
-      sendCanvas = !sendCanvas;
+      sendCanvas.value = !sendCanvas.value;
     }
 
     // The onImageReceived method takes an image and then compares it to the instance of images 
@@ -55,7 +55,7 @@ export default defineComponent({
 
     function onImageReceived(image: Blob): void {
       imageBlobs.push(image);
-      if (this.images.length === imageBlobs.length) {
+      if (props.images.length === imageBlobs.length) {
         downloadAll();
       }
     }
