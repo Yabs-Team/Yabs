@@ -16,7 +16,7 @@ describe('AdminView.vue', () => {
     const a = wrapper.findAll('router-link-stub');
     if (a.length == requiredItems.length) {
       for (let i:number = 0; i < a.length; i++) {
-        expect(requiredItems.find(item => a.at(i).text().includes(item))).not.toBeFalsy()
+        expect(requiredItems.find(item => a.at(i).text().includes(item))).not.toBeFalsy();
       }
     } else {
       expect(true).toBe(false);
