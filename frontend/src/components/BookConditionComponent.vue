@@ -35,7 +35,7 @@
 <script lang="ts">
 import BooksModule from '../store/modules/BooksModule';
 import { Book, BookForm } from '@/types';
-import { defineComponent, ref } from '@vue/composition-api';
+import { defineComponent } from '@vue/composition-api';
 
 interface BookConditionProps {
   title: string,
@@ -55,11 +55,9 @@ export default defineComponent({
     note:{type:String, default:''}
   },
   setup(props:BookConditionProps){
-
     const statuses: string [] = ['Damaged', 'OK', 'Other'];
-
-    const form: BookForm = {
-      condition: ref(props.status),
+    let form: BookForm = {
+      condition: props.status,
       title_id: props.title_id, //eslint-disable-line camelcase
       barcode: props.barcode
     };
