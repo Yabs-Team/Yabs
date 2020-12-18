@@ -31,6 +31,12 @@
       outlined
       data-cy="condition"
     />
+    <v-select
+          :items="items"
+          label="Tillgänglighet"
+          return-object
+          single-line
+    />
     <v-btn
       class="mr-4"
       type="submit"
