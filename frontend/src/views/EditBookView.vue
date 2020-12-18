@@ -23,6 +23,7 @@
       </template>
     </v-img>
     <BookConditionComponent 
+      v-if="book != null"
       :title="book.title.name" 
       :title_id="book.title.id"
       :status="book.condition" 
@@ -45,7 +46,7 @@ export default defineComponent({
     BookConditionComponent
   },
   setup(_: object, { root }: SetupContext){
-    let book: Ref<Book> = ref({title: {} as Title} as Book);
+    let book: Ref<Book | null> = ref(null);
 
     BooksModule.fetchSingle(root.$route.params.id).then((response: Book) => {
       book.value = response;
