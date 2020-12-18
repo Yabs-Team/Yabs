@@ -2,6 +2,7 @@
   <div>
     <v-file-input
       id="file"
+      data-cy="file-input"
       class="input-file"
       multiple
       outlined
@@ -9,6 +10,7 @@
       @change="onFileSelect"
     />
     <v-btn
+      data-cy="add-file"
       color="primary"
       large
       @click="submit"
