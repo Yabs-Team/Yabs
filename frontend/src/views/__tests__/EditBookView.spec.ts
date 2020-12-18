@@ -9,20 +9,20 @@ describe('EditBookView.vue', () => {
   const baseBook: Book = {
     barcode: '',
     condition: '',
-    created_at: '',
+    created_at: '', //eslint-disable-line camelcase
     note: '',
     title: {
       cost: 0,
-      created_at: '',
+      created_at: '', //eslint-disable-line camelcase
       id: 0,
       isbn: '',
       name: '',
-      title_type: '',
-      updated_at: ''
+      title_type: '', //eslint-disable-line camelcase
+      updated_at: '' //eslint-disable-line camelcase
     },
-    title_id: 0,
-    updated_at: ''
-  }
+    title_id: 0, //eslint-disable-line camelcase
+    updated_at: '' //eslint-disable-line camelcase
+  };
 
   it('BooksStatusComponent exists', () => {
     setTimeout(() => {
@@ -34,8 +34,8 @@ describe('EditBookView.vue', () => {
   it('correct bookproperties check', () => {
     setTimeout(() => {
       const wrapper: Wrapper<EditBookView> = shallowFactory(EditBookView);
-      baseBook.barcode = '1001'
-      baseBook.title.name= 'korvmedmos'
+      baseBook.barcode = '1001';
+      baseBook.title.name= 'korvmedmos';
       BooksModule.setBook(baseBook);
       expect(wrapper.text()).toMatch('1001');
       expect(wrapper.text()).toMatch('korvmedmos');
