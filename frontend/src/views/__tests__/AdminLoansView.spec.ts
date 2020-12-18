@@ -9,13 +9,13 @@ describe('AdminLoansView.vue', () => {
     const wrapper: Wrapper<AdminLoansView> = shallowFactory(AdminLoansView);
     expect(wrapper.find('div').exists()).toBe(true);
   });
-
+  
   it('Components exist in view', () => {
     const injectRouterStubs = {stubs: ['router-link']};
     const wrapper: Wrapper<Vue> = shallowFactory(AdminLoansView, injectRouterStubs);
     const componentNames = ['LoanFormComponent', 'LoanListComponent', 'ReturnLoanComponent'];
     componentNames.forEach(componentName => {
-       expect(wrapper.find(`${componentName}-stub`).name()).toEqual(componentName);
+      expect(wrapper.find(`${componentName}-stub`).name()).toEqual(componentName);
     });
   });
 });
