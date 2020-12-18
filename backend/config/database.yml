@@ -16,8 +16,8 @@ development:
 test:
   <<: *default
   database: yabs_test
-  host: localhost
-  port: 5432
+  host: <%= ENV["POSTGRES_HOST"] %>
+  port: <%= ENV["POSTGRES_PORT"] %>
 
 production:
   <<: *default
