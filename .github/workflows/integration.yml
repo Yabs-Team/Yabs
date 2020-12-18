@@ -37,17 +37,23 @@ jobs:
     - name: Load database from schema
       env:
           RAILS_ENV: test
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
       run: |
         cd backend
         bundle exec bin/rails db:schema:load
     - name: Load fixtures to database
       env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         RAILS_ENV: test
       run: |
         cd backend
         bundle exec bin/rails db:fixtures:load
     - name: Run rails backend
       env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         RAILS_ENV: test
       run: |
         cd backend
@@ -88,6 +94,8 @@ jobs:
         working-directory: backend
     - name: Load fixtures and schema
       env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         RAILS_ENV: test
       run: |
         cd backend
@@ -95,6 +103,8 @@ jobs:
         bundle exec bin/rails db:fixtures:load
     - name: Run rails backend
       env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         RAILS_ENV: test
       run: |
         cd backend
@@ -138,6 +148,8 @@ jobs:
           working-directory: backend
       - name: Load fixtures and schema
         env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
           RAILS_ENV: test
         run: |
           cd backend
@@ -145,6 +157,8 @@ jobs:
           bundle exec bin/rails db:fixtures:load
       - name: Run rails backend
         env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
           RAILS_ENV: test
         run: |
           cd backend

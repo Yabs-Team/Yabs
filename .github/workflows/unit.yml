@@ -26,11 +26,16 @@ jobs:
         working-directory: backend
     - name: Load database from schema
       env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         RAILS_ENV: test
       run: |
         cd backend
         bundle exec bin/rails db:schema:load
     - name: Run unit tests
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
       run: |
         cd backend
         bundle exec bin/rake
