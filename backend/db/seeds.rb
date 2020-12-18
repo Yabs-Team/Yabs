@@ -140,6 +140,7 @@ when "all"
     fixtures_review
     fixtures_title
     fixtures_user
+    fixtures_card
 when "book"
     fixtures_book
 when "title"
