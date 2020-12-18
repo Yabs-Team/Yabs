@@ -93,7 +93,6 @@ import UsersModule from '../store/modules/UsersModule';
 import TitlesModule from '../store/modules/TitlesModule';
 import LoansModule from '../store/modules/LoansModule';
 import BooksModule from '../store/modules/BooksModule';
-import { UserModuleType } from '../types';
 
 export default defineComponent({
   name: 'StartView',
