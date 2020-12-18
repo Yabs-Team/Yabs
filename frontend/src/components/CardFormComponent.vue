@@ -33,9 +33,7 @@ export default defineComponent({
   
     // Constructor for instantiating the class and fetching all the users from the userModule
   
-    function created(): void {
-      UsersModule.fetchAll();
-    }
+    UsersModule.fetchAll();
 
     // Eventlistener that emits the informations about that specific event higher up in the 
     // component tree

@@ -56,7 +56,7 @@
 --> 
 
 <script lang="ts">
-import { ref, defineComponent, SetupContext, watch } from '@vue/composition-api';
+import { ref, defineComponent, SetupContext, watch, onMounted, Ref } from '@vue/composition-api';
 import JsBarcode from 'jsbarcode';
 import JSZip from 'jszip';
 import JQuery from 'jquery';
@@ -112,8 +112,8 @@ export default class CigCanvas extends Vue {
     image: {type: File, default: null},
     sendCanvas: {type: Boolean, default: false},
   },
-  setup(props: CigCanvasProps, { root, emit, refs }: SetupContext) {
-    let name: string = '';
+  setup(props: CigCanvasProps, { root, emit }: SetupContext) {
+    let name: Ref<string> = ref('');
     let barcode: string = '';
     let role: number = 0;
     let email: string = '';
@@ -121,6 +121,11 @@ export default class CigCanvas extends Vue {
     let height: number = 0;
     let size: number = 1;
     let context: CanvasRenderingContext2D | null = null;
+
+    const canvasContainer: Ref<HTMLDivElement | null> = ref(null);
+    const canvas: Ref<HTMLCanvasElement | null> = ref(null);
+    const bg: Ref<HTMLImageElement | null> = ref(null);
+    const logo: Ref<HTMLImageElement | null> = ref(null);
 
     // Method userNames is used in order to filter out the users that are not deleted to verify
     // that the user that you are trying to render on the card is an actual active user
@@ -137,10 +142,11 @@ export default class CigCanvas extends Vue {
 
     function checkUserData(): void { // TODO: don't compare name to find the user. Instead compare the uid.
       for (const user in UsersModule.all) {
-        if (name === UsersModule.all[user].name) {
+        if (name.value === UsersModule.all[user].name) {
           barcode = user;
           email = UsersModule.all[user].email;
           role = UsersModule.all[user].role;
+          break;
         }
       }
     }
@@ -155,12 +161,10 @@ export default class CigCanvas extends Vue {
         context.clearRect(0, 0, width, height);
 
         setTimeout(() => {
-          const bg = refs.bg as HTMLImageElement;
-          if (bg && context) {
-            context.drawImage(bg, 0, 0, width, height);
+          if (bg.value && context && logo.value) {
+            context.drawImage(bg.value, 0, 0, width, height);
             
-            const logo = refs.logo as HTMLImageElement;
-            context.drawImage(logo, width / 2 - 75, 25);
+            context.drawImage(logo.value, width / 2 - 75, 25);
             drawText();
             drawImages();
           }
@@ -172,21 +176,20 @@ export default class CigCanvas extends Vue {
     // the structure of the canvas
 
     function getCanvasContainerSize(): void {
-      const canvasContainer = this.$refs.canvasContainer as HTMLDivElement;
-      console.log(canvasContainer.clientWidth);
-      width = canvasContainer.clientWidth;
-      height = canvasContainer.clientHeight;
+      if(canvasContainer.value !== null){
+        width = canvasContainer.value.clientWidth;
+        height = canvasContainer.value.clientHeight;
+      }
     }
 
     // the setCanvasSize method basically does the same thing but sets the dimensions to 2d 
 
     function setCanvasSize(): void {
-      const htmlCanvasElement = refs.canvas as HTMLCanvasElement;
-
-      context = htmlCanvasElement.getContext('2d');
-
-      htmlCanvasElement.width = width;
-      htmlCanvasElement.height = height;
+      if(canvas.value !== null){
+        context = canvas.value.getContext('2d');
+        canvas.value.width = width;
+        canvas.value.height = height;
+      }
     }
 
     // the draw image instantiates new classes of the image based on the barcode and also 
@@ -265,7 +268,7 @@ export default class CigCanvas extends Vue {
         context.textAlign = 'center';
         context.fillStyle = '#ffffff';
         context.fillText(
-          name,
+          name.value,
           width / 2,
           height / 2 + height / 8,
           width,
@@ -318,8 +321,7 @@ export default class CigCanvas extends Vue {
     watch(() => props.sendCanvas, (newVal: boolean, _: boolean) => {
       if(newVal){
         const zip = new JSZip();
-        const canvas = refs.canvas as HTMLCanvasElement;
-        canvas.toBlob((blob) => {
+        canvas.value!.toBlob((blob: Blob | null) => {
           emit('imageSent', blob);
         });
         props.sendCanvas = false;
@@ -331,10 +333,9 @@ export default class CigCanvas extends Vue {
 
     function downloadCanvas(): void {
       const zip = new JSZip();
-      const canvas = refs.canvas as HTMLCanvasElement;
-      canvas.toBlob((blob) => {
+      canvas.value!.toBlob((blob: Blob | null) => {
         if (blob){
-          zip.file(name + '.png', blob);
+          zip.file(name.value + '.png', blob);
           zip.generateAsync({ type: 'blob' }).then((zipBlob : Blob) => {
             FileSaver.saveAs(zipBlob, 'cards.zip');
           });
@@ -367,14 +368,13 @@ export default class CigCanvas extends Vue {
     }
 
     // this is also a getter to receive information simply from the generate canvas instance
-
-    function mounted(): void {
+    
+    root.$nextTick(() => {
       generateCanvas();
-    }
+    });
 
-    mounted();
     return {
-      userNames, onNameInput, name, savePicture, downloadCanvas, 
+      userNames, onNameInput, name, savePicture, downloadCanvas, canvasContainer, canvas, bg, logo
     };
   }
 });

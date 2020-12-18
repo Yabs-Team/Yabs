@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, SetupContext } from '@vue/composition-api';
+import { ref, defineComponent, SetupContext, Ref } from '@vue/composition-api';
 import CardFormComponent from '@/components/CardFormComponent.vue';
 import CanvasContainer from '@/components/CanvasContainer.vue';
 import UsersModule from '../store/modules/UsersModule';
@@ -33,20 +33,17 @@ export default defineComponent({
     CanvasContainer
   },
   setup(_: object, { root }: SetupContext) {
-    const images: File[] = ref([]);
+    const images: Ref<File[]> = ref([]);
   
     // The on send images getter takes the image from the event target and sets it to the instance
     // of the image
   
     function onSendImages(sendImages: File[]): void {
-      this.images = sendImages;
+      images.value = sendImages;
     }
   
-    function created(): void {
-      UsersModule.fetchAll();
-    }
+    UsersModule.fetchAll();
 
-    created();
     return {
       images, onSendImages
     };
