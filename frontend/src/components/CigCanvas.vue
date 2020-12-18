@@ -56,7 +56,7 @@
 --> 
 
 <script lang="ts">
-import { ref, defineComponent, SetupContext, watch, onMounted, Ref } from '@vue/composition-api';
+import { ref, defineComponent, SetupContext, watch, Ref } from '@vue/composition-api';
 import JsBarcode from 'jsbarcode';
 import JSZip from 'jszip';
 import JQuery from 'jquery';
