@@ -1,7 +1,7 @@
 <template>
   <div>
-      <!-- Todo: add cover to title interface and implement the code below for setting image src -->
-      <!-- :src="book.title.cover" -->
+    <!-- Todo: add cover to title interface and implement the code below for setting image src -->
+    <!-- :src="book.title.cover" -->
     <v-img
       lazy-src="https://picsum.photos/id/11/100/60"
       aspect-ratio="1"
