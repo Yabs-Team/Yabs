@@ -2,7 +2,6 @@ export {
   User,
   UserForm,
   UserCollection,
-  UserModuleType,
   Title,
   TitleForm,
   TitleCollection,
@@ -114,11 +113,4 @@ interface LoanCollection {[id: number]: Loan; }
 interface Subject {
   id: number;
   name: string;
-}
-
-interface UserModuleType {
-  currentUser: User;
-  currentUserID: number;
-  all: UserCollection;
-  allAsArray: User[];
 }
