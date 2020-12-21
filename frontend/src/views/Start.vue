@@ -87,24 +87,23 @@
   LoanListComponent in order to render the loans that soon are to expire
 -->
 <script lang="ts">
-import { SetupContext } from '@vue/composition-api';
+import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import LoanListComponent from '@/components/LoanListComponent.vue';
 import UsersModule from '../store/modules/UsersModule';
 import TitlesModule from '../store/modules/TitlesModule';
 import LoansModule from '../store/modules/LoansModule';
 import BooksModule from '../store/modules/BooksModule';
-import { VuexModule } from 'vuex-module-decorators';
 
-export default ({
-  name: '',
+export default defineComponent({
+  name: 'StartView',
   components: {
     LoanListComponent
   },
   setup(_ : object, { root } : SetupContext): object {
-    const size: string = 'lg';
-    const primary: string = 'primary';
-    const loading: boolean = true;
-    const usersModule: VuexModule = UsersModule;
+    const size = ref('lg');
+    const primary = ref('primary');
+    const loading = ref(true);
+    const usersModule = ref(UsersModule);
 
     // The users module is imported and used in order to get information about the current user
     // but also so that the possibility for a user to monitor its soon expiring loans.
@@ -128,6 +127,8 @@ export default ({
     };
   }
 });
+
+
 </script>
 
 

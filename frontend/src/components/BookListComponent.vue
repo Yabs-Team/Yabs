@@ -6,7 +6,7 @@
 <template>
   <ListComponent
     :headers="headers"
-    :items="booksModule.allAsArray"
+    :items="BooksModule.allAsArray"
     :route-path="'books'"
     :route-specifier="'barcode'"
     class="elevation-1"
@@ -17,8 +17,8 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import BooksModule from '../store/modules/BooksModule';
-import { VuexModule } from 'vuex-module-decorators';
 import ListComponent from '@/components/ListComponent.vue';
+import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'BookListComponent',
@@ -31,7 +31,7 @@ export default defineComponent({
     // these headers are the headers for the table created in the template and are filled
 
     // with the information passed from the BooksModule
-
+    
     const headers: object[] = [
       { text: 'Titel', value: 'title.name' },
       { text: 'Skick', value: 'condition' },
