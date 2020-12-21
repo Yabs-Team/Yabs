@@ -4,7 +4,10 @@ import AdminUsersView from '../AdminUsersView.vue';
 import Vue from 'vue';
 
 describe('AdminUsersView.vue', () => {
-  const wrapper: Wrapper<Vue> = shallowFactory(AdminUsersView);  
+  let wrapper: Wrapper<Vue>;
+  beforeEach(() => {
+    wrapper = shallowFactory(AdminUsersView);
+  });  
   it('Is not empty', () => {
     expect(wrapper.isEmpty()).toBe(false);
   });
