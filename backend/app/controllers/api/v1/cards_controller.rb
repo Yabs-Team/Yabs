@@ -5,7 +5,6 @@ class Api::V1::CardsController < ApplicationController
   # GET /cards.json
   def index
     render json: Card.all
-    # return 'hhihi'
   end
 
   # GET /cards/1
