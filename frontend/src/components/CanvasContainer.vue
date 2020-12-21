@@ -13,10 +13,10 @@
       <CigCanvas
         v-for="(image, index) in images"
         :key="index"
-        ref="cards"
         class="canvas"
         :image="image"
         :send-canvas="sendCanvas"
+        :save-picture-trigger="saveAllPictures"
         @imageSent="onImageReceived($event)"
       />
     </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, Ref } from '@vue/composition-api';
+import { ref, defineComponent, Ref, SetupContext } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
@@ -44,8 +44,9 @@ export default defineComponent({
   props: {
     images: {type: Array, default: []}
   },
-  setup(props : CanvasContainerProps){
+  setup(props : CanvasContainerProps, { root }: SetupContext){
     let sendCanvas: Ref<boolean> = ref(false);
+    let saveAllPictures: Ref<boolean> = ref(false);
     let imageBlobs: Blob[] = [];
     let cards: Ref<VueComponent[] | null> = ref(null);
     
@@ -83,15 +84,14 @@ export default defineComponent({
     }
 
     function saveAll(): void{
-      cards.value!.forEach((card: VueComponent)=> {
-        if (card.barcode !== '') {
-          card.savePicture();
-        };
+      saveAllPictures.value = true;
+      root.$nextTick(() => {
+        saveAllPictures.value = false;
       });
     }
 
     return {
-      getAllCanvases, sendCanvas, saveAll, cards
+      getAllCanvases, sendCanvas, saveAll, cards, saveAllPictures
     };
   }
 

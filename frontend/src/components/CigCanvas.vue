@@ -71,7 +71,8 @@ import roleToText from '@/helpers/roleToText';
 
 interface CigCanvasProps {
   image: File,
-  sendCanvas: boolean
+  sendCanvas: boolean,
+  savePictureTrigger: boolean
 }
 
 export default defineComponent({
@@ -82,6 +83,7 @@ export default defineComponent({
   props: {
     image: {type: File, default: null},
     sendCanvas: {type: Boolean, default: false},
+    savePictureTrigger: {type: Boolean, default: false},
   },
   setup(props: CigCanvasProps, { root, emit }: SetupContext) {
     let name: Ref<string> = ref('');
@@ -106,6 +108,7 @@ export default defineComponent({
         .filter(([key, user]) => !(user as User).name.includes('Deleted User'))
         .map(([key, user]) => (user as User).name);
     }
+
     // checkUserData is used to fill the instances of the class with information from the 
     // UsersModule so that the card has the right inforamtion
 
@@ -265,6 +268,15 @@ export default defineComponent({
       }
     });
 
+    // This is a watch action that monitors the prop savePictureTrigger to see if the 
+    // boolean is being mutated in any way and triggers the savePicture function if true
+
+    watch(() => props.savePictureTrigger, (newVal: boolean, _: boolean) => {
+      if(newVal){
+        savePicture();
+      }
+    });
+
     // the download canvas method is used to download and also save the donwloaded zip to
     // the new instance of a JSZIP to later blob it so that it can be used in Vue
 
@@ -304,8 +316,6 @@ export default defineComponent({
       checkUserData();
       generateCanvas();
     }
-
-    // this is also a getter to receive information simply from the generate canvas instance
     
     root.$nextTick(() => {
       generateCanvas();
