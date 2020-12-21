@@ -3,7 +3,7 @@ import { Wrapper } from '@vue/test-utils';
 import EditBookView from '../EditBookView.vue';
 import BooksModule from '@/store/modules/BooksModule';
 import { Book } from '@/types';
-import Vue from 'Vue';
+import Vue from 'vue';
 
 describe('EditBookView.vue', () => {
 
