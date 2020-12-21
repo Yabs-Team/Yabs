@@ -59,6 +59,6 @@ class Api::V1::CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:uid, :user_id, :expiration_data, :status, :user)
+      params.require(:card).permit(:uid, :user_id, :expiration_data, :status)
     end
 end
