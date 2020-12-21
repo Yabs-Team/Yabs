@@ -3,7 +3,7 @@ import { Wrapper } from '@vue/test-utils';
 import ProfileView from '@/views/ProfileView.vue';
 import UsersModule from '@/store/modules/UsersModule';
 import { User } from '@/types';
-import Vue from 'vue'
+import Vue from 'vue';
 
 
 describe('ProfileView.vue', () => {
