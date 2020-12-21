@@ -96,7 +96,7 @@ class BooksModule extends VuexModule {
   }
 
   @Mutation
-  private setBook(payload: Book): void {
+  public setBook(payload: Book): void {
     Vue.set(this._books, payload.barcode, payload);
   }
 
