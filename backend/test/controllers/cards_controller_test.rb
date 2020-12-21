@@ -11,9 +11,9 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create card" do
-    # assert_difference('Card.count') do
-    # end
-    post api_v1_cards_url, params: { card: { expiration_data: @card.expiration_data, status: @card.status, user_id: @card.user_id } }
+    assert_difference('Card.count') do
+      post api_v1_cards_url, params: { card: { expiration_data: @card.expiration_data, status: @card.status, user_id: @card.user_id } }
+    end
 
     assert_response 200
   end
