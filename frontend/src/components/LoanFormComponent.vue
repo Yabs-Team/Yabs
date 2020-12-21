@@ -71,16 +71,6 @@ export default defineComponent({
       book_id: 0 //eslint-disable-line camelcase
     } as LoanForm;
 
-    // Eventlistener that does not reload the page when executed, sets the lent by id to the 
-    // Eventlistener that does not reload the page when executed, sets the lent by id to the 
-    // Eventlistener that does not reload the page when executed, sets the lent by id to the 
-    // current user that has been logged in and then rerenders the loan form for the 
-    // current user that has been logged in and then rerenders the loan form for the 
-    // current user that has been logged in and then rerenders the loan form for the 
-    // user to recreate a loan 
-    // user to recreate a loan 
-    // user to recreate a loan 
-
     const show = ref(true);
 
     function onSubmit(evt: Event): void{
