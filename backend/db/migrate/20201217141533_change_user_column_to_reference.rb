@@ -5,7 +5,4 @@ class ChangeUserColumnToReference < ActiveRecord::Migration[6.0]
 
   end
   
-  def down
-    
-  end
 end
