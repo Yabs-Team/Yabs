@@ -3,6 +3,7 @@ import { Wrapper } from '@vue/test-utils';
 import EditBookView from '../EditBookView.vue';
 import BooksModule from '@/store/modules/BooksModule';
 import { Book } from '@/types';
+import Vue from 'Vue';
 
 describe('EditBookView.vue', () => {
 
@@ -26,14 +27,14 @@ describe('EditBookView.vue', () => {
 
   it('BooksStatusComponent exists', () => {
     setTimeout(() => {
-      const wrapper: Wrapper<EditBookView> = shallowFactory(EditBookView);
+      const wrapper: Wrapper<Vue> = shallowFactory(EditBookView);
       expect(wrapper.find({name: 'BookStatusComponent'}).exists()).toBe(true);
     }, 1000);
   });
 
   it('correct bookproperties check', () => {
     setTimeout(() => {
-      const wrapper: Wrapper<EditBookView> = shallowFactory(EditBookView);
+      const wrapper: Wrapper<Vue> = shallowFactory(EditBookView);
       baseBook.barcode = '1001';
       baseBook.title.name= 'korvmedmos';
       BooksModule.setBook(baseBook);
