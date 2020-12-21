@@ -3,11 +3,11 @@
 one:
   uid: 1
   user_id: 2054282603
-  expiration_data: 2020-12-17 11:55:10
+  expiration_date: 2020-12-17 11:55:10
   status: testCard0
 
 two:
   uid: 2
   user_id: 2054282603
-  expiration_data: 2020-12-17 11:55:10
+  expiration_date: 2020-12-17 11:55:10
   status: TestCard1
