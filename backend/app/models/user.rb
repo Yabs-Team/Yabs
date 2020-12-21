@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :responsibilities
   has_many :subjects, through: :responsibilities
+  has_many :cards
 
   # Rektor
   def principal?
