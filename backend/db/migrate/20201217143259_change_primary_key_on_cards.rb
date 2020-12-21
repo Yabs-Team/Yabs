@@ -3,8 +3,6 @@ class ChangePrimaryKeyOnCards < ActiveRecord::Migration[6.0]
   def up
     change_column :cards, :uid, :integer
     change_column_null :cards, :uid, :integer, false
-
-    #remove_index :users, :id
     remove_column :cards, :id
 
     add_index :cards, :uid, unique: true
