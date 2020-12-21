@@ -15,28 +15,31 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from '@vue/composition-api';
 import BooksModule from '../store/modules/BooksModule';
 import ListComponent from '@/components/ListComponent.vue';
-import { defineComponent } from '@vue/composition-api';
+import { VuexModule } from 'vuex-module-decorators';
 
-
-export default defineComponent ({
+export default defineComponent({
   name: 'BookListComponent',
-  components: { ListComponent },
-  setup(){
+  components: {
+    ListComponent
+  },
+  setup() {
+    const booksModule: VuexModule = BooksModule;
+
     const headers: object[] = [
       { text: 'Titel', value: 'title.name' },
       { text: 'Skick', value: 'condition' },
       { text: 'Sträckkod', value: 'barcode' },
     ];
+
     return {
-      BooksModule,
-      headers,
+      booksModule,
+      headers
     };
   }
 });
-
-
 </script>
 
 <style lang="sass" scoped>

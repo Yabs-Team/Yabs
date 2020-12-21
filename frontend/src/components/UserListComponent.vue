@@ -11,26 +11,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { defineComponent } from '@vue/composition-api';
 import UsersModule from '../store/modules/UsersModule';
 import { VuexModule } from 'vuex-module-decorators';
 import ListComponent from '@/components/ListComponent.vue';
 
-@Component({
+export default defineComponent({
+  name: 'LoanListComponent',
   components: {
     ListComponent
+  },
+  setup() {
+    const usersModule: VuexModule = UsersModule;
+    const headers: object[] = [
+      { text: 'Namn', value: 'name' },
+      { text: 'Email', value: 'email' },
+      { text: 'Klass', value: 'klass' },
+    ];
+    const routePath: string = 'users';
+    const routeSpecifier: string = 'uid'; // Placeholder
+
+    return {
+      usersModule,
+      headers,
+      routePath,
+      routeSpecifier
+    };
   }
-})
-export default class LoanListComponent extends Vue {
-  private usersModule: VuexModule = UsersModule;
-  private headers: object[] = [
-    { text: 'Namn', value: 'name' },
-    { text: 'Email', value: 'email' },
-    { text: 'Klass', value: 'klass' },
-  ];
-  private routePath: string = 'users';
-  private routeSpecifier: string = 'uid'; // Placeholder
-}
+});
 </script>
 
 <style lang="sass" scoped>
