@@ -105,7 +105,7 @@ export default defineComponent({
     LoanListComponent,
   },
   setup(_ : object, { root } : SetupContext) {
-    const image = ref([] as Array<File>)
+    const image = ref([] as Array<File>);
     const snackbar = ref(false);
     const snackbarText = ref('');
 
@@ -154,7 +154,7 @@ export default defineComponent({
       roleToText
     };
   }
-})
+});
 
 </script>
 
