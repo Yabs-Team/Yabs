@@ -56,7 +56,6 @@ interface Header {
 //  */
 
 interface ListComponentProps {
-  contains(headers: any, arg1: string);
   headers: Header[];
   items: Object; //eslint-disable-line camelcase
   useActions: Boolean;
@@ -82,7 +81,7 @@ export default defineComponent({
      * Adds the header "Actions" into headers if useActions is true.
      */
     function created(): void {
-      if (props.useActions && !props.contains(props.headers, 'Actions')) {
+      if (props.useActions && !contains(props.headers, 'Action')) {
         props.headers.push({
           text: 'Actions',
           value: 'action',
@@ -124,8 +123,7 @@ export default defineComponent({
      *
      *    This could potentially result in the the user routing to "locahost:8080/books/1001".
      */
-    function route(event: Event, item: any): void {
-      //eslint-disable-line @typescript-eslint/no-explicit-any
+    function route(event: Event, item: object): void {
       event.preventDefault();
       if (item[props.routeSpecifier]) {
         root.$router.push(`/${props.routePath}/${item[props.routeSpecifier]}`);
