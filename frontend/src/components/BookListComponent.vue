@@ -28,6 +28,10 @@ export default defineComponent({
   setup() {
     const booksModule: VuexModule = BooksModule;
 
+    // these headers are the headers for the table created in the template and are filled
+
+    // with the information passed from the BooksModule
+    
     const headers: object[] = [
       { text: 'Titel', value: 'title.name' },
       { text: 'Skick', value: 'condition' },
