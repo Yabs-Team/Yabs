@@ -44,8 +44,8 @@ export default defineComponent({
     images: {type: Array, default: []}
   },
   setup(props : CanvasContainerProps, { root }: SetupContext){
-    let sendCanvas: Ref<boolean> = ref(false);
-    let saveAllPictures: Ref<boolean> = ref(false);
+    const sendCanvas: Ref<boolean> = ref(false);
+    const saveAllPictures: Ref<boolean> = ref(false);
     let imageBlobs: Blob[] = [];
     
     // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
