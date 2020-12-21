@@ -45,10 +45,6 @@ class Api::V1::CardsController < ApplicationController
   # DELETE /cards/1.json
   def destroy
     @card.destroy
-    # respond_to do |format|
-    #   format.html { redirect_to api_v1_cards_url, notice: 'Card was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
   end
 
   private
