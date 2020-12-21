@@ -122,7 +122,7 @@ export default defineComponent({
      *
      *    This could potentially result in the the user routing to "locahost:8080/books/1001".
      */
-    function route(event: Event, item: object): void {
+    function route(event: Event, item: any): void { //eslint-disable-line @typescript-eslint/no-explicit-any
       event.preventDefault();
       if (item[props.routeSpecifier]) {
         root.$router.push(`/${props.routePath}/${item[props.routeSpecifier]}`);
