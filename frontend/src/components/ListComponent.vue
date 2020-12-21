@@ -35,7 +35,6 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
 import { defineComponent, ref, SetupContext } from '@vue/composition-api';
 
 interface Header {
