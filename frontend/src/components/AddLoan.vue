@@ -107,12 +107,15 @@ export default defineComponent({
             .catch((failure: boolean) => console.log(failure));
           input.value = '';
         }
+      }
     }
+
     function onShow() : void {
       inputText.value = '';
       inputState.value = false;
       inputReturn.value = '';
     }
+    
     function onShown(): void {
       focusRef(input);
     }
