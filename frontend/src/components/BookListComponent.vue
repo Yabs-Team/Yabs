@@ -25,7 +25,7 @@ export default defineComponent({
   components: {
     ListComponent
   },
-  setup(_: object, { root }: SetupContext) {
+  setup() {
     const booksModule: VuexModule = BooksModule;
     const headers = [
       { text: 'Titel', value: 'title.name' },
