@@ -74,8 +74,8 @@ Book.create(barcode: "5007", condition: "OK", title: title_tomtens_jul)
 Book.create(barcode: "5008", condition: "OK", title: title_tomtens_jul)
 
 # Create test Cards
-Card.create(uid: 1, expiration_data: "2020-12-17 11:55:10", status: "testCard0", user: 1849468831)
-Card.create(uid: 2, expiration_data: "2020-12-17 11:55:10", status: "testCard1", user: 1849468831)
+Card.create(uid: 1, expiration_data: "2020-12-17 11:55:10", status: "testCard0", user_id: 2054282603)
+Card.create(uid: 2, expiration_data: "2020-12-17 11:55:10", status: "testCard1", user_id: 2054282603)
 
 # Create fixtures
 def fixtures_card()
