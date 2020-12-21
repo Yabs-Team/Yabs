@@ -72,7 +72,6 @@ export default defineComponent({
     let inputText = ref(''),
       inputState = ref(false),
       inputReturn = ref(''),
-      popoverShow = ref(false),
       button = ref(null),
       input = ref(''),
       menu = ref(false as boolean);
