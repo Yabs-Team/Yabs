@@ -3,6 +3,8 @@ import { Wrapper } from '@vue/test-utils';
 import ProfileView from '@/views/ProfileView.vue';
 import UsersModule from '@/store/modules/UsersModule';
 import { User } from '@/types';
+import Vue from 'vue'
+
 
 describe('ProfileView.vue', () => {
   const baseUser: User = {
@@ -18,7 +20,7 @@ describe('ProfileView.vue', () => {
   };
 
   it('Notifes you if you are not logged in', () => {
-    const wrapper: Wrapper<ProfileView> = shallowFactory(ProfileView);
+    const wrapper: Wrapper<Vue> = shallowFactory(ProfileView);
     UsersModule.setCurrentUser(baseUser);
 
     expect(wrapper.text()).toMatch('inte inloggad');
@@ -26,7 +28,7 @@ describe('ProfileView.vue', () => {
 
   it('Displays the correct name/role/class', () => {
     setTimeout(() => {
-      const wrapper: Wrapper<ProfileView> = shallowFactory(ProfileView);
+      const wrapper: Wrapper<Vue> = shallowFactory(ProfileView);
   
       baseUser.role = 1;
       baseUser.uid = 1111;
