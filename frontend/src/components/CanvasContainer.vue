@@ -3,6 +3,9 @@
     <v-btn @click="getAllCanvases">
       Ladda ned alla kort
     </v-btn>
+    <v-btn @click.prevent="saveAll">
+      Spara alla bilder
+    </v-btn>
     <div
       class="cig-card"
       style="flex-wrap:wrap;"
@@ -10,6 +13,7 @@
       <CigCanvas
         v-for="(image, index) in images"
         :key="index"
+        ref="cards"
         class="canvas"
         :image="image"
         :send-canvas="sendCanvas"
@@ -24,6 +28,7 @@ import { ref, defineComponent, Ref } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
+import VueComponent from 'vue';
 
 // This is the canvas container component for the cards for the users (students)
 
@@ -42,6 +47,7 @@ export default defineComponent({
   setup(props : CanvasContainerProps){
     let sendCanvas: Ref<boolean> = ref(false);
     let imageBlobs: Blob[] = [];
+    let cards: Ref<VueComponent[] | null> = ref(null);
     
     // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
 
@@ -76,8 +82,16 @@ export default defineComponent({
       });
     }
 
+    function saveAll(): void{
+      cards.value!.forEach((card: VueComponent)=> {
+        if (card.barcode !== '') {
+          card.savePicture();
+        };
+      });
+    }
+
     return {
-      getAllCanvases, sendCanvas
+      getAllCanvases, sendCanvas, saveAll, cards
     };
   }
 

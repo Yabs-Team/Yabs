@@ -85,7 +85,7 @@ export default defineComponent({
   },
   setup(props: CigCanvasProps, { root, emit }: SetupContext) {
     let name: Ref<string> = ref('');
-    let barcode: string = '';
+    let barcode: Ref<string> = ref('');
     let role: number = 0;
     let email: string = '';
     let width: number = 0;
@@ -112,7 +112,7 @@ export default defineComponent({
     function checkUserData(): void { // TODO: don't compare name to find the user. Instead compare the uid.
       for (const user in UsersModule.all) {
         if (name.value === UsersModule.all[user].name) {
-          barcode = user;
+          barcode.value = user;
           email = UsersModule.all[user].email;
           role = UsersModule.all[user].role;
           break;
@@ -173,8 +173,8 @@ export default defineComponent({
         profileImage.src = URL.createObjectURL(props.image);
       }
 
-      if (barcode !== '') {
-        JsBarcode(barcodeImage, barcode);
+      if (barcode.value !== '') {
+        JsBarcode(barcodeImage, barcode.value);
       }
 
       setTimeout(() => {
@@ -286,12 +286,13 @@ export default defineComponent({
 
     function savePicture(): void {
       const formData = new FormData();
-      formData.append('uid', barcode);
+      formData.append('uid', barcode.value);
       formData.append('image', props.image as Blob);
       UsersModule.update(formData).then((response: User) => {
         console.log('user updated profile!');
       }).catch((error: object) => {
         // TODO: show in notification to user
+        alert(`Failed to update user: ${name.value}. Please try again`);
         console.error(error);
       });
     }
@@ -311,7 +312,7 @@ export default defineComponent({
     });
 
     return {
-      userNames, onNameInput, name, savePicture, downloadCanvas, canvasContainer, canvas, bg, logo
+      userNames, onNameInput, name, savePicture, downloadCanvas, canvasContainer, canvas, bg, logo, barcode
     };
   }
 });
