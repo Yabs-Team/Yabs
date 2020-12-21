@@ -79,10 +79,10 @@ export default defineComponent({
     LoanListComponent
   },
   setup() {
-    let rolechecker: RoleChecker = RoleChecker;
-    let users = ref(false as boolean);
-    let loans = ref(false as boolean);
-    let books = ref(false as boolean);
+    const rolechecker: RoleChecker = RoleChecker;
+    const users = ref(false);
+    const loans = ref(false);
+    const books = ref(false);
 
     function created(): void {
       BooksModule.fetchAll();
