@@ -4,7 +4,6 @@ class Api::V1::SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
   def index
-
     render json: Subject.all
   end
 
