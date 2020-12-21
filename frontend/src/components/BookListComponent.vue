@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 import BooksModule from '../store/modules/BooksModule';
 import ListComponent from '@/components/ListComponent.vue';
 import { VuexModule } from 'vuex-module-decorators';
