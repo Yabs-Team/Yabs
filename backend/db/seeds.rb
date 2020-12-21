@@ -73,7 +73,19 @@ Book.create(barcode: "5006", condition: "OK", title: title_cc)
 Book.create(barcode: "5007", condition: "OK", title: title_tomtens_jul)
 Book.create(barcode: "5008", condition: "OK", title: title_tomtens_jul)
 
+# Create test Cards
+Card.create(uid: 1, expiration_date: "2020-12-17 11:55:10", status: "testCard0", user_id: 2054282603)
+Card.create(uid: 2, expiration_date: "2020-12-17 11:55:10", status: "testCard1", user_id: 2054282603)
+
 # Create fixtures
+def fixtures_card()
+    cards = Card.all.to_a
+    cards.shift.dump_fixture(append = false)
+    for card in cards do
+        card.dump_fixture
+    end
+end
+
 def fixtures_title()
     titles = Title.all.to_a
     titles.shift.dump_fixture(append = false)
@@ -128,6 +140,7 @@ when "all"
     fixtures_review
     fixtures_title
     fixtures_user
+    fixtures_card
 when "book"
     fixtures_book
 when "title"
@@ -140,6 +153,8 @@ when "review"
     fixtures_review
 when "subject"
     fixtures_subjects
+when "card"
+    fixtures_card
 when nil
     #do nothing
 else
