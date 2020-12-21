@@ -17,6 +17,7 @@ pickle-email-*.html
 coverage/
 .vscode/
 **/*.DS_Store
+tmp/
 
 #Cypress videos and screenshots
 frontend/cypress/videos/**

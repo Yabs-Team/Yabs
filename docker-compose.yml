@@ -1,5 +1,11 @@
 version: "3.8"
 services:
+  database:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
   backend:
     build: ./backend
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -8,8 +14,11 @@ services:
       - bundles:/bundle
     environment:
       - BUNDLE_PATH=/bundle/vendor
+      - POSTGRES_HOST=database
     ports:
       - "3000:3000"
+    depends_on:
+      - database
   frontend:
     build: ./frontend
     command: bash -c "yarn run serve"

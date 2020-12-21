@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2020_12_21_125752) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
+    t.text "name", null: false
+    t.text "record_type", null: false
     t.integer "record_id", null: false
     t.integer "blob_id", null: false
     t.datetime "created_at", null: false
@@ -23,23 +23,23 @@ ActiveRecord::Schema.define(version: 2020_12_21_125752) do
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
+    t.text "key", null: false
+    t.text "filename", null: false
+    t.text "content_type"
     t.text "metadata"
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
+    t.text "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "books", id: false, force: :cascade do |t|
     t.integer "title_id"
-    t.string "barcode", null: false
-    t.string "condition"
+    t.text "barcode", null: false
+    t.text "condition"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "notes"
+    t.text "notes"
     t.index ["barcode"], name: "index_books_on_barcode", unique: true
     t.index ["title_id"], name: "index_books_on_title_id"
   end
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_125752) do
   create_table "loans", force: :cascade do |t|
     t.integer "loaned_by_id"
     t.integer "lent_by_id"
-    t.string "book_id"
+    t.text "book_id"
     t.date "returned_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -79,45 +79,45 @@ ActiveRecord::Schema.define(version: 2020_12_21_125752) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "score"
-    t.string "review"
+    t.text "review"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "user_id", null: false
+    t.text "user_id", null: false
     t.integer "title_id"
     t.index ["title_id"], name: "index_reviews_on_title_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.string "name"
+    t.text "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "titles", force: :cascade do |t|
-    t.string "name"
-    t.string "isbn"
+    t.text "name"
+    t.text "isbn"
     t.integer "cost"
-    t.string "title_type"
+    t.text "title_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
-    t.string "authors"
-    t.string "cover"
+    t.text "description"
+    t.text "authors"
+    t.text "cover"
     t.decimal "page_count"
-    t.string "published_date"
+    t.text "published_date"
     t.integer "subject_id"
     t.index ["subject_id"], name: "index_titles_on_subject_id"
   end
 
   create_table "users", id: false, force: :cascade do |t|
     t.integer "uid"
-    t.string "name"
-    t.string "email"
-    t.string "klass"
+    t.text "name"
+    t.text "email"
+    t.text "klass"
     t.integer "role"
-    t.string "google_token"
-    t.string "photo_path"
+    t.text "google_token"
+    t.text "photo_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uid"], name: "index_users_on_uid", unique: true
