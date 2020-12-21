@@ -75,6 +75,7 @@ interface BookForm {
   barcode: string;
   title_id: number; //eslint-disable-line camelcase
   condition: string;
+  availability?: boolean;
 }
 
 interface BookCollection { [id: string]: Book; }

@@ -28,7 +28,7 @@ export default defineComponent ({
       { text: 'Titel', value: 'title.name' },
       { text: 'Skick', value: 'condition' },
       { text: 'Sträckkod', value: 'barcode' },
-      { text: 'Tillgänglighet', value: 'depreciated' },
+      { text: 'Tillgänglighet', value: 'availability' },
     ];
     return {
       BooksModule,
