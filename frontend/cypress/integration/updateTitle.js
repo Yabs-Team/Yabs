@@ -22,10 +22,10 @@ describe('This test will update a title', () => {
     cy.get('[data-cy=subjectId]').click({force:true});
     cy.get('div').contains('Programm').click();
 
-    cy.get('[data-cy=submit]').click();
+    cy.get('[data-cy=submit]').click({force:true});
 
     cy.get('[data-jest=search]').type(bookTitle);
-    cy.get('[data-cy=formAction]').first().click();
+    cy.get('[data-cy=formAction]').first().click({force:true});
 
     cy.get('[data-cy=name]').should('have.value', bookTitle);
     cy.get('[data-cy=isbn]').should('have.value', isbn);

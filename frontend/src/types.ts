@@ -11,7 +11,8 @@ export {
   Loan,
   LoanForm,
   LoanCollection,
-  Subject
+  Subject,
+  AddLoanForm
 };
 
 interface User {
@@ -90,6 +91,15 @@ interface Loan {
   returned_at: string|null; //eslint-disable-line camelcase
   updated_at: string; //eslint-disable-line camelcase
 }
+
+interface AddLoanForm {
+  id?: number;
+  book_id: number; //eslint-disable-line camelcase
+  lent_by_id: number; //eslint-disable-line camelcase
+  loaned_by_id: number; //eslint-disable-line camelcase
+  expiration_date: string; //eslint-disable-line camelcase
+}
+
 
 interface LoanForm {
   id?: number;

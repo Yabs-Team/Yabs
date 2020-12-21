@@ -20,58 +20,68 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { ref, defineComponent, Ref } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
 
-@Component({
+// This is the canvas container component for the cards for the users (students)
+
+interface CanvasContainerProps {
+  images: File[]
+}
+
+export default defineComponent({
+  name: 'CanvasContainer',
   components: {
     CigCanvas,
   },
-})
+  props: {
+    images: {type: Array, default: []}
+  },
+  setup(props : CanvasContainerProps){
+    let sendCanvas: Ref<boolean> = ref(false);
+    let imageBlobs: Blob[] = [];
+    
+    // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
 
-// This is the canvas container component for the cards for the users (students)
-
-export default class CanvasContainer extends Vue {
-  @Prop({ default: [] }) public images!: File[];
-
-  public sendCanvas: boolean = false;
-  public imageBlobs: Blob[] = [];
-  
-  // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
-
-  public getAllCanvases(): void {
-    this.sendCanvas = !this.sendCanvas;
-  }
-
-  // The onImageReceived method takes an image and then compares it to the instance of images 
-  // and if they are the same length, the ZIP file of that image is being downloaded 
-  // through the donwloadAll method using the JSZIP dependency.
-
-  public onImageReceived(image: Blob): void {
-    this.imageBlobs.push(image);
-    if (this.images.length === this.imageBlobs.length) {
-      this.downloadAll();
+    function getAllCanvases(): void {
+      sendCanvas.value = !sendCanvas.value;
     }
-  }
 
-  public downloadAll(): void {
-    const zip = new JSZip();
-    let count: number = 0;
+    // The onImageReceived method takes an image and then compares it to the instance of images 
+    // and if they are the same length, the ZIP file of that image is being downloaded 
+    // through the donwloadAll method using the JSZIP dependency.
 
-    this.imageBlobs.forEach((image) => {
-      count++;
-      zip.file(count + '.png', image);
-
-      if (count === this.imageBlobs.length) {
-        zip.generateAsync({ type: 'blob' }).then((zipFile: string | Blob) => {
-          FileSaver.saveAs(zipFile, 'cards.zip');
-        });
+    function onImageReceived(image: Blob): void {
+      imageBlobs.push(image);
+      if (props.images.length === imageBlobs.length) {
+        downloadAll();
       }
-    });
+    }
+
+    function downloadAll(): void {
+      const zip = new JSZip();
+      let count: number = 0;
+
+      imageBlobs.forEach((image) => {
+        count++;
+        zip.file(count + '.png', image);
+
+        if (count === imageBlobs.length) {
+          zip.generateAsync({ type: 'blob' }).then((zipFile: string | Blob) => {
+            FileSaver.saveAs(zipFile, 'cards.zip');
+          });
+        }
+      });
+    }
+
+    return {
+      getAllCanvases, sendCanvas
+    };
   }
-}
+
+});
 </script>
 
 <style lang="sass" scoped>

@@ -4,8 +4,19 @@ on: [push]
 
 jobs:
   backend-unit-tests:
-
     runs-on: ubuntu-latest
+
+    services: 
+      postgres:
+        image: postgres:13.1
+        env:
+          POSTGRES_DB: yabs_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-interval 5s --health-retries 5
+
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1.59.1
@@ -14,10 +25,17 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
         working-directory: backend
     - name: Load database from schema
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
+        RAILS_ENV: test
       run: |
         cd backend
         bundle exec bin/rails db:schema:load
     - name: Run unit tests
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
       run: |
         cd backend
         bundle exec bin/rake
@@ -25,6 +43,16 @@ jobs:
   frontend-unit-tests:
 
     runs-on: ubuntu-latest
+    services: 
+      postgres:
+        image: postgres:13.1
+        env:
+          POSTGRES_DB: yabs_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-interval 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
@@ -43,6 +71,16 @@ jobs:
   frontend-lint:
 
     runs-on: ubuntu-latest
+    services: 
+      postgres:
+        image: postgres:13.1
+        env:
+          POSTGRES_DB: yabs_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-interval 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v2

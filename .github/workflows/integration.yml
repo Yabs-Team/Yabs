@@ -8,6 +8,17 @@ on:
 jobs:
   e2e:
     runs-on: ubuntu-latest
+    services: 
+      postgres:
+        image: postgres:13.1
+        env:
+          POSTGRES_DB: yabs_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-interval 5s --health-retries 5
+
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
@@ -24,17 +35,25 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
         working-directory: backend
     - name: Load database from schema
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
+        RAILS_ENV: test
       run: |
         cd backend
         bundle exec bin/rails db:schema:load
     - name: Load fixtures to database
       env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         RAILS_ENV: test
       run: |
         cd backend
         bundle exec bin/rails db:fixtures:load
     - name: Run rails backend
       env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         RAILS_ENV: test
       run: |
         cd backend
@@ -55,6 +74,17 @@ jobs:
         path: frontend/cypress/videos
   api-tests:
     runs-on: ubuntu-latest
+    services: 
+      postgres:
+        image: postgres:13.1
+        env:
+          POSTGRES_DB: yabs_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-interval 5s --health-retries 5
+
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1.59.1
@@ -64,6 +94,8 @@ jobs:
         working-directory: backend
     - name: Load fixtures and schema
       env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         RAILS_ENV: test
       run: |
         cd backend
@@ -71,6 +103,8 @@ jobs:
         bundle exec bin/rails db:fixtures:load
     - name: Run rails backend
       env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         RAILS_ENV: test
       run: |
         cd backend
@@ -83,6 +117,17 @@ jobs:
         POSTMAN_KEY: ${{secrets.POSTMAN_KEY}}
   lighthouse:
     runs-on: ubuntu-latest
+    services: 
+      postgres:
+        image: postgres:13.1
+        env:
+          POSTGRES_DB: yabs_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-interval 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -103,6 +148,8 @@ jobs:
           working-directory: backend
       - name: Load fixtures and schema
         env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
           RAILS_ENV: test
         run: |
           cd backend
@@ -110,6 +157,8 @@ jobs:
           bundle exec bin/rails db:fixtures:load
       - name: Run rails backend
         env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
           RAILS_ENV: test
         run: |
           cd backend
