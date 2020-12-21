@@ -3,6 +3,9 @@
     <v-btn @click="getAllCanvases">
       Ladda ned alla kort
     </v-btn>
+    <v-btn @click.prevent="saveAll">
+      Spara alla bilder
+    </v-btn>
     <div
       class="cig-card"
       style="flex-wrap:wrap;"
@@ -13,6 +16,7 @@
         class="canvas"
         :image="image"
         :send-canvas="sendCanvas"
+        :save-picture-trigger="saveAllPictures"
         @imageSent="onImageReceived($event)"
       />
     </div>
@@ -20,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, Ref } from '@vue/composition-api';
+import { ref, defineComponent, Ref, SetupContext } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
@@ -39,8 +43,9 @@ export default defineComponent({
   props: {
     images: {type: Array, default: []}
   },
-  setup(props : CanvasContainerProps){
+  setup(props : CanvasContainerProps, { root }: SetupContext){
     let sendCanvas: Ref<boolean> = ref(false);
+    let saveAllPictures: Ref<boolean> = ref(false);
     let imageBlobs: Blob[] = [];
     
     // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
@@ -76,8 +81,15 @@ export default defineComponent({
       });
     }
 
+    function saveAll(): void{
+      saveAllPictures.value = true;
+      root.$nextTick(() => {
+        saveAllPictures.value = false;
+      });
+    }
+
     return {
-      getAllCanvases, sendCanvas
+      getAllCanvases, sendCanvas, saveAll, saveAllPictures
     };
   }
 
