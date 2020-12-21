@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 import BooksModule from '../store/modules/BooksModule';
 import ListComponent from '@/components/ListComponent.vue';
 import { VuexModule } from 'vuex-module-decorators';
@@ -25,7 +25,7 @@ export default defineComponent({
   components: {
     ListComponent
   },
-  setup() {
+  setup(_: object, { root }: SetupContext) {
     const booksModule: VuexModule = BooksModule;
     const headers = [
       { text: 'Titel', value: 'title.name' },
@@ -42,8 +42,8 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-    .card
-        width: 100%
-        height: 100%
-        overflow-y: auto
+  .card
+      width: 100%
+      height: 100%
+      overflow-y: auto
 </style>
