@@ -69,7 +69,7 @@ export default defineComponent({
   name: 'AddLoan',
   setup(_ : object, { root, emit } : SetupContext ) {
     
-    let inputText = ref(''),
+      const inputText = ref(''),
       inputState = ref(false),
       inputReturn = ref(''),
       button = ref(null),
@@ -80,7 +80,7 @@ export default defineComponent({
       book_id: 0, //eslint-disable-line camelcase
       /* Hardcoded value atm for the school */
       lent_by_id: 1854282603, //eslint-disable-line camelcase
-      loaned_by_id: 0,//eslint-disable-line camelcase
+      loaned_by_id: 0, //eslint-disable-line camelcase
       expiration_date: '2020/02/12' //eslint-disable-line camelcase
     };
 
@@ -100,7 +100,7 @@ export default defineComponent({
         form.loaned_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
         console.log(form);
         /* This Checks if the form contains the necessary data  */
-        if (!!form.lent_by_id && !!form.loaned_by_id && !!form.book_id) {
+        if (!Object.values(form.value).some(prop => prop === 0)) {
           LoansModule.create(form)
             .then((payload: Loan) => emit('loan-added', payload))
             .catch((failure: boolean) => console.log(failure));
