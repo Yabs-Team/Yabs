@@ -1,13 +1,19 @@
 <template>
-  <div id="barcodeScanner" />
+  <div id="barcodeScanner">
+    <span v-if="!loaded">Initializing..</span><span v-if="invalidBrowser">Your browser doesn't support this.</span>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, SetupContext, onMounted, onBeforeUnmount } from '@vue/composition-api';
+import Quagga from '@te4-adrian-almetun-smeds/quagga2';
 
 export default defineComponent({
   name: 'BarcodeReaderComponent',
   setup(props: {}, { emit }: SetupContext) {
+    const loaded = ref(false);
+    const invalidBrowser = ref(false);
+
     // Checks if the browser is compatible
     function validateBrowser(): Boolean {
       return (
@@ -34,25 +40,22 @@ export default defineComponent({
         return false;
       }
     }
-    const Quagga = require('@te4-adrian-almetun-smeds/quagga2').default;
+
     onMounted(() => {
       if (validateBrowser()) {
-        console.log('mounted');
         let lastSeenCode: null | string = null;
 
         Quagga.onDetected((data: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
           const newCode = data.codeResult.code;
-          console.log(data);
           if (validResponse(data.codeResult.decodedCodes)) {
             if (newCode !== lastSeenCode) {
               emit('newCodeDetected', newCode);
               lastSeenCode = data.codeResult.code;
-              console.log(data.codeResult.code);
             } else {
               emit('codeDetected', newCode);
             }
           } else {
-            console.log('Invalid code found');
+            // Found a invalid code
           }
         });
 
@@ -61,7 +64,7 @@ export default defineComponent({
             inputStream: {
               name: 'Live',
               type: 'LiveStream',
-              target: document.querySelector('#barcodeScanner') // Or '#yourElement' (optional)
+              target: document.querySelector('#barcodeScanner')!
             },
             decoder: {
               readers: ['ean_reader']
@@ -74,17 +77,19 @@ export default defineComponent({
               return;
             }
             console.log('Initialization finished. Ready to start');
+            loaded.value = true;
             Quagga.start();
           }
         );
       } else {
-        console.log('No browser support');
+        invalidBrowser.value = false;
       }
     });
 
     onBeforeUnmount(()=> {
       Quagga.stop();
     });
+    return { loaded, invalidBrowser };
   }
 });
 </script>
@@ -96,6 +101,11 @@ export default defineComponent({
   position: relative;
   width: 40vh;
   height: 40vh;
+}
+span {
+  position: absolute;
+  top:0;
+  left: 0;
 }
 #barcodeScanner * {
   width: 100%;
