@@ -6,6 +6,24 @@
       </v-card-title>
       <v-card-text>
         <v-form>
+          <v-btn @click="toggleReader">
+            <v-icon
+              v-if="barcode"
+              aria-label="Stäng streckkods läsare"
+            >
+              mdi-barcode-off
+            </v-icon>
+            <v-icon
+              v-else
+              aria-label="Läs av Streckkod"
+            >
+              mdi-barcode-scan
+            </v-icon>
+          </v-btn>
+          <BarcodeReaderComponent
+            v-if="barcode"
+            @newCodeDetected="newCodeDetected"
+          />
           <v-text-field
             v-model="scannedBookId"
             data-jest="book_barcode_return"
@@ -13,7 +31,7 @@
             label="Bokens Streckkod"
             outlined
           />
-          <v-text-field 
+          <v-text-field
             v-model="scannedBookStatus"
             data-jest="book_condition"
             data-cy="book_condition"
@@ -38,73 +56,106 @@
         </v-form>
       </v-card-text>
     </v-card>
+    <BaseModal
+      :body="confirmationBody"
+      :header="confirmationHeader"
+      :show-modal="showModal"
+      :actions="modalActions"
+    />
   </div>
 </template>
 
 <script lang='ts'>
+import { BookForm, Loan, Book } from '@/types';
 import { ref, defineComponent, SetupContext, watch } from '@vue/composition-api';
-import LoansModule from '../store/modules/LoansModule';
-import { Loan } from '../types';
+import BarcodeReaderComponent from '@/components/BarcodeReaderComponent.vue';
+import BaseModal from '@/components/BaseModal.vue';
 import BooksModule from '../store/modules/BooksModule';
-import { BookForm } from '@/types';
+import LoansModule from '../store/modules/LoansModule';
 
 export default defineComponent({
   name: 'ReturnLoanComponent',
+  components: {BaseModal, BarcodeReaderComponent},
   setup(_: object, { root }: SetupContext) {
     const scannedBookId = ref('');
     const scannedBookStatus = ref('');
-    const updatedBookCondition : BookForm = {
-      barcode: '',
-      title_id: 0, //eslint-disable-line camelcase
-      condition: ''  
-    };
+
+    const confirmationBody = ref('');
+    const confirmationHeader = ref('');
+    const showModal = ref(false);
+
+    const modalActions = ref([{}]);
+
+    async function modal(e: string): Promise<void> {
+      try {
+        const resp = await BooksModule.fetchSingle(e);
+        confirmationHeader.value = 'Bekräfta retur';
+        confirmationBody.value = resp.title.name;
+        modalActions.value = [
+          {text: 'Avbryt', action: ():void => { showModal.value = false;}},
+          {text: 'Bekräfta', action: ():void => { showModal.value = false; submitChanges(resp);}},
+        ];
+        showModal.value = true;
+      } catch {
+        confirmationHeader.value = 'Något gick fel';
+        confirmationBody.value = 'Kunde inte hitta boken. \nVänligen testa igen';
+        modalActions.value = [
+          {text: 'Stäng', action: ():void => { showModal.value = false;}},
+        ];
+        showModal.value = true;
+      }
+      scannedBookId.value = e;
+    }
+
+    const barcode = ref(false);
+    function toggleReader(): void {
+      barcode.value = !barcode.value;
+    }
+
+    const foundBook = ref({});
+    BooksModule.fetchAll();
+
+    watch(() => scannedBookId.value, (newVal, _) => {
+      const book = BooksModule.allAsArray.find(x => (x.barcode == scannedBookId.value));
+      console.log(book);
+      if (book != null) {
+        foundBook.value = book;
+        scannedBookStatus.value = book.condition;
+      }
+    });
 
     function onSubmit(evt: Event): void {
       evt.preventDefault();
+      console.log('hello');
+      modal(scannedBookId.value);
+    }
 
-      const targetLoan = LoansModule.allAsArray.find((loan: Loan) => {
-        return loan.book_id == Number(scannedBookId.value);
-      });
+    async function submitChanges(changedBook: Book): Promise<void> {
+      const updatedBookCondition: BookForm = {
+        ...changedBook
+      };
+      await LoansModule.fetchAll();
+      const targetLoan = LoansModule.allAsArray.find(x => x.book_id == updatedBookCondition.barcode);
+      if (targetLoan != null) {
 
-      if(targetLoan) {
-        // Gets exsisting book from BooksModule
-        const existingBook = BooksModule.allAsArray.find(x => (x.barcode == scannedBookId.value));
-        if(existingBook){
-          updatedBookCondition.title_id = existingBook.title_id; //eslint-disable-line camelcase
-          updatedBookCondition.barcode = existingBook.barcode;
-        }
         updatedBookCondition.condition = scannedBookStatus.value;
         LoansModule.delete(targetLoan);
         BooksModule.update(updatedBookCondition);
-        scannedBookId.value = ''; // Resets values on page to default 
-        scannedBookStatus.value = ''; // Resets values on page to default 
-      };
+        scannedBookId.value = ''; // Resets values on page to default
+        scannedBookStatus.value = ''; // Resets values on page to default
+      } else {
+        console.log('Something wen\'t wrong');
+      }
     }
 
-    watch(() => scannedBookId.value, (newVal, _) => {
-      const book = BooksModule.allAsArray.find(x => (x.barcode == newVal));
-      if(book) {
-        scannedBookStatus.value = book.condition;
-      }else {
-        scannedBookStatus.value = '';
-      }
-    });
-    return { scannedBookId, onSubmit, scannedBookStatus };
+    function newCodeDetected(e:string): void {
+      scannedBookId.value = e;
+    }
+
+
+    return { newCodeDetected, modalActions, scannedBookId, onSubmit, scannedBookStatus, barcode, toggleReader, confirmationBody, confirmationHeader, showModal  };
   }
 });
-
-// @Component
-// export default class ReturnLoanComponent extends Vue{
-//   private scannedBookId: string = '';
-
-//   private onSubmit(evt: Event): void {
-//     evt.preventDefault();
-//     const targetLoan = LoansModule.allAsArray.find((loan: Loan) => {return loan.book_id == Number(this.scannedBookId);});
-
-//     if (targetLoan) {LoansModule.delete(targetLoan);}; 
-//   }
-
-// }
 </script>
 
 <style>
