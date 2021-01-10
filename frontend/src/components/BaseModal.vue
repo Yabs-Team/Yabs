@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="center" data-jest="modal">
     <v-dialog
       v-model="showModal"
       persistent
@@ -16,6 +16,7 @@
           <v-spacer />
           <v-btn
             v-for="x in actions"
+            :data-jest="`modal-btn`"
             :key="x.text"
             color="green darken-1"
             text
