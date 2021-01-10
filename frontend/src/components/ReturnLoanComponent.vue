@@ -6,7 +6,7 @@
       </v-card-title>
       <v-card-text>
         <v-form>
-          <v-btn @click="toggleReader">
+          <v-btn @click="toggleReader" data-jest="barcode_button">
             <v-icon
               v-if="barcode"
               aria-label="Stäng streckkods läsare"
@@ -126,7 +126,6 @@ export default defineComponent({
 
     function onSubmit(evt: Event): void {
       evt.preventDefault();
-      console.log('hello');
       modal(scannedBookId.value);
     }
 
@@ -153,7 +152,7 @@ export default defineComponent({
     }
 
 
-    return { newCodeDetected, modalActions, scannedBookId, onSubmit, scannedBookStatus, barcode, toggleReader, confirmationBody, confirmationHeader, showModal  };
+    return { newCodeDetected, submitChanges, modalActions, scannedBookId, onSubmit, scannedBookStatus, barcode, toggleReader, confirmationBody, confirmationHeader, showModal  };
   }
 });
 </script>
