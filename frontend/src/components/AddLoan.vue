@@ -70,11 +70,11 @@ export default defineComponent({
   setup(_ : object, { root, emit } : SetupContext ) {
 
     const inputText = ref(''),
-    inputState = ref(false),
-    inputReturn = ref(''),
-    button = ref(null),
-    input = ref(''),
-    menu = ref(false as boolean);
+      inputState = ref(false),
+      inputReturn = ref(''),
+      button = ref(null),
+      input = ref(''),
+      menu = ref(false as boolean);
 
     const form: AddLoanForm  = {
       book_id: 0, //eslint-disable-line camelcase
