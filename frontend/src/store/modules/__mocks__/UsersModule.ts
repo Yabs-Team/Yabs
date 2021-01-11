@@ -25,12 +25,12 @@ const user1: User = {
 
 module.exports = {
   allAsArray: [user, user1],
-  fetchAll: () => null,
+  fetchAll: (): null => null,
   create: jest.fn().mockImplementationOnce(_arg => {
     return Promise.resolve();
   }),
   update: jest.fn(),
-  fetchSingle: (_: any) => {
+  fetchSingle: (_: any): User => { // eslint-disable-line @typescript-eslint/no-explicit-any
     return user;
   },
 };
