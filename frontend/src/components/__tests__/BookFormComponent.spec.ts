@@ -19,6 +19,7 @@ describe('BookFormComponent.vue', () => {
       barcode: '1234',
       title_id: 0, //eslint-disable-line camelcase
       condition: 'ok',
+      availability: true
     });
   });
 });
