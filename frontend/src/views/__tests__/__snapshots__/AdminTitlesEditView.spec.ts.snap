@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminTitlesEditView.vue Displays the correct data in the form 1`] = `
+<div>
+  <h1 class="display-2">
+    Titles
+  </h1>
+  <div>
+    <titleformcomponent-stub mode="edit"></titleformcomponent-stub>
+  </div>
+</div>
+`;
