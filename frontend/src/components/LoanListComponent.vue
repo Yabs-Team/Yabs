@@ -10,7 +10,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import LoansModule from '../store/modules/LoansModule';
 import { VuexModule } from 'vuex-module-decorators';
-import ListComponent from '@/components/ListComponent.vue';
+import ListComponent from '../components/ListComponent.vue';
 
 
 // This component is used as a Parent element and therefore has the headers object to 
