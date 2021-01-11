@@ -79,6 +79,17 @@
     >
       Rensa Fältet
     </v-btn>
+    <v-btn
+      v-if="mode == 'edit'"
+      large
+      type="submit"
+      class="ml-4"
+      data-jest="deleteTitle"
+      data-cy="deleteTitle"
+      @click="deleteTitle"
+    >
+      Ta bort
+    </v-btn>
   </v-form>
 </template>
 
@@ -87,6 +98,7 @@ import { ref, defineComponent, SetupContext, watch } from '@vue/composition-api'
 import TitlesModule from '../store/modules/TitlesModule';
 import { Title, TitleForm, Subject } from '../types';
 import Subjects from '../services/api/subjects';
+import LoansModule from '@/store/modules/LoansModule';
 
 
 // This is the child component of the earlier named parent element and catches the information
@@ -186,7 +198,13 @@ export default defineComponent({
       });
     }
 
-    return { form, show, options, onSubmit, onReset, subjects, buttonText };
+    async function deleteTitle(): Promise<void>{
+      let titleData: Title = await TitlesModule.fetchSingleByISBN(form.value.isbn);
+      TitlesModule.delete(titleData);
+      root.$router.push('/admin/titles');
+    }
+
+    return { form, show, options, onSubmit, onReset, subjects, buttonText, deleteTitle };
   }
 });
 </script>
