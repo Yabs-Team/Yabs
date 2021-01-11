@@ -1,5 +1,5 @@
 engines:
-  duplication:
-    enabled: false
-    exclude_paths:
-      - frontend/src/store/modules/__mocks__/
+    similar-code:
+      enabled: false
+      exclude_paths:
+        - frontend/src/store/modules/__mocks__/
