@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent, SetupContext } from '@vue/composition-api';
-import TitlesModule from '../store/modules/TitlesModule';
+import TitlesModule from '@/store/modules/TitlesModule';
 import ListComponent from '@/components/ListComponent.vue';
 
 // The TitleListComponent inherits the information about the titles from the titles module
@@ -30,7 +30,7 @@ export default defineComponent({
       { text: 'Typ', value: 'title_type' },
       { text: 'ISBN', value: 'isbn' }
     ];
-    
+
     return { TitlesModule, headers };
   }
 });

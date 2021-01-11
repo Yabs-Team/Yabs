@@ -9,6 +9,7 @@ const title: Title = {
   'created_at': '2020-12-21T15:23:15.615Z',
   'updated_at': '2021-01-04T15:54:04.695Z',
 };
+
 const title1: Title = {
   'id': 3,
   'name': 'Clean Code',
@@ -21,9 +22,7 @@ const title1: Title = {
 
 module.exports = {
   allAsArray: [title, title1],
-  fetchAll: jest.fn().mockImplementationOnce(() => {
-    return Promise.resolve();
-  }),
+  fetchAll: (): null => null,
   create: jest.fn().mockImplementationOnce(_arg => {
     return Promise.resolve();
   }),
