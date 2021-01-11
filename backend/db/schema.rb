@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_21_125752) do
+ActiveRecord::Schema.define(version: 2020_12_21_115452) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.text "name", null: false
@@ -39,7 +39,8 @@ ActiveRecord::Schema.define(version: 2020_12_21_125752) do
     t.text "condition"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "notes"
+    t.string "notes"
+    t.boolean "availability"
     t.index ["barcode"], name: "index_books_on_barcode", unique: true
     t.index ["title_id"], name: "index_books_on_title_id"
   end
