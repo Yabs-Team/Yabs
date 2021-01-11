@@ -80,7 +80,16 @@ export default defineComponent({
 
     function onSubmit(evt: Event): void {
       evt.preventDefault();
-      BooksModule.create(form);
+      const multiBookInput = form.barcode.split(',');
+      if (multiBookInput.length > 1) {
+        for (const bookBarcode of multiBookInput) {
+          const tempBook = {...form};
+          tempBook.barcode = bookBarcode.trim();
+          BooksModule.create(tempBook);
+        };
+      } else {
+        BooksModule.create(form);
+      };
       onReset();
     };
 
