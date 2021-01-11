@@ -20,6 +20,7 @@
           outlined
         />
       </v-item-group>
+
       <v-item-group
         vertical=""
         label-class="text-sm-right"
@@ -34,6 +35,38 @@
           outlined
         />
       </v-item-group>
+
+      <v-item-group
+        vertical=""
+        label-class="text-sm-right"
+        label-for="nestedBid"
+      >
+        <v-menu
+          ref="menu"
+          v-model="menu"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="form.expiration_date"
+              label="Expire date"
+              outlined
+              v-bind="attrs"
+              v-on="on"
+            />
+          </template>
+          <v-date-picker
+            ref="picker"
+            v-model="form.expiration_date"
+            :min="new Date().toISOString().substr(0, 10)"
+            @change="save"
+          />
+        </v-menu>
+      </v-item-group>
+
       <v-btn
         data-cy="loanOutBook"
         type="submit"
@@ -66,23 +99,25 @@ export default class LoanFormComponent extends Vue {
   public form: LoanForm = {
     lent_by_id: 0, //eslint-disable-line camelcase
     loaned_by_id: 0, //eslint-disable-line camelcase
-    book_id: 0 //eslint-disable-line camelcase
+    book_id: 0,//eslint-disable-line camelcase
+    expiration_date: ''//eslint-disable-line camelcase
   };
   public show: boolean = true;
 
   // Eventlistener that does not reload the page when executed, sets the lent by id to the 
   // current user that has been logged in and then rerenders the loan form for the 
-  // user to recreate a loan 
+  // user to recreate a loan
 
   public onSubmit(evt: Event): void {
 
     evt.preventDefault();
     this.form.lent_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
-    if (!!this.form.lent_by_id && !!this.form.loaned_by_id && !!this.form.book_id) {
+    if (!!this.form.lent_by_id && !!this.form.loaned_by_id && !!this.form.book_id && !!this.form.expiration_date) {
       LoansModule.create(this.form)
         .then((payload: Loan) => this.$emit('loan-added', payload))
         .catch((failure: boolean) => console.log(failure));
     }
+
   }
 
 

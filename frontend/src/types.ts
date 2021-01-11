@@ -96,6 +96,7 @@ interface LoanForm {
   book_id: number; //eslint-disable-line camelcase
   lent_by_id: number; //eslint-disable-line camelcase
   loaned_by_id: number; //eslint-disable-line camelcase
+  expiration_date: string;
 }
 
 interface LoanCollection {[id: number]: Loan; }
