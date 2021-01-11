@@ -64,7 +64,7 @@
 import LoansModule from '../store/modules/LoansModule';
 import { Loan, AddLoanForm } from '../types';
 import UsersModule from '../store/modules/UsersModule';
-import { defineComponent, ref, SetupContext, watch } from '@vue/composition-api';
+import { defineComponent, ref, Ref, SetupContext, watch } from '@vue/composition-api';
 export default defineComponent({
   name: 'AddLoan',
   setup(_ : object, { root, emit } : SetupContext ) {
@@ -76,13 +76,14 @@ export default defineComponent({
       input = ref(''),
       menu = ref(false as boolean);
 
-    const form: AddLoanForm  = {
+    const form: Ref < AddLoanForm > = ref ({
       book_id: 0, //eslint-disable-line camelcase
       /* Hardcoded value atm for the school */
       lent_by_id: 1854282603, //eslint-disable-line camelcase
       loaned_by_id: 0, //eslint-disable-line camelcase
       expiration_date: '2020/02/12' //eslint-disable-line camelcase
-    };
+  
+    });
 
     function onCancel(): void {
       menu.value = false;
@@ -96,11 +97,11 @@ export default defineComponent({
         onCancel();
         /* "Return" our popover "form" results */
         inputReturn.value = input.value;
-        form.book_id = parseInt(input.value); //eslint-disable-line camelcase
-        form.loaned_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
+        form.value.book_id = parseInt(input.value); //eslint-disable-line camelcase
+        form.value.loaned_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
         /* This Checks if the form contains the necessary data  */
         if (!Object.values(form.value).some(prop => prop === 0)) {
-          LoansModule.create(form)
+          LoansModule.create(form.value)
             .then((payload: Loan) => emit('loan-added', payload))
             .catch((failure: boolean) => console.log(failure));
           input.value = '';
