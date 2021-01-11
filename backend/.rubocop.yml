@@ -1,0 +1,26 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+
+AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: 2.6
+  NewCops: enable
+
+Layout/LineLength:
+  Max: 125
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Rails/BulkChangeTable:
+  Exclude:
+    - 'db/migrate/20191216135511_add_columns_to_title.rb'
+
+Rails/ReversibleMigration:
+  Exclude:
+    - 'db/migrate/20181120100040_change_primary_key_on_users.rb'
+    - 'db/migrate/20181120114623_create_books.rb'
+    - 'db/migrate/20191216135730_drop_title_from_title.rb'
+    - 'db/migrate/20191218093038_remove_titles_id_from_review.rb'
