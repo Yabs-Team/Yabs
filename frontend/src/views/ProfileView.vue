@@ -34,7 +34,7 @@
     </v-row>
 
     <v-card
-      v-if="RoleChecker.isAdmin()"
+      v-if="currentUserIsAdmin"
       class="d-flex align-start justify-center pa-4 pt-7 pb-1"
     >
       <v-file-input
@@ -109,9 +109,11 @@ export default defineComponent({
     const snackbar = ref(false);
     const snackbarText = ref('');
 
+    const currentUserIsAdmin = RoleChecker.isAdmin();
+
     function created() : void {
       LoansModule.fetchAll();
-    } 
+    }
 
     function getUser():User {
       return UsersModule.all[+root.$route.params.id];
@@ -140,12 +142,12 @@ export default defineComponent({
       }).catch((error: object) => {
         snackbarText.value = error.toString();
       });
-      
+
       snackbar.value = true;
     }
     return{
       UsersModule,
-      RoleChecker,
+      currentUserIsAdmin,
       created,
       getUser,
       savePicture,
