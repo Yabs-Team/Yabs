@@ -14,8 +14,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
-      "cd frontend && vue-cli-service lint --fix",
-      "git add ."
+      "eslint --cache --max-warnings=0 -c ./frontend/.eslintrc.js --fix"
     ]
   }
 }
