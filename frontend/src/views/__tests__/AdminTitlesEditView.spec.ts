@@ -2,7 +2,7 @@ import AdminTitlesEditView from "../AdminTitlesEditView.vue";
 import vue from "vue";
 
 import { Wrapper } from "@vue/test-utils";
-import { factory } from "@/helpers/testFactoryHelpers";
+import { shallowFactory } from "@/helpers/testFactoryHelpers";
 
 jest.mock("@/store/modules/TitlesModule");
 
@@ -19,7 +19,7 @@ const options = {
 
 describe("AdminTitlesEditView.vue", () => {
   it("Displays the correct data in the form", async () => {
-    const wrapper: Wrapper<vue> = factory(AdminTitlesEditView, options);
+    const wrapper: Wrapper<vue> = shallowFactory(AdminTitlesEditView, options);
     expect(wrapper.html()).toMatchSnapshot();
     expect(wrapper.text()).not.toMatch("Clean Code");
   });
