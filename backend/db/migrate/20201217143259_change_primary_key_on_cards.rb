@@ -9,6 +9,6 @@ class ChangePrimaryKeyOnCards < ActiveRecord::Migration[6.0]
   end
 
   def down
-    change_column :cards, :role, :string
+    change_column :cards, :role, :text
   end
 end
