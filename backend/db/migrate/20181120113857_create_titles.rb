@@ -1,10 +1,10 @@
 class CreateTitles < ActiveRecord::Migration[5.2]
   def change
     create_table :titles do |t|
-      t.string :name
-      t.string :isbn
+      t.text :name
+      t.text :isbn
       t.integer :cost
-      t.string :type
+      t.text :type
 
       t.timestamps
     end

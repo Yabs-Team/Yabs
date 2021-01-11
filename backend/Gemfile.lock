@@ -137,6 +137,7 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     os (1.0.1)
+    pg (1.2.3)
     public_suffix (4.0.1)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -209,7 +210,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.1)
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -242,6 +242,7 @@ DEPENDENCIES
   google_books
   jbuilder
   listen (>= 3.0.5, < 3.2)
+  pg
   puma
   pundit
   rack-cors
@@ -249,7 +250,6 @@ DEPENDENCIES
   sass-rails
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
   turbolinks
   tzinfo-data
   uglifier
