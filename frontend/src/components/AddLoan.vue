@@ -74,7 +74,7 @@ export default defineComponent({
       inputReturn = ref(''),
       button = ref(null),
       input = ref(''),
-      menu = ref(false as boolean);
+      menu = ref(false);
 
     const form: Ref < AddLoanForm > = ref ({
       book_id: 0, //eslint-disable-line camelcase
