@@ -100,7 +100,7 @@ export default defineComponent({
         form.value.book_id = parseInt(input.value); //eslint-disable-line camelcase
         form.value.loaned_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
         /* This Checks if the form contains the necessary data  */
-        if (!Object.values(form.value).some(prop => prop === 0)) {
+        if (!Object.values(form).some(prop => prop === 0)) {
           LoansModule.create(form.value)
             .then((payload: Loan) => emit('loan-added', payload))
             .catch((failure: boolean) => console.log(failure));
