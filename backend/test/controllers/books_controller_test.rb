@@ -12,7 +12,8 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 
   test "should create book" do
     assert_difference('Book.count') do
-      post api_v1_books_url, params: { book: { barcode: 5001, condition: @book.condition, title_id: @book.title_id } }, as: :json
+      post api_v1_books_url, params: { book: { barcode: 5001, condition: @book.condition, title_id: @book.title_id } }, 
+                             as: :json
     end
 
     assert_response 200
@@ -24,7 +25,8 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update book" do
-    patch api_v1_book_url(@book), params: { book: { barcode: @book.barcode, condition: @book.condition, title_id: @book.title_id } }, as: :json
+    patch api_v1_book_url(@book), 
+          params: { book: { barcode: @book.barcode, condition: @book.condition, title_id: @book.title_id } }, as: :json
     assert_response 200
   end
 

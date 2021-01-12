@@ -6,7 +6,7 @@ jobs:
   backend-unit-tests:
     runs-on: ubuntu-latest
 
-    services: 
+    services:
       postgres:
         image: postgres:13.1
         env:
@@ -40,10 +40,24 @@ jobs:
         cd backend
         bundle exec bin/rake
 
+  backend-lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1.59.1
+      with:
+        ruby-version: 2.6.3
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        working-directory: backend
+    - name: Run rubocop linter
+      run: |
+        cd backend
+        bundle exec rubocop
+
   frontend-unit-tests:
 
     runs-on: ubuntu-latest
-    services: 
+    services:
       postgres:
         image: postgres:13.1
         env:
@@ -71,7 +85,7 @@ jobs:
   frontend-lint:
 
     runs-on: ubuntu-latest
-    services: 
+    services:
       postgres:
         image: postgres:13.1
         env:

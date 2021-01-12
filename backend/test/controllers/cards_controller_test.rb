@@ -12,7 +12,8 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create card" do
     assert_difference('Card.count') do
-      post api_v1_cards_url, params: { card: { expiration_date: @card.expiration_date, status: @card.status, user_id: @card.user_id } }
+      post api_v1_cards_url, 
+           params: { card: { expiration_date: @card.expiration_date, status: @card.status, user_id: @card.user_id } }
     end
 
     assert_response 200
@@ -24,7 +25,9 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update card" do
-    patch api_v1_card_url(@card), params: { card: { expiration_date: @card.expiration_date, status: @card.status, uid: @card.uid, user_id: @card.user_id } }
+    patch api_v1_card_url(@card), 
+          params: { card: { expiration_date: @card.expiration_date, status: @card.status, uid: @card.uid, 
+                            user_id: @card.user_id } }
     assert_response 200
   end
 

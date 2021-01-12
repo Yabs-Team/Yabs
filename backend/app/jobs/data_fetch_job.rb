@@ -7,13 +7,15 @@ class DataFetchJob < ApplicationJob
   def perform(*fetch)
     token = []
     scopes =  ['https://www.googleapis.com/auth/admin.directory.group.readonly','https://www.googleapis.com/auth/admin.directory.user.readonly']
-    client = GoogleApiClient.new(Google::Apis::AdminDirectoryV1::DirectoryService, scopes, Rails.application.secrets.google_client_secrets, 'johanneberg.laneservice@ga.ntig.se')
+    client = GoogleApiClient.new(Google::Apis::AdminDirectoryV1::DirectoryService, scopes,
+                                 Rails.application.secrets.google_client_secrets, 'johanneberg.laneservice@ga.ntig.se')
     data = client.service.list_users(domain: 'ga.ntig.se', query: "orgUnitPath='/Johanneberg'", max_results: 500)
     insert_data(data.users, token)
     data = client.service.list_users(domain: 'elev.ga.ntig.se', query: "orgUnitPath='/Johanneberg'", max_results: 500)
     insert_data(data.users, token)
     while data.next_page_token != nil
-      data = client.service.list_users(domain: 'elev.ga.ntig.se', page_token: data.next_page_token, query: "orgUnitPath='/Johanneberg'")
+      data = client.service.list_users(domain: 'elev.ga.ntig.se', page_token: data.next_page_token,
+                                       query: "orgUnitPath='/Johanneberg'")
       insert_data(data.users, token)
     end
     delete_users(token)
@@ -29,20 +31,26 @@ class DataFetchJob < ApplicationJob
       if person.org_unit_path == "/Johanneberg/Personal"
         role = 4
         klass = "Personal"
-      else 
+      else
         role = 1
         klass = person.org_unit_path[20..-1]
       end
       if @user = User.find_by(google_token: person.id)
-        @user.update(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id, photo_path: "")
-      else 
-        User.create(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id, photo_path: "")
+        @user.update(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role,
+                     google_token: person.id, photo_path: "")
+      else
+        User.create(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role,
+                    google_token: person.id, photo_path: "")
       end
     end
   end
 
+  # rubocop:disable Style/MultilineBlockChain
   def delete_users(token)
-    User.all.reject{|x| token.include? x.google_token}.each{|user| user.update(name: "Deleted User #{user.uid}", klass: "", email: "", role: "")}
+    User.all.reject do |x|
+      token.include? x.google_token
+    end.each{|user| user.update(name: "Deleted User #{user.uid}", klass: "", email: "", role: "")}
   end
+  # rubocop:enable Style/MultilineBlockChain
 
 end
