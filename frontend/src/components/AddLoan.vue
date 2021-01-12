@@ -147,7 +147,8 @@ export default defineComponent({
       onOk,
       onShow,
       onShown,
-      onHidden
+      onHidden,
+      menu
     };
   }
 });
