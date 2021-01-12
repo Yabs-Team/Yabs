@@ -37,10 +37,10 @@ class DataFetchJob < ApplicationJob
       end
       if @user = User.find_by(google_token: person.id)
         @user.update(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role,
-                     google_token: person.id, photo_path: person.thumbnail_photo_url)
+                     google_token: person.id, photo_path: "")
       else
         User.create(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role,
-                    google_token: person.id, photo_path: person.thumbnail_photo_url)
+                    google_token: person.id, photo_path: "")
       end
     end
   end
