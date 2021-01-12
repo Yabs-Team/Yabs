@@ -66,6 +66,13 @@ class Api::V1::TitlesController < ApplicationController
     render json: @title, status: :no_content
   end
 
+  def get_books
+    @loans = Loan.joins(:book => :title).where('titles.id = ? AND loans.returned_at IS NULL', title.id)
+    # @books = Books.where(title_id:params[:id]).all
+    # @loans = @books.map{|book| Loans.where(book_id:book.id)}
+    p @loans
+    render json: @loans
+  end
   # Set title method, find the current title and sets the title to that instance in order
   # to execute given method on correct title
 

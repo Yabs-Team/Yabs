@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :loans
       resources :books
       resources :titles
+      # get 'titles/get_loans', :to => 'titles#get_books'
       resources :reviews
       resources :subjects
 
