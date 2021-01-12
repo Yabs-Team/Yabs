@@ -58,7 +58,7 @@ export default defineComponent({
     header: {default: 'This header', type: String},
     body: {default: 'This body', type: String},
     showModal: {default: false, type: Boolean},
-    actions: {default: defaultPropFactory()},
+    actions: {default: defaultPropFactory},
   },
 });
 </script>
