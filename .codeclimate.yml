@@ -1,0 +1,5 @@
+engines:
+    similar-code:
+      enabled: false
+      exclude_paths:
+        - frontend/src/store/modules/__mocks__/

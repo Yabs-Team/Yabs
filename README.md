@@ -7,6 +7,7 @@
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/itggot-TE4/Yabs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/itggot-TE4/Yabs/context:javascript)
 
 ## What's Yabs?
+
 Yabs or yet another booking system is a collection of tools for creating card id generation and loans of literature.
 
 ## License
@@ -14,7 +15,9 @@ Yabs or yet another booking system is a collection of tools for creating card id
 Yabs is released under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Development environment
+
 Supports development under Mac with docker for mac, Linux with docker and Windows running docker with WSL2 backend. VSCode is used for development. Recommended VSCode extensions:
+
 - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 - [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
 - [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
@@ -27,45 +30,70 @@ Supports development under Mac with docker for mac, Linux with docker and Window
 Also install nodejs and yarn locally so linter and Vetur works properly in editor. Run `yarn install` in /frontend to install node modules on host machine.
 
 ## Installation
+
 Install dependencies:
-```
+
+```console
 sudo gem install docker-sync
-```
-Install Yabs with:
-```
-docker-sync start
-docker-compose run backend bundle install
-docker-compose run frontend yarn install
-docker-compose build
-docker-compose run backend rails db:schema:load
-docker-compose run backend rails db:seed
 ```
 
 Put secrets.yml containing google_client_secrets in backend/config/secrets.yml
 
-## Running unit tests
-Rails fixtures are stored as snapshots. They only need to be updated if changes are done to seed.rb file:
+Install Yabs with:
+
+```console
+docker-sync start
+docker-compose run backend bundle install
+docker-compose run frontend yarn install
+docker-compose build
+
+docker-compose run backend rails db:setup
+docker-compose run backend rails db:schema:load
+docker-compose run backend rails db:seed
 ```
+
+
+## Running unit tests
+
+Rails fixtures are stored as snapshots. They only need to be updated if changes are done to seed.rb file:
+
+```console
 docker-compose run backend rails db:seed fixture=all
 ```
+
 To run the unit tests:
-```
+
+```console
 docker-compose run backend rake
 docker-compose run frontend yarn test:unit
 ```
 
 ## Running
+
 If you haven't started docker-sync yet, do that first:
-```
+
+```console
 docker-sync clean
 docker-sync start
 ```
+
 Finally:
-```
+
+```console
 docker-compose up
 ```
 
 ## Tap into backend container for rails CLI
-```
+
+``` console
 docker-compose exec backend bash
+```
+
+## Reseeding database
+
+To reseed the database run these commands in running docker backend:
+
+``` console
+docker-compose exec backend rails db:setup
+docker-compose exec backend rails db:fixtures:load
 ```

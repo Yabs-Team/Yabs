@@ -29,6 +29,6 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized(exception)
-    render json: exception.record.errors, status: :unprocessable_entity
+    render json: exception.record.errors, status: :unauthorized
   end
 end

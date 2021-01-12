@@ -1,36 +1,39 @@
 <template>
   <ListComponent
     :headers="headers"
-    :items="titlesModule.allAsArray"
+    :items="TitlesModule.allAsArray"
+    route-path="admin/titles"
+    route-specifier="isbn"
+    :use-actions="true"
     class="elevation-1"
   />
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import TitlesModule from '../store/modules/TitlesModule';
-import { VuexModule } from 'vuex-module-decorators';
+import { defineComponent, SetupContext } from '@vue/composition-api';
+import TitlesModule from '@/store/modules/TitlesModule';
 import ListComponent from '@/components/ListComponent.vue';
-
 
 // The TitleListComponent inherits the information about the titles from the titles module
 // and the headers that are created in the headers object
 
-@Component({
+export default defineComponent({
+  name: 'TitleListComponent',
   components: {
     ListComponent
-  }
-})
+  },
+  setup(_: object, { root }: SetupContext) {
 
-export default class TitleListComponent extends Vue {
-  private titlesModule: VuexModule = TitlesModule;
-  private headers: object[] = [
-    { text: 'Titel', value: 'name' },
-    { text: 'Kostnad', value: 'cost' },
-    { text: 'Typ', value: 'title_type' },
-    { text: 'ISBN', value: 'isbn' },
-  ];
-}
+    const headers: object[] = [
+      { text: 'Titel', value: 'name' },
+      { text: 'Kostnad', value: 'cost' },
+      { text: 'Typ', value: 'title_type' },
+      { text: 'ISBN', value: 'isbn' }
+    ];
+
+    return { TitlesModule, headers };
+  }
+});
 </script>
 
 <style lang="sass" scoped>

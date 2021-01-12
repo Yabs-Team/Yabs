@@ -87,51 +87,55 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
 import LoansModule from '../store/modules/LoansModule';
 import { Loan, LoanForm } from '../types';
 import UsersModule from '../store/modules/UsersModule';
+import { ref, defineComponent, SetupContext} from '@vue/composition-api';
+
 
 // loan form component is used to user interface for the user to create a loan and is later 
 // authorized by the pundit dependency 
-@Component
-export default class LoanFormComponent extends Vue {
-  public form: LoanForm = {
-    lent_by_id: 0, //eslint-disable-line camelcase
-    loaned_by_id: 0, //eslint-disable-line camelcase
-    book_id: 0,//eslint-disable-line camelcase
-    expiration_date: ''//eslint-disable-line camelcase
-  };
-  public show: boolean = true;
 
-  // Eventlistener that does not reload the page when executed, sets the lent by id to the 
-  // current user that has been logged in and then rerenders the loan form for the 
-  // user to recreate a loan
+export default defineComponent({
+  name: 'LoanFormComponent',
+  setup(_ : object, {root, emit} : SetupContext) {
+    const form = {
+      lent_by_id: 0, //eslint-disable-line camelcase
+      loaned_by_id: 0, //eslint-disable-line camelcase
+      book_id: 0,
+      expiration_date: '' //eslint-disable-line camelcase
+    } as LoanForm;
 
-  public onSubmit(evt: Event): void {
+    const show = ref(true);
 
-    evt.preventDefault();
-    this.form.lent_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
-    if (!!this.form.lent_by_id && !!this.form.loaned_by_id && !!this.form.book_id && !!this.form.expiration_date) {
-      LoansModule.create(this.form)
-        .then((payload: Loan) => this.$emit('loan-added', payload))
-        .catch((failure: boolean) => console.log(failure));
+    function onSubmit(evt: Event): void{
+      evt.preventDefault();
+      form.lent_by_id = UsersModule.currentUserID; //eslint-disable-line camelcase
+      if (!!form.lent_by_id && !!form.loaned_by_id && !!form.book_id && !!form.expiration_date) {
+        LoansModule.create(form)
+          .then((payload: Loan) => emit('loan-added', payload))
+          .catch((failure: boolean) => console.log(failure));
+      }
     }
 
+    //   // this is the Eventlistener for the user to reset the form if the user has entered the 
+    //   // wrong information about the loan
+
+    function onReset(evt: Event): void {
+      evt.preventDefault();
+      form.loaned_by_id = 0; //eslint-disable-line camelcase
+      form.book_id = 0; //eslint-disable-line camelcase
+      show.value = false;
+      root.$nextTick(() => {
+        show.value = true;
+      });
+    }
+    return{
+      show,
+      onSubmit,
+      form,
+      onReset
+    };
   }
-
-
-  // this is the Eventlistener for the user to reset the form if the user has entered the 
-  // wrong information about the loan
-
-  public onReset(evt: Event): void {
-    evt.preventDefault();
-    this.form.loaned_by_id = 0; //eslint-disable-line camelcase
-    this.form.book_id = 0; //eslint-disable-line camelcase
-    this.show = false;
-    this.$nextTick(() => {
-      this.show = true;
-    });
-  }
-}
+});
 </script>

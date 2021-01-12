@@ -22,8 +22,10 @@ class DataFetchJob < ApplicationJob
 
   def insert_data(users, token)
     users.each do |person|
+      year = person.creation_time.year.to_s
       token << person.id
-      uid = Time.new.year.to_s[2..-1] + person.id.to_str[13..-1]
+      uid = year[year.length / 2..-1] + person.id.to_str[13..-1]
+
       if person.org_unit_path == "/Johanneberg/Personal"
         role = 4
         klass = "Personal"
@@ -32,9 +34,9 @@ class DataFetchJob < ApplicationJob
         klass = person.org_unit_path[20..-1]
       end
       if @user = User.find_by(google_token: person.id)
-        @user.update(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id)
+        @user.update(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id, photo_path: person.thumbnail_photo_url)
       else 
-        User.create(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id)
+        User.create(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id, photo_path: person.thumbnail_photo_url)
       end
     end
   end

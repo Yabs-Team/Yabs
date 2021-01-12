@@ -70,7 +70,7 @@
       large
       data-cy="submit"
     >
-      Lägg till
+      {{ buttonText }}
     </v-btn>
     <v-btn
       type="reset"
@@ -83,7 +83,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, SetupContext } from '@vue/composition-api';
+import { ref, defineComponent, SetupContext, watch } from '@vue/composition-api';
 import TitlesModule from '../store/modules/TitlesModule';
 import { Title, TitleForm, Subject } from '../types';
 import Subjects from '../services/api/subjects';
@@ -92,9 +92,19 @@ import Subjects from '../services/api/subjects';
 // This is the child component of the earlier named parent element and catches the information
 // passed down the component tree to render the table
 
+interface TitleFormProps {
+  formData: TitleForm;
+  mode: string;
+};
+
 export default defineComponent({
   name: 'TitleFormComponent',
-  setup(_ : object, { root, emit } : SetupContext) {
+  props: {
+    formData: {}, // Form data - data to prefill the form with
+    mode: {default: 'new'}, // Form mode - new, edit
+  },
+
+  setup(props : TitleFormProps, { root, emit } : SetupContext) {
     const form = ref({
       name: '',
       cost: '',
@@ -102,6 +112,23 @@ export default defineComponent({
       title_type: '', //eslint-disable-line camelcase
       subject_id: '',  //eslint-disable-line camelcase
     } as TitleForm);
+
+    let buttonText = '';
+    if (props.mode == 'new') {
+      buttonText = 'Lägg till';
+    } else if (props.mode == 'edit') {
+      buttonText = 'Uppdatera titel';
+    } else {
+      buttonText = 'Unkown form mode';
+    };
+
+    if (props.formData != null) {
+      form.value = {...form.value, ...props.formData};
+    };
+
+    watch(() => props.formData, (newVal, _) => {
+      form.value =  {...form.value, ...newVal};
+    });
 
     const show = ref(true);
 
@@ -123,16 +150,24 @@ export default defineComponent({
     };
     updateSubject();
 
-    // The onSubmit eventlistener calls the titlesmodule and recreates the form when the submit has been
+    // The onSubmit eventlistener calls the titlesmodule and emits an event if the create/update action is
     // successfull
 
     function onSubmit(evt: Event): void {
       if (!Object.values(form.value).some(prop => prop === '')) {
-        TitlesModule.create(form.value)
-          .then((title: Title) => {
-            emit('title-added', title);
-          })
-          .catch((failure: object) => console.log(failure));
+        if (props.mode == 'new') {
+          TitlesModule.create(form.value)
+            .then((title: Title) => {
+              emit('title-added', title);
+            })
+            .catch((failure: object) => console.log(failure));
+        } else if (props.mode == 'edit' ) {
+          TitlesModule.update(form.value)
+            .then((title: Title) => {
+              emit('title-updated', title);
+            })
+            .catch((failure: object) => console.log(failure));
+        }
       } else {
         console.log('Missing data');
       }
@@ -151,7 +186,7 @@ export default defineComponent({
       });
     }
 
-    return { form, show, options, onSubmit, onReset, subjects };
+    return { form, show, options, onSubmit, onReset, subjects, buttonText };
   }
 });
 </script>

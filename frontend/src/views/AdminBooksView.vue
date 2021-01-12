@@ -15,28 +15,26 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
 import BooksModule from '../store/modules/BooksModule';
 import BookFormComponent from '@/components/BookFormComponent.vue';
 import BookListComponent from '@/components/BookListComponent.vue';
 import TitlesModule from '../store/modules/TitlesModule';
+import { defineComponent } from '@vue/composition-api';
 
-@Component({
+export default defineComponent({
+  name: 'AdminBooksView',
   components: {
     BookFormComponent,
     BookListComponent
+  },
+  setup(): void{
+    function created(): void {
+      BooksModule.fetchAll();
+      TitlesModule.fetchAll();
+    }
+    created();
   }
-})
-export default class AdminBooksView extends Vue {
-
-  // created() is the constructor of the admin books view that instantiates the class by
-  // fetching all the books and all the titles
-  
-  private created(): void {
-    BooksModule.fetchAll();
-    TitlesModule.fetchAll();
-  }
-}
+});
 </script>
 
 <style scoped>

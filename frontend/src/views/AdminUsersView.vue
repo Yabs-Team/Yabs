@@ -9,13 +9,14 @@
     />
     <v-data-table
       :headers="headers"
-      :items="convertListToA(staffUsers)"
+      :items="convertListToA(allUsers)"
       :items-per-page="5"
       :search="search"
+      @click:row="userClick"
     >
       <template v-slot:item.role="{ item }">
         <v-select
-          v-model="staffUsers[item.uid].assignedRoles"
+          v-model="allUsers[item.uid].assignedRoles"
           :items="selectRoles"
           multiple
         />
@@ -23,7 +24,7 @@
       <template v-slot:item.actions="{ item }">
         <v-btn 
           color="primary"
-          @click="updateUserRoles(staffUsers[item.uid])"
+          @click="updateUserRoles(allUsers[item.uid])"
         >
           Save
         </v-btn>
@@ -33,61 +34,71 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator';
+import { SetupContext, defineComponent, computed, ref} from '@vue/composition-api';
 import UsersModule from '@/store/modules/UsersModule';
-import { VuexModule } from 'vuex-module-decorators';
 import RoleChecker from '@/helpers/RoleChecker';
 import { User, UserCollection } from '@/types';
-import convertListToA from '@/helpers/convertNestedToArray';
 import convertListToN from '@/helpers/convertArrayToNested';
+import convertListToA from '@/helpers/convertNestedToArray';
 
-@Component({
-  components: {
-  },
-})
-export default class AdminUsersVIew extends Vue {
-  private UsersModule: VuexModule = UsersModule;
-  private RoleChecker: RoleChecker = RoleChecker;
-  private convertListToA: Function = convertListToA;
+export default defineComponent({
+  name: 'AdminUsersView',
+  setup(_: object, { root }: SetupContext): object {
+    const router = root.$router;
+    const search = ref('');
+    const headers: object[] = [
+      { text: 'Namn', value: 'name' },
+      { text: 'Email', value: 'email' },
+      { text: 'Roller', value: 'role' },
+      { text: '', value: 'actions' },
+    ];
 
-  private search: string = '';
-  private headers: object[] = [
-    { text: 'Namn', value: 'name' },
-    { text: 'Email', value: 'email' },
-    { text: 'Roller', value: 'role' },
-    { text: '', value: 'actions' },
-  ];
-  /**
-   * This function filters out all students from the Usersmodule users
-   * and gives the remaining an array with their specified roles.
-   */
-  get staffUsers(): UserCollection {
-    return convertListToN(UsersModule.allAsArray
-      .filter(user => RoleChecker.isStudentHealth(user))
-      .map((user) => {
-        user.assignedRoles = RoleChecker.assignedRoles(user).map((number) => { return number.toString(); });
-        return user;
-      }), 'uid');
-  }
+    const allUsers = computed ((): UserCollection => {
+      let users = convertListToN(UsersModule.allAsArray
+        .map((user) => {
+          user.assignedRoles = RoleChecker.assignedRoles(user).map((number) => { return number.toString(); });
+          return user;
+        }), 'uid');
+      return users;
+    });
 
-  private selectRoles: object[] = Object.keys(RoleChecker.roles()).map((key) => {
-    return { 
-      value: key, 
-      text: RoleChecker.roles()[Number(key)] 
-    }; 
-  }).filter(selectRole => Number(selectRole.value) != 1);
-  
-  private created(): void {
-    UsersModule.fetchAll();
-  }
+    const selectRoles = computed ((): object[] => {
+      return Object.keys(RoleChecker.roles()).map((key) => {
+        return {
+          value: key, 
+          text: RoleChecker.roles()[Number(key)] 
+        }; 
+      }).filter(selectRole => Number(selectRole.value));
+    });
 
-  private updateUserRoles(user: User): void {
-    if (user.assignedRoles!.length >= 1) {
-      user.role = user.assignedRoles!.reduce((acc, num) => acc += Number(num), 0);
-      UsersModule.update(user);
+    function created(): void {
+      UsersModule.fetchAll();
     }
+
+    function updateUserRoles(user: User): void {
+      if (user.assignedRoles!.length >= 1) {
+        user.role = user.assignedRoles!.reduce((acc, num) => acc += Number(num), 0);
+        UsersModule.update(user);
+      }
+    }
+
+    function userClick(user: User): void {
+      router.push(`/users/${user.uid}`);
+    }
+
+    created();
+
+    return {
+      search,
+      headers,
+      allUsers,
+      selectRoles,
+      updateUserRoles,
+      convertListToA,
+      userClick
+    };
   }
-}
+});
 </script>
 
 <style scoped>

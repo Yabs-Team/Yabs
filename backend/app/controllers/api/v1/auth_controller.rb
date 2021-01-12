@@ -14,7 +14,7 @@ class Api::V1::AuthController < ApplicationController
 
       api_user = JSON.parse(response.body)
       unless api_user['aud'] == "959028814295-ojio0nureo15e2l4uj2lng0goeef0k27.apps.googleusercontent.com"
-        render json: {:errors => "invalid id token"}, status: :unprocessable_entity
+        render json: {:errors => "invalid id token"}, status: :bad_request
       else
         @user = User.where(google_token: api_user['sub']).first
 
