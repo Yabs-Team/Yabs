@@ -113,7 +113,7 @@ export default defineComponent({
 
     function created() : void {
       LoansModule.fetchAll();
-    }
+    } 
 
     function getUser():User {
       return UsersModule.all[+root.$route.params.id];
@@ -142,7 +142,7 @@ export default defineComponent({
       }).catch((error: object) => {
         snackbarText.value = error.toString();
       });
-
+      
       snackbar.value = true;
     }
     return{
@@ -153,7 +153,9 @@ export default defineComponent({
       savePicture,
       snackbar,
       snackbarText,
-      roleToText
+      roleToText,
+      image
+
     };
   }
 });
