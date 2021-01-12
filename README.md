@@ -29,6 +29,8 @@ Supports development under Mac with docker for mac, Linux with docker and Window
 
 Also install nodejs and yarn locally so linter and Vetur works properly in editor. Run `yarn install` in /frontend to install node modules on host machine.
 
+To make use of the pre-commit hooks setup by this project you are also required to run `yarn install` in the root of YABS
+
 ## Installation
 
 Install dependencies:

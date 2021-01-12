@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "docsify": "^4.9.4",
-    "husky": "^5.0.6",
+    "husky": "^4.3.7",
     "lint-staged": "^10.5.3"
   },
   "gitHooks": {
@@ -9,13 +9,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && cd frontend && yarn run test:unit"
     }
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
-      "vue-cli-service lint --fix",
-      "git add ."
+      "eslint --cache --max-warnings=0 -c ./frontend/.eslintrc.js --fix"
     ]
   }
 }
