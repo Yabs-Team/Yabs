@@ -34,9 +34,9 @@ class DataFetchJob < ApplicationJob
         klass = person.org_unit_path[20..-1]
       end
       if @user = User.find_by(google_token: person.id)
-        @user.update(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id, photo_path: person.thumbnail_photo_url)
+        @user.update(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id, photo_path: "")
       else 
-        User.create(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id, photo_path: person.thumbnail_photo_url)
+        User.create(name: person.name.full_name, uid: uid, klass: klass, email: person.emails[0]["address"], role: role, google_token: person.id, photo_path: "")
       end
     end
   end
