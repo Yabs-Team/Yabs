@@ -6,7 +6,10 @@
       </v-card-title>
       <v-card-text>
         <v-form>
-          <v-btn @click="toggleReader" data-jest="barcode_button">
+          <v-btn
+            data-jest="barcode_button"
+            @click="toggleReader"
+          >
             <v-icon
               v-if="barcode"
               aria-label="Stäng streckkods läsare"
@@ -66,7 +69,7 @@
 </template>
 
 <script lang='ts'>
-import { BookForm, Loan, Book } from '@/types';
+import { BookForm, Book } from '@/types';
 import { ref, defineComponent, SetupContext, watch } from '@vue/composition-api';
 import BarcodeReaderComponent from '@/components/BarcodeReaderComponent.vue';
 import BaseModal from '@/components/BaseModal.vue';
