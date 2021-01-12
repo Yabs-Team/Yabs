@@ -52,7 +52,7 @@ jobs:
     - name: Run rubocop linter
       run: |
         cd backend
-        backend exec rubocop
+        bundle exec rubocop
 
   frontend-unit-tests:
 
