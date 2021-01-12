@@ -6,7 +6,7 @@ import Vue from 'vue';
 describe('AdminLoansView.vue', () => {
   
   it('CardFormComponent exists in view', () => {
-    const wrapper: Wrapper<AdminLoansView> = shallowFactory(AdminLoansView);
+    const wrapper: Wrapper<Vue> = shallowFactory(AdminLoansView);
     expect(wrapper.find('div').exists()).toBe(true);
   });
   

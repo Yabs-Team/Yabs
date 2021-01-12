@@ -71,7 +71,8 @@ import roleToText from '@/helpers/roleToText';
 
 interface CigCanvasProps {
   image: File,
-  sendCanvas: boolean
+  sendCanvas: boolean,
+  savePictureTrigger: boolean
 }
 
 export default defineComponent({
@@ -82,6 +83,7 @@ export default defineComponent({
   props: {
     image: {type: File, default: null},
     sendCanvas: {type: Boolean, default: false},
+    savePictureTrigger: {type: Boolean, default: false},
   },
   setup(props: CigCanvasProps, { root, emit }: SetupContext) {
     let name: Ref<string> = ref('');
@@ -251,6 +253,7 @@ export default defineComponent({
         );
       } 200;
     }
+
     // This is a watch action that monitors the send the instance sendCanvas to see if the 
     // boolean is being mutated in any way and also blobs the image to send it via the 
     // emit method built in Vue to the parent component
@@ -262,6 +265,15 @@ export default defineComponent({
           emit('imageSent', blob);
         });
         props.sendCanvas = false;
+      }
+    });
+
+    // This is a watch action that monitors the prop savePictureTrigger to see if the 
+    // boolean is being mutated in any way and calls the function savePicture if true
+
+    watch(() => props.savePictureTrigger, (newVal: boolean, _: boolean) => {
+      if(newVal){
+        savePicture();
       }
     });
 
@@ -292,6 +304,7 @@ export default defineComponent({
         console.log('user updated profile!');
       }).catch((error: object) => {
         // TODO: show in notification to user
+        alert(`Failed to update user: ${name.value}. Please try again`);
         console.error(error);
       });
     }
