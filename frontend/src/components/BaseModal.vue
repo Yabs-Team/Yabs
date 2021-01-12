@@ -1,5 +1,8 @@
 <template>
-  <v-row justify="center" data-jest="modal">
+  <v-row
+    justify="center"
+    data-jest="modal"
+  >
     <v-dialog
       v-model="showModal"
       persistent
@@ -16,8 +19,8 @@
           <v-spacer />
           <v-btn
             v-for="x in actions"
-            :data-jest="`modal-btn`"
             :key="x.text"
+            :data-jest="`modal-btn`"
             color="green darken-1"
             text
             @click="x.action"
@@ -45,7 +48,7 @@ interface BaseModalProps {
 }
 
 function defaultPropFactory(): BaseModalActionProp[]  {
-  return {default: [{ text: 'Nooo', action: (): void => { console.log('noo'); }}, { text: 'Yeah', action: (): void => { console.log('Yeah'); }}]};
+  return [{ text: 'Nooo', action: (): void => { console.log('noo'); }}, { text: 'Yeah', action: (): void => { console.log('Yeah'); }}];
 }
 
 export default defineComponent({
@@ -55,7 +58,7 @@ export default defineComponent({
     header: {default: 'This header', type: String},
     body: {default: 'This body', type: String},
     showModal: {default: false, type: Boolean},
-    actions: defaultPropFactory(),
+    actions: {default: defaultPropFactory},
   },
 });
 </script>
