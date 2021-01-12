@@ -25,8 +25,8 @@ Responsibility.create(subject: e_sub, user: e_user)
 
 alice_google = GoogleBooks::API.search('isbn:0763645680').first
 # Create titles of both book types
-title_alice = Title.create(name: "Alice in Wonderland", isbn: "0763645680", 
-    cost: 70, 
+title_alice = Title.create(name: "Alice in Wonderland", isbn: "0763645680",
+    cost: 70,
     title_type: "Skönlitteratur",
     description: alice_google.description,
     authors: alice_google.authors.to_s,
@@ -35,10 +35,12 @@ title_alice = Title.create(name: "Alice in Wonderland", isbn: "0763645680",
     published_date: alice_google.published_date,
     subject: lib_sub
 )
-title_lotr = Title.create(name: "The Fellowship of the Ring", isbn: "9780547928210", cost: 100, title_type: "Skönlitteratur", subject: lib_sub)
+title_lotr = Title.create(name: "The Fellowship of the Ring", isbn: "9780547928210", cost: 100,
+    title_type: "Skönlitteratur", subject: lib_sub)
 
 title_cc = Title.create(name: "Clean Code", isbn: "9780132350884", cost: 300, title_type: "Kurslitteratur", subject: p_sub)
-title_tomtens_jul = Title.create(name: "Tomtens jul", isbn: "9781999985462", cost: 60, title_type: "Kurslitteratur", subject: s_sub)
+title_tomtens_jul = Title.create(name: "Tomtens jul", isbn: "9781999985462", cost: 60, title_type: "Kurslitteratur",
+    subject: s_sub)
 
 # Create books to be loaned
 book_alice = Book.create(barcode: "5000", condition: "OK", title: title_alice)
@@ -61,7 +63,7 @@ loan_cc.save
 review_alice = Review.new(score: 3, review: "I didn't particulary like this book.")
 review_alice.title = title_alice
 review_alice.user = loan_alice.loaned_by
-review_alice.save   
+review_alice.save
 
 
 # Create the rest of the books
