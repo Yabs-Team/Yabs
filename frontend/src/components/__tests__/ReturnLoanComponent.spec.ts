@@ -85,7 +85,7 @@ describe('ReturnLoanComponent.vue', () => {
   };
 
   it('Expect the modal to be present', async () => {
-    const wrapper = shallowFactory(ReturnLoanComponent, options);
+    const wrapper = factory(ReturnLoanComponent, options);
     expect(wrapper.find('[data-jest=\'modal\']').exists()).toBe(true);
   });
 
@@ -103,7 +103,7 @@ describe('ReturnLoanComponent.vue', () => {
   });
 
   it('initialises an update calls update book with correct input', async () => {
-    const wrapper: Wrapper<Vue> = shallowFactory(ReturnLoanComponent, options);
+    const wrapper: Wrapper<Vue> = factory(ReturnLoanComponent, options);
 
     wrapper.find('[data-jest=\'book_barcode_return\']').setValue('5002');
     wrapper.find('[data-jest=\'book_condition\']').setValue('Broken');
