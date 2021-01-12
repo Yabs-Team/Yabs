@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_125752) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "notes"
+    t.boolean "availability"
     t.index ["barcode"], name: "index_books_on_barcode", unique: true
     t.index ["title_id"], name: "index_books_on_title_id"
   end
@@ -47,7 +48,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_125752) do
   create_table "cards", id: false, force: :cascade do |t|
     t.integer "uid"
     t.datetime "expiration_date"
-    t.string "status"
+    t.text "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false

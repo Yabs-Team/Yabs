@@ -31,6 +31,12 @@
       outlined
       data-cy="condition"
     />
+    <v-select
+      v-model="form.availability"
+      :items="availability"
+      label="Tillgänglighet"
+      item-text="state"
+    />
     <v-btn
       class="mr-4"
       type="submit"
@@ -65,7 +71,8 @@ export default defineComponent({
     let form: BookForm = {
       barcode: '',
       title_id: 0, //eslint-disable-line camelcase
-      condition: ''
+      condition: '',
+      availability: true
     };
 
     //   // Submit is the event listener that takes the event and prevents the site to reload when
@@ -73,7 +80,16 @@ export default defineComponent({
 
     function onSubmit(evt: Event): void {
       evt.preventDefault();
-      BooksModule.create(form);
+      const multiBookInput = form.barcode.split(',');
+      if (multiBookInput.length > 1) {
+        for (const bookBarcode of multiBookInput) {
+          const tempBook = {...form};
+          tempBook.barcode = bookBarcode.trim();
+          BooksModule.create(tempBook);
+        };
+      } else {
+        BooksModule.create(form);
+      };
       onReset();
     };
 
@@ -85,14 +101,21 @@ export default defineComponent({
         barcode: '',
         title_id: 0, //eslint-disable-line camelcase
         condition: '',
+        availability: true
       };
-    }
+    };
+
+    const availability: object[] = [
+      { state: 'true', value: true },
+      { state: 'false', value: false },
+    ];
+
     return{
       form,
       TitlesModule,
       onSubmit,
       onReset,
-      
+      availability
     };
   }
 });
