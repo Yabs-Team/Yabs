@@ -10,6 +10,7 @@
     "lintnf": "vue-cli-service lint src/ --no-fix --max-warnings 1"
   },
   "dependencies": {
+    "@te4-adrian-almetun-smeds/quagga2": "git+https://github.com/te4-adrian-almetun-smeds/quagga2.git",
     "@types/file-saver": "^2.0.0",
     "@types/jquery": "^3.3.22",
     "@types/jszip": "^3.1.4",
