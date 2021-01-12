@@ -1,5 +1,5 @@
 <template>
-  <div id="barcodeScanner">
+  <div id="barcodeScanner" data-jest="barcodeReader">
     <span v-if="!loaded">Initializing..</span><span v-if="invalidBrowser">Your browser doesn't support this.</span>
   </div>
 </template>
