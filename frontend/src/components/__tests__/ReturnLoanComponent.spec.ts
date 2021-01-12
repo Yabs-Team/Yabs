@@ -93,7 +93,7 @@ describe('ReturnLoanComponent.vue', () => {
     const wrapper = factory(ReturnLoanComponent, options);
 
     expect(wrapper.find('[data-jest=\'barcodeReader\']').exists()).toBe(false);
-    wrapper.find('[data-jest=\'barcode_button\']').trigger('click');
+    wrapper.find('[data-jest=\'barcodeButton\']').trigger('click');
     expect(wrapper.find('[data-jest=\'barcodeReader\']').exists()).toBe(true);
   });
 
@@ -105,8 +105,8 @@ describe('ReturnLoanComponent.vue', () => {
   it('initialises an update calls update book with correct input', async () => {
     const wrapper: Wrapper<Vue> = factory(ReturnLoanComponent, options);
 
-    wrapper.find('[data-jest=\'book_barcode_return\']').setValue('5002');
-    wrapper.find('[data-jest=\'book_condition\']').setValue('Broken');
+    wrapper.find('[data-jest=\'bookBarcodeReturn\']').setValue('5002');
+    wrapper.find('[data-jest=\'bookCondition\']').setValue('Broken');
     await wrapper.find('[data-jest=\'ReturnBook\']').trigger('click');
 
     wrapper.setData({

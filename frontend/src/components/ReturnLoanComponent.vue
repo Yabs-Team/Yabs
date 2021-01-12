@@ -7,7 +7,7 @@
       <v-card-text>
         <v-form>
           <v-btn
-            data-jest="barcode_button"
+            data-jest="barcodeButton"
             @click="toggleReader"
           >
             <v-icon
@@ -29,15 +29,15 @@
           />
           <v-text-field
             v-model="scannedBookId"
-            data-jest="book_barcode_return"
-            data-cy="book_barcode_return"
+            data-jest="bookBarcodeReturn"
+            data-cy="bookBarcodeReturn"
             label="Bokens Streckkod"
             outlined
           />
           <v-text-field
             v-model="scannedBookStatus"
-            data-jest="book_condition"
-            data-cy="book_condition"
+            data-jest="bookCondition"
+            data-cy="bookCondition"
             label="Bokens Status"
             outlined
           />
