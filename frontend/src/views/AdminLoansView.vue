@@ -28,32 +28,27 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component} from 'vue-property-decorator';
+import { defineComponent } from '@vue/composition-api';
 import LoanFormComponent from '@/components/LoanFormComponent.vue';
 import LoanListComponent from '@/components/LoanListComponent.vue';
 import ReturnLoanComponent from '@/components/ReturnLoanComponent.vue';
 import LoansModule from '../store/modules/LoansModule';
 
-@Component({
+export default defineComponent({
+  name: 'AdminLoansView',
   components: {
     LoanFormComponent,
     LoanListComponent,
     ReturnLoanComponent
+  },
+  setup() {
+    function created(): void {
+      LoansModule.fetchAll();
+    }
+
+    created();
   }
-})
-
-// This component is the parent view of the components LoanListComponent and LoanFormComponent
-// which is declared in the template
-
-export default class AdminLoansView extends Vue {
-
-  // The class is instantiated by the constructor created by fetching all the loans from the
-  // loans module
-  
-  private created(): void {
-    LoansModule.fetchAll();
-  }
-}
+});
 </script>
 
 <style scoped>
