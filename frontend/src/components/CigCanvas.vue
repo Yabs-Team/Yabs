@@ -50,6 +50,20 @@
       src="../assets/logo.png"
       hidden="hidden"
     >
+
+    <v-snackbar
+      v-model="snackbar"
+    >
+      {{ snackbarText }}
+
+      <v-btn
+        color="white"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -99,6 +113,8 @@ export default defineComponent({
     let height: number = 0;
     let size: number = 1;
     let context: CanvasRenderingContext2D | null = null;
+    let snackbarText: Ref<string> = ref('');
+    let snackbar: Ref<boolean> = ref(false);
 
 
     const canvasContainer: Ref<HTMLDivElement | null> = ref(null);
@@ -256,7 +272,7 @@ export default defineComponent({
           width,
         );
         context.fillText(
-          role.toString(),
+          roleToText(role),
           width / 2,
           height / 1.7 + height / 8,
           width,
@@ -274,7 +290,7 @@ export default defineComponent({
         canvas.value!.toBlob((blob: Blob | null) => {
           emit('imageSent', blob);
         });
-        props.sendCanvas = false;
+
       }
     });
 
@@ -311,12 +327,14 @@ export default defineComponent({
       formData.append('uid', barcode);
       formData.append('image', props.image as Blob);
       UsersModule.update(formData).then((response: User) => {
-        console.log('user updated profile!');
+        snackbarText.value = `Successfully updated user ${name.value}!`;
       }).catch((error: object) => {
         // TODO: show in notification to user
-        alert(`Failed to update user: ${name.value}. Please try again`);
-        console.error(error);
+        snackbarText.value = `Failed to update user: ${name.value}. Please try again`;
+        console.log(error);
       });
+
+      snackbar.value = true;
     }
 
     // onNameInput is a getter to receive the information stored in the instance of checkUserData
@@ -334,7 +352,7 @@ export default defineComponent({
     });
 
     return {
-      userNames, onNameInput, name, savePicture, downloadCanvas, canvasContainer, canvas, bg, logo, emitIndex
+      userNames, onNameInput, name, savePicture, downloadCanvas, snackbarText, snackbar, canvasContainer, canvas, bg, logo, emitIndex
     };
   }
 });

@@ -7,7 +7,7 @@ import CardFormComponent from '@/components/CardFormComponent.vue';
 describe('CardFormComponent.vue', () => {
   it('checks if it exists', () => {
     const wrapper: Wrapper<Vue> = shallowFactory(CardFormComponent);
-    expect(wrapper.find('[data-cy=file-input]')).toBe(true);
+    expect(wrapper.find('[data-cy="file-input"]')).toBeTruthy();
         
   });
 });
