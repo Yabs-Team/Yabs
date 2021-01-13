@@ -1,6 +1,6 @@
-<!-- 
+<!--
   This is the Start and root view for all of the application and includes three links, "Profil", "Admin"
-  and "Hitta". It fetches all the loans and all the users from their modules in order to 
+  and "Hitta". It fetches all the loans and all the users from their modules in order to
   render them in the bottom of the page
  -->
 
@@ -82,8 +82,8 @@
   </div>
 </template>
 
-<!-- 
-  Since this is the starting page, many modules are imported but also one component called 
+<!--
+  Since this is the starting page, many modules are imported but also one component called
   LoanListComponent in order to render the loans that soon are to expire
 -->
 <script lang="ts">
@@ -118,12 +118,13 @@ export default defineComponent({
       }
     }
 
+    created();
+
     return {
       size,
       primary,
       loading,
       usersModule,
-      created
     };
   }
 });
