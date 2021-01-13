@@ -5,18 +5,12 @@
       data-cy="file-input"
       class="input-file"
       multiple
+      label="Välj bilder eller zip-filer..."
+      hide-details
       outlined
       accept="image/*, .zip"
       @change="onFileSelect"
     />
-    <v-btn
-      data-cy="add-file"
-      color="primary"
-      large
-      @click="submit"
-    >
-      Lägg till
-    </v-btn>
   </div>
 </template>
 
@@ -31,7 +25,7 @@ import JSZip, { JSZipObject } from 'jszip';
 export default defineComponent({
   name: 'CardFormComponent',
   setup(_: object, { root, emit }: SetupContext){
-    const files: File[] = [];
+    let files: File[] = [];
   
     // Constructor for instantiating the class and fetching all the users from the userModule
   
@@ -40,9 +34,8 @@ export default defineComponent({
     // Eventlistener that emits the informations about that specific event higher up in the 
     // component tree
 
-    function submit(): void {
-      emit('sendImages', files);
-    }
+    // function submit(): void {
+    // }
 
     // Eventlistener that takes a list of instances of the object File and checks the type
     // of the file and confirms that it is a zip file and then extracts the content to render
@@ -56,6 +49,9 @@ export default defineComponent({
           files.push(fileObject);
         }
       }
+
+      emit('sendImages', files);
+      files = [];
     }
 
     // loadFileData takes three arguments, a list of files, the index of the list of files
@@ -100,7 +96,7 @@ export default defineComponent({
         });
     }
     return {
-      files, onFileSelect, submit
+      files, onFileSelect
     };
   }
 });
