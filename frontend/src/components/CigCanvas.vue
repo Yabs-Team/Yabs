@@ -11,7 +11,8 @@
       <canvas
         id="canvas"
         ref="canvas"
-        height="500"
+        height="700"
+        width="600"
       />
     </div>
     <v-form>
@@ -174,8 +175,10 @@ export default defineComponent({
 
     function getCanvasContainerSize(): void {
       if(canvasContainer.value !== null){
-        width = canvasContainer.value.clientWidth;
-        height = canvasContainer.value.clientHeight;
+        // 17 to 27 is the relation between a creditcards width and height
+        let scale = 15;
+        width = 17 * scale;
+        height = 27 * scale;
       }
     }
 
