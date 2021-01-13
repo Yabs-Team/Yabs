@@ -5,19 +5,31 @@
  -->
 
 <template>
-  <div>
+  <v-container>
     <h1 class="display-2">
       Cards
     </h1>
-    <div class="flex">
-      <div style="margin-right: 50px">
+    <v-row>
+      <v-col>
         <CardFormComponent @sendImages="onSendImages($event)" />  
-      </div>
-      <div v-if="images.length > 0">
-        <CanvasContainer :images="images" />
-      </div>
+      </v-col>
+      <v-col class="btn-parent">
+        <v-btn class="ma-auto" @click="">Ladda ner alla kort</v-btn>
+        <v-btn class="ma-auto">Spara alla bilder</v-btn>
+        <v-btn class="ma-auto">Ta bort alla kort</v-btn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <CanvasContainer 
+        v-if="images.length > 0"
+        :images="images" 
+        @deleteCard="removeCardByIndex"
+      />
+    </v-row>
+
+    <div class="flex">
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -39,13 +51,19 @@ export default defineComponent({
     // of the image
   
     function onSendImages(sendImages: File[]): void {
-      images.value = sendImages;
+      console.log(sendImages);
+      images.value = images.value.concat(sendImages);
+      console.log(images.value);
+    }
+
+    function removeCardByIndex(index : number): void{
+      images.value.splice(index, 1);
     }
   
     UsersModule.fetchAll();
 
     return {
-      images, onSendImages
+      images, onSendImages, removeCardByIndex
     };
   }
   
@@ -60,5 +78,12 @@ export default defineComponent({
 
 .flex > div {
   flex: 1;
+}
+
+.btn-parent{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
 }
 </style>

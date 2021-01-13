@@ -35,6 +35,9 @@
         >
           Ladda ned kort
         </v-btn>
+        <v-btn @click="$emit('deleteCard')">
+          Ta bort
+        </v-btn>
       </v-item-group>
     </v-form>
     <img
@@ -72,7 +75,8 @@ import roleToText from '@/helpers/roleToText';
 interface CigCanvasProps {
   image: File,
   sendCanvas: boolean,
-  savePictureTrigger: boolean
+  savePictureTrigger: boolean,
+  index: number,
 }
 
 export default defineComponent({
@@ -84,6 +88,7 @@ export default defineComponent({
     image: {type: File, default: null},
     sendCanvas: {type: Boolean, default: false},
     savePictureTrigger: {type: Boolean, default: false},
+    index: {type: Number, default: null},
   },
   setup(props: CigCanvasProps, { root, emit }: SetupContext) {
     let name: Ref<string> = ref('');
@@ -94,6 +99,7 @@ export default defineComponent({
     let height: number = 0;
     let size: number = 1;
     let context: CanvasRenderingContext2D | null = null;
+
 
     const canvasContainer: Ref<HTMLDivElement | null> = ref(null);
     const canvas: Ref<HTMLCanvasElement | null> = ref(null);
@@ -108,7 +114,11 @@ export default defineComponent({
         .filter(([key, user]) => !(user as User).name.includes('Deleted User'))
         .map(([key, user]) => (user as User).name);
     }
-    
+
+    function emitIndex(): void{
+      emit('deleteCard', props.index);
+    }
+
     // checkUserData is used to fill the instances of the class with information from the 
     // UsersModule so that the card has the right inforamtion
 
@@ -324,7 +334,7 @@ export default defineComponent({
     });
 
     return {
-      userNames, onNameInput, name, savePicture, downloadCanvas, canvasContainer, canvas, bg, logo
+      userNames, onNameInput, name, savePicture, downloadCanvas, canvasContainer, canvas, bg, logo, emitIndex
     };
   }
 });

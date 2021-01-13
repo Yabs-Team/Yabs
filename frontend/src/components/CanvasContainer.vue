@@ -1,22 +1,23 @@
 <template>
   <div class="root">
-    <v-btn @click="getAllCanvases">
+    <!-- <v-btn @click="getAllCanvases">
       Ladda ned alla kort
     </v-btn>
     <v-btn @click.prevent="saveAll">
       Spara alla bilder
-    </v-btn>
+    </v-btn> -->
     <div
       class="cig-card"
-      style="flex-wrap:wrap;"
     >
       <CigCanvas
         v-for="(image, index) in images"
         :key="index"
-        class="canvas"
+        class="canvas mt-5 mb-5"
         :image="image"
+        :index="index"
         :send-canvas="sendCanvas"
         :save-picture-trigger="saveAllPictures"
+        @deleteCard="$emit('deleteCard', index)"
         @imageSent="onImageReceived($event)"
       />
     </div>
@@ -43,7 +44,7 @@ export default defineComponent({
   props: {
     images: {type: Array, default: []}
   },
-  setup(props : CanvasContainerProps, { root }: SetupContext){
+  setup(props : CanvasContainerProps, { emit, root }: SetupContext){
     const sendCanvas: Ref<boolean> = ref(false);
     const saveAllPictures: Ref<boolean> = ref(false);
     let imageBlobs: Blob[] = [];
@@ -52,6 +53,10 @@ export default defineComponent({
 
     function getAllCanvases(): void {
       sendCanvas.value = !sendCanvas.value;
+    }
+
+    function emitIndex(e : number): void{
+      emit('deleteCard', e);
     }
 
     // The onImageReceived method takes an image and then compares it to the instance of images 
@@ -89,7 +94,7 @@ export default defineComponent({
     }
 
     return {
-      getAllCanvases, sendCanvas, saveAll, saveAllPictures
+      getAllCanvases, sendCanvas, saveAll, saveAllPictures, emitIndex
     };
   }
 
@@ -116,7 +121,8 @@ export default defineComponent({
         border-radius: 0.25rem
         display: flex
         flex-direction: row
-        justify-content: center
+        flex-wrap: wrap 
+        justify-content: space-evenly
 
     .grid-container
         margin-top: 10px
