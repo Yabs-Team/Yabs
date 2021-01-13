@@ -1,5 +1,23 @@
 <template>
   <div>
+    <v-btn
+      data-jest="barcodeButton"
+      @click="toggleReader"
+    >
+      <v-icon
+        v-if="!show"
+        aria-label="Stäng streckkods läsare"
+      >
+        mdi-barcode-off
+      </v-icon>
+      <v-icon
+        v-else
+        aria-label="Läs av Streckkoder"
+      >
+        mdi-barcode-scan
+      </v-icon>
+    </v-btn>
+
     <v-form
       v-if="show"
       data-jest="form"
@@ -50,6 +68,32 @@
         Rensa Fälten
       </v-btn>
     </v-form>
+    <div v-else>
+      <BarcodeReaderComponent
+        @newCodeDetected="newCodeDetected"
+      />
+      <p>
+        Vänligen scanna {{ currentScan == 'book' ? 'Bokens sträckkod' : 'Elevens passerkort' }}
+      </p>
+      <v-container>
+        <p @click.prevent="currentScan = 'book'">
+          Bokens sträckkod: {{ form.book_id }}
+        </p>
+        <p @click.prevent="currentScan = 'student'">
+          Elevens sträckkod: {{ form.loaned_by_id }}
+        </p>
+        <v-btn
+          data-cy="loanOutBook"
+          type="submit"
+          color="primary"
+          class="mr-4"
+          large
+          @click.prevent="onSubmit"
+        >
+          Låna Ut
+        </v-btn>
+      </v-container>
+    </div>
   </div>
 </template>
 
@@ -57,13 +101,14 @@
 import LoansModule from '../store/modules/LoansModule';
 import { Loan, LoanForm } from '../types';
 import UsersModule from '../store/modules/UsersModule';
+import BarcodeReaderComponent from './BarcodeReaderComponent.vue';
 import { ref, defineComponent, SetupContext} from '@vue/composition-api';
 
-
-// loan form component is used to user interface for the user to create a loan and is later 
-// authorized by the pundit dependency 
+// loan form component is used to user interface for the user to create a loan and is later
+// authorized by the pundit dependency
 export default defineComponent({
   name: 'LoanFormComponent',
+  components: { BarcodeReaderComponent },
   setup(_ : object, {root, emit} : SetupContext) {
     const form = {
       lent_by_id: 0, //eslint-disable-line camelcase
@@ -83,8 +128,7 @@ export default defineComponent({
       }
     }
 
-    //   // this is the Eventlistener for the user to reset the form if the user has entered the 
-    //   // wrong information about the loan
+    // this is the Eventlistener for the user to clear the forms input fields
 
     function onReset(evt: Event): void {
       evt.preventDefault();
@@ -95,7 +139,30 @@ export default defineComponent({
         show.value = true;
       });
     }
+
+    const currentScan = ref('book');
+
+    // If the scanner detects a new barcode depending on what is currently being scanned
+    // it sets the corresponding form values
+    function newCodeDetected(code: string): void {
+      if (currentScan.value === 'book') {
+        form.book_id = parseInt(code); //eslint-disable-line camelcase
+        currentScan.value = 'student';
+      } else {
+        form.loaned_by_id = parseInt(code); //eslint-disable-line camelcase
+        currentScan.value = 'book';
+      };
+    }
+
+    // Toggles the barcodeReaders precence.
+    function toggleReader():void {
+      show.value = !show.value;
+    }
+
     return{
+      newCodeDetected,
+      toggleReader,
+      currentScan,
       show,
       onSubmit,
       form,

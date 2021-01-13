@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoanFormComponent.vue renders correctly 1`] = `
+<div>
+  <v-btn-stub tag="button" activeclass="" type="button" data-jest="barcodeButton">
+    <v-icon-stub arialabel="Läs av Streckkoder" aria-label="Läs av Streckkoder">
+      mdi-barcode-scan
+    </v-icon-stub>
+  </v-btn-stub>
+  <v-form-stub data-jest="form">
+    <v-item-group-stub activeclass="v-item--active" tag="div" vertical="" label-class="text-sm-right" label-for="nestedUid">
+      <v-text-field-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="0" backgroundcolor="" id="nestedUid" label="Elevens Streckkod" loaderheight="2" clearicon="$clear" outlined="true" type="text" data-jest="student_barcode" data-cy="student_barcode"></v-text-field-stub>
+    </v-item-group-stub>
+    <v-item-group-stub activeclass="v-item--active" tag="div" vertical="" label-class="text-sm-right" label-for="nestedBid">
+      <v-text-field-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="0" backgroundcolor="" id="nestedBid" label="Bokens Streckkod" loaderheight="2" clearicon="$clear" outlined="true" type="text" data-jest="book_barcode" data-cy="book_barcode"></v-text-field-stub>
+    </v-item-group-stub>
+    <v-btn-stub color="primary" tag="button" activeclass="" large="true" type="submit" data-cy="loanOutBook" class="mr-4">
+      Låna Ut
+    </v-btn-stub>
+    <v-btn-stub tag="button" activeclass="" large="true" type="reset">
+      Rensa Fälten
+    </v-btn-stub>
+  </v-form-stub>
+</div>
+`;
+
+exports[`LoanFormComponent.vue renders the barcode scanner correctly 1`] = `
+<div><button type="button" class="v-btn v-btn--flat theme--light v-size--default" data-jest="barcodeButton"><span class="v-btn__content"><i aria-hidden="true" aria-label="Stäng streckkods läsare" class="v-icon notranslate mdi mdi-barcode-off theme--light"></i></span></button>
+  <div>
+    <div id="barcodeScanner" data-jest="barcodeReader"><span>Initializing..</span>
+      <!---->
+    </div>
+    <p>
+      Vänligen scanna Bokens sträckkod
+    </p>
+    <div class="container">
+      <p>
+        Bokens sträckkod: 0
+      </p>
+      <p>
+        Elevens sträckkod: 0
+      </p> <button type="submit" class="mr-4 v-btn v-btn--flat theme--light v-size--large primary--text" data-cy="loanOutBook"><span class="v-btn__content">
+        Låna Ut
+      </span></button>
+    </div>
+  </div>
+</div>
+`;
