@@ -1,4 +1,4 @@
-import { Book, Title, TitleForm } from '@/types';
+import { Loan, Title, TitleForm } from '@/types';
 import APIRequest from './APIRequest';
 
 export default class TitlesAPI extends APIRequest {

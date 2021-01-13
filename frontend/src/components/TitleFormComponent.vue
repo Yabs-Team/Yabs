@@ -92,11 +92,12 @@
         Ta bort
       </v-btn>
     </v-form>
-    <v-snackbar
-      v-if="snackbarShown == true"
-    >
-      Hej
-    </v-snackbar>
+    <BaseModal
+      :header="modalHeader"
+      :body="modalBody"
+      :actions="modalActions"
+      :show-modal="showModal"
+    />
   </main>
 </template>
 
@@ -106,6 +107,7 @@ import TitlesModule from '../store/modules/TitlesModule';
 import { Title, TitleForm, Subject } from '../types';
 import Subjects from '../services/api/subjects';
 import LoansModule from '@/store/modules/LoansModule';
+import BaseModal from './BaseModal.vue';
 
 
 // This is the child component of the earlier named parent element and catches the information
@@ -122,9 +124,15 @@ export default defineComponent({
     formData: {}, // Form data - data to prefill the form with
     mode: {default: 'new'}, // Form mode - new, edit
   },
+  components: {
+    BaseModal
+  },
 
   setup(props : TitleFormProps, { root, emit } : SetupContext) {
-    let snackbarShown = false;
+    const showModal = ref(false);
+    const modalBody = ref('');
+    const modalHeader = ref('');
+    const modalActions = ref([{}]);
     const form = ref({
       name: '',
       cost: '',
@@ -206,20 +214,28 @@ export default defineComponent({
       });
     }
 
+    async function submitChange(titleData: Title):Promise<void>{
+      await TitlesModule.delete(titleData);
+      root.$router.push('/admin/titles');
+    };
+
     async function deleteTitle(): Promise<void>{
       let titleData: Title = await TitlesModule.fetchSingleByISBN(form.value.isbn);
       let activeLoans = await TitlesModule.getLoans(titleData.id);
       if(activeLoans.length > 0){
-        snackbarShown = true;
-        console.log('Working?');
+        modalHeader.value = `Du finns aktiva lån, är du säker på att du vill ta bort ${titleData.name}?`;
+        modalBody.value = activeLoans.map(loan => `${loan.loaned_by.name} - ${loan.book.barcode}`).join(',\n');
+        modalActions.value = [
+          {text: 'Nej', action: ():void => {showModal.value = false;}},
+          {text: 'Ja', action: ():void => { showModal.value = false; submitChange(titleData);}}
+        ];
+        showModal.value = true;
       }else{
-        console.log('Is this working?');
-        // TitlesModule.delete(titleData);
+        TitlesModule.delete(titleData);
+        root.$router.push('/admin/titles');
       };
-      root.$router.push('/admin/titles');
     }
-
-    return { form, show, options, onSubmit, onReset, subjects, buttonText, deleteTitle, snackbarShown };
+    return { form, show, options, onSubmit, onReset, subjects, buttonText, deleteTitle, modalActions, modalHeader, modalBody, showModal, submitChange };
   }
 });
 </script>

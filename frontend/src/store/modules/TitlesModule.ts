@@ -7,7 +7,7 @@ import {
   Mutation,
 } from 'vuex-module-decorators';
 import store from '..';
-import { Title, TitleForm, TitleCollection, Book, Loan } from '@/types';
+import { Title, TitleForm, TitleCollection, Loan } from '@/types';
 import TitlesAPI from '../../services/api/titles';
 import convertList from '@/helpers/convertArrayToNested';
 import convertNested from '@/helpers/convertNestedToArray';
