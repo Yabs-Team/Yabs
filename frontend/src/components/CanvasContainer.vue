@@ -50,14 +50,7 @@ export default defineComponent({
   },
 
   setup(props : CanvasContainerProps, { emit, root }: SetupContext){
-    // const sendCanvas: Ref<boolean> = ref(false);
     let imageBlobs: Blob[] = [];
-    
-    // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
-
-    // function getAllCanvases(): void {
-    //   sendCanvas.value = !sendCanvas.value;
-    // }
 
     function emitIndex(e : number): void{
       emit('deleteCard', e);
