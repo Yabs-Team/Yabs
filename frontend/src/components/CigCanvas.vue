@@ -116,8 +116,6 @@ export default defineComponent({
     let snackbarText: Ref<string> = ref('');
     let snackbar: Ref<boolean> = ref(false);
 
-
-
     const canvasContainer: Ref<HTMLDivElement | null> = ref(null);
     const canvas: Ref<HTMLCanvasElement | null> = ref(null);
     const bg: Ref<HTMLImageElement | null> = ref(null);
