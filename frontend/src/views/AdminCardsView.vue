@@ -14,21 +14,37 @@
         <CardFormComponent @sendImages="onSendImages($event)" />  
       </v-col>
       <v-col class="btn-parent">
-        <v-btn class="ma-auto" @click="">Ladda ner alla kort</v-btn>
-        <v-btn class="ma-auto">Spara alla bilder</v-btn>
-        <v-btn class="ma-auto">Ta bort alla kort</v-btn>
+        <v-btn
+          class="ma-auto"
+          @click="getAllCanvas"
+        >
+          Ladda ner alla kort
+        </v-btn>
+        <v-btn
+          class="ma-auto"
+          @click="saveAll"
+        >
+          Spara alla bilder
+        </v-btn>
+        <v-btn
+          class="ma-auto"
+          @click="images = []"
+        >
+          Ta bort alla kort
+        </v-btn>
       </v-col>
     </v-row>
     <v-row>
       <CanvasContainer 
         v-if="images.length > 0"
         :images="images" 
+        :download-all="downloadAll"
+        :save-all-pictures="saveAllPictures"
         @deleteCard="removeCardByIndex"
       />
     </v-row>
 
-    <div class="flex">
-    </div>
+    <div class="flex" />
   </v-container>
 </template>
 
@@ -46,6 +62,9 @@ export default defineComponent({
   },
   setup(_: object, { root }: SetupContext) {
     const images: Ref<File[]> = ref([]);
+    const saveAllPictures: Ref<boolean> = ref(false);
+    const downloadAll: Ref<boolean> = ref(false);
+    
   
     // The on send images getter takes the image from the event target and sets it to the instance
     // of the image
@@ -56,6 +75,20 @@ export default defineComponent({
       console.log(images.value);
     }
 
+    function getAllCanvas(): void{
+      downloadAll.value = true;
+      root.$nextTick(() => {
+        downloadAll.value = false;
+      });
+    }
+
+    function saveAll(): void{
+      saveAllPictures.value = true;
+      root.$nextTick(() => {
+        saveAllPictures.value = false;
+      });
+    }
+
     function removeCardByIndex(index : number): void{
       images.value.splice(index, 1);
     }
@@ -63,7 +96,7 @@ export default defineComponent({
     UsersModule.fetchAll();
 
     return {
-      images, onSendImages, removeCardByIndex
+      images, onSendImages, removeCardByIndex, downloadAll, saveAll, saveAllPictures, getAllCanvas
     };
   }
   

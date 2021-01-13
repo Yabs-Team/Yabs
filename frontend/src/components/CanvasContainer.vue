@@ -15,10 +15,11 @@
         class="canvas mt-5 mb-5"
         :image="image"
         :index="index"
-        :send-canvas="sendCanvas"
+        :send-canvas="downloadAll"
         :save-picture-trigger="saveAllPictures"
         @deleteCard="$emit('deleteCard', index)"
         @imageSent="onImageReceived($event)"
+        @falsifySendCanvas="$emit('falsifySendCanvas')"
       />
     </div>
   </div>
@@ -41,19 +42,22 @@ export default defineComponent({
   components: {
     CigCanvas,
   },
+
   props: {
-    images: {type: Array, default: []}
+    images: {type: Array, default: []},
+    saveAllPictures: {type: Boolean, default: false},
+    downloadAll: {type: Boolean, default: false}
   },
+
   setup(props : CanvasContainerProps, { emit, root }: SetupContext){
-    const sendCanvas: Ref<boolean> = ref(false);
-    const saveAllPictures: Ref<boolean> = ref(false);
+    // const sendCanvas: Ref<boolean> = ref(false);
     let imageBlobs: Blob[] = [];
     
     // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
 
-    function getAllCanvases(): void {
-      sendCanvas.value = !sendCanvas.value;
-    }
+    // function getAllCanvases(): void {
+    //   sendCanvas.value = !sendCanvas.value;
+    // }
 
     function emitIndex(e : number): void{
       emit('deleteCard', e);
@@ -86,15 +90,8 @@ export default defineComponent({
       });
     }
 
-    function saveAll(): void{
-      saveAllPictures.value = true;
-      root.$nextTick(() => {
-        saveAllPictures.value = false;
-      });
-    }
-
     return {
-      getAllCanvases, sendCanvas, saveAll, saveAllPictures, emitIndex
+      emitIndex, onImageReceived
     };
   }
 
