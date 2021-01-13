@@ -31,12 +31,6 @@ export default defineComponent({
   
     UsersModule.fetchAll();
 
-    // Eventlistener that emits the informations about that specific event higher up in the 
-    // component tree
-
-    // function submit(): void {
-    // }
-
     // Eventlistener that takes a list of instances of the object File and checks the type
     // of the file and confirms that it is a zip file and then extracts the content to render
     // else simply pushes the content into the instance this.files

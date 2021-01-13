@@ -1,27 +1,19 @@
 <template>
-  <div class="root">
-    <!-- <v-btn @click="getAllCanvases">
-      Ladda ned alla kort
-    </v-btn>
-    <v-btn @click.prevent="saveAll">
-      Spara alla bilder
-    </v-btn> -->
-    <div
-      class="cig-card"
-    >
-      <CigCanvas
-        v-for="(image, index) in images"
-        :key="index"
-        class="canvas mt-5 mb-5"
-        :image="image"
-        :index="index"
-        :send-canvas="downloadAll"
-        :save-picture-trigger="saveAllPictures"
-        @deleteCard="$emit('deleteCard', index)"
-        @imageSent="onImageReceived($event)"
-        @falsifySendCanvas="$emit('falsifySendCanvas')"
-      />
-    </div>
+  <div
+    class="cig-card"
+  >
+    <CigCanvas
+      v-for="(image, index) in images"
+      :key="index"
+      class="canvas mt-5 mb-5"
+      :image="image"
+      :index="index"
+      :send-canvas="downloadAll"
+      :save-picture-trigger="saveAllPictures"
+      @deleteCard="$emit('deleteCard', index)"
+      @imageSent="onImageReceived($event)"
+      @falsifySendCanvas="$emit('falsifySendCanvas')"
+    />
   </div>
 </template>
 
@@ -51,6 +43,8 @@ export default defineComponent({
 
   setup(props : CanvasContainerProps, { emit, root }: SetupContext){
     let imageBlobs: Blob[] = [];
+    
+    // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
 
     function emitIndex(e : number): void{
       emit('deleteCard', e);
@@ -92,11 +86,6 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-    .root
-        display: flex
-        flex-direction: column
-        height: 100%
-        width: 100%
 
     .cig-card
         margin-top: 20px
