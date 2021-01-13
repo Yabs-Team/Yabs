@@ -68,8 +68,8 @@ class Api::V1::TitlesController < ApplicationController
 
   # Get active loans on books connected to a title.
 
-  def get_loans
-    @loans = Loan.joins(:book => :title).where('titles.id = ? AND loans.returned_at IS NULL', params[:id])
+  def loans
+    @loans = Loan.joins(book: :title).where('titles.id = ? AND loans.returned_at IS NULL', params[:id])
     render json: @loans
   end
   # Set title method, find the current title and sets the title to that instance in order

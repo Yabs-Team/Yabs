@@ -106,7 +106,6 @@ import { ref, defineComponent, SetupContext, watch } from '@vue/composition-api'
 import TitlesModule from '../store/modules/TitlesModule';
 import { Title, TitleForm, Subject } from '../types';
 import Subjects from '../services/api/subjects';
-import LoansModule from '@/store/modules/LoansModule';
 import BaseModal from './BaseModal.vue';
 
 
