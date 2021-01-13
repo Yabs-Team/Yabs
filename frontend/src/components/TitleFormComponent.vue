@@ -1,96 +1,103 @@
 <template>
-  <v-form
-    v-if="show"
-    data-jest="form"
-    @submit.prevent="onSubmit"
-    @reset.prevent="onReset"
-  >
-    <v-item-group
-      vertical=""
-      label-class="text-sm-right"
-      label-for="nestedBid"
+  <main>
+    <v-form
+      v-if="show"
+      data-jest="form"
+      @submit.prevent="onSubmit"
+      @reset.prevent="onReset"
     >
-      <v-text-field
-        id="nestedBid"
-        v-model="form.name"
-        data-jest="name"
-        label="Namn"
+      <v-item-group
+        vertical=""
+        label-class="text-sm-right"
+        label-for="nestedBid"
+      >
+        <v-text-field
+          id="nestedBid"
+          v-model="form.name"
+          data-jest="name"
+          label="Namn"
+          outlined
+          data-cy="name"
+        />
+      </v-item-group>
+      <v-item-group
+        vertical=""
+        label-class="text-sm-right"
+        label-for="nestedBid"
+      >
+        <v-text-field
+          id="nestedBid"
+          v-model="form.cost"
+          data-jest="cost"
+          label="Kostnad"
+          outlined
+          data-cy="cost"
+        />
+      </v-item-group>
+      <v-item-group
+        vertical=""
+        label-class="text-sm-right"
+        label-for="nestedBid"
+      >
+        <v-text-field
+          id="nestedBid"
+          v-model="form.isbn"
+          data-jest="isbn"
+          label="isbn"
+          outlined
+          data-cy="isbn"
+        />
+      </v-item-group>
+      <v-select
+        v-model="form.title_type"
+        data-jest="titleType"
+        :items="options"
+        label="Välj typ av titel"
         outlined
-        data-cy="name"
+        data-cy="titleType"
       />
-    </v-item-group>
-    <v-item-group
-      vertical=""
-      label-class="text-sm-right"
-      label-for="nestedBid"
-    >
-      <v-text-field
-        id="nestedBid"
-        v-model="form.cost"
-        data-jest="cost"
-        label="Kostnad"
+      <v-select
+        v-model="form.subject_id"
+        data-jest="subjectId"
+        data-cy="subjectId"
+        :items="subjects"
+        label="Välj ämne av titel"
         outlined
-        data-cy="cost"
       />
-    </v-item-group>
-    <v-item-group
-      vertical=""
-      label-class="text-sm-right"
-      label-for="nestedBid"
+      <v-btn
+        type="submit"
+        color="primary"
+        class="mr-4"
+        large
+        data-cy="submit"
+      >
+        {{ buttonText }}
+      </v-btn>
+      <v-btn
+        type="reset"
+        large
+        data-cy="reset"
+      >
+        Rensa Fältet
+      </v-btn>
+      <v-btn
+        v-if="mode == 'edit'"
+        large
+        type="submit"
+        class="ml-4"
+        data-jest="deleteTitle"
+        data-cy="deleteTitle"
+        @click="deleteTitle"
+      >
+        Ta bort
+      </v-btn>
+    </v-form>
+    <v-snackbar
+      v-if="snackbarShown == true"
     >
-      <v-text-field
-        id="nestedBid"
-        v-model="form.isbn"
-        data-jest="isbn"
-        label="isbn"
-        outlined
-        data-cy="isbn"
-      />
-    </v-item-group>
-    <v-select
-      v-model="form.title_type"
-      data-jest="titleType"
-      :items="options"
-      label="Välj typ av titel"
-      outlined
-      data-cy="titleType"
-    />
-    <v-select
-      v-model="form.subject_id"
-      data-jest="subjectId"
-      data-cy="subjectId"
-      :items="subjects"
-      label="Välj ämne av titel"
-      outlined
-    />
-    <v-btn
-      type="submit"
-      color="primary"
-      class="mr-4"
-      large
-      data-cy="submit"
-    >
-      {{ buttonText }}
-    </v-btn>
-    <v-btn
-      type="reset"
-      large
-      data-cy="reset"
-    >
-      Rensa Fältet
-    </v-btn>
-    <v-btn
-      v-if="mode == 'edit'"
-      large
-      type="submit"
-      class="ml-4"
-      data-jest="deleteTitle"
-      data-cy="deleteTitle"
-      @click="deleteTitle"
-    >
-      Ta bort
-    </v-btn>
-  </v-form>
+      Hej
+    </v-snackbar>
+  </main>
 </template>
 
 <script lang="ts">
@@ -117,6 +124,7 @@ export default defineComponent({
   },
 
   setup(props : TitleFormProps, { root, emit } : SetupContext) {
+    let snackbarShown = false;
     const form = ref({
       name: '',
       cost: '',
@@ -200,11 +208,18 @@ export default defineComponent({
 
     async function deleteTitle(): Promise<void>{
       let titleData: Title = await TitlesModule.fetchSingleByISBN(form.value.isbn);
-      TitlesModule.delete(titleData);
+      let activeLoans = await TitlesModule.getLoans(titleData.id);
+      if(activeLoans.length > 0){
+        snackbarShown = true;
+        console.log('Working?');
+      }else{
+        console.log('Is this working?');
+        // TitlesModule.delete(titleData);
+      };
       root.$router.push('/admin/titles');
     }
 
-    return { form, show, options, onSubmit, onReset, subjects, buttonText, deleteTitle };
+    return { form, show, options, onSubmit, onReset, subjects, buttonText, deleteTitle, snackbarShown };
   }
 });
 </script>

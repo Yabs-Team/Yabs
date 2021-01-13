@@ -7,7 +7,7 @@ import {
   Mutation,
 } from 'vuex-module-decorators';
 import store from '..';
-import { Title, TitleForm, TitleCollection } from '@/types';
+import { Title, TitleForm, TitleCollection, Book, Loan } from '@/types';
 import TitlesAPI from '../../services/api/titles';
 import convertList from '@/helpers/convertArrayToNested';
 import convertNested from '@/helpers/convertNestedToArray';
@@ -106,6 +106,20 @@ class TitlesModule extends VuexModule {
         })
         .catch((error: object) => {
           this.setFailure(error);
+          reject(error);
+        });
+    });
+  }
+
+  @Action({rawError: true})
+  public getLoans(id: number): Promise<Loan[]> {
+    return new Promise((resolve, reject) => {
+      TitlesAPI.getLoans(id)
+        .then((response: Loan[]) => {
+          resolve(response);
+        })
+        .catch((error: object) => {
+          this.setFailure(Error);
           reject(error);
         });
     });
