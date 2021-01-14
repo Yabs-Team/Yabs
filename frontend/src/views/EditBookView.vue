@@ -9,7 +9,6 @@
       :title_id="book.title.id"
       :status="book.condition" 
       :barcode="book.barcode"
-      :notes="book.notes"
     />
     <h1 v-else class="display-2">
       Något gick fel :ok_woman:

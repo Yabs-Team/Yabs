@@ -47,8 +47,7 @@ interface BookConditionProps {
   title: string,
   title_id: number, //eslint-disable-line camelcase
   barcode: string,
-  status: string,
-  notes: string
+  status: string
 };
 
 export default defineComponent({
@@ -66,7 +65,6 @@ export default defineComponent({
       condition: props.status,
       title_id: props.title_id, //eslint-disable-line camelcase
       barcode: props.barcode,
-      notes: props.notes
     };
 
     function submit(): void {
