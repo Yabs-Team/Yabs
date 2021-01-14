@@ -1,30 +1,24 @@
 <template>
-  <div class="root">
-    <v-btn @click="getAllCanvases">
-      Ladda ned alla kort
-    </v-btn>
-    <v-btn @click.prevent="saveAll">
-      Spara alla bilder
-    </v-btn>
-    <div
-      class="cig-card"
-      style="flex-wrap:wrap;"
-    >
-      <CigCanvas
-        v-for="(image, index) in images"
-        :key="index"
-        class="canvas"
-        :image="image"
-        :send-canvas="sendCanvas"
-        :save-picture-trigger="saveAllPictures"
-        @imageSent="onImageReceived($event)"
-      />
-    </div>
+  <div
+    class="cig-card"
+  >
+    <CigCanvas
+      v-for="(image, index) in images"
+      :key="index"
+      class="canvas mt-5 mb-5"
+      :image="image"
+      :index="index"
+      :send-canvas="downloadAll"
+      :save-picture-trigger="saveAllPictures"
+      @deleteCard="$emit('deleteCard', index)"
+      @imageSent="onImageReceived($event)"
+      @falsifySendCanvas="$emit('falsifySendCanvas')"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, Ref, SetupContext } from '@vue/composition-api';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
@@ -40,20 +34,16 @@ export default defineComponent({
   components: {
     CigCanvas,
   },
+
   props: {
-    images: {type: Array, default: []}
+    images: {type: Array, default: []},
+    saveAllPictures: {type: Boolean, default: false},
+    downloadAll: {type: Boolean, default: false}
   },
-  setup(props : CanvasContainerProps, { root }: SetupContext){
-    const sendCanvas: Ref<boolean> = ref(false);
-    const saveAllPictures: Ref<boolean> = ref(false);
+
+  setup(props : CanvasContainerProps, { emit, root }: SetupContext){
     let imageBlobs: Blob[] = [];
     
-    // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
-
-    function getAllCanvases(): void {
-      sendCanvas.value = !sendCanvas.value;
-    }
-
     // The onImageReceived method takes an image and then compares it to the instance of images 
     // and if they are the same length, the ZIP file of that image is being downloaded 
     // through the donwloadAll method using the JSZIP dependency.
@@ -81,15 +71,8 @@ export default defineComponent({
       });
     }
 
-    function saveAll(): void{
-      saveAllPictures.value = true;
-      root.$nextTick(() => {
-        saveAllPictures.value = false;
-      });
-    }
-
     return {
-      getAllCanvases, sendCanvas, saveAll, saveAllPictures
+      onImageReceived
     };
   }
 
@@ -97,11 +80,6 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-    .root
-        display: flex
-        flex-direction: column
-        height: 100%
-        width: 100%
 
     .cig-card
         margin-top: 20px
@@ -116,7 +94,8 @@ export default defineComponent({
         border-radius: 0.25rem
         display: flex
         flex-direction: row
-        justify-content: center
+        flex-wrap: wrap 
+        justify-content: space-evenly
 
     .grid-container
         margin-top: 10px
