@@ -8,7 +8,7 @@ context('Lends a book', () => {
     it('Loans a book for a student on Admin Loans view', () => {
         cy.get('[data-cy=student_barcode]').type('2819');
         cy.get('[data-cy=book_barcode]').type('2819');
-        cy.get('[data-cy=submit]').click();
-        cy.get('[data-cy=reset]').click();
+        cy.get('[data-cy=loanOutBook]').click();
+        cy.get('[type=reset]').click();
     })
 })
