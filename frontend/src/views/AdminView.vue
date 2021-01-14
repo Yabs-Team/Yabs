@@ -84,5 +84,8 @@ export default defineComponent({
 .left{margin-right: 50px}
 .right{flex: 1}
 .router-link{color: black}
-.router-link:hover{text-decoration: none !important}
+.router-link{text-decoration: none !important}
+.v-application--is-ltr .v-list-item__action:first-child, .v-application--is-ltr .v-list-item__icon:first-child {
+  margin-right: 24px;
+}
 </style>
