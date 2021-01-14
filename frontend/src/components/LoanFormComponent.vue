@@ -43,7 +43,6 @@
       >
         <v-menu
           ref="menu"
-          v-model="menu"
           :close-on-content-click="false"
           transition="scale-transition"
           offset-y
@@ -55,6 +54,7 @@
               label="Expire date"
               outlined
               v-bind="attrs"
+              data-jest="expirationDate"
               v-on="on"
             />
           </template>
@@ -62,7 +62,6 @@
             ref="picker"
             v-model="form.expiration_date"
             :min="new Date().toISOString().substr(0, 10)"
-            @change="save"
           />
         </v-menu>
       </v-item-group>
@@ -93,8 +92,8 @@ import UsersModule from '../store/modules/UsersModule';
 import { ref, defineComponent, SetupContext} from '@vue/composition-api';
 
 
-// loan form component is used to user interface for the user to create a loan and is later 
-// authorized by the pundit dependency 
+// loan form component is used to user interface for the user to create a loan and is later
+// authorized by the pundit dependency
 
 export default defineComponent({
   name: 'LoanFormComponent',
@@ -102,7 +101,7 @@ export default defineComponent({
     const form = {
       lent_by_id: 0, //eslint-disable-line camelcase
       loaned_by_id: 0, //eslint-disable-line camelcase
-      book_id: 0,
+      book_id: 0, //eslint-disable-line camelcase
       expiration_date: '' //eslint-disable-line camelcase
     } as LoanForm;
 
@@ -118,7 +117,7 @@ export default defineComponent({
       }
     }
 
-    //   // this is the Eventlistener for the user to reset the form if the user has entered the 
+    //   // this is the Eventlistener for the user to reset the form if the user has entered the
     //   // wrong information about the loan
 
     function onReset(evt: Event): void {
