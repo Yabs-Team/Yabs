@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LibraryView.vue matches the snapshot 1`] = `
+<v-container-stub tag="div">
+  <returnloancomponent-stub></returnloancomponent-stub>
+  <h2>Add loan</h2>
+  <libraryloancomponent-stub></libraryloancomponent-stub>
+  <h2>Your loans</h2>
+  <loanlistcomponent-stub></loanlistcomponent-stub>
+  <h2>Search for a book</h2>
+  <titlelistcomponent-stub></titlelistcomponent-stub>
+</v-container-stub>
+`;
