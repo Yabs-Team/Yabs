@@ -9,19 +9,6 @@
         @submit="onSubmit"
         @reset="onReset"
       >
-        <!-- <v-item-group
-          vertical=""
-          label-class="text-sm-right"
-          label-for="nestedUid"
-        >
-          <v-text-field
-            id="nestedUid"
-            v-model="form.loaned_by_id"
-            data-cy="student_barcode"
-            label="Din mammas Streckkod"
-            outlined
-          />
-        </v-item-group> -->
         <v-item-group
           vertical=""
           label-class="text-sm-right"
