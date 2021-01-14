@@ -114,6 +114,35 @@
         <p @click.prevent="currentScan = 'student'">
           Elevens sträckkod: {{ form.loaned_by_id }}
         </p>
+        <v-item-group
+          vertical=""
+          label-class="text-sm-right"
+          label-for="nestedBid"
+        >
+          <v-menu
+            ref="menu"
+            :close-on-content-click="false"
+            transition="scale-transition"
+            offset-y
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="form.expiration_date"
+                label="Expire date"
+                outlined
+                v-bind="attrs"
+                data-jest="expirationDate"
+                v-on="on"
+              />
+            </template>
+            <v-date-picker
+              ref="picker"
+              v-model="form.expiration_date"
+              :min="new Date().toISOString().substr(0, 10)"
+            />
+          </v-menu>
+        </v-item-group>
         <v-btn
           data-cy="loanOutBook"
           type="submit"

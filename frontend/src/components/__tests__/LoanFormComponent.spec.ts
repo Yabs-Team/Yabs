@@ -7,6 +7,15 @@ import UsersModule from '@/store/modules/UsersModule';
 import { User } from '@/types';
 import Vue from 'vue';
 
+// Must mock the date class else it would fail the snapshots
+class MockDate extends Date {
+  constructor() {
+      super("2020-05-14T11:01:58.135Z"); // add whatever date you'll expect to get
+  }
+}
+
+// @ts-ignore
+global.Date = MockDate;
 
 jest.mock('@/store/modules/LoansModule', () => {
   return {
