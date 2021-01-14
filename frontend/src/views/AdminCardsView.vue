@@ -70,9 +70,7 @@ export default defineComponent({
     // of the image
   
     function onSendImages(sendImages: File[]): void {
-      console.log(sendImages);
       images.value = images.value.concat(sendImages);
-      console.log(images.value);
     }
 
     function getAllCanvas(): void{

@@ -131,10 +131,6 @@ export default defineComponent({
         .map(([key, user]) => (user as User).name);
     }
 
-    function emitIndex(): void{
-      emit('deleteCard', props.index);
-    }
-
     // checkUserData is used to fill the instances of the class with information from the 
     // UsersModule so that the card has the right inforamtion
 
@@ -176,6 +172,8 @@ export default defineComponent({
     function getCanvasContainerSize(): void {
       if(canvasContainer.value !== null){
         // 17 to 27 is the relation between a creditcards width and height
+        // TODO: Translate the hardcoded relation to a mathematical formula for extra
+        //       style points.
         let scale = 15;
         width = 17 * scale;
         height = 27 * scale;
@@ -354,7 +352,7 @@ export default defineComponent({
     });
 
     return {
-      userNames, onNameInput, name, savePicture, downloadCanvas, snackbarText, snackbar, canvasContainer, canvas, bg, logo, emitIndex
+      userNames, onNameInput, name, savePicture, downloadCanvas, snackbarText, snackbar, canvasContainer, canvas, bg, logo
     };
   }
 });

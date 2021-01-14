@@ -44,12 +44,6 @@ export default defineComponent({
   setup(props : CanvasContainerProps, { emit, root }: SetupContext){
     let imageBlobs: Blob[] = [];
     
-    // Eventlistener GetAllCanvases is simply used in order to fetch all the canvases. 
-
-    function emitIndex(e : number): void{
-      emit('deleteCard', e);
-    }
-
     // The onImageReceived method takes an image and then compares it to the instance of images 
     // and if they are the same length, the ZIP file of that image is being downloaded 
     // through the donwloadAll method using the JSZIP dependency.
@@ -78,7 +72,7 @@ export default defineComponent({
     }
 
     return {
-      emitIndex, onImageReceived
+      onImageReceived
     };
   }
 
