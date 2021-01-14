@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, Ref, SetupContext } from '@vue/composition-api';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
