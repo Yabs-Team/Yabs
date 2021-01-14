@@ -11,8 +11,8 @@
       :barcode="book.barcode"
       :notes="book.notes"
     />
-    <h1 class="display-2" v-else>
-      Boken hittades inte
+    <h1 v-else class="display-2">
+      Något gick fel :ok_woman:
     </h1>
   </div>
 </template>

@@ -65,7 +65,8 @@ export default defineComponent({
     let form: BookForm = {
       condition: props.status,
       title_id: props.title_id, //eslint-disable-line camelcase
-      barcode: props.barcode
+      barcode: props.barcode,
+      notes: props.notes
     };
 
     function submit(): void {
