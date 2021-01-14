@@ -62,7 +62,7 @@
         text
         @click="snackbar = false"
       >
-        Close
+        Stäng
       </v-btn>
     </v-snackbar>
   </v-card>
@@ -327,10 +327,10 @@ export default defineComponent({
       formData.append('uid', barcode);
       formData.append('image', props.image as Blob);
       UsersModule.update(formData).then((response: User) => {
-        snackbarText.value = `Successfully updated user ${name.value}!`;
+        snackbarText.value = `${name.value} bild har uppdaterats!`;
       }).catch((error: object) => {
         // TODO: show in notification to user
-        snackbarText.value = `Failed to update user: ${name.value}. Please try again`;
+        snackbarText.value = `${name.value} bild gick inte att uppdatera.`;
         console.log(error);
       });
 

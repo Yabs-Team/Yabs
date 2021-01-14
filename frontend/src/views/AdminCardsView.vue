@@ -7,7 +7,7 @@
 <template>
   <v-container>
     <h1 class="display-2">
-      Cards
+      Passerkort
     </h1>
     <v-row>
       <v-col>
