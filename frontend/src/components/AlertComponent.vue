@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Ref, watchEffect, computed, watch, defineComponent, ref, SetupContext } from '@vue/composition-api';
+import { Ref, computed, watch, defineComponent, ref, SetupContext } from '@vue/composition-api';
 import StatusModule from '@/store/modules/StatusModule';
 import { StatusMessage } from '@/types';
 
