@@ -36,6 +36,9 @@
           >
             Ladda ned kort
           </v-btn>
+          <v-btn @click="$emit('deleteCard')">
+            Ta bort
+          </v-btn>
         </v-item-group>
       </v-form>
       <img
