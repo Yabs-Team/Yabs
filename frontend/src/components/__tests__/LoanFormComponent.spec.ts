@@ -17,19 +17,21 @@ jest.mock('@/store/modules/LoansModule', () => {
 });
 
 describe('LoanFormComponent.vue', () => {
-  
+
   it('calls loansmodule with correct values', () => {
     const wrapper: Wrapper<Vue> = factory(LoanFormComponent);
     UsersModule.setCurrentUser({uid: 123} as User);
 
     wrapper.find('[data-jest=\'student_barcode\']').setValue('123');
     wrapper.find('[data-jest=\'book_barcode\']').setValue('1234');
+    wrapper.find('[data-jest=\'expirationDate\']').setValue('2021-01-01');
     wrapper.find('[data-jest=\'form\']').trigger('submit');
-   
+
     expect(LoansModule.create).toHaveBeenCalledWith({
       loaned_by_id: '123', //eslint-disable-line camelcase
       book_id: '1234', //eslint-disable-line camelcase
       lent_by_id: 123, //eslint-disable-line camelcase
+      expiration_date: '2021-01-01', //eslint-disable-line camelcase
     });
   });
 });
