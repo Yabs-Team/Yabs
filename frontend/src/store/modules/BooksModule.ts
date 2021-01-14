@@ -16,7 +16,6 @@ class BooksModule extends VuexModule {
     return this._books;
   }
 
-
   get allAsArray(): Book[] {
     return convertNested(this._books);
   }
@@ -72,6 +71,7 @@ class BooksModule extends VuexModule {
         .then((response: Book) => {
           this.setBook(response);
           resolve(response);
+          console.log(response);
         })
         .catch((error: object) => {
           this.setfailure(error);

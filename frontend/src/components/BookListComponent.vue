@@ -7,9 +7,10 @@
   <ListComponent
     :headers="headers"
     :items="BooksModule.allAsArray"
-    :route-path="'books'"
-    :route-specifier="'barcode'"
+    route-path="admin/books"
+    route-specifier="'barcode'"
     class="elevation-1"
+    :use-actions="true"
     v-bind="$attrs"
   />
 </template>
@@ -22,7 +23,9 @@ import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent ({
   name: 'BookListComponent',
-  components: { ListComponent },
+  components: {
+    ListComponent
+  },
   setup(){
     const headers: object[] = [
       { text: 'Titel', value: 'title.name' },

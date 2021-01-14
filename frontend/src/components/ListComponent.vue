@@ -122,10 +122,14 @@ export default defineComponent({
      *
      *    This could potentially result in the the user routing to "locahost:8080/books/1001".
      */
+    // route kallas på med argumenten item. Item innehåller barcode för den som klickas på [?]
     function route(event: Event, item: any): void { //eslint-disable-line @typescript-eslint/no-explicit-any
+      console.log(item);
       event.preventDefault();
       if (item[props.routeSpecifier]) {
         root.$router.push(`/${props.routePath}/${item[props.routeSpecifier]}`);
+      } else if (item.barcode) {
+        root.$router.push(`/${props.routePath}/${item.barcode}`);
       }
     }
 

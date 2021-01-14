@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="display-2">
-      Books
+      Böcker
     </h1>
     <div class="flex">
       <div style="margin-right: 50px">
