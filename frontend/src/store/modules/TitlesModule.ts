@@ -44,7 +44,7 @@ class TitlesModule extends VuexModule {
     return new Promise((resolve, reject) => {
       TitlesAPI.single(id)
         .then((response: Title) => {
-          resolve();
+          resolve(response);
         })
         .catch((error: object) => {
           this.setFailure(Error);

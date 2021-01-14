@@ -12,7 +12,8 @@ class GoogleApiClient
 	private
 
 	def set_up_auth_client(scopes, service_account_key_file, sub)
-		auth_client = Google::Auth::ServiceAccountCredentials.make_creds(json_key_io: StringIO.open(service_account_key_file), scope: scopes)
+		auth_client = Google::Auth::ServiceAccountCredentials.make_creds(json_key_io: StringIO.open(service_account_key_file), 
+                                                                   scope: scopes)
 		if sub
 			auth_client.sub = sub
 		end
@@ -31,7 +32,8 @@ end
 
 
 scopes =  ['https://www.googleapis.com/auth/admin.directory.group.readonly','https://www.googleapis.com/auth/admin.directory.user.readonly']
-client = GoogleApiClient.new(Google::Apis::AdminDirectoryV1::DirectoryService, scopes, Rails.application.secrets.google_client_secrets, 'johanneberg.laneservice@ga.ntig.se')
+client = GoogleApiClient.new(Google::Apis::AdminDirectoryV1::DirectoryService, scopes, 
+                             Rails.application.secrets.google_client_secrets, 'johanneberg.laneservice@ga.ntig.se')
 
 #client.service.list_groups(domain: 'ga.ntig.se')
 

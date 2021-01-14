@@ -81,7 +81,7 @@ interface BookCollection { [id: string]: Book; }
 
 interface Loan {
   book: object;
-  book_id: number; //eslint-disable-line camelcase
+  book_id: string; //eslint-disable-line camelcase
   created_at: string; //eslint-disable-line camelcase
   expiration_date: string; //eslint-disable-line camelcase
   id: number;
