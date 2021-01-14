@@ -114,8 +114,8 @@ export default defineComponent({
     let height: number = 0;
     let size: number = 1;
     let context: CanvasRenderingContext2D | null = null;
-    let snackbarText: Ref<string> = ref('');
-    let snackbar: Ref<boolean> = ref(false);
+    let snackbarText = ref('');
+    let snackbar = ref(false);
 
     const canvasContainer: Ref<HTMLDivElement | null> = ref(null);
     const canvas: Ref<HTMLCanvasElement | null> = ref(null);
