@@ -1,4 +1,4 @@
-import { Loan, LoanForm, AddLoanForm } from '@/types';
+import { Loan, LoanForm } from '@/types';
 import APIRequest from './APIRequest';
 
 export default class LoansAPI extends APIRequest {
@@ -19,19 +19,11 @@ export default class LoansAPI extends APIRequest {
     });
   }
 
-  static createLoan(request: AddLoanForm): Promise<Loan> {
-    return new Promise((res, rej) => {
-      this.Post<Loan>('v1/loans', request)
-        .then((resp) => {res(resp); })
-        .catch((err) => {rej(err); });
-    });
-  }
-
   static update(request: LoanForm): Promise<Loan> {
     return new Promise((res, rej) => {
       this.Patch<Loan>(`v1/loans/${request.id}`, request)
         .then((resp) => {res(resp); })
-        .catch((err) => {rej(err); });      
+        .catch((err) => {rej(err); });
     });
   }
 

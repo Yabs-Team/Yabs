@@ -62,7 +62,7 @@
 
 <script lang="ts">
 import LoansModule from '../store/modules/LoansModule';
-import { Loan, AddLoanForm } from '../types';
+import { LoanForm, Loan } from '../types';
 import UsersModule from '../store/modules/UsersModule';
 import { defineComponent, ref, Ref, SetupContext, watch } from '@vue/composition-api';
 export default defineComponent({
@@ -76,13 +76,13 @@ export default defineComponent({
       input = ref(''),
       menu = ref(false);
 
-    const form: Ref < AddLoanForm > = ref ({
+    const form: Ref < LoanForm > = ref ({
       book_id: 0, //eslint-disable-line camelcase
       /* Hardcoded value atm for the school */
       lent_by_id: 1854282603, //eslint-disable-line camelcase
       loaned_by_id: 0, //eslint-disable-line camelcase
       expiration_date: '2020/02/12' //eslint-disable-line camelcase
-  
+
     });
 
     function onCancel(): void {
@@ -114,7 +114,7 @@ export default defineComponent({
       inputState.value = false;
       inputReturn.value = '';
     }
-    
+
     function onShown(): void {
       focusRef(input);
     }
@@ -122,7 +122,7 @@ export default defineComponent({
     function onHidden() : void {
       focusRef(button);
     }
-    
+
     function focusRef(ref : any) : void { //eslint-disable-line @typescript-eslint/no-explicit-any
       root.$nextTick(() => {
         root.$nextTick(() => {
@@ -130,13 +130,13 @@ export default defineComponent({
         });
       });
     }
-    
+
     watch(input,(value, prevValue) => {
       if (value) {
         inputState.value = true;
       }
     });
-    
+
     return{
       input,
       inputState,
