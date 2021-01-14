@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BaseModal.vue Renders corretly 1`] = `
-<v-alert-stub color="" elevation="6" rounded="true" tag="div" transition="scale-transition" closelabel="$vuetify.close" dense="true" dismissible="true" closeicon="$cancel" icon="mdi-information" prominent="true" type="info" class="onTop">
+<v-alert-stub color="" elevation="6" tag="div" transition="scale-transition" closelabel="$vuetify.close" dense="true" dismissible="true" icon="mdi-information" prominent="true" type="info" rounded="" class="onTop">
 
 </v-alert-stub>
 `;
+
+
