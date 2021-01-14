@@ -12,8 +12,7 @@ export {
   LoanForm,
   LoanCollection,
   Subject,
-  StatusMessage,
-  AddLoanForm
+  StatusMessage
 };
 
 interface User {
@@ -81,7 +80,7 @@ interface BookForm {
 interface BookCollection { [id: string]: Book; }
 
 interface Loan {
-  book: object;
+  book: Book;
   book_id: string; //eslint-disable-line camelcase
   created_at: string; //eslint-disable-line camelcase
   expiration_date: string; //eslint-disable-line camelcase
@@ -94,20 +93,12 @@ interface Loan {
   updated_at: string; //eslint-disable-line camelcase
 }
 
-interface AddLoanForm {
-  id?: number;
-  book_id: number; //eslint-disable-line camelcase
-  lent_by_id: number; //eslint-disable-line camelcase
-  loaned_by_id: number; //eslint-disable-line camelcase
-  expiration_date: string; //eslint-disable-line camelcase
-}
-
-
 interface LoanForm {
   id?: number;
   book_id: number; //eslint-disable-line camelcase
   lent_by_id: number; //eslint-disable-line camelcase
   loaned_by_id: number; //eslint-disable-line camelcase
+  expiration_date: string; //eslint-disable-line camelcase
 }
 
 interface LoanCollection {[id: number]: Loan; }

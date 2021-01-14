@@ -1,4 +1,4 @@
-import { Title, TitleForm } from '@/types';
+import { Loan, Title, TitleForm } from '@/types';
 import APIRequest from './APIRequest';
 
 export default class TitlesAPI extends APIRequest {
@@ -46,6 +46,14 @@ export default class TitlesAPI extends APIRequest {
   static delete(request: Title): Promise<number> {
     return new Promise((res, rej) => {
       this.Delete<number>(`v1/titles/${request.id}`)
+        .then((resp) => {res(resp); })
+        .catch((err) => {rej(err); });
+    });
+  }
+
+  static getLoans(id: number): Promise<Loan[]> {
+    return new Promise((res, rej) => {
+      this.Get<Loan[]>(`v1/titles/get_loans/${id}`)
         .then((resp) => {res(resp); })
         .catch((err) => {rej(err); });
     });

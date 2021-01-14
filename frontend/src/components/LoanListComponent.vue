@@ -9,6 +9,7 @@
 <script lang="ts">
 import { Prop } from 'vue-property-decorator';
 import LoansModule from '../store/modules/LoansModule';
+
 import ListComponent from '@/components/ListComponent.vue';
 import { defineComponent, SetupContext } from '@vue/composition-api';
 
