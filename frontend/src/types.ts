@@ -12,6 +12,7 @@ export {
   LoanForm,
   LoanCollection,
   Subject,
+  StatusMessage
 };
 
 interface User {
@@ -106,3 +107,11 @@ interface Subject {
   id: number;
   name: string;
 }
+
+interface StatusMessage {
+  color: string;
+  text: string;
+  type: string;
+  icon: string;
+  timeout: number;
+};

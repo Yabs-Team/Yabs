@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <AlertComponent />
     <NavbarComponent />
     <div class="main">
       <v-content>
@@ -11,11 +12,13 @@
 
 <script lang="ts">
 import NavbarComponent from '@/components/NavbarComponent.vue';
+import AlertComponent from '@/components/AlertComponent.vue';
 
 export default({
   name: 'App',
   components: {
     NavbarComponent,
+    AlertComponent,
   },
 });
 
@@ -65,5 +68,5 @@ export default({
     flex-direction: row
     justify-content: center
     padding: 0px
-  
+
 </style>
