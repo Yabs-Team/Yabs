@@ -12,7 +12,10 @@
         <v-card-title class="headline">
           {{ header }}
         </v-card-title>
-        <v-card-text data-cy="modalBody" class="body">
+        <v-card-text
+          data-cy="modalBody"
+          class="body"
+        >
           {{ body }}
         </v-card-text>
         <v-card-actions>
