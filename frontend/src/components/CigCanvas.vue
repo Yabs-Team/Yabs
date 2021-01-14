@@ -11,7 +11,8 @@
       <canvas
         id="canvas"
         ref="canvas"
-        height="500"
+        height="700"
+        width="600"
       />
     </div>
     <v-form>
@@ -35,6 +36,9 @@
         >
           Ladda ned kort
         </v-btn>
+        <v-btn @click="$emit('deleteCard')">
+          Ta bort
+        </v-btn>
       </v-item-group>
     </v-form>
     <img
@@ -47,6 +51,20 @@
       src="../assets/logo.png"
       hidden="hidden"
     >
+
+    <v-snackbar
+      v-model="snackbar"
+    >
+      {{ snackbarText }}
+
+      <v-btn
+        color="white"
+        text
+        @click="snackbar = false"
+      >
+        Stäng
+      </v-btn>
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -72,7 +90,8 @@ import roleToText from '@/helpers/roleToText';
 interface CigCanvasProps {
   image: File,
   sendCanvas: boolean,
-  savePictureTrigger: boolean
+  savePictureTrigger: boolean,
+  index: number,
 }
 
 export default defineComponent({
@@ -84,9 +103,10 @@ export default defineComponent({
     image: {type: File, default: null},
     sendCanvas: {type: Boolean, default: false},
     savePictureTrigger: {type: Boolean, default: false},
+    index: {type: Number, default: null},
   },
   setup(props: CigCanvasProps, { root, emit }: SetupContext) {
-    let name: Ref<string> = ref('');
+    let name = ref('');
     let barcode: string = '';
     let role: number = 0;
     let email: string = '';
@@ -94,6 +114,8 @@ export default defineComponent({
     let height: number = 0;
     let size: number = 1;
     let context: CanvasRenderingContext2D | null = null;
+    let snackbarText = ref('');
+    let snackbar = ref(false);
 
     const canvasContainer: Ref<HTMLDivElement | null> = ref(null);
     const canvas: Ref<HTMLCanvasElement | null> = ref(null);
@@ -108,7 +130,7 @@ export default defineComponent({
         .filter(([key, user]) => !(user as User).name.includes('Deleted User'))
         .map(([key, user]) => (user as User).name);
     }
-    
+
     // checkUserData is used to fill the instances of the class with information from the 
     // UsersModule so that the card has the right inforamtion
 
@@ -149,8 +171,12 @@ export default defineComponent({
 
     function getCanvasContainerSize(): void {
       if(canvasContainer.value !== null){
-        width = canvasContainer.value.clientWidth;
-        height = canvasContainer.value.clientHeight;
+        // 17 to 27 is the relation between a creditcards width and height
+        // TODO: Translate the hardcoded relation to a mathematical formula for extra
+        //       style points.
+        let scale = 15;
+        width = 17 * scale;
+        height = 27 * scale;
       }
     }
 
@@ -246,7 +272,7 @@ export default defineComponent({
           width,
         );
         context.fillText(
-          role.toString(),
+          roleToText(role),
           width / 2,
           height / 1.7 + height / 8,
           width,
@@ -264,7 +290,7 @@ export default defineComponent({
         canvas.value!.toBlob((blob: Blob | null) => {
           emit('imageSent', blob);
         });
-        props.sendCanvas = false;
+
       }
     });
 
@@ -301,12 +327,14 @@ export default defineComponent({
       formData.append('uid', barcode);
       formData.append('image', props.image as Blob);
       UsersModule.update(formData).then((response: User) => {
-        console.log('user updated profile!');
+        snackbarText.value = `${name.value} bild har uppdaterats!`;
       }).catch((error: object) => {
         // TODO: show in notification to user
-        alert(`Failed to update user: ${name.value}. Please try again`);
-        console.error(error);
+        snackbarText.value = `${name.value} bild gick inte att uppdatera.`;
+        console.log(error);
       });
+
+      snackbar.value = true;
     }
 
     // onNameInput is a getter to receive the information stored in the instance of checkUserData
@@ -324,7 +352,7 @@ export default defineComponent({
     });
 
     return {
-      userNames, onNameInput, name, savePicture, downloadCanvas, canvasContainer, canvas, bg, logo
+      userNames, onNameInput, name, savePicture, downloadCanvas, snackbarText, snackbar, canvasContainer, canvas, bg, logo
     };
   }
 });
