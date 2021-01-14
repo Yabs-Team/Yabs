@@ -80,14 +80,14 @@ interface BookForm {
 interface BookCollection { [id: string]: Book; }
 
 interface Loan {
-  book: object;
+  book: Book;
   book_id: string; //eslint-disable-line camelcase
   created_at: string; //eslint-disable-line camelcase
   expiration_date: string; //eslint-disable-line camelcase
   id: number;
   lent_by: object; //eslint-disable-line camelcase
   lent_by_id: number; //eslint-disable-line camelcase
-  loaned_by: object; //eslint-disable-line camelcase
+  loaned_by: User; //eslint-disable-line camelcase
   loaned_by_id: number; //eslint-disable-line camelcase
   returned_at: string|null; //eslint-disable-line camelcase
   updated_at: string; //eslint-disable-line camelcase

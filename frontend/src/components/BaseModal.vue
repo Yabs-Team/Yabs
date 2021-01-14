@@ -12,7 +12,7 @@
         <v-card-title class="headline">
           {{ header }}
         </v-card-title>
-        <v-card-text>
+        <v-card-text class="body">
           {{ body }}
         </v-card-text>
         <v-card-actions>
@@ -62,3 +62,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+  .body {
+    white-space: pre-line
+  }
+</style>>
