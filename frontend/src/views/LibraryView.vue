@@ -11,7 +11,7 @@
 </template>
 
 <script lang='ts'>
-import { SetupContext } from '@vue/composition-api';
+import { defineComponent, SetupContext } from '@vue/composition-api';
 import LoanListComponent from '@/components/LoanListComponent.vue';
 import LibraryLoanComponent from '@/components/LibraryLoanComponent.vue';
 import TitleListComponent from '@/components/TitleListComponent.vue';
@@ -21,7 +21,7 @@ import TitlesModule from '../store/modules/TitlesModule';
 import BooksModule from '../store/modules/BooksModule';
 import { VuexModule } from 'vuex-module-decorators';
 
-export default ({
+export default defineComponent({
   name: 'LibraryView',
   components: {
     LoanListComponent,
