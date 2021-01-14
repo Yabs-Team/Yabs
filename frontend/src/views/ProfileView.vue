@@ -76,7 +76,7 @@
           <v-card-actions>
             <v-card-title>Lån</v-card-title>
             <v-spacer />
-            <AddLoan />
+            <AddLoanComponent />
           </v-card-actions>
           <LoanListComponent />
         </v-card>
@@ -88,20 +88,20 @@
 <script lang="ts">
 import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
-import AddLoan from '@/components/AddLoan.vue';
 import LoanListComponent from '@/components/LoanListComponent.vue';
 import UsersModule from '../store/modules/UsersModule';
 import LoansModule from '../store/modules/LoansModule';
 import RoleChecker from '@/helpers/RoleChecker';
 import roleToText from '@/helpers/roleToText';
 import { User } from '@/types';
+import AddLoanComponent from '@/components/AddLoanComponent.vue';
 
 
 export default defineComponent({
   name: 'Profile',
   components: {
     CigCanvas,
-    AddLoan,
+    AddLoanComponent,
     LoanListComponent,
   },
   setup(_ : object, { root } : SetupContext) {

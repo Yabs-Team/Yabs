@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FindView.vue matches the snapshot 1`] = `
+<v-container-stub tag="div">
+  <v-row-stub tag="div">
+    <v-col-stub tag="div">
+      <v-card-stub loaderheight="4" tag="div">
+        <v-chip-group-stub activeclass="v-slide-item--active" mandatory="true" nexticon="$next" mobilebreakpoint="1264" previcon="$prev">
+          <v-chip-stub color="success" activeclass="" tag="span" active="true" closeicon="$delete" filtericon="$complete" outlined="true" class="ma-2" value="true">
+            <v-icon-stub left="">
+              mdi-account-outline
+            </v-icon-stub>
+            Users
+          </v-chip-stub>
+          <v-chip-stub color="deep-purple" activeclass="" tag="span" active="true" closeicon="$delete" filtericon="$complete" outlined="true" class="ma-2" value="true">
+            <v-icon-stub left="">
+              mdi-handshake
+            </v-icon-stub>
+            Loans
+          </v-chip-stub>
+          <v-chip-stub color="light-blue" activeclass="" tag="span" active="true" closeicon="$delete" filtericon="$complete" outlined="true" class="ma-2" value="true">
+            <v-icon-stub left="">
+              mdi-library
+            </v-icon-stub>
+            Books
+          </v-chip-stub>
+        </v-chip-group-stub>
+        <loanlistcomponent-stub items-per-page="15"></loanlistcomponent-stub>
+        <booklistcomponent-stub use-actions="true" items-per-page="15"></booklistcomponent-stub>
+        <userlistcomponent-stub items-per-page="15"></userlistcomponent-stub>
+      </v-card-stub>
+    </v-col-stub>
+  </v-row-stub>
+</v-container-stub>
+`;
