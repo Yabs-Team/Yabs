@@ -106,7 +106,7 @@ export default defineComponent({
     index: {type: Number, default: null},
   },
   setup(props: CigCanvasProps, { root, emit }: SetupContext) {
-    let name: Ref<string> = ref('');
+    let name = ref('');
     let barcode: string = '';
     let role: number = 0;
     let email: string = '';
