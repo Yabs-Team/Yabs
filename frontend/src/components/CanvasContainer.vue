@@ -11,17 +11,25 @@
       :send-canvas="downloadAll"
       :save-picture-trigger="saveAllPictures"
       @deleteCard="$emit('deleteCard', index)"
-      @imageSent="onImageReceived($event)"
+      @imageSent="cardGateKeeper"
       @falsifySendCanvas="$emit('falsifySendCanvas')"
+    />
+
+    <BaseModal
+      :show-modal="showModal"
+      :header="'Ett av dina kort du vill ladda ner saknar användare'"
+      :body="'Något eller några av passerkorten du försöker ladda ner saknar användare. Vill du ladda ner alla bilder, oavsett om de är kopplade till en användare?'"
+      :actions="dialogButtons"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext } from '@vue/composition-api';
+import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import CigCanvas from '@/components/CigCanvas.vue';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
+import BaseModal from '@/components/BaseModal.vue';
 
 // This is the canvas container component for the cards for the users (students)
 
@@ -32,7 +40,7 @@ interface CanvasContainerProps {
 export default defineComponent({
   name: 'CanvasContainer',
   components: {
-    CigCanvas,
+    CigCanvas, BaseModal
   },
 
   props: {
@@ -43,36 +51,69 @@ export default defineComponent({
 
   setup(props : CanvasContainerProps, { emit, root }: SetupContext){
     let imageBlobs: Blob[] = [];
+    let showModal = ref(false);
+    let emptyCardExists: boolean = false;
+    let dialogButtons = [
+      {text: 'Nej', action: ():void => { showModal.value = false; downloadAll(true);}},
+      {text: 'Ja', action: ():void => {showModal.value = false; downloadAll(false);}},
+    ];
+
+    let imageBlobsWithData: Blob[] = [];
     
     // The onImageReceived method takes an image and then compares it to the instance of images 
     // and if they are the same length, the ZIP file of that image is being downloaded 
     // through the donwloadAll method using the JSZIP dependency.
 
-    function onImageReceived(image: Blob): void {
-      imageBlobs.push(image);
+    function cardGateKeeper(args : {image: Blob, isEmpty: boolean}):void {
+      console.log(args);
+      if(args.isEmpty){
+        emptyCardExists = true;
+      }else{
+        imageBlobsWithData.push(args.image);
+      }
+      
+      imageBlobs.push(args.image);
+
       if (props.images.length === imageBlobs.length) {
-        downloadAll();
+        
+        if(emptyCardExists){
+          showModal.value = true;
+        }else{
+          downloadAll(false);
+        }
+        
+        emptyCardExists = false;
       }
     }
 
-    function downloadAll(): void {
+    function downloadAll(onlyUsers : boolean): void {
+      console.log(onlyUsers);
+      if(onlyUsers){
+        var selectedImages = imageBlobsWithData;
+      }else{
+        var selectedImages = imageBlobs;
+      }
+
       const zip = new JSZip();
       let count: number = 0;
 
-      imageBlobs.forEach((image) => {
+      selectedImages.forEach((image) => {
         count++;
         zip.file(count + '.png', image);
 
-        if (count === imageBlobs.length) {
+        if (count === selectedImages.length) {
           zip.generateAsync({ type: 'blob' }).then((zipFile: string | Blob) => {
             FileSaver.saveAs(zipFile, 'cards.zip');
           });
         }
       });
+
+      imageBlobsWithData = [];
+      imageBlobs = [];
     }
 
     return {
-      onImageReceived
+      cardGateKeeper, showModal, dialogButtons
     };
   }
 

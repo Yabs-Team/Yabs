@@ -32,7 +32,7 @@
           <v-btn
             class="btn"
             data-cy="download-btn"
-            @click="downloadCanvas"
+            @click="emptyCardGateKeeper"
           >
             Ladda ned kort
           </v-btn>
@@ -51,10 +51,10 @@
     </v-card>
 
     <BaseModal
-      :show-modal="dialog"
+      :show-modal="showModal"
       :header="'Kortet du vill ladda ner saknar användare'"
       :body="'Passerkortet som du försöker ladda ner har ingen användare tilldelat till sig. Detta gör passerkortet oanvändbart. Vill du fortsätta?'"
-      :actions="[{text: 'Nej'}, {text: 'Ja'}]"
+      :actions="dialogButtons"
     />
   </main>
 </template>
@@ -114,7 +114,12 @@ export default defineComponent({
     let context: CanvasRenderingContext2D | null = null;
     let snackbarText = ref('');
     let snackbar = ref(false);
-    let dialog = ref(false);
+    let showModal = ref(false);
+
+    let dialogButtons = [
+      {text: 'Nej', action: ():void => { showModal.value = false;}},
+      {text: 'Ja', action: ():void => {showModal.value = false; downloadCanvas();}},
+    ];
 
     const canvasContainer: Ref<HTMLDivElement | null> = ref(null);
     const canvas: Ref<HTMLCanvasElement | null> = ref(null);
@@ -287,9 +292,8 @@ export default defineComponent({
       if(newVal){
         const zip = new JSZip();
         canvas.value!.toBlob((blob: Blob | null) => {
-          emit('imageSent', blob);
+          emit('imageSent', {image: blob, isEmpty: name.value == ''});
         });
-
       }
     });
 
@@ -302,26 +306,27 @@ export default defineComponent({
       }
     });
 
+
+    function emptyCardGateKeeper(): void{
+      if(name.value == ''){
+        showModal.value = true;
+      }else{
+        downloadCanvas();
+      }
+    }
+
     // the download canvas method is used to download and also save the donwloaded zip to
     // the new instance of a JSZIP to later blob it so that it can be used in Vue
-
     function downloadCanvas(): void {
-      // if(name.value == ''){
-
-
-      // }
-
-      dialog.value = true;
-
-      // const zip = new JSZip();
-      // canvas.value!.toBlob((blob: Blob | null) => {
-      //   if (blob){
-      //     zip.file(name.value + '.png', blob);
-      //     zip.generateAsync({ type: 'blob' }).then((zipBlob : Blob) => {
-      //       FileSaver.saveAs(zipBlob, 'cards.zip');
-      //     });
-      //   }
-      // });
+      const zip = new JSZip();
+      canvas.value!.toBlob((blob: Blob | null) => {
+        if (blob){
+          zip.file(name.value + '.png', blob);
+          zip.generateAsync({ type: 'blob' }).then((zipBlob : Blob) => {
+            FileSaver.saveAs(zipBlob, 'cards.zip');
+          });
+        }
+      });
     }
 
     // savePicture method instantiates a new object of FormData to send the uid and the image
@@ -358,7 +363,7 @@ export default defineComponent({
     });
 
     return {
-      userNames, onNameInput, name, savePicture, downloadCanvas, snackbarText, snackbar, canvasContainer, canvas, bg, logo, dialog
+      userNames, onNameInput, name, savePicture, downloadCanvas, snackbarText, snackbar, canvasContainer, canvas, bg, logo, showModal, dialogButtons, emptyCardGateKeeper
     };
   }
 });
