@@ -1,10 +1,9 @@
-const baseURL = 'localhost'
-function baseVisit(url = '/') {
-    if (Cypress.env('env') == 'test') { cy.visit(`${baseURL}:3000${url}`)}
-    else { cy.visit(`${baseURL}:8080${url}`); } 
-}
+import baseVisit from '../helper';
 
 context('Going to the first page', () => {
+    beforeEach(() => {
+        baseVisit();
+    });
 
     it('Pressing delete button with active loan, warning should pop up', () => {
         baseVisit('/admin/titles/0763645680');
