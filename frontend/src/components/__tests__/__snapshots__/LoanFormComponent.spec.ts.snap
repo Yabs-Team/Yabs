@@ -8,10 +8,10 @@ exports[`LoanFormComponent.vue renders correctly 1`] = `
     </v-icon-stub>
   </v-btn-stub>
   <v-form-stub data-jest="form">
-    <v-item-group-stub activeclass="v-item--active" tag="div" vertical="" label-class="text-sm-right" label-for="nestedUid">
+    <v-item-group-stub activeclass="v-item--active" vertical="" label-class="text-sm-right" label-for="nestedUid">
       <v-text-field-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="0" backgroundcolor="" id="nestedUid" label="Elevens Streckkod" loaderheight="2" clearicon="$clear" outlined="true" type="text" data-jest="student_barcode" data-cy="student_barcode"></v-text-field-stub>
     </v-item-group-stub>
-    <v-item-group-stub activeclass="v-item--active" tag="div" vertical="" label-class="text-sm-right" label-for="nestedBid">
+    <v-item-group-stub activeclass="v-item--active" vertical="" label-class="text-sm-right" label-for="nestedBid">
       <v-text-field-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="0" backgroundcolor="" id="nestedBid" label="Bokens Streckkod" loaderheight="2" clearicon="$clear" outlined="true" type="text" data-jest="book_barcode" data-cy="book_barcode"></v-text-field-stub>
     </v-item-group-stub>
     <v-item-group-stub activeclass="v-item--active" vertical="" label-class="text-sm-right" label-for="nestedBid">
@@ -30,7 +30,7 @@ exports[`LoanFormComponent.vue renders correctly 1`] = `
 `;
 
 exports[`LoanFormComponent.vue renders the barcode scanner correctly 1`] = `
-<div><button type="button" class="v-btn v-btn--flat theme--light v-size--default" data-jest="barcodeButton"><span class="v-btn__content"><i aria-hidden="true" aria-label="Stäng streckkods läsare" class="v-icon notranslate mdi mdi-barcode-off theme--light"></i></span></button>
+<div><button type="button" class="v-btn v-btn--contained theme--light v-size--default" data-jest="barcodeButton"><span class="v-btn__content"><i aria-hidden="true" aria-label="Stäng streckkods läsare" class="v-icon notranslate mdi mdi-barcode-off theme--light"></i></span></button>
   <div>
     <div id="barcodeScanner" data-jest="barcodeReader"><span>Initializing..</span>
       <!---->
@@ -62,7 +62,7 @@ exports[`LoanFormComponent.vue renders the barcode scanner correctly 1`] = `
           </div>
           <div role="menu" class="v-menu__content theme--light " style="max-height: auto; min-width: 290px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"></div>
         </div>
-      </div> <button type="submit" class="mr-4 v-btn v-btn--flat theme--light v-size--large primary--text" data-cy="loanOutBook"><span class="v-btn__content">
+      </div> <button type="submit" class="mr-4 v-btn v-btn--contained theme--light v-size--large primary" data-cy="loanOutBook"><span class="v-btn__content">
         Låna Ut
       </span></button>
     </div>
