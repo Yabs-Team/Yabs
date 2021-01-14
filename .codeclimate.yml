@@ -1,6 +1,8 @@
-engines:
-    similar-code:
-      enabled: false
-      exclude_paths:
+version: "2"
+checks:
+  similar-code:
+    enabled: true
+    config:
+      exclude_patterns:
         - frontend/src/store/modules/__mocks__/
         - frontend/src/components/__tests__/
