@@ -12,6 +12,7 @@ export {
   LoanForm,
   LoanCollection,
   Subject,
+  StatusMessage,
   AddLoanForm
 };
 
@@ -87,7 +88,7 @@ interface Loan {
   id: number;
   lent_by: object; //eslint-disable-line camelcase
   lent_by_id: number; //eslint-disable-line camelcase
-  loaned_by: object; //eslint-disable-line camelcase
+  loaned_by: User; //eslint-disable-line camelcase
   loaned_by_id: number; //eslint-disable-line camelcase
   returned_at: string|null; //eslint-disable-line camelcase
   updated_at: string; //eslint-disable-line camelcase
@@ -115,3 +116,11 @@ interface Subject {
   id: number;
   name: string;
 }
+
+interface StatusMessage {
+  color: string;
+  text: string;
+  type: string;
+  icon: string;
+  timeout: number;
+};
