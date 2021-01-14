@@ -1,71 +1,65 @@
 <template>
-  <v-card
-    id="canvas-container"
-    justify="center"
-    align="center"
-  >
-    <div
-      id="canvasContainer"
-      ref="canvasContainer"
+  <main>
+    <v-card
+      id="canvas-container"
+      justify="center"
+      align="center"
     >
-      <canvas
-        id="canvas"
-        ref="canvas"
-        height="700"
-        width="600"
-      />
-    </div>
-    <v-form>
-      <v-item-group>
-        <v-autocomplete
-          v-model="name"
-          data-cy="user-selector"
-          :items="userNames()"
-          @change="onNameInput"
-        />
-        <v-btn
-          class="btn"
-          @click="savePicture"
-        >
-          Spara Bild
-        </v-btn>
-        <v-btn
-          class="btn"
-          data-cy="download-btn"
-          @click="downloadCanvas"
-        >
-          Ladda ned kort
-        </v-btn>
-        <v-btn @click="$emit('deleteCard')">
-          Ta bort
-        </v-btn>
-      </v-item-group>
-    </v-form>
-    <img
-      ref="bg"
-      src="../assets/background.png"
-      hidden="hidden"
-    >
-    <img
-      ref="logo"
-      src="../assets/logo.png"
-      hidden="hidden"
-    >
-
-    <v-snackbar
-      v-model="snackbar"
-    >
-      {{ snackbarText }}
-
-      <v-btn
-        color="white"
-        text
-        @click="snackbar = false"
+      <div
+        id="canvasContainer"
+        ref="canvasContainer"
       >
-        Stäng
-      </v-btn>
-    </v-snackbar>
-  </v-card>
+        <canvas
+          id="canvas"
+          ref="canvas"
+          height="500"
+        />
+      </div>
+      <v-form>
+        <v-item-group>
+          <v-autocomplete
+            v-model="name"
+            data-cy="user-selector"
+            :items="userNames()"
+            @change="onNameInput"
+          />
+          <v-btn
+            class="btn"
+            @click="savePicture"
+          >
+            Spara Bild
+          </v-btn>
+          <v-btn
+            class="btn"
+            data-cy="download-btn"
+            @click="emptyCardGateKeeper"
+          >
+            Ladda ned kort
+          </v-btn>
+          <v-btn @click="$emit('deleteCard')">
+            Ta bort
+          </v-btn>
+        </v-item-group>
+      </v-form>
+      <img
+        ref="bg"
+        src="../assets/background.png"
+        hidden="hidden"
+      >
+      <img
+        ref="logo"
+        src="../assets/logo.png"
+        hidden="hidden"
+      >
+    </v-card>
+
+    <BaseModal
+      :show-modal="showModal"
+      :header="'Kortet du vill ladda ner saknar användare'"
+      :body="'Passerkortet som du försöker ladda ner har ingen användare tilldelat till sig. Detta gör passerkortet oanvändbart. Vill du fortsätta?'"
+      :actions="dialogButtons"
+    />
+  </main>
 </template>
 
 <!-- 
@@ -86,6 +80,7 @@ import { setTimeout } from 'timers';
 import UsersModule from '../store/modules/UsersModule';
 import { User } from '@/types';
 import roleToText from '@/helpers/roleToText';
+import BaseModal from '@/components/BaseModal.vue';
 
 interface CigCanvasProps {
   image: File,
@@ -99,12 +94,18 @@ export default defineComponent({
   directives: {
     resize,
   },
+
+  components: {
+    BaseModal
+  },
+
   props: {
     image: {type: File, default: null},
     sendCanvas: {type: Boolean, default: false},
     savePictureTrigger: {type: Boolean, default: false},
     index: {type: Number, default: null},
   },
+
   setup(props: CigCanvasProps, { root, emit }: SetupContext) {
     let name = ref('');
     let barcode: string = '';
@@ -116,6 +117,12 @@ export default defineComponent({
     let context: CanvasRenderingContext2D | null = null;
     let snackbarText = ref('');
     let snackbar = ref(false);
+    let showModal = ref(false);
+
+    let dialogButtons = [
+      {text: 'Nej', action: ():void => { showModal.value = false;}},
+      {text: 'Ja', action: ():void => {showModal.value = false; downloadCanvas();}},
+    ];
 
     const canvasContainer: Ref<HTMLDivElement | null> = ref(null);
     const canvas: Ref<HTMLCanvasElement | null> = ref(null);
@@ -288,9 +295,8 @@ export default defineComponent({
       if(newVal){
         const zip = new JSZip();
         canvas.value!.toBlob((blob: Blob | null) => {
-          emit('imageSent', blob);
+          emit('imageSent', {image: blob, isEmpty: name.value == ''});
         });
-
       }
     });
 
@@ -303,9 +309,17 @@ export default defineComponent({
       }
     });
 
+
+    function emptyCardGateKeeper(): void{
+      if(name.value == ''){
+        showModal.value = true;
+      }else{
+        downloadCanvas();
+      }
+    }
+
     // the download canvas method is used to download and also save the donwloaded zip to
     // the new instance of a JSZIP to later blob it so that it can be used in Vue
-
     function downloadCanvas(): void {
       const zip = new JSZip();
       canvas.value!.toBlob((blob: Blob | null) => {
@@ -352,7 +366,7 @@ export default defineComponent({
     });
 
     return {
-      userNames, onNameInput, name, savePicture, downloadCanvas, snackbarText, snackbar, canvasContainer, canvas, bg, logo
+      userNames, onNameInput, name, savePicture, downloadCanvas, snackbarText, snackbar, canvasContainer, canvas, bg, logo, showModal, dialogButtons, emptyCardGateKeeper
     };
   }
 });
