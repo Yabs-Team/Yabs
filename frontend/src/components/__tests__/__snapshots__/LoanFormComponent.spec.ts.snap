@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoanFormComponent.vue renders correctly 1`] = `
+<div>
+  <v-btn-stub tag="button" activeclass="" type="button" data-jest="barcodeButton">
+    <v-icon-stub arialabel="Läs av Streckkoder" aria-label="Läs av Streckkoder">
+      mdi-barcode-scan
+    </v-icon-stub>
+  </v-btn-stub>
+  <v-form-stub data-jest="form">
+    <v-item-group-stub activeclass="v-item--active" vertical="" label-class="text-sm-right" label-for="nestedUid">
+      <v-text-field-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="0" backgroundcolor="" id="nestedUid" label="Elevens Streckkod" loaderheight="2" clearicon="$clear" outlined="true" type="text" data-jest="student_barcode" data-cy="student_barcode"></v-text-field-stub>
+    </v-item-group-stub>
+    <v-item-group-stub activeclass="v-item--active" vertical="" label-class="text-sm-right" label-for="nestedBid">
+      <v-text-field-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="0" backgroundcolor="" id="nestedBid" label="Bokens Streckkod" loaderheight="2" clearicon="$clear" outlined="true" type="text" data-jest="book_barcode" data-cy="book_barcode"></v-text-field-stub>
+    </v-item-group-stub>
+    <v-item-group-stub activeclass="v-item--active" vertical="" label-class="text-sm-right" label-for="nestedBid">
+      <v-menu-stub opendelay="0" closedelay="0" contentclass="" maxwidth="auto" minwidth="290px" nudgebottom="0" nudgeleft="0" nudgeright="0" nudgetop="0" nudgewidth="0" openonclick="true" closeonclick="true" maxheight="auto" offsety="true" origin="top left" transition="scale-transition">
+        <v-date-picker-stub width="290" eventcolor="warning" firstdayofweek="0" min="2020-05-14" nexticon="$next" previcon="$prev" showcurrent="true" selecteditemstext="$vuetify.datePicker.itemsSelected" type="date" value=""></v-date-picker-stub>
+      </v-menu-stub>
+    </v-item-group-stub>
+    <v-btn-stub color="primary" tag="button" activeclass="" large="true" type="submit" data-cy="loanOutBook" class="mr-4">
+      Låna Ut
+    </v-btn-stub>
+    <v-btn-stub tag="button" activeclass="" large="true" type="reset">
+      Rensa Fälten
+    </v-btn-stub>
+  </v-form-stub>
+</div>
+`;
+
+exports[`LoanFormComponent.vue renders the barcode scanner correctly 1`] = `
+<div><button type="button" class="v-btn v-btn--contained theme--light v-size--default" data-jest="barcodeButton"><span class="v-btn__content"><i aria-hidden="true" aria-label="Stäng streckkods läsare" class="v-icon notranslate mdi mdi-barcode-off theme--light"></i></span></button>
+  <div>
+    <div id="barcodeScanner" data-jest="barcodeReader"><span>Initializing..</span>
+      <!---->
+    </div>
+    <p>
+      Vänligen scanna Bokens sträckkod
+    </p>
+    <div class="container">
+      <p>
+        Bokens sträckkod: 0
+      </p>
+      <p>
+        Elevens sträckkod: 0
+      </p>
+      <div class="v-item-group theme--light" vertical="" label-class="text-sm-right" label-for="nestedBid">
+        <div class="v-menu">
+          <div class="v-input theme--light v-text-field v-text-field--enclosed v-text-field--outlined">
+            <div class="v-input__control">
+              <div class="v-input__slot">
+                <fieldset aria-hidden="true">
+                  <legend style="width: 0px;"><span>​</span></legend>
+                </fieldset>
+                <div class="v-text-field__slot"><label for="input-47" class="v-label theme--light" style="left: 0px; position: absolute;">Expire date</label><input data-jest="expirationDate" role="button" aria-haspopup="true" aria-expanded="false" id="input-47" type="text"></div>
+              </div>
+              <div class="v-text-field__details">
+                <div class="v-messages theme--light"><span name="message-transition" tag="div" class="v-messages__wrapper"></span></div>
+              </div>
+            </div>
+          </div>
+          <div role="menu" class="v-menu__content theme--light " style="max-height: auto; min-width: 290px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 0; display: none;"></div>
+        </div>
+      </div> <button type="submit" class="mr-4 v-btn v-btn--contained theme--light v-size--large primary" data-cy="loanOutBook"><span class="v-btn__content">
+        Låna Ut
+      </span></button>
+    </div>
+  </div>
+</div>
+`;
