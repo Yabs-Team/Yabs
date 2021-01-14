@@ -65,7 +65,6 @@ export default defineComponent({
     // through the donwloadAll method using the JSZIP dependency.
 
     function cardGateKeeper(args : {image: Blob, isEmpty: boolean}):void {
-      console.log(args);
       if(args.isEmpty){
         emptyCardExists = true;
       }else{
@@ -87,11 +86,11 @@ export default defineComponent({
     }
 
     function downloadAll(onlyUsers : boolean): void {
-      console.log(onlyUsers);
+      let selectedImages: Blob[] = [];
       if(onlyUsers){
-        var selectedImages = imageBlobsWithData;
+        selectedImages = imageBlobsWithData;
       }else{
-        var selectedImages = imageBlobs;
+        selectedImages = imageBlobs;
       }
 
       const zip = new JSZip();
