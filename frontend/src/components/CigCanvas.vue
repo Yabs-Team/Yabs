@@ -73,7 +73,6 @@
 import { ref, defineComponent, SetupContext, watch, Ref } from '@vue/composition-api';
 import JsBarcode from 'jsbarcode';
 import JSZip from 'jszip';
-import JQuery from 'jquery';
 import FileSaver from 'file-saver';
 import resize from 'vue-resize-directive';
 import { setTimeout } from 'timers';
@@ -266,7 +265,6 @@ export default defineComponent({
     function drawText(): void {
       if (context){
         const firstFontSize = width / 10;
-        const secondFontSize = width / 20;
 
         context.font = firstFontSize + 'px Arial';
         context.textAlign = 'center';
@@ -292,7 +290,6 @@ export default defineComponent({
 
     watch(() => props.sendCanvas, (newVal: boolean, _: boolean) => {
       if(newVal){
-        const zip = new JSZip();
         canvas.value!.toBlob((blob: Blob | null) => {
           emit('imageSent', {image: blob, isEmpty: name.value == ''});
         });
