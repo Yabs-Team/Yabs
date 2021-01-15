@@ -2,3 +2,4 @@ version: "2"
 exclude_patterns:
   - frontend/src/store/modules/__mocks__/
   - frontend/src/components/__tests__/
+  - backend/test/controllers/
