@@ -62,18 +62,17 @@
   </main>
 </template>
 
-<!-- 
-  There are some uncommon imports in this file such as resize and JsBarcode. 
+<!--
+  There are some uncommon imports in this file such as resize and JsBarcode.
   resize is used to manipulate pixel width on images,
-  Jsbarcode is a dependency used for interpreting the barcode information on the 
+  Jsbarcode is a dependency used for interpreting the barcode information on the
   cards
---> 
+-->
 
 <script lang="ts">
 import { ref, defineComponent, SetupContext, watch, Ref } from '@vue/composition-api';
 import JsBarcode from 'jsbarcode';
 import JSZip from 'jszip';
-import JQuery from 'jquery';
 import FileSaver from 'file-saver';
 import resize from 'vue-resize-directive';
 import { setTimeout } from 'timers';
@@ -113,7 +112,6 @@ export default defineComponent({
     let email: string = '';
     let width: number = 0;
     let height: number = 0;
-    let size: number = 1;
     let context: CanvasRenderingContext2D | null = null;
     let snackbarText = ref('');
     let snackbar = ref(false);
@@ -131,14 +129,14 @@ export default defineComponent({
 
     // Method userNames is used in order to filter out the users that are not deleted to verify
     // that the user that you are trying to render on the card is an actual active user
-    
+
     function userNames(): string[] {
       return Object.entries(UsersModule.all)
         .filter(([key, user]) => !(user as User).name.includes('Deleted User'))
         .map(([key, user]) => (user as User).name);
     }
 
-    // checkUserData is used to fill the instances of the class with information from the 
+    // checkUserData is used to fill the instances of the class with information from the
     // UsersModule so that the card has the right inforamtion
 
     function checkUserData(): void { // TODO: don't compare name to find the user. Instead compare the uid.
@@ -152,7 +150,7 @@ export default defineComponent({
       }
     }
 
-    // The generateCanvas method does exactly what its called and uses the resize dependency 
+    // The generateCanvas method does exactly what its called and uses the resize dependency
     // to cut the canvas into a good format
 
     function generateCanvas(): void {
@@ -164,7 +162,7 @@ export default defineComponent({
         setTimeout(() => {
           if (bg.value && context && logo.value) {
             context.drawImage(bg.value, 0, 0, width, height);
-            
+
             context.drawImage(logo.value, width / 2 - 75, 25);
             drawText();
             drawImages();
@@ -173,7 +171,7 @@ export default defineComponent({
       }
     }
 
-    // Sets the instance of the height and width to the client hight and width to standardise 
+    // Sets the instance of the height and width to the client hight and width to standardise
     // the structure of the canvas
 
     function getCanvasContainerSize(): void {
@@ -187,7 +185,7 @@ export default defineComponent({
       }
     }
 
-    // the setCanvasSize method basically does the same thing but sets the dimensions to 2d 
+    // the setCanvasSize method basically does the same thing but sets the dimensions to 2d
 
     function setCanvasSize(): void {
       if(canvas.value !== null){
@@ -197,7 +195,7 @@ export default defineComponent({
       }
     }
 
-    // the draw image instantiates new classes of the image based on the barcode and also 
+    // the draw image instantiates new classes of the image based on the barcode and also
     // on the extracted zip file that is the profile image
 
     function drawImages(): void {
@@ -225,10 +223,10 @@ export default defineComponent({
             Math.PI * 2,
             true,
           );
-        
+
           context.closePath();
           context.clip();
-    
+
           context.drawImage(
             profileImage,
             width / 4,
@@ -267,7 +265,6 @@ export default defineComponent({
     function drawText(): void {
       if (context){
         const firstFontSize = width / 10;
-        const secondFontSize = width / 20;
 
         context.font = firstFontSize + 'px Arial';
         context.textAlign = 'center';
@@ -287,20 +284,19 @@ export default defineComponent({
       } 200;
     }
 
-    // This is a watch action that monitors the send the instance sendCanvas to see if the 
-    // boolean is being mutated in any way and also blobs the image to send it via the 
+    // This is a watch action that monitors the send the instance sendCanvas to see if the
+    // boolean is being mutated in any way and also blobs the image to send it via the
     // emit method built in Vue to the parent component
 
     watch(() => props.sendCanvas, (newVal: boolean, _: boolean) => {
       if(newVal){
-        const zip = new JSZip();
         canvas.value!.toBlob((blob: Blob | null) => {
           emit('imageSent', {image: blob, isEmpty: name.value == ''});
         });
       }
     });
 
-    // This is a watch action that monitors the prop savePictureTrigger to see if the 
+    // This is a watch action that monitors the prop savePictureTrigger to see if the
     // boolean is being mutated in any way and calls the function savePicture if true
 
     watch(() => props.savePictureTrigger, (newVal: boolean, _: boolean) => {
@@ -333,8 +329,8 @@ export default defineComponent({
     }
 
     // savePicture method instantiates a new object of FormData to send the uid and the image
-    // so that the new picture so that it later can be updated and watched by the earlier 
-    // mentioned watch action 
+    // so that the new picture so that it later can be updated and watched by the earlier
+    // mentioned watch action
 
     function savePicture(): void {
       const formData = new FormData();
@@ -352,7 +348,7 @@ export default defineComponent({
     }
 
     // onNameInput is a getter to receive the information stored in the instance of checkUserData
-    // and the generate Canvas 
+    // and the generate Canvas
 
     function onNameInput(): void {
       checkUserData();
@@ -360,7 +356,7 @@ export default defineComponent({
     }
 
     // this is also a getter to receive information simply from the generate canvas instance
-    
+
     root.$nextTick(() => {
       generateCanvas();
     });
