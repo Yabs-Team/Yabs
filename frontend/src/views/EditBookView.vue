@@ -37,7 +37,6 @@
 import { defineComponent, SetupContext, ref, Ref } from '@vue/composition-api';
 import BooksModule from '../store/modules/BooksModule';
 import BookConditionComponent from '../components/BookConditionComponent.vue';
-import TitlesModule from '../store/modules/TitlesModule';
 import { Book } from '@/types';
 
 export default defineComponent({
