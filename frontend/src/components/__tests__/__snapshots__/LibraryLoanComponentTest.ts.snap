@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoanFormComponent.vue renders correctly 1`] = `
+<div>
+  <v-btn-stub tag="button" activeclass="" type="button" data-jest="barcodeButton">
+    <v-icon-stub arialabel="Läs av Streckkoder" aria-label="Läs av Streckkoder">
+      mdi-barcode-scan
+    </v-icon-stub>
+  </v-btn-stub>
+  <v-form-stub data-jest="form">
+    <v-item-group-stub activeclass="v-item--active" vertical="" label-class="text-sm-right" label-for="nestedUid">
+      <v-text-field-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="0" backgroundcolor="" id="nestedUid" label="Elevens Streckkod" loaderheight="2" clearicon="$clear" outlined="true" type="text" data-jest="student_barcode" data-cy="student_barcode"></v-text-field-stub>
+    </v-item-group-stub>
+    <v-item-group-stub activeclass="v-item--active" vertical="" label-class="text-sm-right" label-for="nestedBid">
+      <v-text-field-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="0" backgroundcolor="" id="nestedBid" label="Bokens Streckkod" loaderheight="2" clearicon="$clear" outlined="true" type="text" data-jest="book_barcode" data-cy="book_barcode"></v-text-field-stub>
+    </v-item-group-stub>
+    <v-item-group-stub activeclass="v-item--active" vertical="" label-class="text-sm-right" label-for="nestedBid">
+      <v-menu-stub opendelay="0" closedelay="0" contentclass="" maxwidth="auto" minwidth="290px" nudgebottom="0" nudgeleft="0" nudgeright="0" nudgetop="0" nudgewidth="0" openonclick="true" closeonclick="true" maxheight="auto" offsety="true" origin="top left" transition="scale-transition">
+        <v-date-picker-stub width="290" eventcolor="warning" firstdayofweek="0" min="2021-01-15" nexticon="$next" previcon="$prev" showcurrent="true" selecteditemstext="$vuetify.datePicker.itemsSelected" type="date" value=""></v-date-picker-stub>
+      </v-menu-stub>
+    </v-item-group-stub>
+    <v-btn-stub color="primary" tag="button" activeclass="" large="true" type="submit" data-cy="loanOutBook" class="mr-4">
+      Låna Ut
+    </v-btn-stub>
+    <v-btn-stub tag="button" activeclass="" large="true" type="reset">
+      Rensa Fälten
+    </v-btn-stub>
+  </v-form-stub>
+</div>
+`;

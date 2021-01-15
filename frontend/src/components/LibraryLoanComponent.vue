@@ -18,6 +18,7 @@
             id="nestedBid"
             v-model="form.book_id"
             data-cy="book_barcode"
+            data-jest="book_barcode"
             label="Bokens Streckkod"
             outlined
           />
@@ -42,7 +43,7 @@
 
 <script lang="ts">
 import { Prop } from 'vue-property-decorator';
-import LoansModule from '../store/modules/LoansModule';
+import LoansModule from '@/store/modules/LoansModule';
 import { Loan, LoanForm } from '../types';
 import UsersModule from '../store/modules/UsersModule';
 import { ref, defineComponent, SetupContext } from '@vue/composition-api';
