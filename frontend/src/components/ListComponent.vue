@@ -124,7 +124,6 @@ export default defineComponent({
      */
     // route kallas på med argumenten item. Item innehåller barcode för den som klickas på [?]
     function route(event: Event, item: any): void { //eslint-disable-line @typescript-eslint/no-explicit-any
-      console.log(item);
       event.preventDefault();
       if (item[props.routeSpecifier]) {
         root.$router.push(`/${props.routePath}/${item[props.routeSpecifier]}`);
