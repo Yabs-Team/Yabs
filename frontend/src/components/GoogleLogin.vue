@@ -4,7 +4,7 @@
     text
     color="grey"
   >
-    <div 
+    <div
       id="signin2"
       ref="signin2"
     />
@@ -14,14 +14,13 @@
 <script lang="ts">
 import { defineComponent, Ref, ref, SetupContext } from '@vue/composition-api';
 import UsersModule from '../store/modules/UsersModule';
-import { VuexModule } from 'vuex-module-decorators';
 
 export default defineComponent({
   name: 'GoogleLogin',
   setup(_: Object, {root}: SetupContext){
     const signin2: Ref<HTMLDivElement | null> = ref(null);
-    // renderLoginButton is used to set the information about the button without having to 
-    // include any css, which is forbidden in this project, based on the class signin2 
+    // renderLoginButton is used to set the information about the button without having to
+    // include any css, which is forbidden in this project, based on the class signin2
 
     function renderLoginButton(): void {
       // @ts-ignore: gapi
@@ -36,11 +35,6 @@ export default defineComponent({
       });
     }
 
-    // Getter to get the updated version of the instance renderLoginButton
-
-    function updated(): void {
-      renderLoginButton();
-    }
 
     // onSignIn takes a user from the google Api and sets the users profile with the information
     // fetched from the google api but also takes the token that is generated and setting it
@@ -80,7 +74,7 @@ export default defineComponent({
         UsersModule.signOut();
       });
     };
-    
+
     // mounted is a getter to reveive the information about the renderloginbutton
 
     root.$nextTick(() => {
