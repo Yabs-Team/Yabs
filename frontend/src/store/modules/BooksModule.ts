@@ -71,7 +71,6 @@ class BooksModule extends VuexModule {
         .then((response: Book) => {
           this.setBook(response);
           resolve(response);
-          console.log(response);
         })
         .catch((error: object) => {
           this.setfailure(error);
