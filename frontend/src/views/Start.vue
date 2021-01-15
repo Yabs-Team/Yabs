@@ -90,9 +90,7 @@
 import { ref, defineComponent, SetupContext } from '@vue/composition-api';
 import LoanListComponent from '@/components/LoanListComponent.vue';
 import UsersModule from '../store/modules/UsersModule';
-import TitlesModule from '../store/modules/TitlesModule';
 import LoansModule from '../store/modules/LoansModule';
-import BooksModule from '../store/modules/BooksModule';
 
 export default defineComponent({
   name: 'StartView',
