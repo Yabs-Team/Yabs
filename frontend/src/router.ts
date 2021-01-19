@@ -20,11 +20,6 @@ const routes: RouteConfig[] = [
     component: loadView('ProfileView'),
   },
   {
-    path: '/books/:id',
-    name: 'edit book',
-    component: loadView('EditBookView'),
-  },
-  {
     path: '/admin',
     name: 'admin',
     component: loadView('AdminView'),
@@ -34,6 +29,7 @@ const routes: RouteConfig[] = [
       {path: 'titles', component: loadView('AdminTitlesView')},
       {path: 'titles/:id', component: loadView('AdminTitlesEditView')},
       {path: 'books', component: loadView('AdminBooksView')},
+      {path: 'books/:id', component: loadView('EditBookView')},
       {path: 'cards', component: loadView('AdminCardsView')},
       {path: 'users', component: loadView('AdminUsersView')},
     ]

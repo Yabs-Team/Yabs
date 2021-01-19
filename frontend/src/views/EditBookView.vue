@@ -2,34 +2,17 @@
   <div>
     <!-- Todo: add cover to title interface and implement the code below for setting image src -->
     <!-- :src="book.title.cover" -->
-    <v-img
-      lazy-src="https://picsum.photos/id/11/100/60"
-      aspect-ratio="1"
-      class="grey lighten-2"
-      max-width="500"
-      max-height="300"
-    >
-      <template v-slot:placeholder>
-        <v-row
-          class="fill-height ma-0"
-          align="center"
-          justify="center"
-        >
-          <v-progress-circular 
-            indeterminate 
-            color="grey lighten-5" 
-          />
-        </v-row>
-      </template>
-    </v-img>
+    
     <BookConditionComponent 
       v-if="book != null"
       :title="book.title.name" 
       :title_id="book.title.id"
       :status="book.condition" 
       :barcode="book.barcode"
-      :note="book.note"
     />
+    <h1 v-else class="display-2">
+      Något gick fel :ok_woman:
+    </h1>
   </div>
 </template>
 
