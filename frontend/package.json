@@ -22,7 +22,7 @@
     "file-saver": "^2.0.0",
     "jsbarcode": "^3.11.0",
     "jszip": "^3.1.5",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "vue": "^2.6.12",
     "vue-authenticate": "^1.3.4",
     "vue-axios": "^2.1.4",
